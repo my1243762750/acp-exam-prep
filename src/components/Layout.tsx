@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Avatar, Breadcrumb, Button } from 'antd';
-import { BookOutlined, FileTextOutlined, TrophyOutlined, BarChartOutlined, ExclamationCircleOutlined, SmileTwoTone } from '@ant-design/icons';
+import { BookOutlined, FileTextOutlined, TrophyOutlined, BarChartOutlined, ExclamationCircleOutlined, HomeTwoTone, MenuUnfoldOutlined, MenuFoldOutlined, SmileTwoTone } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ const { Header, Sider, Content } = Layout;
 
 // SVG考试图标
 const ExamLogo = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="4" y="6" width="28" height="24" rx="4" fill="#1890ff"/>
     <rect x="8" y="10" width="20" height="16" rx="2" fill="#fff"/>
     <rect x="12" y="14" width="12" height="2" rx="1" fill="#1890ff"/>
@@ -26,16 +26,16 @@ const LogoBar = styled.div`
 const StyledSider = styled(Sider)`
   background: #f7f9fa !important;
   border-right: 1px solid #e6e6e6;
-  min-width: 220px !important;
-  max-width: 220px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
   &.ant-layout-sider-collapsed {
-    min-width: 64px !important;
-    max-width: 64px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
   }
 `;
 
 const StyledHeader = styled(Header)`
-  background: linear-gradient(90deg, #1890ff 0%, #36cfc9 100%) !important;
+  background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%) !important;
   color: #fff;
   box-shadow: 0 2px 8px rgba(24, 144, 255, 0.08);
   display: flex;
@@ -86,8 +86,8 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <StyledSider
-        width={220}
-        collapsedWidth={64}
+        width={180}
+        collapsedWidth={48}
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapsed}
@@ -107,14 +107,14 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <StyledHeader>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <Button type="text" style={{ color: '#fff', fontSize: 20 }} onClick={() => setCollapsed(c => !c)}>
-              {collapsed ? <span style={{ fontSize: 22 }}>&gt;</span> : <span style={{ fontSize: 22 }}>&lt;</span>}
+              {collapsed ? <MenuUnfoldOutlined style={{ fontSize: 22 }} /> : <MenuFoldOutlined style={{ fontSize: 22 }} />}
             </Button>
             <Breadcrumb separator="/" style={{ color: '#fff', fontSize: 16 }}>
               {breadcrumbItems}
             </Breadcrumb>
           </div>
           <div>
-            <Avatar size={40} icon={<SmileTwoTone twoToneColor="#1890ff,#f7971e" style={{ fontSize: 32 }} />} style={{ background: 'transparent' }} />
+            <Avatar size={40} icon={<SmileTwoTone twoToneColor="#1890ff,#36cfc9" style={{ fontSize: 32 }} />} style={{ background: 'transparent' }} />
           </div>
         </StyledHeader>
         <StyledContent>{children}</StyledContent>
