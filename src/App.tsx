@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Practice from './pages/Practice';
+import Exam from './pages/Exam';
+import Review from './pages/Review';
+import Statistics from './pages/Statistics';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider locale={zhCN}>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/practice" element={<Practice />} />
+            <Route path="/exam" element={<Exam />} />
+            <Route path="/review" element={<Review />} />
+            <Route path="/statistics" element={<Statistics />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ConfigProvider>
   );
-}
+};
 
 export default App;
