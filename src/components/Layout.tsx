@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Avatar, Breadcrumb, Button } from 'antd';
-import { BookOutlined, FileTextOutlined, TrophyOutlined, BarChartOutlined, ExclamationCircleOutlined, HomeTwoTone, MenuUnfoldOutlined, MenuFoldOutlined, SmileTwoTone } from '@ant-design/icons';
+import { BookOutlined, FileTextOutlined, TrophyOutlined, BarChartOutlined, ExclamationCircleOutlined, HomeTwoTone, MenuUnfoldOutlined, MenuFoldOutlined, SmileTwoTone, UnorderedListOutlined } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -57,6 +57,7 @@ const menuItems = [
   { key: '/exam', icon: <TrophyOutlined />, label: <Link to="/exam">模拟考试</Link> },
   { key: '/review', icon: <ExclamationCircleOutlined />, label: <Link to="/review">错题复习</Link> },
   { key: '/statistics', icon: <BarChartOutlined />, label: <Link to="/statistics">学习统计</Link> },
+  { key: '/preview', icon: <UnorderedListOutlined />, label: <Link to="/preview">题库预览</Link> },
 ];
 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

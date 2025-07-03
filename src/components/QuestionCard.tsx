@@ -156,7 +156,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         <div style={{ marginTop: 16 }}>
           <Alert
             message={`正确答案：${question.answer}`}
-            type={isCorrect ? 'success' : 'error'}
+            type={hasAnswered ? (isCorrect ? 'success' : 'error') : 'info'}
             showIcon
             style={{ marginBottom: 12 }}
           />

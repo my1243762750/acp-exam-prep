@@ -8,6 +8,7 @@ import Practice from './pages/Practice';
 import Exam from './pages/Exam';
 import Review from './pages/Review';
 import Statistics from './pages/Statistics';
+import Preview from './pages/Preview';
 import './App.css';
 
 const App: React.FC = () => {
@@ -21,6 +22,7 @@ const App: React.FC = () => {
             <Route path="/exam" element={<Exam />} />
             <Route path="/review" element={<Review />} />
             <Route path="/statistics" element={<Statistics />} />
+            <Route path="/preview" element={<Preview />} />
           </Routes>
         </Layout>
       </Router>
