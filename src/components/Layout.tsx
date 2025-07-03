@@ -1,114 +1,126 @@
 import React from 'react';
-import { Layout as AntLayout, Menu } from 'antd';
-import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  HomeOutlined,
-  BookOutlined,
-  FileTextOutlined,
-  ExclamationCircleOutlined,
-  BarChartOutlined
-} from '@ant-design/icons';
+import { Layout, Menu, Avatar, Breadcrumb, Button } from 'antd';
+import { BookOutlined, FileTextOutlined, TrophyOutlined, BarChartOutlined, ExclamationCircleOutlined, SmileTwoTone } from '@ant-design/icons';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const { Header, Sider, Content } = AntLayout;
+const { Header, Sider, Content } = Layout;
 
-const StyledLayout = styled(AntLayout)`
-  min-height: 100vh;
-`;
+// SVG考试图标
+const ExamLogo = () => (
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="6" width="28" height="24" rx="4" fill="#1890ff"/>
+    <rect x="8" y="10" width="20" height="16" rx="2" fill="#fff"/>
+    <rect x="12" y="14" width="12" height="2" rx="1" fill="#1890ff"/>
+    <rect x="12" y="18" width="8" height="2" rx="1" fill="#1890ff"/>
+  </svg>
+);
 
-const StyledHeader = styled(Header)`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+const LogoBar = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  height: 64px;
+  justify-content: center;
 `;
 
 const StyledSider = styled(Sider)`
-  background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  background: #f7f9fa !important;
+  border-right: 1px solid #e6e6e6;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  &.ant-layout-sider-collapsed {
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+`;
+
+const StyledHeader = styled(Header)`
+  background: linear-gradient(90deg, #1890ff 0%, #36cfc9 100%) !important;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.08);
+  display: flex;
+  align-items: center;
+  height: 64px !important;
+  justify-content: space-between;
+  padding: 0 32px;
 `;
 
 const StyledContent = styled(Content)`
-  margin: 24px;
-  padding: 32px;
-  background: #f8fafc;
-  border-radius: 16px;
-  min-height: calc(100vh - 48px);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
-`;
-
-const Logo = styled.div`
-  color: white;
-  font-size: 22px;
-  font-weight: 700;
-  margin-right: 48px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  letter-spacing: 1px;
+  background: #f7f9fa;
+  min-height: 100vh;
+  padding: 32px 40px 40px 40px;
 `;
 
 const menuItems = [
-  {
-    key: '/',
-    icon: <HomeOutlined />,
-    label: '首页',
-  },
-  {
-    key: '/practice',
-    icon: <BookOutlined />,
-    label: '练习模式',
-  },
-  {
-    key: '/exam',
-    icon: <FileTextOutlined />,
-    label: '模拟考试',
-  },
-  {
-    key: '/review',
-    icon: <ExclamationCircleOutlined />,
-    label: '错题复习',
-  },
-  {
-    key: '/statistics',
-    icon: <BarChartOutlined />,
-    label: '学习统计',
-  },
+  { key: '/', icon: <BookOutlined />, label: <Link to="/">首页</Link> },
+  { key: '/practice', icon: <FileTextOutlined />, label: <Link to="/practice">练习模式</Link> },
+  { key: '/exam', icon: <TrophyOutlined />, label: <Link to="/exam">模拟考试</Link> },
+  { key: '/review', icon: <ExclamationCircleOutlined />, label: <Link to="/review">错题复习</Link> },
+  { key: '/statistics', icon: <BarChartOutlined />, label: <Link to="/statistics">学习统计</Link> },
 ];
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const navigate = useNavigate();
+const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
-
-  const handleMenuClick = ({ key }: { key: string }) => {
-    navigate(key);
-  };
-
+  const navigate = useNavigate();
+  // 面包屑
+  const pathSnippets = location.pathname.split('/').filter(i => i);
+  const breadcrumbItems = [
+    <Breadcrumb.Item key="home">
+      <Link to="/">首页</Link>
+    </Breadcrumb.Item>,
+    ...pathSnippets.map((snippet, idx) => {
+      const url = `/${pathSnippets.slice(0, idx + 1).join('/')}`;
+      let name = '';
+      switch (snippet) {
+        case 'practice': name = '练习模式'; break;
+        case 'exam': name = '模拟考试'; break;
+        case 'review': name = '错题复习'; break;
+        case 'statistics': name = '学习统计'; break;
+        default: name = snippet;
+      }
+      return <Breadcrumb.Item key={url}><Link to={url}>{name}</Link></Breadcrumb.Item>;
+    })
+  ];
+  // 折叠按钮
+  const [collapsed, setCollapsed] = React.useState(false);
   return (
-    <StyledLayout>
-      <StyledHeader>
-        <Logo>ACP考试助手</Logo>
-      </StyledHeader>
-      <AntLayout>
-        <StyledSider width={200}>
-          <Menu
-            mode="inline"
-            selectedKeys={[location.pathname]}
-            style={{ height: '100%', borderRight: 0 }}
-            items={menuItems}
-            onClick={handleMenuClick}
-            theme="dark"
-          />
-        </StyledSider>
-        <StyledContent>
-          {children}
-        </StyledContent>
-      </AntLayout>
-    </StyledLayout>
+    <Layout style={{ minHeight: '100vh' }}>
+      <StyledSider
+        width={220}
+        collapsedWidth={64}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={setCollapsed}
+        trigger={null}
+      >
+        <LogoBar>
+          <ExamLogo />
+        </LogoBar>
+        <Menu
+          mode="inline"
+          selectedKeys={[location.pathname]}
+          style={{ border: 'none', background: 'transparent', marginTop: 16 }}
+          items={menuItems}
+        />
+      </StyledSider>
+      <Layout>
+        <StyledHeader>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <Button type="text" style={{ color: '#fff', fontSize: 20 }} onClick={() => setCollapsed(c => !c)}>
+              {collapsed ? <span style={{ fontSize: 22 }}>&gt;</span> : <span style={{ fontSize: 22 }}>&lt;</span>}
+            </Button>
+            <Breadcrumb separator="/" style={{ color: '#fff', fontSize: 16 }}>
+              {breadcrumbItems}
+            </Breadcrumb>
+          </div>
+          <div>
+            <Avatar size={40} icon={<SmileTwoTone twoToneColor="#1890ff,#f7971e" style={{ fontSize: 32 }} />} style={{ background: 'transparent' }} />
+          </div>
+        </StyledHeader>
+        <StyledContent>{children}</StyledContent>
+      </Layout>
+    </Layout>
   );
 };
 
-export default Layout; 
+export default MainLayout; 

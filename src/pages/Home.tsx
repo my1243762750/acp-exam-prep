@@ -30,38 +30,29 @@ const StyledCard = styled(Card)`
   }
 `;
 
-const QuickActionCard = styled(Card)`
+const QuickActionCard = styled(Card)<{ gradient: string; bordercolor: string; hovercolor: string }>`
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  border-radius: 16px;
+  border: 2px solid ${(props) => props.bordercolor};
+  background: #fff;
+  color: #222;
   overflow: hidden;
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
+  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.08);
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    
-    &::before {
-      opacity: 1;
+    border-color: ${(props) => props.bordercolor};
+    box-shadow: 0 8px 32px rgba(24, 144, 255, 0.15);
+    background: ${(props) => props.gradient};
+    .icon-wrapper {
+      color: ${(props) => props.hovercolor} !important;
+      filter: drop-shadow(0 2px 8px ${(props) => props.hovercolor}33);
+    }
+    .quick-title, .quick-desc {
+      color: ${(props) => props.hovercolor} !important;
     }
   }
-  
   .ant-card-body {
     padding: 32px 24px;
     position: relative;
@@ -69,11 +60,12 @@ const QuickActionCard = styled(Card)`
   }
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div<{ color: string }>`
   font-size: 56px;
   margin-bottom: 20px;
-  color: white;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  color: ${(props) => props.color};
+  filter: drop-shadow(0 2px 4px ${(props) => props.color}33);
+  transition: color 0.3s;
 `;
 
 const Home: React.FC = () => {
@@ -92,34 +84,47 @@ const Home: React.FC = () => {
   const accuracy = Math.round((stats.correctAnswers / stats.answeredQuestions) * 100);
   const progress = Math.round((stats.answeredQuestions / stats.totalQuestions) * 100);
 
+  // 每个卡片主色
   const quickActions = [
     {
       title: '开始练习',
       description: '按分类练习题目',
       icon: <BookOutlined />,
       path: '/practice',
-      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      gradient: 'linear-gradient(135deg, #e3f0ff 0%, #cbe6ff 100%)',
+      color: '#1890ff',
+      bordercolor: '#1890ff',
+      hovercolor: '#1765ad'
     },
     {
       title: '模拟考试',
       description: '全真模拟考试环境',
       icon: <FileTextOutlined />,
       path: '/exam',
-      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+      gradient: 'linear-gradient(135deg, #fff2e3 0%, #ffe6cb 100%)',
+      color: '#ff7e5f',
+      bordercolor: '#ff7e5f',
+      hovercolor: '#d46b08'
     },
     {
       title: '错题复习',
       description: '重点复习错题',
       icon: <ExclamationCircleOutlined />,
       path: '/review',
-      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+      gradient: 'linear-gradient(135deg, #e3fff6 0%, #cbffe6 100%)',
+      color: '#43e97b',
+      bordercolor: '#43e97b',
+      hovercolor: '#389e0d'
     },
     {
       title: '学习统计',
       description: '查看学习进度',
       icon: <TrophyOutlined />,
       path: '/statistics',
-      gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+      gradient: 'linear-gradient(135deg, #fffbe3 0%, #fff6cb 100%)',
+      color: '#f7971e',
+      bordercolor: '#f7971e',
+      hovercolor: '#ad6800'
     }
   ];
 
@@ -194,13 +199,15 @@ const Home: React.FC = () => {
           <Col xs={24} sm={12} md={6} key={index}>
             <QuickActionCard
               onClick={() => navigate(action.path)}
-              style={{ background: action.gradient }}
+              gradient={action.gradient}
+              bordercolor={action.bordercolor}
+              hovercolor={action.hovercolor}
             >
-              <IconWrapper>
+              <IconWrapper className="icon-wrapper" color={action.color}>
                 {action.icon}
               </IconWrapper>
-              <Title level={4} style={{ color: 'white', marginBottom: 8 }}>{action.title}</Title>
-              <Paragraph style={{ color: 'rgba(255,255,255,0.8)', margin: 0 }}>{action.description}</Paragraph>
+              <Title level={4} className="quick-title" style={{ color: action.color, marginBottom: 8 }}>{action.title}</Title>
+              <Paragraph className="quick-desc" style={{ color: '#666', margin: 0 }}>{action.description}</Paragraph>
             </QuickActionCard>
           </Col>
         ))}
