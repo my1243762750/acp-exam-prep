@@ -1,0 +1,157 @@
+:root {
+  /* Colors - Primary (Indigo-Violet) */
+  --mei-color-primary-50: #EDE9FE;
+  --mei-color-primary-100: #DDD6FE;
+  --mei-color-primary-200: #C4B5FD;
+  --mei-color-primary-300: #A78BFA;
+  --mei-color-primary-400: #8B5CF6;
+  --mei-color-primary-500: #6C5CE7;
+  --mei-color-primary-600: #5B4ED6;
+  --mei-color-primary-700: #4C3FBF;
+  --mei-color-primary-800: #3D31A8;
+  --mei-color-primary-900: #2E2491;
+
+  /* Colors - Blue Axis */
+  --mei-color-blue-50: #EFF6FF;
+  --mei-color-blue-100: #DBEAFE;
+  --mei-color-blue-200: #BFDBFE;
+  --mei-color-blue-300: #93C5FD;
+  --mei-color-blue-400: #60A5FA;
+  --mei-color-blue-500: #3B82F6;
+  --mei-color-blue-600: #2563EB;
+  --mei-color-blue-700: #1D4ED8;
+  --mei-color-blue-800: #1E40AF;
+  --mei-color-blue-900: #1E3A8A;
+
+  /* Colors - Purple Axis */
+  --mei-color-purple-50: #F5F3FF;
+  --mei-color-purple-100: #EDE9FE;
+  --mei-color-purple-200: #DDD6FE;
+  --mei-color-purple-300: #C4B5FD;
+  --mei-color-purple-400: #A78BFA;
+  --mei-color-purple-500: #8B5CF6;
+  --mei-color-purple-600: #7C3AED;
+  --mei-color-purple-700: #6D28D9;
+  --mei-color-purple-800: #5B21B6;
+  --mei-color-purple-900: #4C1D95;
+
+  /* Colors - Neutral */
+  --mei-color-neutral-50: #F8F9FC;
+  --mei-color-neutral-100: #F1F2F7;
+  --mei-color-neutral-200: #E4E5EF;
+  --mei-color-neutral-300: #C9CBD6;
+  --mei-color-neutral-400: #A1A3B0;
+  --mei-color-neutral-500: #7C7D8A;
+  --mei-color-neutral-600: #5E5F6B;
+  --mei-color-neutral-700: #434452;
+  --mei-color-neutral-800: #2A2B38;
+  --mei-color-neutral-900: #1A1A2E;
+
+  /* Semantic Colors */
+  --mei-color-success-light: #D1FAE5;
+  --mei-color-success-base: #10B981;
+  --mei-color-success-dark: #065F46;
+  --mei-color-warning-light: #FEF3C7;
+  --mei-color-warning-base: #F59E0B;
+  --mei-color-warning-dark: #92400E;
+  --mei-color-error-light: #FEE2E2;
+  --mei-color-error-base: #EF4444;
+  --mei-color-error-dark: #991B1B;
+  --mei-color-info-light: #DBEAFE;
+  --mei-color-info-base: #3B82F6;
+  --mei-color-info-dark: #1E40AF;
+
+  /* Theme - Light */
+  --mei-theme-bg-page: #FFFFFF;
+  --mei-theme-bg-surface: #F8F9FC;
+  --mei-theme-bg-elevated: #FFFFFF;
+  --mei-theme-bg-overlay: rgba(26, 26, 46, 0.5);
+  --mei-theme-text-primary: #1A1A2E;
+  --mei-theme-text-secondary: #5E5F6B;
+  --mei-theme-text-tertiary: #A1A3B0;
+  --mei-theme-text-inverse: #FFFFFF;
+  --mei-theme-text-link: #3B82F6;
+  --mei-theme-border-default: #E4E5EF;
+  --mei-theme-border-strong: #C9CBD6;
+
+  /* Border Radius */
+  --mei-radius-none: 0;
+  --mei-radius-sm: 4px;
+  --mei-radius-md: 8px;
+  --mei-radius-lg: 12px;
+  --mei-radius-xl: 16px;
+  --mei-radius-2xl: 24px;
+  --mei-radius-full: 9999px;
+
+  /* Spacing - Semantic */
+  --mei-spacing-inset-xs: 4px;
+  --mei-spacing-inset-sm: 8px;
+  --mei-spacing-inset-md: 12px;
+  --mei-spacing-inset-lg: 16px;
+  --mei-spacing-inset-xl: 24px;
+  
+  --mei-spacing-stack-xs: 4px;
+  --mei-spacing-stack-sm: 8px;
+  --mei-spacing-stack-md: 12px;
+  --mei-spacing-stack-lg: 16px;
+  --mei-spacing-stack-xl: 24px;
+  --mei-spacing-stack-2xl: 32px;
+
+  --mei-spacing-inline-xs: 4px;
+  --mei-spacing-inline-sm: 8px;
+  --mei-spacing-inline-md: 12px;
+  --mei-spacing-inline-lg: 16px;
+  --mei-spacing-inline-xl: 24px;
+
+  /* Typography */
+  --mei-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --mei-font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  
+  --mei-font-size-xs: 12px;
+  --mei-font-size-sm: 14px;
+  --mei-font-size-base: 16px;
+  --mei-font-size-lg: 18px;
+  --mei-font-size-xl: 20px;
+  --mei-font-size-2xl: 24px;
+  --mei-font-size-3xl: 30px;
+  --mei-font-size-4xl: 36px;
+  --mei-font-size-5xl: 48px;
+  --mei-font-size-6xl: 60px;
+
+  --mei-font-weight-regular: 400;
+  --mei-font-weight-medium: 500;
+  --mei-font-weight-semibold: 600;
+  --mei-font-weight-bold: 700;
+
+  /* Shadows (Light Mode) */
+  --mei-shadow-sm: 0 1px 2px 0 rgba(26, 26, 46, 0.06);
+  --mei-shadow-md: 0 2px 6px -1px rgba(26, 26, 46, 0.08);
+  --mei-shadow-lg: 0 4px 12px -2px rgba(26, 26, 46, 0.1);
+  --mei-shadow-xl: 0 8px 24px -4px rgba(26, 26, 46, 0.12);
+  --mei-shadow-2xl: 0 16px 48px -8px rgba(26, 26, 46, 0.14);
+
+  /* Motion */
+  --mei-motion-fast: 150ms;
+  --mei-motion-normal: 250ms;
+  --mei-motion-slow: 400ms;
+}
+
+[data-theme='dark'] {
+  --mei-theme-bg-page: #0F0F1A;
+  --mei-theme-bg-surface: #1A1A2E;
+  --mei-theme-bg-elevated: #2A2B38;
+  --mei-theme-bg-overlay: rgba(0, 0, 0, 0.6);
+  --mei-theme-text-primary: #F1F2F7;
+  --mei-theme-text-secondary: #A1A3B0;
+  --mei-theme-text-tertiary: #5E5F6B;
+  --mei-theme-text-inverse: #1A1A2E;
+  --mei-theme-text-link: #60A5FA;
+  --mei-theme-border-default: #2A2B38;
+  --mei-theme-border-strong: #434452;
+
+  --mei-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --mei-shadow-md: 0 2px 6px -1px rgba(0, 0, 0, 0.35);
+  --mei-shadow-lg: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+  --mei-shadow-xl: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+  --mei-shadow-2xl: 0 16px 48px -8px rgba(0, 0, 0, 0.5);
+}

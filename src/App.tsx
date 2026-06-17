@@ -9,6 +9,7 @@ import Exam from './pages/Exam';
 import Review from './pages/Review';
 import Statistics from './pages/Statistics';
 import Preview from './pages/Preview';
+import './tokens.css';
 import './App.css';
 
 const App: React.FC = () => {

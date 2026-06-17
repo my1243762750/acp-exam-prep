@@ -7,62 +7,65 @@ import { Question } from '../data/questions';
 const { Panel } = Collapse;
 
 const StyledCard = styled(Card)`
-  margin-bottom: 20px;
-  border-radius: 16px;
-  border: none;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  margin-bottom: var(--mei-spacing-stack-lg);
+  border-radius: var(--mei-radius-lg);
+  border: 1px solid var(--mei-theme-border-default);
+  box-shadow: var(--mei-shadow-sm);
+  transition: all var(--mei-motion-normal) var(--mei-motion-easing-easeOut);
   overflow: hidden;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--mei-shadow-md);
   }
   
   .ant-card-body {
-    padding: 32px;
+    padding: var(--mei-spacing-inset-xl);
   }
 `;
 
 const QuestionTitle = styled.div`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  line-height: 1.7;
-  color: #2c3e50;
+  font-size: var(--mei-font-size-lg);
+  font-weight: var(--mei-font-weight-semibold);
+  margin-bottom: var(--mei-spacing-stack-lg);
+  line-height: var(--mei-font-lineHeight-relaxed);
+  color: var(--mei-theme-text-primary);
 `;
 
 const OptionItem = styled.div<{ isSelected?: boolean; isCorrect?: boolean; showAnswer?: boolean }>`
-  padding: 16px 20px;
-  border: 2px solid #e8e8e8;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  padding: var(--mei-spacing-inset-md) var(--mei-spacing-inline-lg);
+  border: 1px solid var(--mei-theme-border-default);
+  border-radius: var(--mei-radius-md);
+  margin-bottom: var(--mei-spacing-stack-sm);
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: white;
+  transition: all var(--mei-motion-fast);
+  background: var(--mei-theme-bg-elevated);
+  display: flex;
+  align-items: center;
   
   &:hover {
-    border-color: #1890ff;
-    background-color: #f8fbff;
+    border-color: var(--mei-color-primary-300);
+    background-color: var(--mei-color-primary-50);
     transform: translateX(4px);
   }
   
   ${props => props.isSelected && !props.showAnswer && `
-    border-color: #1890ff;
-    background: linear-gradient(135deg, #e6f7ff 0%, #f0f8ff 100%);
-    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+    border-color: var(--mei-color-primary-500);
+    background: var(--mei-color-primary-50);
+    box-shadow: var(--mei-shadow-sm);
+    font-weight: 500;
   `}
   
   ${props => props.showAnswer && props.isCorrect && `
-    border-color: #52c41a;
-    background: linear-gradient(135deg, #f6ffed 0%, #f0fff0 100%);
-    box-shadow: 0 4px 12px rgba(82, 196, 26, 0.15);
+    border-color: var(--mei-color-success-base);
+    background: var(--mei-color-success-light);
+    color: var(--mei-color-success-dark);
   `}
   
   ${props => props.showAnswer && props.isSelected && !props.isCorrect && `
-    border-color: #ff4d4f;
-    background: linear-gradient(135deg, #fff2f0 0%, #fff0f0 100%);
-    box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15);
+    border-color: var(--mei-color-error-base);
+    background: var(--mei-color-error-light);
+    color: var(--mei-color-error-dark);
   `}
 `;
 
@@ -70,7 +73,7 @@ const QuestionMeta = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--mei-spacing-stack-md);
 `;
 
 interface QuestionCardProps {
@@ -111,11 +114,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         {showAnswer && hasAnswered && (
           <Space>
             {isCorrect ? (
-              <CheckCircleOutlined style={{ color: '#52c41a', fontSize: '18px' }} />
+              <CheckCircleOutlined style={{ color: 'var(--mei-color-success-base)', fontSize: '18px' }} />
             ) : (
-              <CloseCircleOutlined style={{ color: '#ff4d4f', fontSize: '18px' }} />
+              <CloseCircleOutlined style={{ color: 'var(--mei-color-error-base)', fontSize: '18px' }} />
             )}
-            <span style={{ color: isCorrect ? '#52c41a' : '#ff4d4f' }}>
+            <span style={{ color: isCorrect ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 600 }}>
               {isCorrect ? '回答正确' : '回答错误'}
             </span>
           </Space>
@@ -128,6 +131,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         value={selectedAnswer}
         onChange={(e) => handleOptionSelect(e.target.value)}
         disabled={showAnswer}
+        style={{ width: '100%' }}
       >
         <Space direction="vertical" style={{ width: '100%' }}>
           {question.options.map((option, index) => {
@@ -144,7 +148,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                 onClick={() => handleOptionSelect(optionValue)}
               >
                 <Radio value={optionValue} style={{ marginRight: 8 }}>
-                  <span dangerouslySetInnerHTML={{ __html: option }} />
+                  <span style={{ color: 'inherit' }} dangerouslySetInnerHTML={{ __html: option }} />
                 </Radio>
               </OptionItem>
             );
@@ -153,16 +157,20 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       </Radio.Group>
 
       {showAnswer && (
-        <div style={{ marginTop: 16 }}>
+        <div style={{ marginTop: 24 }}>
           <Alert
-            message={`正确答案：${question.answer}`}
+            message={
+              <span style={{ fontWeight: 600 }}>
+                正确答案：<span style={{ color: 'var(--mei-color-success-base)', fontSize: 18 }}>{question.answer}</span>
+              </span>
+            }
             type={hasAnswered ? (isCorrect ? 'success' : 'error') : 'info'}
             showIcon
-            style={{ marginBottom: 12 }}
+            style={{ marginBottom: 16, borderRadius: 'var(--mei-radius-md)' }}
           />
-          <Collapse>
-            <Panel header="查看解析" key="1">
-              <div style={{ padding: '8px 0' }} dangerouslySetInnerHTML={{ __html: question.explanation }} />
+          <Collapse ghost expandIconPosition="end">
+            <Panel header={<span style={{ fontWeight: 600, color: 'var(--mei-color-primary-600)' }}>查看详细解析</span>} key="1">
+              <div style={{ padding: '8px 0', lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }} dangerouslySetInnerHTML={{ __html: question.explanation }} />
             </Panel>
           </Collapse>
         </div>

@@ -1,4 +1,4 @@
-/* 全局样式 */
+/* Global Styles using Mei UI System Tokens */
 * {
   margin: 0;
   padding: 0;
@@ -6,156 +6,165 @@
 }
 
 body {
-  background: #f7f9fa;
-  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
-  color: #222;
+  background: var(--mei-theme-bg-surface);
+  font-family: var(--mei-font-sans);
+  color: var(--mei-theme-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--mei-font-mono);
 }
 
-/* Ant Design 组件样式覆盖 */
+/* Ant Design Style Overrides */
 .ant-layout {
-  background: #f7f9fa !important;
+  background: var(--mei-theme-bg-page) !important;
 }
 
 .ant-layout-header {
-  background: linear-gradient(90deg, #1890ff 0%, #36cfc9 100%);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.08);
-  padding: 0 32px;
+  background: var(--mei-color-primary-500) !important;
+  color: var(--mei-theme-text-inverse) !important;
+  box-shadow: var(--mei-shadow-md) !important;
+  padding: 0 var(--mei-spacing-inset-xl) !important;
   height: 64px;
   display: flex;
   align-items: center;
 }
 
 .ant-layout-sider {
-  background: #f7f9fa !important;
-  border-right: 1px solid #e6e6e6;
+  background: var(--mei-theme-bg-page) !important;
+  border-right: 1px solid var(--mei-theme-border-default) !important;
 }
 
 .ant-menu {
-  background: #f7f9fa !important;
-  border: none;
+  background: transparent !important;
+  border: none !important;
 }
 
 .ant-menu-item {
-  color: #222 !important;
-  font-weight: 500;
-  border-radius: 8px;
-  margin: 4px 8px;
+  color: var(--mei-theme-text-secondary) !important;
+  font-weight: var(--mei-font-weight-medium);
+  border-radius: var(--mei-radius-md);
+  margin: var(--mei-spacing-stack-xs) var(--mei-spacing-inset-sm) !important;
 }
 
 .ant-menu-item-selected {
-  background: #e6f7ff !important;
-  color: #1890ff !important;
-  font-weight: bold;
+  background: var(--mei-color-primary-50) !important;
+  color: var(--mei-color-primary-600) !important;
+  font-weight: var(--mei-font-weight-bold);
 }
 
 .ant-card {
-  background: #fff !important;
-  border-radius: 16px !important;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
-  border: none !important;
+  background: var(--mei-theme-bg-elevated) !important;
+  border-radius: var(--mei-radius-lg) !important;
+  box-shadow: var(--mei-shadow-sm) !important;
+  border: 1px solid var(--mei-theme-border-default) !important;
+}
+
+.ant-card:hover {
+  box-shadow: var(--mei-shadow-md) !important;
+  transform: translateY(-2px);
+  transition: all var(--mei-motion-normal) var(--mei-motion-easing-easeOut);
 }
 
 .ant-btn-primary {
-  background: linear-gradient(90deg, #1890ff 0%, #36cfc9 100%) !important;
+  background: var(--mei-color-primary-500) !important;
   border: none !important;
+  border-radius: var(--mei-radius-md) !important;
+  font-weight: var(--mei-font-weight-semibold) !important;
+  box-shadow: var(--mei-shadow-sm) !important;
 }
 
 .ant-btn-primary:hover, .ant-btn-primary:focus {
-  background: linear-gradient(90deg, #36cfc9 0%, #1890ff 100%) !important;
-  filter: brightness(1.05);
+  background: var(--mei-color-primary-600) !important;
+  box-shadow: var(--mei-shadow-md) !important;
 }
 
 .ant-progress-bg {
-  background: linear-gradient(90deg, #1890ff 0%, #36cfc9 100%) !important;
+  background: var(--mei-color-primary-500) !important;
 }
 
 .ant-statistic-title {
-  color: #666;
-  font-size: 14px;
+  color: var(--mei-theme-text-secondary);
+  font-size: var(--mei-font-size-sm);
 }
 
 .ant-statistic-content {
-  color: #262626;
-  font-weight: 600;
+  color: var(--mei-theme-text-primary);
+  font-weight: var(--mei-font-weight-bold);
+}
+
+.ant-tag {
+  border-radius: var(--mei-radius-full) !important;
+  border: none !important;
+  padding: var(--mei-spacing-inset-xs) var(--mei-spacing-inline-sm) !important;
 }
 
 .ant-tag-blue {
-  background: #e6f7ff !important;
-  color: #1890ff !important;
-  border: none !important;
+  background: var(--mei-color-blue-50) !important;
+  color: var(--mei-color-blue-700) !important;
 }
 
 .ant-tag-green {
-  background: #f6ffed !important;
-  color: #52c41a !important;
-  border: none !important;
+  background: var(--mei-color-success-light) !important;
+  color: var(--mei-color-success-dark) !important;
 }
 
 .ant-tag-purple {
-  background: #f9f0ff !important;
-  color: #722ed1 !important;
-  border: none !important;
+  background: var(--mei-color-purple-50) !important;
+  color: var(--mei-color-purple-700) !important;
 }
 
-.ant-select {
-  border-radius: 6px;
+.ant-tag-orange {
+  background: var(--mei-color-warning-light) !important;
+  color: var(--mei-color-warning-dark) !important;
 }
 
-.ant-input {
-  border-radius: 6px;
+.ant-tag-red {
+  background: var(--mei-color-error-light) !important;
+  color: var(--mei-color-error-dark) !important;
 }
 
-/* 自定义滚动条 */
+.ant-select-selector, .ant-input {
+  border-radius: var(--mei-radius-md) !important;
+  border-color: var(--mei-theme-border-default) !important;
+}
+
+.ant-select-focused .ant-select-selector, .ant-input:focus {
+  border-color: var(--mei-color-primary-500) !important;
+  box-shadow: 0 0 0 2px var(--mei-color-primary-100) !important;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
-  background: #f7f9fa;
+  background: var(--mei-theme-bg-surface);
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
+  background: var(--mei-color-neutral-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e6e6e6;
-  border-radius: 8px;
+  background: var(--mei-color-neutral-200);
+  border-radius: var(--mei-radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: var(--mei-color-neutral-300);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .ant-layout-sider {
-    position: fixed;
-    height: 100vh;
-    z-index: 999;
-  }
-  
-  .ant-layout-content {
-    margin-left: 0;
-  }
-}
-
-/* 动画效果 */
+/* Animations */
 .fade-in {
-  animation: fadeIn 0.3s ease-in;
+  animation: fadeIn var(--mei-motion-normal) var(--mei-motion-easing-easeOut);
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -163,88 +172,30 @@ code {
   }
 }
 
-.slide-in {
-  animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* 题目卡片特殊样式 */
-.question-card {
-  transition: all 0.3s ease;
-}
-
-.question-card:hover {
-  transform: translateY(-2px);
-}
-
+/* Question Card Special Styles */
 .option-item {
-  transition: all 0.2s ease;
+  border: 1px solid var(--mei-theme-border-default);
+  border-radius: var(--mei-radius-lg);
+  padding: var(--mei-spacing-inset-md);
+  margin-bottom: var(--mei-spacing-stack-sm);
+  transition: all var(--mei-motion-fast);
+  background: var(--mei-theme-bg-elevated);
 }
 
 .option-item:hover {
-  background-color: #f5f5f5;
+  border-color: var(--mei-color-primary-500);
+  background: var(--mei-theme-bg-surface);
 }
 
-/* 统计图表样式 */
-.recharts-wrapper {
-  margin: 0 auto;
-}
-
-.recharts-tooltip-wrapper {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* 加载状态 */
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-
-/* 空状态 */
-.empty-container {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.empty-container .ant-empty-description {
-  color: #999;
-}
-
-/* 成功/错误状态 */
+/* Status Colors */
 .success-text {
-  color: #52c41a;
+  color: var(--mei-color-success-base);
 }
 
 .error-text {
-  color: #ff4d4f;
+  color: var(--mei-color-error-base);
 }
 
 .warning-text {
-  color: #faad14;
-}
-
-/* 打印样式 */
-@media print {
-  .ant-layout-sider,
-  .ant-layout-header,
-  .ant-btn {
-    display: none !important;
-  }
-  
-  .ant-layout-content {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  color: var(--mei-color-warning-base);
 }

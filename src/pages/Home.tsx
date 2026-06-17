@@ -10,63 +10,75 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getStats } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
 
 const statColors = [
-  { color: '#1890ff', bg: 'linear-gradient(135deg, #e3f0ff 0%, #cbe6ff 100%)' }, // 蓝
-  { color: '#36cfc9', bg: 'linear-gradient(135deg, #e6fffb 0%, #b5f5ec 100%)' }, // 青
-  { color: '#faad14', bg: 'linear-gradient(135deg, #fffbe6 0%, #ffe7ba 100%)' }, // 橙
-  { color: '#9254de', bg: 'linear-gradient(135deg, #f9f0ff 0%, #d3adf7 100%)' }  // 紫
+  { color: 'var(--mei-color-blue-600)', bg: 'var(--mei-color-blue-50)' },       // 基础数据: 蓝
+  { color: 'var(--mei-color-primary-600)', bg: 'var(--mei-color-primary-50)' }, // 主操作数据: 靛紫
+  { color: 'var(--mei-color-success-dark)', bg: 'var(--mei-color-success-light)' },// 正确率/成就: 绿
+  { color: 'var(--mei-color-warning-dark)', bg: 'var(--mei-color-warning-light)' } // 坚持/天数: 金/橙
 ];
 
 const StatCard = styled(Card)<{ bgcolor: string }>`
-  margin-bottom: 16px;
-  border-radius: 12px;
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: var(--mei-spacing-stack-md);
+  border-radius: var(--mei-radius-lg);
+  border: 1px solid var(--mei-theme-border-default);
+  box-shadow: var(--mei-shadow-sm);
   background: ${(props) => props.bgcolor};
+  transition: all var(--mei-motion-normal);
+  &:hover {
+    box-shadow: var(--mei-shadow-md);
+    transform: translateY(-4px);
+  }
   .ant-card-body {
-    padding: 24px;
+    padding: var(--mei-spacing-inset-lg);
   }
 `;
 
 const StatIcon = styled.span<{ color: string }>`
   font-size: 32px;
   color: ${(props) => props.color};
-  margin-right: 8px;
+  margin-right: var(--mei-spacing-inline-sm);
 `;
 
 const StatValue = styled.span<{ color: string }>`
   color: ${(props) => props.color};
-  font-weight: bold;
+  font-weight: var(--mei-font-weight-bold);
+  font-size: var(--mei-font-size-2xl);
 `;
 
-const QuickActionCard = styled(Card)<{ hovercolor: string }>`
+const QuickActionCard = styled(Card)<{ basecolor: string; lightcolor: string }>`
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s;
-  border-radius: 16px;
-  border: 2px solid #1890ff;
-  background: #fff;
-  color: #222;
+  transition: all var(--mei-motion-normal);
+  border-radius: var(--mei-radius-xl);
+  border: 1px solid var(--mei-theme-border-default);
+  background: var(--mei-theme-bg-elevated);
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.08);
+  box-shadow: var(--mei-shadow-sm);
+
   &:hover {
-    border-color: ${(props) => props.hovercolor};
-    box-shadow: 0 8px 32px rgba(24, 144, 255, 0.15);
-    background: linear-gradient(135deg, #e3f0ff 0%, #cbe6ff 100%);
+    border-color: ${(props) => props.basecolor};
+    box-shadow: var(--mei-shadow-lg);
+    background: ${(props) => props.lightcolor};
+    transform: translateY(-4px);
+
     .icon-wrapper {
-      color: ${(props) => props.hovercolor} !important;
-      filter: drop-shadow(0 2px 8px ${(props) => props.hovercolor}33);
+      color: ${(props) => props.basecolor} !important;
+      transform: scale(1.1);
     }
-    .quick-title, .quick-desc {
-      color: ${(props) => props.hovercolor} !important;
+    .quick-title {
+      color: ${(props) => props.basecolor} !important;
+    }
+    .quick-desc {
+      color: var(--mei-theme-text-primary) !important;
     }
   }
   .ant-card-body {
-    padding: 32px 24px;
+    padding: var(--mei-spacing-inset-xl);
     position: relative;
     z-index: 1;
   }
@@ -74,27 +86,23 @@ const QuickActionCard = styled(Card)<{ hovercolor: string }>`
 
 const IconWrapper = styled.div<{ color: string }>`
   font-size: 56px;
-  margin-bottom: 20px;
+  margin-bottom: var(--mei-spacing-stack-md);
   color: ${(props) => props.color};
-  filter: drop-shadow(0 2px 4px ${(props) => props.color}33);
-  transition: color 0.3s;
+  transition: all var(--mei-motion-normal);
 `;
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const stats = getStats();
 
-  // 模拟数据
-  const stats = {
-    totalQuestions: 506,
-    answeredQuestions: 320,
-    correctAnswers: 256,
-    wrongAnswers: 64,
-    studyDays: 15,
-    averageScore: 80
-  };
+  const accuracy = stats.answeredQuestions > 0
+    ? Math.round((stats.correctAnswers / stats.answeredQuestions) * 100)
+    : 0;
+  const progress = stats.totalQuestions > 0
+    ? Math.round((stats.answeredQuestions / stats.totalQuestions) * 100)
+    : 0;
 
-  const accuracy = Math.round((stats.correctAnswers / stats.answeredQuestions) * 100);
-  const progress = Math.round((stats.answeredQuestions / stats.totalQuestions) * 100);
+  const hasData = stats.answeredQuestions > 0;
 
   const quickActions = [
     {
@@ -102,44 +110,47 @@ const Home: React.FC = () => {
       description: '按分类练习题目',
       icon: <BookOutlined />,
       path: '/practice',
-      hovercolor: '#1765ad'
+      basecolor: 'var(--mei-color-blue-500)',
+      lightcolor: 'var(--mei-color-blue-50)'
     },
     {
       title: '模拟考试',
       description: '全真模拟考试环境',
       icon: <FileTextOutlined />,
       path: '/exam',
-      hovercolor: '#1765ad'
+      basecolor: 'var(--mei-color-primary-500)',
+      lightcolor: 'var(--mei-color-primary-50)'
     },
     {
       title: '错题复习',
       description: '重点复习错题',
       icon: <ExclamationCircleOutlined />,
       path: '/review',
-      hovercolor: '#1765ad'
+      basecolor: 'var(--mei-color-error-base)',
+      lightcolor: 'var(--mei-color-error-light)'
     },
     {
       title: '学习统计',
       description: '查看学习进度',
       icon: <TrophyOutlined />,
       path: '/statistics',
-      hovercolor: '#1765ad'
+      basecolor: 'var(--mei-color-purple-500)',
+      lightcolor: 'var(--mei-color-purple-50)'
     }
   ];
 
   return (
     <div>
-      <Title level={2}>欢迎使用ACP考试助手</Title>
-      <Paragraph type="secondary">
+      <Title level={2} style={{ color: 'var(--mei-theme-text-primary)' }}>欢迎使用ACP考试助手</Title>
+      <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', marginBottom: 32 }}>
         阿里云ACP认证考试备考平台，助您高效备考，轻松通过考试
       </Paragraph>
 
-      {/* 统计卡片 */}
-      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+      <Row gutter={[24, 24]} style={{ marginBottom: 32 }}>
         <Col xs={24} sm={12} md={6}>
           <StatCard bgcolor={statColors[0].bg}>
             <Statistic
-              title="总题数"
+              title={<span style={{ color: statColors[0].color, fontWeight: 600 }}>总题数</span>}
               valueRender={() => <><StatIcon color={statColors[0].color}><BookOutlined /></StatIcon><StatValue color={statColors[0].color}>{stats.totalQuestions}</StatValue></>}
             />
           </StatCard>
@@ -147,7 +158,7 @@ const Home: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <StatCard bgcolor={statColors[1].bg}>
             <Statistic
-              title="已答题数"
+              title={<span style={{ color: statColors[1].color, fontWeight: 600 }}>已答题数</span>}
               valueRender={() => <><StatIcon color={statColors[1].color}><CheckCircleOutlined /></StatIcon><StatValue color={statColors[1].color}>{stats.answeredQuestions}</StatValue></>}
             />
           </StatCard>
@@ -155,86 +166,93 @@ const Home: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <StatCard bgcolor={statColors[2].bg}>
             <Statistic
-              title="正确率"
-              valueRender={() => <><StatIcon color={statColors[2].color}><TrophyOutlined /></StatIcon><StatValue color={statColors[2].color}>{accuracy}%</StatValue></>}
+              title={<span style={{ color: statColors[2].color, fontWeight: 600 }}>正确率</span>}
+              valueRender={() => <><StatIcon color={statColors[2].color}><TrophyOutlined /></StatIcon><StatValue color={statColors[2].color}>{hasData ? `${accuracy}%` : '--'}</StatValue></>}
             />
           </StatCard>
         </Col>
         <Col xs={24} sm={12} md={6}>
           <StatCard bgcolor={statColors[3].bg}>
             <Statistic
-              title="学习天数"
+              title={<span style={{ color: statColors[3].color, fontWeight: 600 }}>学习天数</span>}
               valueRender={() => <><StatIcon color={statColors[3].color}><ClockCircleOutlined /></StatIcon><StatValue color={statColors[3].color}>{stats.studyDays}</StatValue></>}
             />
           </StatCard>
         </Col>
       </Row>
 
-      {/* 学习进度 */}
-      <Card title="学习进度" style={{ marginBottom: 24, borderRadius: 12 }}>
-        <Progress
-          percent={progress}
-          status="active"
-          strokeColor={{
-            '0%': '#108ee9',
-            '100%': '#87d068',
-          }}
-        />
-        <div style={{ marginTop: 8, color: '#666' }}>
-          已完成 {stats.answeredQuestions} / {stats.totalQuestions} 题
-        </div>
+      <Card title={<span style={{ fontWeight: 700 }}>学习进度</span>} style={{ marginBottom: 32 }}>
+        {hasData ? (
+          <>
+            <Progress
+              percent={progress}
+              status="active"
+              strokeColor={{
+                '0%': 'var(--mei-color-blue-400)',
+                '100%': 'var(--mei-color-primary-600)',
+              }}
+              strokeWidth={12}
+            />
+            <div style={{ marginTop: 12, color: 'var(--mei-theme-text-secondary)', fontWeight: 500 }}>
+              已完成 {stats.answeredQuestions} / {stats.totalQuestions} 题
+            </div>
+          </>
+        ) : (
+          <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>
+            还没有答题记录，去练习模式开始学习吧！
+          </Paragraph>
+        )}
       </Card>
 
-      {/* 快速入口 */}
-      <Title level={3}>快速开始</Title>
-      <Row gutter={[16, 16]}>
+      <Title level={3} style={{ marginBottom: 24, color: 'var(--mei-theme-text-primary)' }}>快速开始</Title>
+      <Row gutter={[24, 24]}>
         {quickActions.map((action, index) => (
           <Col xs={24} sm={12} md={6} key={index}>
-            <QuickActionCard
+            <QuickActionCard 
               onClick={() => navigate(action.path)}
-              hovercolor={action.hovercolor}
+              basecolor={action.basecolor}
+              lightcolor={action.lightcolor}
             >
-              <IconWrapper className="icon-wrapper" color="#1890ff">
+              <IconWrapper className="icon-wrapper" color={action.basecolor}>
                 {action.icon}
               </IconWrapper>
-              <Title level={4} className="quick-title" style={{ color: '#1890ff', marginBottom: 8 }}>{action.title}</Title>
-              <Paragraph className="quick-desc" style={{ color: '#666', margin: 0 }}>{action.description}</Paragraph>
+              <Title level={4} className="quick-title" style={{ color: action.basecolor, marginBottom: 12, transition: 'all 0.3s' }}>{action.title}</Title>
+              <Paragraph className="quick-desc" style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>{action.description}</Paragraph>
             </QuickActionCard>
           </Col>
         ))}
       </Row>
 
-      {/* 学习建议 */}
-      <Card title="学习建议" style={{ marginTop: 24, borderRadius: 12 }}>
-        <Row gutter={[16, 16]}>
+      <Card title={<span style={{ fontWeight: 700 }}>学习建议</span>} style={{ marginTop: 32 }}>
+        <Row gutter={[32, 32]}>
           <Col xs={24} md={12}>
-            <div style={{ padding: '16px 0' }}>
-              <Title level={5}>📚 系统学习</Title>
-              <Paragraph>
+            <div style={{ padding: '8px 0' }}>
+              <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>系统学习</Title>
+              <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
                 建议按照知识点分类进行系统学习，先掌握基础概念，再深入实践应用。
               </Paragraph>
             </div>
           </Col>
           <Col xs={24} md={12}>
-            <div style={{ padding: '16px 0' }}>
-              <Title level={5}>🎯 重点突破</Title>
-              <Paragraph>
+            <div style={{ padding: '8px 0' }}>
+              <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>重点突破</Title>
+              <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
                 重点关注错题和薄弱环节，通过反复练习巩固知识点。
               </Paragraph>
             </div>
           </Col>
           <Col xs={24} md={12}>
-            <div style={{ padding: '16px 0' }}>
-              <Title level={5}>⏰ 模拟训练</Title>
-              <Paragraph>
+            <div style={{ padding: '8px 0' }}>
+              <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>模拟训练</Title>
+              <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
                 定期进行模拟考试，熟悉考试节奏和题型分布。
               </Paragraph>
             </div>
           </Col>
           <Col xs={24} md={12}>
-            <div style={{ padding: '16px 0' }}>
-              <Title level={5}>📊 数据分析</Title>
-              <Paragraph>
+            <div style={{ padding: '8px 0' }}>
+              <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>数据分析</Title>
+              <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
                 关注学习统计数据，及时调整学习策略和重点。
               </Paragraph>
             </div>
@@ -245,4 +263,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home; 
+export default Home;
