@@ -41,13 +41,15 @@ code {
 .ant-menu {
   background: transparent !important;
   border: none !important;
+  padding: 0 12px !important; /* Move padding to the menu container */
 }
 
 .ant-menu-item {
   color: var(--mei-theme-text-secondary) !important;
   font-weight: var(--mei-font-weight-medium);
-  border-radius: var(--mei-radius-md);
-  margin: var(--mei-spacing-stack-xs) var(--mei-spacing-inset-sm) !important;
+  border-radius: var(--mei-radius-md) !important;
+  margin: var(--mei-spacing-stack-xs) 0 !important; /* Remove horizontal margin from the item itself */
+  width: 100% !important; /* Ensure item takes full width of the padded container */
 }
 
 .ant-menu-item-selected {
@@ -61,12 +63,11 @@ code {
   border-radius: var(--mei-radius-lg) !important;
   box-shadow: var(--mei-shadow-sm) !important;
   border: 1px solid var(--mei-theme-border-default) !important;
+  transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out) !important;
 }
 
 .ant-card:hover {
   box-shadow: var(--mei-shadow-md) !important;
-  transform: translateY(-2px);
-  transition: all var(--mei-motion-normal) var(--mei-motion-easing-easeOut);
 }
 
 .ant-btn-primary {
@@ -104,7 +105,7 @@ code {
 
 .ant-tag-blue {
   background: var(--mei-color-blue-50) !important;
-  color: var(--mei-color-blue-700) !important;
+  color: var(--mei-color-blue-600) !important;
 }
 
 .ant-tag-green {
@@ -113,8 +114,8 @@ code {
 }
 
 .ant-tag-purple {
-  background: var(--mei-color-purple-50) !important;
-  color: var(--mei-color-purple-700) !important;
+  background: var(--mei-color-primary-50) !important;
+  color: var(--mei-color-primary-600) !important;
 }
 
 .ant-tag-orange {

@@ -11,11 +11,11 @@ const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
 const StyledCard = styled(Card)`
-  margin-bottom: var(--mei-spacing-stack-md);
-  border-radius: var(--mei-radius-lg);
-  box-shadow: var(--mei-shadow-sm);
+  margin-bottom: var(--mei-spacing-stack-lg);
+  border-radius: var(--mei-radius-xl);
   border: 1px solid var(--mei-theme-border-default);
-  background: var(--mei-theme-bg-elevated);
+  background: var(--mei-theme-bg-page);
+  box-shadow: none;
 `;
 
 const ReviewHeader = styled.div`

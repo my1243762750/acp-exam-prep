@@ -47,19 +47,19 @@
   --mei-color-neutral-800: #2A2B38;
   --mei-color-neutral-900: #1A1A2E;
 
-  /* Semantic Colors */
-  --mei-color-success-light: #D1FAE5;
-  --mei-color-success-base: #10B981;
-  --mei-color-success-dark: #065F46;
-  --mei-color-warning-light: #FEF3C7;
-  --mei-color-warning-base: #F59E0B;
-  --mei-color-warning-dark: #92400E;
-  --mei-color-error-light: #FEE2E2;
-  --mei-color-error-base: #EF4444;
-  --mei-color-error-dark: #991B1B;
-  --mei-color-info-light: #DBEAFE;
-  --mei-color-info-base: #3B82F6;
-  --mei-color-info-dark: #1E40AF;
+  /* Semantic Colors - Muted for professional look */
+  --mei-color-success-light: #E8F5E9;
+  --mei-color-success-base: #66BB6A;
+  --mei-color-success-dark: #2E7D32;
+  --mei-color-warning-light: #FFF8E1;
+  --mei-color-warning-base: #FFA726;
+  --mei-color-warning-dark: #E65100;
+  --mei-color-error-light: #FFEBEE;
+  --mei-color-error-base: #EF5350;
+  --mei-color-error-dark: #C62828;
+  --mei-color-info-light: #E3F2FD;
+  --mei-color-info-base: #42A5F5;
+  --mei-color-info-dark: #1565C0;
 
   /* Theme - Light */
   --mei-theme-bg-page: #FFFFFF;

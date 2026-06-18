@@ -1,6 +1,6 @@
 export interface Question {
   id: number;
-  type: '单选题' | '多选题' | '判断题';
+  type: 'single' | 'multiple' | 'judge';
   title: string;
   options: string[];
   answer: string;
@@ -11,7 +11,7 @@ export interface Question {
 export const questions: Question[] = [
   {
     "id": 1,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾会检查通过公共互联网登录云服务器ECS的来源IP，登录方式包括SSH和远程桌面，当来自某个IP的登录请求出现多次密码错误的情况时，会发出”ECS遭遇密码暴力破解”的报警，当收到这个报警后，最安全的处理方法应该是<strong>____</strong>。",
     "options": [
       "A.通知自己业务平台的所有用户立即修改密码，并通过技术手段杜绝简单密码",
@@ -25,7 +25,7 @@ export const questions: Question[] = [
   },
   {
     "id": 2,
-    "type": "单选题",
+    "type": "single",
     "title": "您基于阿里云的云服务器ECS实例部署了Mysql数据库，随着业务量的不断上涨，您自己部署的数据库的服务能力越来越不足，表现在并发连接数不足，磁盘的IOPS不能满足业务需要等，可以采用阿里云的<strong>____</strong>产品来解决这些问题。",
     "options": [
       "A.对象存储OSS",
@@ -39,7 +39,7 @@ export const questions: Question[] = [
   },
   {
     "id": 3,
-    "type": "单选题",
+    "type": "single",
     "title": "作为一个互联网初创企业的技术负责人，小A在早期选择了阿里云的云服务器ECS并将Java应用程序、数据库MySQL等部署在了一台云服务器ECS实例上。随着业务发展和用户量增加，发现部署在这台ECS实例上数据库性能出现瓶颈。为了最快速度解决该问题，同时提高系统安全性和稳定性，您建议选择阿里云的<strong>____</strong>产品。",
     "options": [
       "A.对象存储OSS",
@@ -53,7 +53,7 @@ export const questions: Question[] = [
   },
   {
     "id": 4,
-    "type": "单选题",
+    "type": "single",
     "title": "在公共云的环境中，阿里云负责云计算基础设施的安全（如: IDC环境、物理服务器运维、云产品虚拟化层等），用户需要对自己购买的云产品进行必要的安全优化和防护设置，以下几种客户的行为中您认为最安全的是<strong>____</strong>。",
     "options": [
       "A.为了管理方便，将云服务器ECS实例的管理员密码修改为123456",
@@ -67,7 +67,7 @@ export const questions: Question[] = [
   },
   {
     "id": 5,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN系统能够实现内容加速的功能，需要智能DNS解析的支持，以下<strong>____</strong>功能不是智能DNS解析系统具备的。",
     "options": [
       "A.可以根据不同的访问者IP把同一个域名分别解析成不同的IP地址",
@@ -81,7 +81,7 @@ export const questions: Question[] = [
   },
   {
     "id": 6,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS的图片处理服务中，所有对图片的转换参数都会加在图片文件的URL后面，使URL变得冗长，不方便管理与阅读。为了简化操作，OSS图片处理服务提供了<strong>___</strong>功能，可以将常见的转换参数保存起来多次使用。",
     "options": [
       "A.样式",
@@ -95,7 +95,7 @@ export const questions: Question[] = [
   },
   {
     "id": 7,
-    "type": "单选题",
+    "type": "single",
     "title": "开通阿里云对象存储OSS服务后，您首先需要使用fOSS管理控制台或OpenAPI创建Bucket来存储文件。创建Bucket时“所属地域”这个属性必须要指定，特别是您的云服务器ECS实例需要通过内网访问OSS Bucket时，必须选择与ECS实例相同的地域，以下有关“所属地域”的说法<strong><strong>_</strong></strong>是正确的。",
     "options": [
       "A.Bucket创建后，“所属地域”属性可随时更改",
@@ -109,7 +109,7 @@ export const questions: Question[] = [
   },
   {
     "id": 8,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。使用阿里云OSS进行数据存储前，需要先建立创建一个或者多个存储空间，这个存储空间在OSS里叫<strong>____</strong>。",
     "options": [
       "A.key",
@@ -123,7 +123,7 @@ export const questions: Question[] = [
   },
   {
     "id": 9,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储服务（Object Storage Service，简称 OSS），是阿里云提供的海量、安全、低成本、高可靠的云存储服务。用户操作OSS的基本数据单元是什么？",
     "options": [
       "A.Object",
@@ -137,7 +137,7 @@ export const questions: Question[] = [
   },
   {
     "id": 10,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB包含了几个主要的部分：来自外部的访问请求、Listener、LoadBalancer、BackendServer等，关于Listener的说法中正确的是<strong>____</strong>。",
     "options": [
       "A.主要包括用户定制的负载均衡策略和转发规则",
@@ -151,7 +151,7 @@ export const questions: Question[] = [
   },
   {
     "id": 11,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云负载均衡SLB产品时，如果从负载均衡服务中移除ECS实例，直接将ECS实例从负载均衡实例中移除，可能会造成业务闪段。建议先执行以下哪个步骤？",
     "options": [
       "A.将ECS实例权重修改为0",
@@ -165,7 +165,7 @@ export const questions: Question[] = [
   },
   {
     "id": 12,
-    "type": "单选题",
+    "type": "single",
     "title": "在阿里云上创建专有网络VPC时，VPC会自动为用户创建1条系统路由，这条路由的作用是<strong>____</strong>。",
     "options": [
       "A.没有任何作用",
@@ -179,7 +179,7 @@ export const questions: Question[] = [
   },
   {
     "id": 13,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾补丁管理服务里发布的补丁来自<strong><strong>_</strong></strong>。",
     "options": [
       "A.阿里云自己研发",
@@ -193,7 +193,7 @@ export const questions: Question[] = [
   },
   {
     "id": 14,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云绿网是云盾体系内的业务防护模块，它的作用是保护网站内容的安全，提前发现不符合政策规定的信息。以下对绿网功能的描述最准确的是<strong>____</strong>。",
     "options": [
       "A.自动判别文本内容和图片是否合规，支持API批量检测图片",
@@ -207,7 +207,7 @@ export const questions: Question[] = [
   },
   {
     "id": 15,
-    "type": "单选题",
+    "type": "single",
     "title": "当客户开通云盾安骑士功能后经常能收到一些安全的报警信息，但是没有时间处理，为了避免安全风险的发生，客户还可以选择云盾的<strong><strong>___</strong></strong>服务，让阿里云专业的工程师代为处理。",
     "options": [
       "A.态势感知",
@@ -221,7 +221,7 @@ export const questions: Question[] = [
   },
   {
     "id": 16,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频手机应用，日均活跃用户为两百万，可以使用阿里云的哪一款或几款产品来解决用户对视频，图片，音频的大量访问？",
     "options": [
       "A.OSS+CDN",
@@ -235,7 +235,7 @@ export const questions: Question[] = [
   },
   {
     "id": 17,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN在实际应用中，CDN效果的好坏与是否正确使用非常相关。 以下<strong><strong>___</strong></strong>场景不适合使用CDN。",
     "options": [
       "A.重复访问率不高的个人网盘业务",
@@ -249,7 +249,7 @@ export const questions: Question[] = [
   },
   {
     "id": 18,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)中，可以配置伸缩规则来定义具体的扩展和收缩操作。以下<strong>____</strong>是伸缩规则。",
     "options": [
       "A.加入或移出3个云服务器ECS实例",
@@ -263,7 +263,7 @@ export const questions: Question[] = [
   },
   {
     "id": 19,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云两个在不同地域创建了专有网络VPC，如果希望实现两个VPC之间的私网通信，采用<strong>____</strong>产品可以实现。",
     "options": [
       "A.通过高速通道实现VPC之间的私网通信",
@@ -277,7 +277,7 @@ export const questions: Question[] = [
   },
   {
     "id": 20,
-    "type": "单选题",
+    "type": "single",
     "title": "当收到阿里云的云盾检测出的安全报警信息后，正确的处理方法是<strong><strong>_</strong></strong>。",
     "options": [
       "A.无需理会，阿里云的云盾会搞定一切",
@@ -291,7 +291,7 @@ export const questions: Question[] = [
   },
   {
     "id": 21,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN在基本配置之上为用户开放了很多优化功能，包括：页面优化、智能压缩、过滤参数、拖拽播放等。以下关于这些优化功能的描述，错误的是<strong>____</strong>。",
     "options": [
       "A.可以压缩与去除页面中无用的空行、回车等内容，有效缩减页面大小",
@@ -305,7 +305,7 @@ export const questions: Question[] = [
   },
   {
     "id": 22,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾数据风控可以很好地解决WEB应用中常见的垃圾注册、刷库等业务风险识别的难题， 要想使用这项服务首先得进行业务数据的采集，对于WEB应用系统，可以采用<strong><strong>_</strong></strong>方式来采集信息。",
     "options": [
       "A.JavaScript",
@@ -319,7 +319,7 @@ export const questions: Question[] = [
   },
   {
     "id": 23,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾数据风控是通过领先的行为收集技术和机器学习模型，解决账号、活动、支付等关键业务环节存在的欺诈威胁，最终实验降低企业损失。该项服务是基于阿里巴巴的<strong><strong>__</strong></strong>能力开发的。",
     "options": [
       "A.BGP网络",
@@ -333,7 +333,7 @@ export const questions: Question[] = [
   },
   {
     "id": 24,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云的负载均衡SLB实例时，做了如下健康检查的配置：响应超时时间为5秒，健康检查间隔为2秒，不健康阀值为3，健康阀值为3。即对于确认一个云服务器ECS实例是健康的，需要连续三次得到正常响应。如果某后端云服务器ECS实例当前状态是不健康的，现在对该实例进行修复，可以通过健康检查确认该实例是健康的时间窗是多久？",
     "options": [
       "A.19秒",
@@ -347,7 +347,7 @@ export const questions: Question[] = [
   },
   {
     "id": 25,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云的负载均衡SLB实例时，做了如下健康检查的配置：响应超时时间为5秒，健康检查间隔为2秒，不健康阀值为3，健康阀值为3，即对于确认一个后端云服务器ECS实例是不健康的，需要连续三次健康检查超时。则在某后端云服务器ECS实例状态异常后，被负载均衡SLB实例从后端服务器中移出的时间窗为是多久？",
     "options": [
       "A.19秒",
@@ -361,7 +361,7 @@ export const questions: Question[] = [
   },
   {
     "id": 26,
-    "type": "单选题",
+    "type": "single",
     "title": "如果用户的在使用阿里云对象存储OSS产品时，产生的外网下行流量比较多，可以使用阿里云内容分发网络CDN产品来降低用户的外网流量成本。组合方案中CDN的公网流量成本比OSS的低，同时CDN向OSS回源时产生的流量费也比访客直接访问OSS低。",
     "options": [
       "A.对",
@@ -373,7 +373,7 @@ export const questions: Question[] = [
   },
   {
     "id": 27,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN和传统厂商的CDN相比具有稳定快速、节约成本和简单易用三个特点。以下关于阿里云CDN节约成本的描述错误的是<strong>____</strong>。",
     "options": [
       "A.资源弹性扩展，按实际使用量付费，接入即可实现跨运营商、跨地域的全网覆盖",
@@ -387,7 +387,7 @@ export const questions: Question[] = [
   },
   {
     "id": 28,
-    "type": "单选题",
+    "type": "single",
     "title": "关于阿里云CDN加速域名的“停用”和“删除”，表述正确的是？",
     "options": [
       "A.停用加速域名会自己停止相关域名的解析",
@@ -401,7 +401,7 @@ export const questions: Question[] = [
   },
   {
     "id": 29,
-    "type": "单选题",
+    "type": "single",
     "title": "关于阿里云CDN缓存数据更新的建议和描述，错误的是<strong>___</strong>？",
     "options": [
       "A.缓存刷新指的是强制将分发节点上缓存的资源标记为过期，当用户再次对该资源发起请求时，节点会回源拉取资源，并缓存一份更新后的资源在分发节点",
@@ -415,7 +415,7 @@ export const questions: Question[] = [
   },
   {
     "id": 30,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾反欺诈服务是阿里巴巴的什么能力开发的？",
     "options": [
       "A.BGP网络",
@@ -429,7 +429,7 @@ export const questions: Question[] = [
   },
   {
     "id": 31,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业托管到传统IDC机房的服务器（包括windows和Linux两种操作系统），每天晚上有来自很多国家的IP地址对其管理密码进行尝试破解。为此管理员小王很是担心，因为工作需要，远程管理端口必须对公网开放。 小王听说阿里云的云盾可以帮助客户提升安全防护的能力，想把系统迁到阿里云上。在阿里云上开通<strong><strong>_</strong></strong>功能可以减少密码被暴力破解的可能。",
     "options": [
       "A.内容安全（原名：绿网）",
@@ -443,7 +443,7 @@ export const questions: Question[] = [
   },
   {
     "id": 32,
-    "type": "单选题",
+    "type": "single",
     "title": "您希望在阿里云上构建一个安全隔离的网络环境，并且在这个网络环境中可以按自己的需求进行网络拓扑的设计和私网IP地址网段的划分，可以采用<strong>____</strong>产品来满足这个需求。",
     "options": [
       "A.弹性伸缩",
@@ -457,7 +457,7 @@ export const questions: Question[] = [
   },
   {
     "id": 33,
-    "type": "单选题",
+    "type": "single",
     "title": "BGP(边界网关协议)主要用于互联网AS(自治系统)之间的互联，BGP的最主要功能在于控制路由的传播和选择最好的路由，阿里云的云服务器ECS产品支持的多线BGP接入,解决的主要问题是<strong>___</strong>。",
     "options": [
       "A.提升全网内容分发效率；",
@@ -471,7 +471,7 @@ export const questions: Question[] = [
   },
   {
     "id": 34,
-    "type": "单选题",
+    "type": "single",
     "title": "您的业务将面临一个新的挑战，要进行一次大型的促销，但无法预估业务增长的幅度，但您了解云服务器ECS实例的CPU利用率如果超过了70%，业务的响应速度将会有大幅度的下降，目前您的web应用部署在一组阿里云的云服务器ECS实例上，前端采用一个公网的负载均衡SLB作为流量入口。采用<strong>____</strong>方式可以最高效并最节省地来应对这个场景。",
     "options": [
       "A.制作部署web服务的云服务器ECS实例的镜像,基于该镜像创建足够多的新的云服务器ECS实例,并加入到负载均衡SLB的集群中,提前做好准备",
@@ -485,7 +485,7 @@ export const questions: Question[] = [
   },
   {
     "id": 35,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业使用公共云的云服务器进行文件处理，出于改善性能的考虑，将正在使用的1核2G云服务器的配置提升至2核8G，这种操作在云计算中被称为<strong>____</strong>。",
     "options": [
       "A.垂直扩展",
@@ -499,7 +499,7 @@ export const questions: Question[] = [
   },
   {
     "id": 36,
-    "type": "单选题",
+    "type": "single",
     "title": "由于业务的流量增长，您需要对您的阿里云的云服务ECS实例的带宽进行临时升级操作，以下的描述中错误的是<strong>____</strong>。",
     "options": [
       "A.可以按天进行升级，升级后如果云服务器ECS续费，仍然按照原基础带宽进行续费",
@@ -513,7 +513,7 @@ export const questions: Question[] = [
   },
   {
     "id": 37,
-    "type": "单选题",
+    "type": "single",
     "title": "您在创建阿里云的云服务器ECS实例时必须要选择<strong>____</strong>来指定新建的云服务器ECS实例的系统盘的配置？",
     "options": [
       "A.IP地址",
@@ -527,7 +527,7 @@ export const questions: Question[] = [
   },
   {
     "id": 38,
-    "type": "单选题",
+    "type": "single",
     "title": "用户在阿里云以外的服务器上安装“安骑士客户端”后，通过<strong><strong>_</strong></strong>方式与指定的阿里云官网帐号关联。",
     "options": [
       "A.在管理控制台生成的安装验证key",
@@ -541,7 +541,7 @@ export const questions: Question[] = [
   },
   {
     "id": 39,
-    "type": "单选题",
+    "type": "single",
     "title": "用户在阿里云以外的服务器上安装“云安全中心客户端”后，通过<strong><strong>_</strong></strong>方式与指定的阿里云官网帐号关联。",
     "options": [
       "A.在管理控制台生成的安装验证key",
@@ -555,7 +555,7 @@ export const questions: Question[] = [
   },
   {
     "id": 40,
-    "type": "单选题",
+    "type": "single",
     "title": "采用云计算服务与传统自建IT系统不同，相比传统自建方式，云计算带来了巨大的便利性。以阿里云服务器ECS为例，这些便利性中不包括<strong><strong>_</strong></strong>。",
     "options": [
       "A.用户按照需要获得计算量而不是按照峰值设计",
@@ -569,7 +569,7 @@ export const questions: Question[] = [
   },
   {
     "id": 41,
-    "type": "单选题",
+    "type": "single",
     "title": "您的特定业务要暂时停止一段时间，为了节省成本希望暂时不使用或者释放这些业务的云服务器ECS实例，但希望能够继续保留现有的云服务器ECS实例系统盘上运行的服务和数据， 通过<strong><strong>_</strong></strong>可以最节省高效地实现。",
     "options": [
       "A.直接释放该云服务器ECS实例，阿里云会自动为用户保留数据",
@@ -583,7 +583,7 @@ export const questions: Question[] = [
   },
   {
     "id": 42,
-    "type": "单选题",
+    "type": "single",
     "title": "为了提升您在阿里云上部署的应用的可用性，可以在多可用区创建云服务器ECS实例并进行应用的部署，同时可以与<strong>____</strong>产品搭配使用，可以实现高可用的架构。",
     "options": [
       "A.云监控",
@@ -597,7 +597,7 @@ export const questions: Question[] = [
   },
   {
     "id": 43,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾DDoS高防IP是阿里云在“基础DDoS防护”之上提供的高级防护产品，支持四层和七层的抗攻击能力， 以下关于云盾DDoS高防IP的功能描述错误的是<strong>____</strong>。",
     "options": [
       "A.支持弹性按天计费",
@@ -611,7 +611,7 @@ export const questions: Question[] = [
   },
   {
     "id": 44,
-    "type": "单选题",
+    "type": "single",
     "title": "A电商平台近几年业务增长很快，访问量持续保持每年提升300%，平台运营团队因此获得了公司的年度特别奖励。在高兴之余运营团队发现平台系统带宽的支出是以每年500%的比例增长的，如果能有效降低这块成本可以提升整体的运营质量。此时，该公司选择阿里云的<strong>____</strong>服务，效果会最明显。",
     "options": [
       "A.支持多可用区的云数据库RDS",
@@ -625,7 +625,7 @@ export const questions: Question[] = [
   },
   {
     "id": 45,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的专有网络VPC中用于连接VPC内的各个交换机的设备是<strong>____</strong>。",
     "options": [
       "A.路由器",
@@ -639,7 +639,7 @@ export const questions: Question[] = [
   },
   {
     "id": 46,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。在安全性方面OSS服务本身具备了防DDoS攻击和自动黑洞清洗的功能，如果采用传统IT的解决方案，实现和OSS类似的防DDos功能，需要做什么投入<strong>____</strong>。",
     "options": [
       "A.只需要在存储服务器内安装特定的安全软件",
@@ -653,7 +653,7 @@ export const questions: Question[] = [
   },
   {
     "id": 47,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS实例的磁盘快照是某一个时间点上某一个磁盘的数据拷贝。以下针对云服务器ECS实例的磁盘快照的描述正确的是<strong>____</strong>。",
     "options": [
       "A.快照被存放在用户自己的磁盘中",
@@ -667,7 +667,7 @@ export const questions: Question[] = [
   },
   {
     "id": 48,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS为每个存储空间Bucket自动分配一个内网地址和一个外网地址，如果正确使用内网地址，一方面可以实现OSS Bucket与云服务器ECS实例之间的流量免费，另一方面云服务器ECS实例通过内网访问OSS Bucket的网络质量较好，能够有效的提升部署在ECS实例上的应用的上传和下载质量。以下关于OSS Bucket内网地址的描述正确的是<strong>____</strong>。",
     "options": [
       "A.如果ECS实例使用OSS Bucket内网地址，只能访问与ECS实例在同一地域且在同一可用区的OSS Bucket",
@@ -681,7 +681,7 @@ export const questions: Question[] = [
   },
   {
     "id": 49,
-    "type": "单选题",
+    "type": "single",
     "title": "在互联网环境中，云服务器ECS要想被别的应用或网民访问到，就必须开通相应的“端口”，比如常见的HTTP应用工作在80端口，FTP应用工作在21端口，以下是某管理员对云服务器ECS配置的策略，请您选出最安全的一种方法<strong>____</strong>。",
     "options": [
       "A.云服务器ECS实例购买成功后，立即从管理控制台启用了安全组防火墙，并对公网只开通必要的服务端口",
@@ -695,7 +695,7 @@ export const questions: Question[] = [
   },
   {
     "id": 50,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业使用公共云搭建了一个门户网站，目前访问缓慢。为了提升网站的响应速度，又购置了多台云服务器，希望新增加的服务器和原有服务器一起对外提供服务，需要哪种技术配合实现这个方案<strong>____</strong>？",
     "options": [
       "A.CDN（内容分发网络）",
@@ -709,7 +709,7 @@ export const questions: Question[] = [
   },
   {
     "id": 51,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算一个重要特点是弹性，阿里云的用户可以根据业务需求和策略实现计算资源的自动调整。在业务量高峰时增加ECS实例来提升系统的处理能力，在业务量低谷时自动减少ECS实例以节约成本。针对此场景，阿里云的<strong>____</strong>产品可以和云服务器ECS实例配合使用实现弹性计算。",
     "options": [
       "A.负载均衡SLB",
@@ -723,7 +723,7 @@ export const questions: Question[] = [
   },
   {
     "id": 52,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算以多种形式对外提供服务，比如提供给消费者的服务是运行在云计算基础设施上的应用程序，消费者可以在各种设备上通过瘦客户端界面访问，如浏览器（例如基于Web的邮件），不需要管理或控制任何云计算基础设施，包括网络、服务器、操作系统、存储，甚至独立的应用能力等等，仅需要对应用进行有限的、特殊的配置。这种服务形式被称作<strong>____</strong>。",
     "options": [
       "A.PaaS(平台即服务)",
@@ -737,7 +737,7 @@ export const questions: Question[] = [
   },
   {
     "id": 53,
-    "type": "单选题",
+    "type": "single",
     "title": "用户通过网络使用软件，无需购买软硬件、建设机房等，而改用向提供商租用基于Web的软件，来管理企业经营活动，且无需对软件进行维护，服务提供商会全权管理和维护软件。这种模式是云计算提供的<strong>____</strong>服务。",
     "options": [
       "A.SaaS(软件即服务)",
@@ -751,7 +751,7 @@ export const questions: Question[] = [
   },
   {
     "id": 54,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云云服务器ECS是一种简单高效、处理能力可弹性伸缩的计算服务，帮助您快速构建更稳定、安全的应用，提升运维效率，降低 IT 成本。ECS属于<strong>____</strong>。",
     "options": [
       "A.SaaS(软件即服务)",
@@ -765,7 +765,7 @@ export const questions: Question[] = [
   },
   {
     "id": 55,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算以多种形式对外提供服务，比如提供给消费者的服务是把客户开发或者购买的应用程序部署到云计算基础设施上。消费者不需要管理或控制底层的云基础设施，包括网络、服务器、操作系统、存储等，但能够控制部署的应用程序，也可能控制运行应用程序的托管环境配置。这种服务形式被称作<strong>____</strong>。",
     "options": [
       "A.SaaS(软件即服务)",
@@ -779,7 +779,7 @@ export const questions: Question[] = [
   },
   {
     "id": 56,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算以多种形式对外提供服务，比如可以提供给消费者处理能力、存储、网络和其他基本的计算资源，消费者能够利用这些计算资源部署和运行任意软件，包括操作系统和应用程序，但不能管理或控制任何云计算基础设施。这种服务形式被称作<strong>____</strong>。",
     "options": [
       "A.SaaS(软件即服务)",
@@ -793,7 +793,7 @@ export const questions: Question[] = [
   },
   {
     "id": 57,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业利用某公共云服务，租用了若干台虚拟机，并把这些虚拟机放在一个隔离的虚拟网络中，可以完全掌控自己的虚拟网络，包括选择自有 IP 地址范围、划分网段、配置路由表和网关等，这个虚拟网络在公共云服务中通常称作<strong>____</strong>。",
     "options": [
       "A.NFV服务",
@@ -807,7 +807,7 @@ export const questions: Question[] = [
   },
   {
     "id": 58,
-    "type": "单选题",
+    "type": "single",
     "title": "您的阿里云专有网络VPC创建后，需要完成<strong>____</strong>操作之后，才能够在专有网络内创建其他的云产品实例，如云服务器、负载均衡和云数据库等.",
     "options": [
       "A.配置网段地址",
@@ -821,7 +821,7 @@ export const questions: Question[] = [
   },
   {
     "id": 59,
-    "type": "单选题",
+    "type": "single",
     "title": "D公司基于阿里云对象存储OSS和云服务器ECS构建了一个应用网站。初期采用OSS的原因是看上了它的大容量存储和能在多台ECS之间共享读写文件的功能，后来因业务需要逐渐增加了事务性的数据交互需求，在多个请求共同写OSS上的同一个文件时会互相覆盖，为此管理员很发愁。遇到这种情况可以选用阿里云的哪个云服务直接解决<strong>____</strong>？",
     "options": [
       "A.增加更多的云服务器ECS",
@@ -835,7 +835,7 @@ export const questions: Question[] = [
   },
   {
     "id": 60,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB提供对多台云服务器进行流量分发的服务，支持四层和七层的流量转发。其中七层流量转发是通过<strong>____</strong>实现的。",
     "options": [
       "A.LVS",
@@ -849,7 +849,7 @@ export const questions: Question[] = [
   },
   {
     "id": 61,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB提供对多台云服务器进行流量分发的服务，支持四层和七层的流量转发。其中四层流量转发是通过<strong>____</strong>实现的。",
     "options": [
       "A.LVS",
@@ -863,7 +863,7 @@ export const questions: Question[] = [
   },
   {
     "id": 62,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS产品支持的多线BGP接入，解决的主要问题是<strong>____</strong>.",
     "options": [
       "A.提升全网内容分发效率",
@@ -877,7 +877,7 @@ export const questions: Question[] = [
   },
   {
     "id": 63,
-    "type": "单选题",
+    "type": "single",
     "title": "如果在配置阿里云的负载均衡SLB实例的监听时，开启了“获取真实访问IP”，针对7层服务可以通过http头部中的<strong>____</strong>字段获取来访者真实IP。",
     "options": [
       "A.Authorization",
@@ -891,7 +891,7 @@ export const questions: Question[] = [
   },
   {
     "id": 64,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是按使用收费的服务，为了防止用户在OSS上的数据被其他人盗链而产生不必要的支出，OSS设计了防盗链功能，以下有关OSS防盗链实现机制的说法正确的是<strong>____</strong>?",
     "options": [
       "A.基于SSL密钥实现",
@@ -905,7 +905,7 @@ export const questions: Question[] = [
   },
   {
     "id": 65,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频直播公司采用阿里云弹性伸缩（Auto Scaling）来实现动态添加或者减少云服务器ECS实例，来应对业务量的变化。由于该公司的系统刚上线不久，没有历史数据做参考，同时也不能预估业务量的变化，他们希望通过ECS实例资源的使用情况（比如CPU利用率、系统负载Load等）来弹性伸缩计算资源。他们应该选择以下哪种伸缩模式<strong>____</strong>?",
     "options": [
       "A.lazy模式",
@@ -919,7 +919,7 @@ export const questions: Question[] = [
   },
   {
     "id": 66,
-    "type": "单选题",
+    "type": "single",
     "title": "以下<strong>____</strong>安全功能需要单独购买，不是在创建阿里云的云服务器ECS实例的同时可以免费获得的。",
     "options": [
       "A.木马查杀",
@@ -933,7 +933,7 @@ export const questions: Question[] = [
   },
   {
     "id": 67,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS实例的安全组实现了类似虚拟防火墙的功能，用于设置单个或多个云服务器ECS实例的网络访问策略。对于云服务器安全组使用的说法正确的是<strong>____</strong> 。",
     "options": [
       "A.每个ECS实例只能属于一个安全组",
@@ -947,7 +947,7 @@ export const questions: Question[] = [
   },
   {
     "id": 68,
-    "type": "单选题",
+    "type": "single",
     "title": "您已经成功购买了阿里云的弹性公网IP（EIP），需要通过管理控制台进行弹性公网IP的绑定，但是界面提示没有找到相应的云服务器ECS实例，可能是<strong>____</strong>原因引起的。",
     "options": [
       "A.您所申请的EIP所在地域的某个可用区内没有经典网络的云服务器ECS实例",
@@ -961,7 +961,7 @@ export const questions: Question[] = [
   },
   {
     "id": 69,
-    "type": "单选题",
+    "type": "single",
     "title": "您的业务增长，会出现现有的阿里云的云服务器ECS实例的系统盘存储资源不足的问题，阿里云提供了系统盘扩容的功能帮您解决系统盘存储资源不足的问题。下列关于扩容系统盘的操作说法错误的是<strong>____</strong>。",
     "options": [
       "A.扩容系统盘之后您实例的IP地址会发生变化",
@@ -975,7 +975,7 @@ export const questions: Question[] = [
   },
   {
     "id": 70,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业使用负载均衡SLB将用户的访问请求分发到多台云服务器ECS实例上，同时为了应对业务波动带来的计算资源需求的变化，选用了阿里云弹性伸缩（Auto Scaling）对后端云服务器ECS实例进行动态的添加或者删除。基于对业务状况的判断，他们定义了两种伸缩模式的任务，一种是定时任务，即在指定的时间点执行伸缩活动，另一种是报警任务，即根据云监控的返回信息自动触发伸缩活动。假设在某一时间点，定时任务和报警任务同时满足执行条件，以下说法正确的是<strong>____</strong> ？",
     "options": [
       "A.两个伸缩活动同时执行",
@@ -989,7 +989,7 @@ export const questions: Question[] = [
   },
   {
     "id": 71,
-    "type": "单选题",
+    "type": "single",
     "title": "您发现在创建云服务器ECS实例的磁盘快照时所需的时间每次都不同，关于这个现象说法错误的是<strong>____</strong>？",
     "options": [
       "A.因为磁盘容量大小不同，导致快照创建的时间不同",
@@ -1003,7 +1003,7 @@ export const questions: Question[] = [
   },
   {
     "id": 72,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云负载均衡SLB可以通过流量分发扩展部署在后端服务器中的应用系统对外服务的能力，通过消除单点故障提升应用系统的可用性，必须和阿里云提供的<strong>____</strong>配合使用。",
     "options": [
       "A.云数据库RDS",
@@ -1017,7 +1017,7 @@ export const questions: Question[] = [
   },
   {
     "id": 73,
-    "type": "单选题",
+    "type": "single",
     "title": "<a href=\"http://www.bestcar.com是一个刚建立的汽车资讯车友交流网站。主站用Php搭建，有10GB的图片素材，部分JS文件。目前购买一台ECS放置所有程序代码，并在ECS上安装MySQL数据库。随着用户访问量的不断增长，访问网站的速度越来越慢，图片加载慢，网站响应慢。用户上传的图片每周增长50GB。以下哪种产品组合方案可以同时解决大量图片存储和快速访问两个问题_______\" target=\"_blank\" rel=\"noopener\">www.bestcar.com是一个刚建立的汽车资讯车友交流网站。主站用Php搭建，有10GB的图片素材，部分JS文件。目前购买一台ECS放置所有程序代码，并在ECS上安装MySQL数据库。随着用户访问量的不断增长，访问网站的速度越来越慢，图片加载慢，网站响应慢。用户上传的图片每周增长50GB。以下哪种产品组合方案可以同时解决大量图片存储和快速访问两个问题_______</a>_ ？",
     "options": [
       "A.采用OSS+ECS组合",
@@ -1031,7 +1031,7 @@ export const questions: Question[] = [
   },
   {
     "id": 74,
-    "type": "单选题",
+    "type": "single",
     "title": "您的业务将面临一个新的挑战，要进行一次大型的促销，但无法预估业务增长的幅度，但您了解云服务器ECS实例的CPU利用率如果超过了70%，业务的响应速度将会有大幅度的下降，目前您的web应用部署在一组阿里云的云服务器ECS实例上，前端采用一个公网的负载均衡SLB作为流量入口。采用<strong>____</strong>方式可以最高效并最节省地来应对这个场景。",
     "options": [
       "A.制作部署web服务的云服务器ECS实例的镜像，基于该镜像创建足够多的新的云服务器ECS实例，并加入到负载均衡SLB的集群中，提前做好准备",
@@ -1045,7 +1045,7 @@ export const questions: Question[] = [
   },
   {
     "id": 75,
-    "type": "单选题",
+    "type": "single",
     "title": "您已经有一台运行状态的云服务器ECS实例，并完成了所需的应用软件的部署。如果您希望创建一个部署同样软件的新的云服务器ECS实例，可以采用<strong>____</strong>方式最高效的获得。",
     "options": [
       "A.上传本地制作好的镜像，并基于该镜像创建一台新的云服务器ECS实例",
@@ -1059,7 +1059,7 @@ export const questions: Question[] = [
   },
   {
     "id": 76,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）经常会和云服务器ECS、负载均衡SLB、云数据库RDS等产品配合使用，以下说法中正确的是<strong>____</strong>？",
     "options": [
       "A.弹性伸缩必须和云服务器ECS一起使用",
@@ -1073,7 +1073,7 @@ export const questions: Question[] = [
   },
   {
     "id": 77,
-    "type": "单选题",
+    "type": "single",
     "title": "互联网络设备之间的数据传输需要特定的规范，这个规范的专业述语被称为“协议”，有一种协议的发明对互联网的产生起了决定性的作用，通过这个协议可以使数万台的计算机连接在一起，这个协议的名称是<strong>____</strong>。",
     "options": [
       "A.HTTP",
@@ -1087,7 +1087,7 @@ export const questions: Question[] = [
   },
   {
     "id": 78,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS提供了海量的存储能力。当用户需要将一些Object从一个Bucket复制到另外一个Bucket，且不改变内容时，可以使用OSS OpenAPI的CopyObject实现。使用CopyObjec来复制文件可以节省<strong>____</strong>成本。",
     "options": [
       "A.存储成本",
@@ -1101,7 +1101,7 @@ export const questions: Question[] = [
   },
   {
     "id": 79,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)，是根据用户的业务需求和策略，自动调整其弹性计算资源的管理服务。支持用户添加已有的云服务器ECS实例，但该云服务器ECS实例的状态必须为<strong>____</strong>。",
     "options": [
       "A.已停止",
@@ -1115,7 +1115,7 @@ export const questions: Question[] = [
   },
   {
     "id": 80,
-    "type": "单选题",
+    "type": "single",
     "title": "某公司有一个阿里云官网账号，并通过此账号申请使用了阿里云的负载均衡SLB实例，公司的账号的管理员创建了子账号，并将负载均衡SLB实例的只读权限授予该子账号，该子账号的拥有者可以查看SLB服务，但是无法对其进行修改。上述授权操作使用了阿里云的<strong>____</strong>。",
     "options": [
       "A.RAM (Resource Access Management)",
@@ -1129,7 +1129,7 @@ export const questions: Question[] = [
   },
   {
     "id": 81,
-    "type": "单选题",
+    "type": "single",
     "title": "当云服务器ECS实例选择了CentOS系统时，本地为Windows操作系统，采用<strong>____</strong>方式无法正确的登录该ECS实例。",
     "options": [
       "A.阿里云管理控制台",
@@ -1143,7 +1143,7 @@ export const questions: Question[] = [
   },
   {
     "id": 82,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。用OSS管理的文件可以很方便地对外提供分享，分享前点击文件后面的“获取地址”文字链接即可得到当前文件的地址，这个分享使用的是<strong>____</strong>应用层（七层）协议。",
     "options": [
       "A.HTTP",
@@ -1157,7 +1157,7 @@ export const questions: Question[] = [
   },
   {
     "id": 83,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩(Auto Scaling)来实现计算资源的弹性配置时，做了如下设置：伸缩组的属性中设置MinSize=6，MaxSize=8，伸缩规则为“减少5台ECS”， 伸缩配置也进行了正常的配置。该伸缩组当前的云服务器ECS实例数为8台，通过设置定时任务来执行，执行一次后，会减少<strong>____</strong>云服务器ECS实例。",
     "options": [
       "A.5台",
@@ -1171,7 +1171,7 @@ export const questions: Question[] = [
   },
   {
     "id": 84,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾是阿里云整体安全体系的一部分，为云上客户和阿里云自身提供多方面的安全保障功能。以下关于云盾的描述，正确的是<strong>____</strong>。",
     "options": [
       "A.是一款软件产品，用户开通云产品后需要安装才能使用",
@@ -1185,7 +1185,7 @@ export const questions: Question[] = [
   },
   {
     "id": 85,
-    "type": "单选题",
+    "type": "single",
     "title": "当您的阿里云的云服务器ECS实例处于<strong>____</strong>状态时，通过API查询云服务器状态时，返回状态是running。",
     "options": [
       "A.启动中",
@@ -1199,7 +1199,7 @@ export const questions: Question[] = [
   },
   {
     "id": 86,
-    "type": "单选题",
+    "type": "single",
     "title": "您希望通过华北2（北京）地域的阿里云专有网络VPC中的云服务器ECS实例通过内网访问OSS，但是连接osscnbeijinginternal.aliyuncs.com（华北2（北京）地域的通用内网地址）失败，可以通过<strong>____</strong>解决。",
     "options": [
       "A.只能通过外网地址进行访问",
@@ -1213,7 +1213,7 @@ export const questions: Question[] = [
   },
   {
     "id": 87,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB是对多台后端服务器进行流量分发的服务。以下关于负载均衡SLB的说法正确的是<strong>____</strong>。",
     "options": [
       "A.通过Tengine提供四层负载均衡",
@@ -1227,7 +1227,7 @@ export const questions: Question[] = [
   },
   {
     "id": 88,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS产品的应用非常广泛，既可以单独的作为Web服务器，也可以与其他阿里云产品配合提供多媒体解决方案。在多媒体、大流量的APP或网站应用场景下，云服务器ECS实例与阿里云的<strong>____</strong>产品搭配，可大幅减少用户访问的等待时间并降低带宽费用。",
     "options": [
       "A.对象存储OSS",
@@ -1241,7 +1241,7 @@ export const questions: Question[] = [
   },
   {
     "id": 89,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云会为每个云服务器ECS实例分配一个私网IP。以下关于云服务器ECS实例的私网IP说法正确的是<strong>____</strong>。",
     "options": [
       "A.私网IP不可以用于SLB的负载均衡",
@@ -1255,7 +1255,7 @@ export const questions: Question[] = [
   },
   {
     "id": 90,
-    "type": "单选题",
+    "type": "single",
     "title": "某用户是做香蕉销售生意的，所有的在线平台和数据都放在阿里云的云服务器ECS实例和云数据库RDS实例中，现在CEO想对香蕉销售额的变化趋势做一个监控，并在订单量发生较大变化时能收到预警信息，可以使用阿里云的<strong>____</strong>产品实现，并在管理控制台中展现结果。",
     "options": [
       "A.态势感知",
@@ -1269,7 +1269,7 @@ export const questions: Question[] = [
   },
   {
     "id": 91,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）时，创建了伸缩组，指定了“伸缩最小实例数（台）”为5，“伸缩最大实例数（台）”为8，设定了正确的伸缩配置，并添加了伸缩规则为“增加3台ECS实例”，创建了基于该伸缩规则的定时任务（运行时间设置为1小时后）。当前伸缩组中有效的ECS实例个数为3，马上启用该伸缩组，以下说法正确的是<strong>____</strong>？",
     "options": [
       "A.会在定时任务触发时按照伸缩配置自动创建3个ECS实例，添加到伸缩组",
@@ -1283,7 +1283,7 @@ export const questions: Question[] = [
   },
   {
     "id": 92,
-    "type": "单选题",
+    "type": "single",
     "title": "您的操作系统为Windows的阿里云的云服务器ECS实例，通过远程登录发现黑屏，不可能是<strong>____</strong>原因造成的。",
     "options": [
       "A.CPU资源耗尽",
@@ -1297,7 +1297,7 @@ export const questions: Question[] = [
   },
   {
     "id": 93,
-    "type": "单选题",
+    "type": "single",
     "title": "某在线教育网站是基于云服务器ECS+负载均衡SLB+弹性伸缩（Auto Scaling）的方案实现的，在保证系统稳定、客户体验良好的前提下，大大节省了资源成本和运维成本。现在他们想把用户的访问信息（如来源IP、访问页面URL、停留时长等）保存下来进行分析，支持一些市场活动。以下说法中错误的是<strong>____</strong>？",
     "options": [
       "A.伸缩组中的每台ECS实例，均保存各自处理的用户访问信息，这些ECS实例上的数据随时可以访问、分析，这种方案简单高效、稳定可靠，同时节省成本",
@@ -1311,7 +1311,7 @@ export const questions: Question[] = [
   },
   {
     "id": 94,
-    "type": "单选题",
+    "type": "single",
     "title": "某保险公司的线上平台每天在线订单量超过20万笔，一年来频繁受到大流量攻击（超过10G），使服务断断续续，严重影响了公司的品牌和业务量。如果该客户使用阿里云的<strong>____</strong>产品可以抵御这类攻击，保证业务的高可用性。",
     "options": [
       "A.DDoS高防IP",
@@ -1325,7 +1325,7 @@ export const questions: Question[] = [
   },
   {
     "id": 95,
-    "type": "单选题",
+    "type": "single",
     "title": "您希望通过管理控制台进行阿里云的专有网络VPC内的云服务器ECS实例的私网IP地址的修改，但发现操作的菜单不可用，可能是<strong>____</strong>原因引起的。",
     "options": [
       "A.该云服务器ECS实例所在的VPC类型是默认专有网络",
@@ -1339,7 +1339,7 @@ export const questions: Question[] = [
   },
   {
     "id": 96,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您希望在使用阿里云云服务器ECS时，为了定义更灵活的网络拓扑，并按需选择私网IP地址范围并进行网段的划分，应该使用<strong>____</strong>产品。",
     "options": [
       "A.VPN",
@@ -1353,7 +1353,7 @@ export const questions: Question[] = [
   },
   {
     "id": 97,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB提供对多台云服务器ECS实例进行流量分发的服务。负载均衡SLB实例和后端提供服务的云服务器ECS实例必须具有相同的<strong>____</strong>。",
     "options": [
       "A.地域（Region）",
@@ -1367,7 +1367,7 @@ export const questions: Question[] = [
   },
   {
     "id": 98,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB时，为了实现跨地域（Region）的高可用性，可以在不同的地域（Region）创建多个负载均衡SLB实例，通过<strong>____</strong>的方式对外提供服务。",
     "options": [
       "A.DNS多播",
@@ -1381,7 +1381,7 @@ export const questions: Question[] = [
   },
   {
     "id": 99,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠 的云存储服务。与自建存储对比，OSS在可靠性、安全、成本和数据处理能力等几个方面都具有优势。以下<strong>____</strong>不是OSS在数据处理能力方面表现出来的优势。",
     "options": [
       "A.提供大规模的数据分析能力",
@@ -1395,7 +1395,7 @@ export const questions: Question[] = [
   },
   {
     "id": 100,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的某台云服务器ECS实例上运行的服务出现响应缓慢的情况，通过云监控发现目前该ECS实例的带宽利用率已经达到80%以上。在不希望对云服务器ECS实例重启的前提下，可以尝试通过<strong>____</strong>操作来缓解服务响应缓慢的问题。",
     "options": [
       "A.其他三个都不需要",
@@ -1409,7 +1409,7 @@ export const questions: Question[] = [
   },
   {
     "id": 101,
-    "type": "单选题",
+    "type": "single",
     "title": "想要实现同一个阿里云帐号下的不同云服务器ECS实例之间的网络访问控制，可以通过阿里云管理控制台提供的<strong>____</strong>功能实现。",
     "options": [
       "A.云盾",
@@ -1423,7 +1423,7 @@ export const questions: Question[] = [
   },
   {
     "id": 102,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB中的证书（Certificate）用于HTTPS协议，在需要使用加密协议时，用户可以将证书上传至负载均衡SLB实例中，在创建HTTPS协议监听时绑定证书，提供HTTPS服务。目前阿里云的负载均衡SLB只支持<strong>____</strong>格式的证书。",
     "options": [
       "A.PEM",
@@ -1437,7 +1437,7 @@ export const questions: Question[] = [
   },
   {
     "id": 103,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在创建Linux操作系统的云服务器ECS实例的同时选择增加了数据盘，以下关于系统盘和数据盘的说法中错误的是<strong>____</strong>。",
     "options": [
       "A.云服务器支持对数据盘进行二次分区",
@@ -1451,7 +1451,7 @@ export const questions: Question[] = [
   },
   {
     "id": 104,
-    "type": "单选题",
+    "type": "single",
     "title": "当您通过Open API进行阿里云的云服务器ECS实例的磁盘挂载的时候，发现不能成功挂载，可能是由于<strong>____</strong>原因引起的。",
     "options": [
       "A.云服务器ECS实例的状态为已停止",
@@ -1465,7 +1465,7 @@ export const questions: Question[] = [
   },
   {
     "id": 105,
-    "type": "单选题",
+    "type": "single",
     "title": "用户在阿里云以外的服务器上安装“安骑士客户端”后，通过<strong>____</strong>方式与指定的阿里云官网帐号关联。",
     "options": [
       "A.在管理控制台生成的安装验证key",
@@ -1479,7 +1479,7 @@ export const questions: Question[] = [
   },
   {
     "id": 106,
-    "type": "单选题",
+    "type": "single",
     "title": "您希望基于已有的磁盘快照在青岛可用区A的云服务器ECS实例创建一个新的块存储磁盘，您可以使用<strong>____</strong>快照创建该磁盘。",
     "options": [
       "A.以上都不行",
@@ -1493,7 +1493,7 @@ export const questions: Question[] = [
   },
   {
     "id": 107,
-    "type": "单选题",
+    "type": "single",
     "title": "您需要创建一个新的云服务器ECS实例进行一个10天的临时性的测试时，采用<strong>____</strong>方式去开通云服务器ECS实例是最经济的模式。",
     "options": [
       "A.按量付费",
@@ -1507,7 +1507,7 @@ export const questions: Question[] = [
   },
   {
     "id": 108,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云提供的海量、安全、低成本、高可靠的云存储服务。如果您有一个网站是纯静态页的，或者是对某复杂网站做过动静分离，您可以直接将静态网页通过OSS提供服务，不仅如此，OSS还可以与<strong>____</strong>产品结合起来提供加速服务。",
     "options": [
       "A.内容分发网络CDN",
@@ -1521,7 +1521,7 @@ export const questions: Question[] = [
   },
   {
     "id": 109,
-    "type": "单选题",
+    "type": "single",
     "title": "C公司是一个互联网金融创业企业，自去年下半年开始公司上线的P2P理财项目规模增长了500倍，日参与融资和理财的客户数量超过8万人。一边是业务规模快速增长，一边是用户体验停滞不前。经过架构师团队仔细评审后发现核心问题是APP客户端经常因本地DNS篡改导致连不上服务器，以及敏感的内容不敢用传统CDN分发导致访问速度慢。 C公司可以选择阿里云的<strong>____</strong>产品组合解决这两个问题。",
     "options": [
       "A.阿里云的云解析和内容分发网络CDN",
@@ -1535,7 +1535,7 @@ export const questions: Question[] = [
   },
   {
     "id": 110,
-    "type": "单选题",
+    "type": "single",
     "title": "PFX是使用二进制的格式保存的个人证书，一般出现在Windows Server中，现在想把该格式的证书上传到阿里云的负载均衡SLB实例，以下说法正确的是<strong>____</strong>。",
     "options": [
       "A.负载均衡SLB支持PFX格式的证书，可以将其直接上传",
@@ -1549,7 +1549,7 @@ export const questions: Question[] = [
   },
   {
     "id": 111,
-    "type": "单选题",
+    "type": "single",
     "title": "您基于阿里云的云服务器ECS实例部署了Mysql数据库，随着业务量的不断上涨，您的运维工作不断增加，包括数据库的备份、主备数据库之间的数据同步等问题，可以采用阿里云的<strong>____</strong>产品来快速解决该问题。",
     "options": [
       "A.表格存储",
@@ -1563,7 +1563,7 @@ export const questions: Question[] = [
   },
   {
     "id": 112,
-    "type": "单选题",
+    "type": "single",
     "title": "您通过阿里云的云监控服务为某台云服务器ECS实例的磁盘使用率设置了1条报警规则：统计周期为5分钟，磁盘使用率平均值超过80%，连续探测5次超过阈值后就报警。如果您的磁盘平均使用率超过80%后，至少需要几分钟后可以收到报警<strong>____</strong>？",
     "options": [
       "A.40分钟",
@@ -1577,7 +1577,7 @@ export const questions: Question[] = [
   },
   {
     "id": 113,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾态势感知能从多个维度监控用户云上资源的安全状况，包括网络层、主机层、数据库层、应用层，甚至还提供安全情报功能，目前态势感知可以通过<strong>____</strong>方式向用户发送报警信息。",
     "options": [
       "A.包括手机短信和电子邮件",
@@ -1591,7 +1591,7 @@ export const questions: Question[] = [
   },
   {
     "id": 114,
-    "type": "单选题",
+    "type": "single",
     "title": "B公司基于阿里云对象存储OSS和云服务器ECS实例构建了一个mp3音乐下载站点，用户在该网站注册后可获得mp3文件的下载链接。 最近一周OSS的公网流量突然增长了一倍，但注册用户数只增加了5%，经仔细分析后发现很多下载请求不是用户从该网站直接下载，而是来自某搜索引擎。您认为该网站采取<strong>____</strong>措施可以快速降低这种风险。",
     "options": [
       "A.增加负载均衡SLB，多一层防护",
@@ -1605,7 +1605,7 @@ export const questions: Question[] = [
   },
   {
     "id": 115,
-    "type": "单选题",
+    "type": "single",
     "title": "SQL注入是一种常见的应用层攻击，一般是通过构建特殊的输入作为参数传入Web应用程序，盗取或破坏应用的数据。请您指出SQL注入攻击最终破坏或盗取的对象是<strong>____</strong>。",
     "options": [
       "A.数据库",
@@ -1619,7 +1619,7 @@ export const questions: Question[] = [
   },
   {
     "id": 116,
-    "type": "单选题",
+    "type": "single",
     "title": "您基于阿里云的云服务器ECS实例部署了Mysql数据库，随着业务量的不断上涨，您自己部署的数据库的服务能力越来越不足，表现在并发连接数不足，磁盘的IOPS不能满足业务需求等，可以采用阿里云的<strong>____</strong>产品来解决这些问题。",
     "options": [
       "A.云数据库RDS",
@@ -1633,7 +1633,7 @@ export const questions: Question[] = [
   },
   {
     "id": 117,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS为用户提供保存访问日志记录的功能。Bucket的拥有者可以通过OSS管理控制台，为其所拥有的Bucket开启访问日志记录功能。当一个Bucket A开启访问日志记录功能后，OSS自动将访问这个Bucket的请求日志，以小时为单位，按照固定的命名规则，生成一个Object写入用户指定的Bucket B。以下关于OSS日志记录说法正确的<strong>____</strong>。",
     "options": [
       "A.Bucket A和Bucket B可以属于不同的用户",
@@ -1647,7 +1647,7 @@ export const questions: Question[] = [
   },
   {
     "id": 118,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频公司，使用负载均衡SLB将用户的访问请求分发到30台云服务器ECS实例上去，由这些配置相同的ECS实例来响应用户的请求。每天晚上20:00到次日凌晨2:00期间，业务量会大幅增加，基本上会比其他时间段增加1倍左右，为了能正常响应游戏用户的请求，从成本和容易实现的角度，以下哪种解决办法最可取<strong>____</strong>？",
     "options": [
       "A.使用自定义的镜像，手工创建30台云服务器ECS实例，在每天晚上20:00前，手工增加到SLB中去，次日凌晨2:00再从SLB中移除",
@@ -1661,7 +1661,7 @@ export const questions: Question[] = [
   },
   {
     "id": 119,
-    "type": "单选题",
+    "type": "single",
     "title": "与传统的软件运行和维护模式相比，云计算要求硬件资源和软件资源能够更好地共享，任何一个企业用户都能够按照自己的需求对SaaS软件进行客户化配置而不影响其他用户的使用。云计算环境中能够满足上述需求的技术是<strong>____</strong>？",
     "options": [
       "A.VPC技术",
@@ -1675,7 +1675,7 @@ export const questions: Question[] = [
   },
   {
     "id": 120,
-    "type": "单选题",
+    "type": "single",
     "title": "开通阿里云对象存储OSS服务后，您首先需要使用OSS管理控制台或OpenAPI创建Bucket来存储文件。创建Bucket时“所属地域”这个属性必须要指定， 特别是您的云服务器ECS实例需要通过内网访问OSS Bucket时，必须选择与 ECS实例相同的地域，以下有关“所属地域”的说法<strong>____</strong>是正确的。",
     "options": [
       "A.Bucket创建后，如果未上传任何文件，则“所属地域”属性可以更改",
@@ -1689,7 +1689,7 @@ export const questions: Question[] = [
   },
   {
     "id": 121,
-    "type": "单选题",
+    "type": "single",
     "title": "以下创建ECS镜像时，<strong>____</strong>步骤的描述有错？",
     "options": [
       "A.输入的自定义镜像描述，不可以为空",
@@ -1703,7 +1703,7 @@ export const questions: Question[] = [
   },
   {
     "id": 122,
-    "type": "单选题",
+    "type": "single",
     "title": "当阿里云用户想要通过API进行ECS实例删除的操作的时候，必须保证ECS实例状态为<strong>____</strong>，才可以进行删除操作，删除后实例的状态变为<strong>____</strong>？",
     "options": [
       "A.Stopped；Deleted",
@@ -1717,7 +1717,7 @@ export const questions: Question[] = [
   },
   {
     "id": 123,
-    "type": "单选题",
+    "type": "single",
     "title": "下列<strong>____</strong>参数代表的是负载均衡SLB实例的唯一标识？",
     "options": [
       "A.LoadBalancerId",
@@ -1731,7 +1731,7 @@ export const questions: Question[] = [
   },
   {
     "id": 124,
-    "type": "单选题",
+    "type": "single",
     "title": "在对ECS实例进行续费操作时，无法实现以下<strong>____</strong>操作？",
     "options": [
       "A.增加CPU规格",
@@ -1745,7 +1745,7 @@ export const questions: Question[] = [
   },
   {
     "id": 125,
-    "type": "单选题",
+    "type": "single",
     "title": "下列关于ECS连接实例的说法错误的是<strong>____</strong>？",
     "options": [
       "A.Windows 2008默认允许最多2个session远程连接",
@@ -1759,7 +1759,7 @@ export const questions: Question[] = [
   },
   {
     "id": 126,
-    "type": "单选题",
+    "type": "single",
     "title": "用户通过ECS管理控制台查看其拥有的某个区域拥有的所有ECS实例的步骤包括<strong>____</strong>：a. 进入ECS管理控制台;b.选择地域；c.选择ECS实例管理，则正确的排列顺序是？",
     "options": [
       "A.b;a;c",
@@ -1773,7 +1773,7 @@ export const questions: Question[] = [
   },
   {
     "id": 127,
-    "type": "单选题",
+    "type": "single",
     "title": "如果用户需要创建SLB实例，为了能够真正的实现应用的负载分担，那么要保证至少要有<strong>____</strong>个ECS实例？",
     "options": [
       "A.5个",
@@ -1787,7 +1787,7 @@ export const questions: Question[] = [
   },
   {
     "id": 128,
-    "type": "单选题",
+    "type": "single",
     "title": "下列关于RDS内网连接说法错误的是<strong>____</strong>？",
     "options": [
       "A.用户可以在RDS内网和外网间切换",
@@ -1801,7 +1801,7 @@ export const questions: Question[] = [
   },
   {
     "id": 129,
-    "type": "单选题",
+    "type": "single",
     "title": "在OSS服务中，单个object的大小限制为<strong>____</strong>？",
     "options": [
       "A.24.4TB",
@@ -1815,7 +1815,7 @@ export const questions: Question[] = [
   },
   {
     "id": 130,
-    "type": "单选题",
+    "type": "single",
     "title": "下列关于SLB API ServerCertificate的说法错误的是<strong>____</strong>？",
     "options": [
       "A.一次可以上传多份证书",
@@ -1829,7 +1829,7 @@ export const questions: Question[] = [
   },
   {
     "id": 131,
-    "type": "单选题",
+    "type": "single",
     "title": "VPC实例的状态变为<strong>____</strong>之后，表示VPC创建成功，可以进行下一步的管理操作。",
     "options": [
       "A.Standby",
@@ -1843,7 +1843,7 @@ export const questions: Question[] = [
   },
   {
     "id": 132,
-    "type": "单选题",
+    "type": "single",
     "title": "关于OSS域名绑定描述正确的是<strong>____</strong>？",
     "options": [
       "A.OSS域名绑定（CNAME）功能目前仅支持OSS以二级域名访问方式进行绑定。",
@@ -1857,7 +1857,7 @@ export const questions: Question[] = [
   },
   {
     "id": 133,
-    "type": "单选题",
+    "type": "single",
     "title": "SLB LoadBalancer中<strong>____</strong>接口是用来修改SLB实例的计费方式的？",
     "options": [
       "A.ModifyLoadBalancerInternetSpec",
@@ -1871,7 +1871,7 @@ export const questions: Question[] = [
   },
   {
     "id": 134,
-    "type": "单选题",
+    "type": "single",
     "title": "当ECS处于以下<strong>____</strong>状态时可以挂载磁盘?",
     "options": [
       "A.更换系统中",
@@ -1885,7 +1885,7 @@ export const questions: Question[] = [
   },
   {
     "id": 135,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云OSS图片处理服务，绑定域名名需要做线上验证，其中一步是下载验证文件并上传到您域名的<strong>____</strong>下，此步骤为验证您对绑定域名的所有权。",
     "options": [
       "A.有效率",
@@ -1899,7 +1899,7 @@ export const questions: Question[] = [
   },
   {
     "id": 136,
-    "type": "单选题",
+    "type": "single",
     "title": "实现VPC中ECS服务器切换/迁移到同VPC下的其他交换机，包括以下几步，请选择正确的顺序<strong>____</strong>：1.打开云服务器管理控制台；2.找到对应的需要切换/迁移的云服务器；3. 选择您所需的交换机，同时指定新交换机下的IP；4. 修改云服务器的私网地址；",
     "options": [
       "A.1，2，3，4",
@@ -1913,7 +1913,7 @@ export const questions: Question[] = [
   },
   {
     "id": 137,
-    "type": "单选题",
+    "type": "single",
     "title": "下列关于SLB说法错误的是<strong>____</strong>？",
     "options": [
       "A.不同操作系统的ECS可以同时做为SLB服务的后端服务器",
@@ -1927,7 +1927,7 @@ export const questions: Question[] = [
   },
   {
     "id": 138,
-    "type": "单选题",
+    "type": "single",
     "title": "当用户想以个人身份向OSS发送请求时，需要首先将发送的请求按照OSS指定的格式生成签名字符串；然后使用AccessKeySecret对签名字符串进行加密产生验证码。OSS收到请求以后，会通过AccessKeyID找到对应的AccessKeySecret，以同样的方法提取签名字符串和验证码，如果计算出来的验证码和提供的一样即认为该请求是有效的；否则，OSS将拒绝处理这次请求，并返回HTTP错误状态码是<strong>____</strong>？",
     "options": [
       "A.错误状态码:405",
@@ -1941,7 +1941,7 @@ export const questions: Question[] = [
   },
   {
     "id": 139,
-    "type": "单选题",
+    "type": "single",
     "title": "下列哪种<strong>____</strong>状态表示负载均衡SLB后端服务器的状态表示未开启SLB健康检查？",
     "options": [
       "A.unavailable",
@@ -1955,7 +1955,7 @@ export const questions: Question[] = [
   },
   {
     "id": 140,
-    "type": "单选题",
+    "type": "single",
     "title": "云服务器ECS服务的API服务地址是<strong>____</strong>。",
     "options": [
       "A.ecsapi.aliyuncs.com",
@@ -1969,7 +1969,7 @@ export const questions: Question[] = [
   },
   {
     "id": 141,
-    "type": "单选题",
+    "type": "single",
     "title": "在阿里云ECS中，无论每次接口调用请求是否成功，系统都会返回一个唯一识别码（返回参数）<strong>____</strong>给用户？",
     "options": [
       "A.Version",
@@ -1983,7 +1983,7 @@ export const questions: Question[] = [
   },
   {
     "id": 142,
-    "type": "单选题",
+    "type": "single",
     "title": "如果ECS实例采用linux系统，关于能否开启NetWorkManager服务说法正确的是<strong>____</strong>？",
     "options": [
       "A.linux系统请不要开启NetWorkManager服务，该服务会跟系统内部网络服务出现冲突，导致网络异常",
@@ -1997,7 +1997,7 @@ export const questions: Question[] = [
   },
   {
     "id": 143,
-    "type": "单选题",
+    "type": "single",
     "title": "ECS外部系统可以通过API在请求时传入参数来指定返回的数据格式，默认为<strong>____</strong>格式？",
     "options": [
       "A.JSP",
@@ -2011,7 +2011,7 @@ export const questions: Question[] = [
   },
   {
     "id": 144,
-    "type": "单选题",
+    "type": "single",
     "title": "用户如果想要在OSS中模拟实现文件夹的创建操作，需要使用的API是<strong>____</strong>？",
     "options": [
       "A.Multipart Upload",
@@ -2025,7 +2025,7 @@ export const questions: Question[] = [
   },
   {
     "id": 145,
-    "type": "单选题",
+    "type": "single",
     "title": "以下针对ECS地域和可用区的描述不正确的是<strong>____</strong>？",
     "options": [
       "A.同账号下，同一地域不同可用区的ECS实例内网不能互通",
@@ -2039,7 +2039,7 @@ export const questions: Question[] = [
   },
   {
     "id": 146,
-    "type": "单选题",
+    "type": "single",
     "title": "除了通过PUT Object接口上传文件到OSS以外，OSS还提供了另外一种上传模式是<strong>____</strong>？",
     "options": [
       "A.Get Object",
@@ -2053,7 +2053,7 @@ export const questions: Question[] = [
   },
   {
     "id": 147,
-    "type": "单选题",
+    "type": "single",
     "title": "下面<strong>____</strong>不是安骑士包含的功能？",
     "options": [
       "A.木马文件检查",
@@ -2067,7 +2067,7 @@ export const questions: Question[] = [
   },
   {
     "id": 148,
-    "type": "单选题",
+    "type": "single",
     "title": "在新建的Linux ECS 实例中，启动 OFBiz 服务的时候，步骤如下：a. # chmod +x ant；b. # cd ofbizrelease12.04；c. # ./ant run； # ./ant start &amp; ；d. # ./ant；# ./ant runinstall。则下列排序正确的是<strong>____</strong>？",
     "options": [
       "A.a；c；b；d",
@@ -2081,7 +2081,7 @@ export const questions: Question[] = [
   },
   {
     "id": 149,
-    "type": "单选题",
+    "type": "single",
     "title": "中国大陆范围内的网站都需要做ICP备案，在架构设计时应该告诉客户提前<strong>____</strong>就需要准备提交备案？",
     "options": [
       "A.网站上线前一天",
@@ -2095,7 +2095,7 @@ export const questions: Question[] = [
   },
   {
     "id": 150,
-    "type": "单选题",
+    "type": "single",
     "title": "弹性伸缩的伸缩规则指的是<strong>____</strong>。",
     "options": [
       "A.定义了SLB的监听规则",
@@ -2109,7 +2109,7 @@ export const questions: Question[] = [
   },
   {
     "id": 151,
-    "type": "单选题",
+    "type": "single",
     "title": "下列哪个阿里提供的操作系统是自带图形化界面的？",
     "options": [
       "A.windows server2008",
@@ -2123,7 +2123,7 @@ export const questions: Question[] = [
   },
   {
     "id": 152,
-    "type": "单选题",
+    "type": "single",
     "title": "以下对ECS的带宽临时升级操作的描述错误的是<strong>____</strong>？",
     "options": [
       "A.支持在当前生命周期内，设定时间段区间内临时增加带宽",
@@ -2137,7 +2137,7 @@ export const questions: Question[] = [
   },
   {
     "id": 153,
-    "type": "单选题",
+    "type": "single",
     "title": "专有网络可以与<strong>____</strong>产品结合使用实现与传统数据中心组成一个按需定制的网络环境，实现应用的平滑迁移上云？",
     "options": [
       "A.SLB",
@@ -2151,7 +2151,7 @@ export const questions: Question[] = [
   },
   {
     "id": 154,
-    "type": "单选题",
+    "type": "single",
     "title": "在管理控制台，对阿里云CDN加速域名进行“停用”或“删除”前，需要做<strong>____</strong>操作，以确保网站可以正常访问？",
     "options": [
       "A.保证源站服务器的带宽充足就够了",
@@ -2165,7 +2165,7 @@ export const questions: Question[] = [
   },
   {
     "id": 155,
-    "type": "单选题",
+    "type": "single",
     "title": "在OSS API中通过<strong>____</strong>参数的操作可以实现设置object头？",
     "options": [
       "A.Multipart Upload",
@@ -2179,7 +2179,7 @@ export const questions: Question[] = [
   },
   {
     "id": 156,
-    "type": "单选题",
+    "type": "single",
     "title": "为了防止因本地IP对阿里云服务器频繁访问而被屏蔽的情况，可以通过云盾的<strong>____</strong>功能进行设置？",
     "options": [
       "A.IP白名单",
@@ -2193,7 +2193,7 @@ export const questions: Question[] = [
   },
   {
     "id": 157,
-    "type": "单选题",
+    "type": "single",
     "title": "渗透测试是通过模拟<strong>____</strong>的攻击方法，来评估计算机网络系统安全的一种评估方法.",
     "options": [
       "A.网络专家",
@@ -2207,7 +2207,7 @@ export const questions: Question[] = [
   },
   {
     "id": 158,
-    "type": "单选题",
+    "type": "single",
     "title": "有很多10或100开头的IP在频繁访问我SLB的后端ECS实例，而安全检查没有报告问题，可能的原因是<strong>____</strong>？",
     "options": [
       "A.ECS服务器故障",
@@ -2221,7 +2221,7 @@ export const questions: Question[] = [
   },
   {
     "id": 159,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云负载均衡SLB的时候，经常会发现有很多100开头的IP（100.x.x.x）在访问负载均衡SLB实例的后端云服务器ECS实例，这可能是<strong>____</strong>引起的？",
     "options": [
       "A.开启了健康检查选项，负载均衡SLB实例对ECS实例进行健康检查引起的",
@@ -2235,7 +2235,7 @@ export const questions: Question[] = [
   },
   {
     "id": 160,
-    "type": "单选题",
+    "type": "single",
     "title": "关于弹性IP说法错误的是<strong>____</strong>。",
     "options": [
       "A.可以单独购买一个弹性公网IP，而不是与其他计算资源或存储资源绑定购买",
@@ -2249,7 +2249,7 @@ export const questions: Question[] = [
   },
   {
     "id": 161,
-    "type": "单选题",
+    "type": "single",
     "title": "作为一个互联网初创企业的技术负责人，小A在早期选择了阿里云的云服务器ECS并将Java应用程序、数据库MySQL等部署在了一台云服务器ECS实例上。随着业务发展和用户量增加，发现部署在这台ECS实例上数据库性能出现瓶颈。为了最快速度解决该问题，您建议选择阿里云的<strong>____</strong>产品。",
     "options": [
       "A.对象存储OSS",
@@ -2263,7 +2263,7 @@ export const questions: Question[] = [
   },
   {
     "id": 162,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS的一个突出特点就是提供了极高的数据可靠性，谈到可靠性自然离不开备份的技术和策略，以下关于OSS备份的说法，正确的是<strong>____</strong>？",
     "options": [
       "A.OSS提供三重备份（每份数据保留三个副本），出现故障时自动恢复",
@@ -2277,7 +2277,7 @@ export const questions: Question[] = [
   },
   {
     "id": 163,
-    "type": "单选题",
+    "type": "single",
     "title": "防DDoS攻击是阿里云的云盾最主要的功能之一，很多网站都曾经受到过不同类型的DDoS攻击，准确理解DDoS对网站做好安全防护至关重要。以下有关DDoS攻击的描述最准确的是<strong>____</strong>？",
     "options": [
       "A.DDoS攻击通过大量的尝试破解的服务器的登录密码",
@@ -2291,7 +2291,7 @@ export const questions: Question[] = [
   },
   {
     "id": 164,
-    "type": "单选题",
+    "type": "single",
     "title": "您的两台阿里云的云服务器ECS实例之间内网不能通信，一定不是由于<strong>____</strong>原因引起的。",
     "options": [
       "A.两台云服务器实例在不同地域",
@@ -2305,7 +2305,7 @@ export const questions: Question[] = [
   },
   {
     "id": 165,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业采取阿里云负载均衡SLB和弹性伸缩（Auto Scaling）配合使用的方案，希望在拥有良好的稳定性、可靠性的同时，还能节省运维 成本和资源使用成本。由于此前没有相关的使用经验，他们根据自己的理解列出了一些应该注意的事项，然后向您咨询意见。作为阿里云产品专家，您判断出只有<strong>____</strong>是正确的，在该公司后续的项目建设过程中也逐一得到验证。",
     "options": [
       "A.负载均衡SLB实例下的所有的ECS实例操作系统一定相同",
@@ -2319,7 +2319,7 @@ export const questions: Question[] = [
   },
   {
     "id": 166,
-    "type": "单选题",
+    "type": "single",
     "title": "您已经在阿里云的一台经典网络类型的没有数据盘的云服务器ECS实例上运行所有的应用，现在出于业务发展的需要，您希望将这台云服务器ECS实例迁移到相同地域的专有网络VPC中去，以下<strong>____</strong>操作是可行的。",
     "options": [
       "A.直接将云服务器ECS实例的类型转换为专有网络",
@@ -2333,7 +2333,7 @@ export const questions: Question[] = [
   },
   {
     "id": 167,
-    "type": "单选题",
+    "type": "single",
     "title": "与专有云相比，公共云天生就暴露在互联网上。共有云在为企业应用带来与生自来的互联网+的特性，同时也带来了来自互联网的安全威胁。由于云计算模式基于网 络提供服务，面向相对开放的环境，在技术上，除了仍然面临传统IT系统在物理、网络、系统等方面的安全问题之外，也面临着一些新的和云计算特征结合紧密的 安全问题。阿里云是通过<strong>____</strong>产品来提供云计算服务的基础安全加固和防护的（比如常见的防DDoS攻击）？",
     "options": [
       "A.云数据库",
@@ -2347,7 +2347,7 @@ export const questions: Question[] = [
   },
   {
     "id": 168,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云账号的AccessKey有所有API访问权限。下列关于AccessKeyId和AccessKeySecret说法错误的是<strong>____</strong>。",
     "options": [
       "A.AccessKeySecret是用于加密签名字符串和服务器端验证签名字符串的密钥",
@@ -2361,7 +2361,7 @@ export const questions: Question[] = [
   },
   {
     "id": 169,
-    "type": "单选题",
+    "type": "single",
     "title": "A电商平台近几年业务增长很快，访问量持续保持每年提升300%，平台运营团队因此获得了公司的年度特别奖励。在高兴之余运营团队发现平台系统带宽的支出 是以每年500%的比例增长的，如果能有效降低这块成本可以提升整体的运营质量。此时，该公司选择阿里云的<strong>____</strong>服务，效果会最明显。",
     "options": [
       "A.支持多可用区的云数据库RDS",
@@ -2375,7 +2375,7 @@ export const questions: Question[] = [
   },
   {
     "id": 170,
-    "type": "单选题",
+    "type": "single",
     "title": "当一个阿里云的云服务器ECS实例无法加入指定的安全组时，可能是<strong>____</strong>原因造成的。",
     "options": [
       "A.云服务器ECS实例创建之后默认已经加入一个安全组，不能再加入其它安全组",
@@ -2389,7 +2389,7 @@ export const questions: Question[] = [
   },
   {
     "id": 171,
-    "type": "单选题",
+    "type": "single",
     "title": "某大型购物商城新上了一套视频监控系统，在商城所在一个5层高的大楼里共安装了35个高清摄像头，用于监控主要的出口通道。该系统的应用部署在一台阿里云的云服务器ECS实例上，该ECS实例上挂了4块2T的数据盘来存储视频数据。上线后一周后发现视频数据的增速过快，预计8T硬盘不出1个月就会用完。 您认为使用阿里云的<strong>____</strong>产品可以最好地解决该客户的存储问题，同时在需要的时候快速读取到历史的视频数据。",
     "options": [
       "A.对象存储OSS",
@@ -2403,7 +2403,7 @@ export const questions: Question[] = [
   },
   {
     "id": 172,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云负载均衡SLB中提供了证书上传和管理的服务，在需要进行加密传输时，用户可以将证书上传到负载均衡SLB实例，在创建监听的时候绑定证书。证书是为了支持<strong>____</strong>协议。",
     "options": [
       "A.HTTP",
@@ -2417,7 +2417,7 @@ export const questions: Question[] = [
   },
   {
     "id": 173,
-    "type": "单选题",
+    "type": "single",
     "title": "购买了阿里云的云服务器ECS实例之后，对于您来说需要承担的维护工作是<strong>____</strong>。",
     "options": [
       "A.磁盘设备的维护",
@@ -2431,7 +2431,7 @@ export const questions: Question[] = [
   },
   {
     "id": 174,
-    "type": "单选题",
+    "type": "single",
     "title": "您已经创建好了一块新的块存储，想要通过阿里云的管理控制台进行磁盘挂载到云服务器ECS实例上的操作，却找不到想挂载的云服务器实例，一定不是因为<strong>____</strong>原因引起的。",
     "options": [
       "A.块存储与云服务器ECS实例在同一个可用区",
@@ -2445,7 +2445,7 @@ export const questions: Question[] = [
   },
   {
     "id": 175,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB可以把用户请求分发到多台云服务器ECS实例上去，其中“加权轮询模式”的转发策略是指<strong>____</strong>。",
     "options": [
       "A.将访问请求分发给目前负载最低的后端云服务器ECS实例",
@@ -2459,7 +2459,7 @@ export const questions: Question[] = [
   },
   {
     "id": 176,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）提供了“弹性自愈”功能，能保持伸缩组中的云服务器ECS实例都处在正常状态，从而使业务始终保持正常的负载，提高系统的稳定性。关于“弹性自愈”，以下说法中正确的是<strong>____</strong>？",
     "options": [
       "A.如果伸缩组中某台ECS实例状态不是运行中，阿里云弹性伸缩首先会自动重启该ECS，重启成功后继续保持在伸缩组中，如果重启失败，则会使用指定的镜像恢复该ECS实例到初始状态，继续保持在伸缩组中",
@@ -2473,7 +2473,7 @@ export const questions: Question[] = [
   },
   {
     "id": 177,
-    "type": "单选题",
+    "type": "single",
     "title": "小张管理的网站选择部署在阿里云的云服务器ECS实例上，最近发现一个现象，网站首页的宣传视频在某些区域播放速度良好，但是在其它地区播放速度很慢。为了解决此问题，你会选择阿里云<strong>____</strong>产品。",
     "options": [
       "A.负载均衡SLB",
@@ -2487,7 +2487,7 @@ export const questions: Question[] = [
   },
   {
     "id": 178,
-    "type": "单选题",
+    "type": "single",
     "title": "某阿里云公共云用户，购买了一台云服务器ECS实例，部署了tomcat，用<strong><strong>___</strong></strong>方法可以最简单的监控该实例的tomcat的8080端口是否访问正常。",
     "options": [
       "A.购买第三方的监控工具",
@@ -2501,7 +2501,7 @@ export const questions: Question[] = [
   },
   {
     "id": 179,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算服务商都支持用户以Web方式自助获得计算资源并对其进行管理。为了提供更好的开发性，云计算平台都支持通过API开放服务，这些API最不可能通过哪个协议进行开放？",
     "options": [
       "A.Restful",
@@ -2515,7 +2515,7 @@ export const questions: Question[] = [
   },
   {
     "id": 180,
-    "type": "单选题",
+    "type": "single",
     "title": "在一些业务场景下，可以通过购买按量付费的云服务器ECS实例来满足特定时间段内需要更多资源的需求，可以通过设定自动释放时间的方式来保证按量付费的资源按预期释放。下列关于该操作说法准确的是<strong>____</strong>。",
     "options": [
       "A.只能在云服务ECS实例创建的时候进行自动释放时间的设置",
@@ -2529,7 +2529,7 @@ export const questions: Question[] = [
   },
   {
     "id": 181,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS中所有数据都在Bucket中，当一个OSS bucket设置成<strong>____</strong>权限，意味着该 OSS Bucket仅允许其他用户来访问 （GET Object）属于该Bucket下的object。",
     "options": [
       "A.私有",
@@ -2543,7 +2543,7 @@ export const questions: Question[] = [
   },
   {
     "id": 182,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云OSS产品实现在线的音视频内容直播时，必须要和阿里云的<strong>____</strong>产品一起配合实现。",
     "options": [
       "A.多媒体转码服务MTS",
@@ -2557,7 +2557,7 @@ export const questions: Question[] = [
   },
   {
     "id": 183,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。用OSS管理的文件可以很方便地对外提供分享，分享前点击文件后面的“获取地址”文字链接即可得到当前文件的地址，这个分享使用的是<strong>____</strong>应用层（七层）协议。",
     "options": [
       "A.HTTP",
@@ -2571,7 +2571,7 @@ export const questions: Question[] = [
   },
   {
     "id": 184,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您不再需要某个阿里云的按量付费的云服务器ECS实例，可以将其释放。关于按量付费的实例释放的操作中，错误的是<strong>____</strong>。",
     "options": [
       "A.您可以再次设置自动释放的时间并覆盖前一次的设置",
@@ -2585,7 +2585,7 @@ export const questions: Question[] = [
   },
   {
     "id": 185,
-    "type": "单选题",
+    "type": "single",
     "title": "某阿里云负载均衡SLB实例下，后端多台云服务器ECS实例配置的权重都一样，但是实际上ECS实例负载却不一样。可能是因为<strong>____</strong>。",
     "options": [
       "A.ECS实例在不同的地域（Region），网络延迟不同",
@@ -2599,7 +2599,7 @@ export const questions: Question[] = [
   },
   {
     "id": 186,
-    "type": "单选题",
+    "type": "single",
     "title": "您的阿里云的云服务器ECS实例的系统盘使用的SSD云盘，需要新增数据盘时不能使用<strong>____</strong>磁盘类型。",
     "options": [
       "A.本地SSD盘",
@@ -2613,7 +2613,7 @@ export const questions: Question[] = [
   },
   {
     "id": 187,
-    "type": "单选题",
+    "type": "single",
     "title": "作为某初创企业的技术负责人，阿明将Java应用程序、图片视频等静态文件都部署在了一台ECS实例上，提供服务。随着业务发展和用户量的增加，发现存储在ECS实例上的静态文件访问速度不能达到预期的要求。您建议选择阿里云的<strong><strong>_</strong></strong>产品可以快速解决静态文件的访问速度问题。",
     "options": [
       "A.云数据库RDS",
@@ -2627,7 +2627,7 @@ export const questions: Question[] = [
   },
   {
     "id": 188,
-    "type": "单选题",
+    "type": "single",
     "title": "某O2O网站基于阿里云的云服务器ECS、负载均衡SLB以及弹性伸缩（Auto Scaling）搭建了线上系统，其中ECS用来处理用户响 应，SLB用来分发流量，弹性伸缩负责动态分配资源以满足突发的业务变化，三个产品配合可以提供稳定、便捷、低成本的服务。现在想要增加云数据库RDS到 该架构中来，用来保存用户访问时产生的数据。以下说法中正确的是<strong><strong>_</strong></strong>？",
     "options": [
       "A.可以把RDS实例手工添加到伸缩组，RDS实例可以保存用户访问的数据",
@@ -2641,7 +2641,7 @@ export const questions: Question[] = [
   },
   {
     "id": 189,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，合理的会话保持配置可以实现与某个连接（Session）相关的所有应用请求能够由同一台后端云服务器ECS实例进行处理，维持业务的延续性。四层服务的会话保持是基于<strong>____</strong>实现的。",
     "options": [
       "A.源IP",
@@ -2655,7 +2655,7 @@ export const questions: Question[] = [
   },
   {
     "id": 190,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，合理的会话保持配置可以实现与某个连接（Session）相关的所有应用请求能够由同一台后端云服务器ECS实例进行处理，维持业务的延续性。七层服务的会话保持是基于<strong>____</strong>实现的。",
     "options": [
       "A.cookie",
@@ -2669,7 +2669,7 @@ export const questions: Question[] = [
   },
   {
     "id": 191,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在非阿里云的服务器上安装了云盾安骑士客户端，通过<strong>____</strong>可以确保在您的管理控制台中能查到此服务器的相关报告。",
     "options": [
       "A.报告无法在阿里云的管理控制台查看",
@@ -2683,7 +2683,7 @@ export const questions: Question[] = [
   },
   {
     "id": 192,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的专有网络VPC可以帮助您基于阿里云的产品构建出一个隔离的网络环境。通过与<strong>____</strong>连接方式结合，可以实现专有网络VPC与传统数据中心组成一个按需定制的网络环境。",
     "options": [
       "A.VPN",
@@ -2697,7 +2697,7 @@ export const questions: Question[] = [
   },
   {
     "id": 193,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的弹性公网IP支持与云服务器ECS实例的动态绑定和解绑。下列关于弹性公网IP说法中错误的是<strong>____</strong>。",
     "options": [
       "A.弹性公网IP只能绑定在同一个地域的特定可用区的VPC类型的云服务器ECS实例上",
@@ -2711,7 +2711,7 @@ export const questions: Question[] = [
   },
   {
     "id": 194,
-    "type": "单选题",
+    "type": "single",
     "title": "您基于阿里云的云服务器ECS实例部署了Mysql数据库，随着业务量的不断上涨，您需要通过读写分离的方式来改善数据库的性能，可以采用阿里云的<strong>____</strong>产品来快速解决该问题。",
     "options": [
       "A.对象存储OSS",
@@ -2725,7 +2725,7 @@ export const questions: Question[] = [
   },
   {
     "id": 195,
-    "type": "单选题",
+    "type": "single",
     "title": "您拥有香港地域可用区A、华北1（青岛）地域可用区B和华南1（深圳）可用区B的云服务器ECS实例，现在希望通过购买新的块存储挂载到已有的云服务器ECS实例上进行磁盘空间的扩容，肯定不能购买<strong>____</strong>可用区的块存储。",
     "options": [
       "A.华北1（青岛）地域可用区A",
@@ -2739,7 +2739,7 @@ export const questions: Question[] = [
   },
   {
     "id": 196,
-    "type": "单选题",
+    "type": "single",
     "title": "您的应用系统中存在大量的非结构化数据，之前采用阿里云的云服务器ECS实例加云数据盘的方式进行存储，随着数据的不断膨胀，维护成本和拥有成本越来愈高。您希望将目前存储在云服务器ECS实例的数据盘上的大量非结构化的数据转存到其他的服务上去，并使用新的服务提供后续的数据存储服务，从而实现更好的节省运维、管理及存储本身的成本，采用<strong>____</strong>方式最为经济高效。",
     "options": [
       "A.将数据转移到表格存储中，提供低成本、高并发、低延时的海量数据存储与在线访问",
@@ -2753,7 +2753,7 @@ export const questions: Question[] = [
   },
   {
     "id": 197,
-    "type": "单选题",
+    "type": "single",
     "title": "您启动了一台新的阿里云的云服务器ECS实例，要求此实例只允许开放80端口的公网访问。可以通过以下哪个操作来实现此要求而不影响其它实例？",
     "options": [
       "A.在该实例所在的默认安全组添加一条公网访问规则仅允许80端口的公网入流量",
@@ -2767,7 +2767,7 @@ export const questions: Question[] = [
   },
   {
     "id": 198,
-    "type": "单选题",
+    "type": "single",
     "title": "您在使用阿里云的云服务器ECS实例的过程中，如果进行<strong>____</strong>操作一定不会导致云服务器ECS实例出现异常。",
     "options": [
       "A.修改上层应用的网络协议",
@@ -2781,7 +2781,7 @@ export const questions: Question[] = [
   },
   {
     "id": 199,
-    "type": "单选题",
+    "type": "single",
     "title": "公网IP可以实现阿里云的云服务器ECS实例与Internet之间互访。下列对于云服务器ECS实例的公网IP描述错误的是<strong>____</strong>。",
     "options": [
       "A.无论您选择何种计费方式，在购买实例的时候，您都需要选择公网的带宽上限",
@@ -2795,7 +2795,7 @@ export const questions: Question[] = [
   },
   {
     "id": 200,
-    "type": "单选题",
+    "type": "single",
     "title": "您发现某台阿里云的云服务器ECS实例无法连接到互联网，不可能是<strong>____</strong>原因造成的。",
     "options": [
       "A.您修改了云服务器ECS实例访问公网的安全组策略",
@@ -2809,7 +2809,7 @@ export const questions: Question[] = [
   },
   {
     "id": 201,
-    "type": "单选题",
+    "type": "single",
     "title": "您的应用系统部署在阿里云的云服务器ECS实例上，系统每天晚上会进行当天运营数据的报表统计，在凌晨3点钟会出现短暂的统计服务响应变慢的情况，但很快会自动消失，很可能是云服务器ECS实例自身的<strong>____</strong>操作引起的。",
     "options": [
       "A.云服务器ECS实例自动休眠了",
@@ -2823,7 +2823,7 @@ export const questions: Question[] = [
   },
   {
     "id": 202,
-    "type": "单选题",
+    "type": "single",
     "title": "作为某初创企业的技术负责人，阿明将Java应用程序、图片视频等静态文件都部署在了一台ECS实例上，提供服务。随着业务发展和用户量的增加，发现存储在ECS实例上的静态文件访问速度不能达到预期的要求。您建议选择阿里云的<strong><strong>_</strong></strong>产品可以快速解决静态文件的访问速度问题。",
     "options": [
       "A.负载均衡SLB",
@@ -2837,7 +2837,7 @@ export const questions: Question[] = [
   },
   {
     "id": 203,
-    "type": "单选题",
+    "type": "single",
     "title": "您基于阿里云的云服务器ECS实例部署了Mysql数据库，随着业务量的不断上涨，您的运维工作不断增加，包括数据库的备份、主备数据库之间的数据同步等问题，可以采用阿里云的<strong>____</strong>产品来快速解决该问题。",
     "options": [
       "A.开放搜索服务OpenSearch",
@@ -2851,7 +2851,7 @@ export const questions: Question[] = [
   },
   {
     "id": 204,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频公司，使用负载均衡SLB将用户的访问请求分发到30台云服务器ECS实例上去，由这些配置相同的ECS实例来响应用户的请求。每天晚上20:00到次日凌晨2:00期间，业务量会大幅增加，基本上会比其他时间段增加1倍左右，为了能正常响应用户的请求，从成本和容易实现的角度，以下哪种解决办法最可取？",
     "options": [
       "A.使用阿里云弹性伸缩（Auto Scaling），通过合适的配置，自动增加ECS实例或者减少ECS实例",
@@ -2865,7 +2865,7 @@ export const questions: Question[] = [
   },
   {
     "id": 205,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）可以通过设置定时任务来定时地增加或减少 ECS 实例,那么如果多个定时任务在同一时间内触发执行同一个伸缩组的伸缩规则,下面关于定时任务执行的说法正确是?",
     "options": [
       "A.会选取最近创建的定时任务执行,排在后面的定时任务会在 LaunchExpirationTime 内自动重试定时触发",
@@ -2879,7 +2879,7 @@ export const questions: Question[] = [
   },
   {
     "id": 206,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)是根据用户的业务需求和策略，自动调整其弹性计算资源的管理服务，可以自动调整<strong>____</strong>。",
     "options": [
       "A.云服务器ECS实例的个数",
@@ -2893,7 +2893,7 @@ export const questions: Question[] = [
   },
   {
     "id": 207,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频直播公司采用阿里云弹性伸缩（Auto Scaling）来实现动态添加或者减少云服务器ECS实例，以应对业务量的变化。由于该公司的系统刚上线不久，没有历史数据做参考，同时也不能预估业务量的变化，他们希望通过ECS实例资源的使用情况（比如CPU利用率、系统负载Load等）来弹性伸缩计算资源。他们应该选择以下哪种伸缩模式？",
     "options": [
       "A.动态模式",
@@ -2907,7 +2907,7 @@ export const questions: Question[] = [
   },
   {
     "id": 208,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS中所有数据都保存在Bucket中，当一个OSS bucket设置成<strong>____</strong>权限，意味着该OSS Bucket仅允许其他用户来访问 （GET Object）属于该Bucket下的object。",
     "options": [
       "A.公共读写",
@@ -2921,7 +2921,7 @@ export const questions: Question[] = [
   },
   {
     "id": 209,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠 的云存储服务。在OSS Bucket中所有元素都是以<strong>_</strong>来存储的。",
     "options": [
       "A.key",
@@ -2935,7 +2935,7 @@ export const questions: Question[] = [
   },
   {
     "id": 210,
-    "type": "单选题",
+    "type": "single",
     "title": "如果阿里云对象存储OSS客户想对访问OSS的IP进行限制，只允许有限的几个IP地址可以下载OSS上的文件，可以通过<strong><strong>___</strong></strong>配置方法实现。",
     "options": [
       "A.直接使用OSS的IP白名单功能",
@@ -2949,7 +2949,7 @@ export const questions: Question[] = [
   },
   {
     "id": 211,
-    "type": "单选题",
+    "type": "single",
     "title": "开通阿里云对象存储OSS服务后，您首先需要使用OSS管理控制台或OpenAPI创建存储空间Bucket以用来存储文件，以下有关Bucket的说法<strong><strong>_</strong></strong>是正确的。",
     "options": [
       "A.Bucket的名称要求全局唯一，且创建后不支持更改",
@@ -2963,7 +2963,7 @@ export const questions: Question[] = [
   },
   {
     "id": 212,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云的负载均衡SLB实例时，可以对后端云服务器ECS实例配置不同的权重，权重越大的ECS实例，会被分到越多的负载。某个SLB实例的后端服务器池中有5个ECS实例，都处在健康状态，其中一台实例ecs_inst1权重被设置成了100，以下说法中正确的是<strong>____</strong>。",
     "options": [
       "A.由于不确定其他4台ECS实例的权重配置，所以无法判断ecs_inst1会被分到多大比例的负载",
@@ -2977,7 +2977,7 @@ export const questions: Question[] = [
   },
   {
     "id": 213,
-    "type": "单选题",
+    "type": "single",
     "title": "某在线考试网站提供在线的认证考试服务，用户登录网站后，需要在120分钟时间内完成答卷。该网站使用了阿里云的云服务器ECS以及负载均衡SLB实现，上述场景中，如果要保持120分钟之内用户和服务器之间的连接不间断，可以通过负载均衡SLB的<strong>____</strong>功能实现。",
     "options": [
       "A.会话保持",
@@ -2991,7 +2991,7 @@ export const questions: Question[] = [
   },
   {
     "id": 214,
-    "type": "单选题",
+    "type": "single",
     "title": "负载均衡通过设置虚拟服务地址，将添加的ECS实例虚拟成一个高性能、高可用的应用服务池，并根据转发规则，将来自客户端的请求分发给云服务器池中的ECS实例。下列关于SLB转发规则说法错误的是？",
     "options": [
       "A.SLB支持“轮询模式”转发规则",
@@ -3005,7 +3005,7 @@ export const questions: Question[] = [
   },
   {
     "id": 215,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，可以通过健康检查来判断后端云服务器ECS实例上的可用性。针对7层服务，负载均衡SLB实例的健康检查机制为：默认由负载均衡SLB实例向后端云服务器ECS实例的内网IP地址的应用服务器配置的缺省首页发起<strong>____</strong>请求，如果返回“200 OK”，将认为后端云服务器ECS实例运行正常，否则视为运行异常。",
     "options": [
       "A.http",
@@ -3019,7 +3019,7 @@ export const questions: Question[] = [
   },
   {
     "id": 216,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云提供公网和私网两种类型的负载均衡服务。下列关于SLB实例属性配置说法错误的是？",
     "options": [
       "A.如果用户不指定一个容易识别的SLB名称，则系统会自行分配一个名称",
@@ -3033,7 +3033,7 @@ export const questions: Question[] = [
   },
   {
     "id": 217,
-    "type": "单选题",
+    "type": "single",
     "title": "在阿里云的负载均衡SLB的管理控制台中，可以根据一些监控的统计指标来设置报警信息，常见的如流量、数据包、连接数等，设置报警阈值，一旦触发了报警条件，就会通过多种方式进行报警。目前还不支持<strong>____</strong>的报警方式。",
     "options": [
       "A.电话报警",
@@ -3047,7 +3047,7 @@ export const questions: Question[] = [
   },
   {
     "id": 218,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB可以通过流量分发扩展应用系统对外的服务能力，通过消除单点故障提升应用系统的可用性。以下关于负载均衡SLB特点的说法中错误的是<strong>____</strong>。",
     "options": [
       "A.跨地域容灾：支持同一个负载均衡SLB实例分流负载到跨多个地域（Region）的云服务器ECS实例，可用性更高",
@@ -3061,7 +3061,7 @@ export const questions: Question[] = [
   },
   {
     "id": 219,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB对应的后端服务器池中包含多台云服务器ECS实例时，若ECS实例对外服务能力不同，为了更充分的利用ECS实例的处理能力，以下说法中正确的是<strong>____</strong>。",
     "options": [
       "A.给处理能力强的ECS实例配置更高的权重，权重越高意味着将有机会被分配到更多的访问请求",
@@ -3075,7 +3075,7 @@ export const questions: Question[] = [
   },
   {
     "id": 220,
-    "type": "单选题",
+    "type": "single",
     "title": "假设网络管理员需要随时随地通过公网对阿里云专有网络VPC下的多台云服务器ECS实例进行管理，通过<strong>____</strong>方式可以既安全又低成本的实现。",
     "options": [
       "A.修改VPC的安全组策略，允许公网的访问",
@@ -3089,7 +3089,7 @@ export const questions: Question[] = [
   },
   {
     "id": 221,
-    "type": "单选题",
+    "type": "single",
     "title": "您希望通过管理控制台进行阿里云的专有网络VPC内的云服务器ECS实例的私网IP地址的修改，但发现操作的菜单不可用，是<strong>____</strong>原因引起的。",
     "options": [
       "A.该云服务器ECS实例没有绑定EIP",
@@ -3103,7 +3103,7 @@ export const questions: Question[] = [
   },
   {
     "id": 222,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的安骑士是云盾提供的用来保护服务器的产品，以下<strong>____</strong>不属于安骑士的功能。",
     "options": [
       "A.木马文件检查",
@@ -3117,7 +3117,7 @@ export const questions: Question[] = [
   },
   {
     "id": 223,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾加密服务通过在阿里云上使用经国家密码管理局检测认证的硬件密码机，帮助用户满足数据安全方面的监管合规要求，保护云上业务数据的隐私性和机密性。云盾加密服务的密钥由<strong><strong>___</strong></strong>负责保管。",
     "options": [
       "A.阿里云的系统管理员",
@@ -3131,7 +3131,7 @@ export const questions: Question[] = [
   },
   {
     "id": 224,
-    "type": "单选题",
+    "type": "single",
     "title": "在服务器上手动安装阿里云的云盾客户端安骑士时需要<strong><strong>___</strong></strong>权限。",
     "options": [
       "A.系统管理员权限",
@@ -3145,7 +3145,7 @@ export const questions: Question[] = [
   },
   {
     "id": 225,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云监控（CloudMonitor） 是一项针对阿里云资源和互联网应用进行监控的服务。下列关于云监控的说法准确的是？",
     "options": [
       "A.需要单独购买并付费，才可以开通",
@@ -3159,7 +3159,7 @@ export const questions: Question[] = [
   },
   {
     "id": 226,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业托管到传统IDC机房的服务器（包括windows和Linux两种操作系统），每天晚上有来自很多国家的IP地址对其管理密码进行尝试破解。为此管理员小王很是担心，因为工作需要，远程管理端口必须对公网开放。小王听说阿里云的云盾可以帮助客户提升安全防护的能力，想把系统迁到阿里云上。在阿里云上开通<strong><strong>_</strong></strong>功能可以减少密码被暴力破解的可能。",
     "options": [
       "A.阿里绿网",
@@ -3173,7 +3173,7 @@ export const questions: Question[] = [
   },
   {
     "id": 227,
-    "type": "单选题",
+    "type": "single",
     "title": "D公司在线视频业务全国排名前五，整个业务系统全部建设在阿里云之上，使用的云产品有云服务器ECS、对象存储OSS、内容分发网络CDN。 最近发现有黑客恶意下载公司的正版视频，在国外社区里分发。 假设你是D公司的系统管理员，从技术上可以如何解决这个问题？",
     "options": [
       "A.启用阿里云CDN的IP黑名单功能",
@@ -3187,7 +3187,7 @@ export const questions: Question[] = [
   },
   {
     "id": 228,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN和传统厂商的CDN相比具有稳定快速、节约成本和简单易用三个特点。以下关于阿里云CDN稳定快速特点的描述错误的是<strong>____</strong>。",
     "options": [
       "A.先进的分布式系统架构，在国内、外均有数百个缓存节点，且节点数在不断增加",
@@ -3202,7 +3202,7 @@ export const questions: Question[] = [
   },
   {
     "id": 229,
-    "type": "单选题",
+    "type": "single",
     "title": "某公司很多系统都架构在阿里云上，使用了多个阿里云弹性伸缩（Auto Scaling）的伸缩组来实现动态资源管理。现有一台包年包月的云服务器ECS实例还未到期，且处于闲置状态，出于避免资源浪费的考虑，想把它更好的利用起来。以下说法中正确的是？",
     "options": [
       "A.可以把它手工添加到同一个地域（Region）的任意一个伸缩组中去",
@@ -3216,7 +3216,7 @@ export const questions: Question[] = [
   },
   {
     "id": 230,
-    "type": "单选题",
+    "type": "single",
     "title": "您部署在阿里云云服务器ECS上的服务，希望能够通过阿里云的产品来提升该服务的可用性，以下哪种方案的可用性最高？",
     "options": [
       "A.在同一个地域的多个可用区的多台云服务器上部署应用，并挂载在同一个负载均衡实例后面",
@@ -3230,7 +3230,7 @@ export const questions: Question[] = [
   },
   {
     "id": 231,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS产品的应用非常广泛，既可以单独的作为Web服务器，也可以与其他阿里云产品配合提供多媒体解决方案。在多媒体、大流量的APP或网站应用场景下，云服务器ECS实例与阿里云的<strong>____</strong>产品，可以实现在业务量增长时自动增加ECS实例，并在业务量下降时自动减少ECS实例，保证满足访问量达到峰值时对资源的要求，同时降低了系统资源的拥有成本。",
     "options": [
       "A.对象存储OSS",
@@ -3244,7 +3244,7 @@ export const questions: Question[] = [
   },
   {
     "id": 232,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS相对于传统物理服务器的一个重要特征是，可以更为便捷的进行服务器的配置升级。下列关于云服务器ECS无缝升级的说法错误的是<strong>____</strong>。",
     "options": [
       "A.云服务器ECS支持变更CPU、内存和宽带升级",
@@ -3258,7 +3258,7 @@ export const questions: Question[] = [
   },
   {
     "id": 233,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频公司的服务部署在阿里云的云服务器ECS上，春晚或每周五热门节目来临时，如临大敌，又不想长期采购大量的云服务器ECS实例提供服务，可以采用阿里云提供的<strong>____</strong>产品来低成本地解决这个问题。",
     "options": [
       "A.弹性伸缩Auto Scaling",
@@ -3272,7 +3272,7 @@ export const questions: Question[] = [
   },
   {
     "id": 234,
-    "type": "单选题",
+    "type": "single",
     "title": "随着业务的增长，您现有的阿里云的云服务器ECS实例的系统盘出现了存储资源不足的问题，阿里云提供了系统盘扩容的功能帮您解决该问题。下列关于扩容系统盘的操作说法错误的是<strong>____</strong>。",
     "options": [
       "A.通过更换ECS实例的系统盘操作来实现系统盘的扩容",
@@ -3286,7 +3286,7 @@ export const questions: Question[] = [
   },
   {
     "id": 235,
-    "type": "单选题",
+    "type": "single",
     "title": "某新媒体公司通过手机APP提供新闻资讯服务，采用阿里云弹性伸缩（Auto Scaling）来实现动态添加或者减少云服务器ECS实例，来应对业务量的变化。该公司的业务人员和技术人员相互配合，估算出他们所需要的资源为闲时10台ECS，但是有几个时间段业务量会比较多，基本上集中在7:30到9:00，18:30到20:00，随着时间点的不同，所需的ECS实例在10到20个之间动态变化。他们在伸缩组中将最小实例个数设置为10，最大实例个数设置为20。从容易部署以及节省成本的角度来考虑，他们还需要配置一个什么模式的任务？",
     "options": [
       "A.动态模式",
@@ -3300,7 +3300,7 @@ export const questions: Question[] = [
   },
   {
     "id": 236,
-    "type": "单选题",
+    "type": "single",
     "title": "某视频直播公司采用阿里云弹性伸缩（Auto Scaling）来实现动态添加或者减少云服务器ECS实例，以应对业务量的变化。由于该公司的系统刚上线不久，没有历史数据做参考，同时也不能预估业务量的变化，他们希望通过ECS实例资源的使用情况（比如CPU利用率、系统负载Load等）来弹性伸缩计算资源。他们应该选择以下哪种伸缩模式？",
     "options": [
       "A.动态模式",
@@ -3314,7 +3314,7 @@ export const questions: Question[] = [
   },
   {
     "id": 237,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业使用负载均衡SLB+云服务器ECS+弹性伸缩（Auto Scaling）的架构搭建网站，已经创建了伸缩组，冷却时间设置为缺省值300秒，最小ECS数设置为1，最大ECS数设置为100，并设定了伸缩规则为“每次增加1台ECS”，同时配置报警任务：“统计周期”设为2分钟，“重复几次后报警”设置为3，每当CPU使用率平均值超过60%时，触发伸缩规则定义的伸缩活动，当前伸缩组中有10台ECS实例。该网站业务在长达1小时的时间段内发生了井喷式的爆发增长，CPU的使用率会一直高于60%，这一小时期间，每两次触发该报警任务的时间间隔最少为<strong>____</strong>加上创建一台ECS实例的消耗时间。",
     "options": [
       "A.11分钟",
@@ -3328,7 +3328,7 @@ export const questions: Question[] = [
   },
   {
     "id": 238,
-    "type": "单选题",
+    "type": "single",
     "title": "小明是一个社交网站的架构师，创业初期用户量较少，每个注册客户上传的图片文件直接保存在了一台阿里云的云服务器ECS实例上。最近用户量爆增，图片存储的空间达到了3.5T，WEB服务器由原来的1台ECS实例扩展到了5台ECS实例，性能问题得到了解决，可是保存在ECS实例的图片无法在多台ECS之间共享读写。 阿里云的<strong>____</strong>产品非常适合解决这个问题。",
     "options": [
       "A.对象存储OSS",
@@ -3342,7 +3342,7 @@ export const questions: Question[] = [
   },
   {
     "id": 239,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS提供了丰富的文件上传和下载接口，用户可以通过API方便地实现大容量存储空间的管理。如果您想建立一个大型图片分享站点，该网站允许大量用户通过WEB方式进行图片的上传和分享，可以使用阿里云的<strong>____</strong>产品与OSS配合实现。",
     "options": [
       "A.负载均衡SLB",
@@ -3356,7 +3356,7 @@ export const questions: Question[] = [
   },
   {
     "id": 240,
-    "type": "单选题",
+    "type": "single",
     "title": "开通阿里云对象存储OSS服务后，您首先需要使用OSS管理控制台或OpenAPI创建Bucket来存储文件。创建Bucket时“所属地域”这个属性必须要指定， 特别是您的云服务器ECS实例需要通过内网访问OSS Bucket时，必须选择与 ECS实例相同的地域，以下有关“所属地域”的说法<strong><strong>_</strong></strong>是正确的。",
     "options": [
       "A.Bucket创建后，“所属地域”属性可随时更改",
@@ -3370,7 +3370,7 @@ export const questions: Question[] = [
   },
   {
     "id": 241,
-    "type": "单选题",
+    "type": "single",
     "title": "C公司基于阿里云对象存储OSS和云服务器ECS实例构建了一个网站，ECS实例与OSS之间有频繁的文件上传和下载需求。系统管理员小赵最近通过阿里云管理控制台中的费用中心发现OSS的流量费用增长很快，但是从ECS实例上部署的应用系统日志里没有发现网站访问量有明显增长。 请您帮小赵判断一下有可能是<strong><strong>_</strong></strong>原因导致的。",
     "options": [
       "A.系统架构中缺少云数据库RDS",
@@ -3384,7 +3384,7 @@ export const questions: Question[] = [
   },
   {
     "id": 242,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云OSS图片处理服务（Image Service） 是阿里云OSS对外提供的图片处理服务。用户将原始图片上传保存在OSS上，通过简单的RESTful接口，可以在任何时间、任何地点、任何互联网设备上对图片进行处理。以下有关OSS图片处理服务说法正确的<strong><strong>____</strong></strong>。",
     "options": [
       "A.可以处理来自于阿里云OSS以外的图片",
@@ -3398,7 +3398,7 @@ export const questions: Question[] = [
   },
   {
     "id": 243,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS支持分块上传操作，即可以将大文件进行分块处理后再分别上传，该操作适合在上传大文件或者网络较差的情况下使用。在分块上传的所有任务完成之后，如果没有调用Complete Multipart Upload接口，就会产生一些不完整的文件，这些不完整的文件会占用用户bucket的空间。为了方便用户删除这些不完整的文件，OSS专门提供了<strong>___</strong>功能。",
     "options": [
       "A.在线批量删除",
@@ -3412,7 +3412,7 @@ export const questions: Question[] = [
   },
   {
     "id": 244,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业购买了一个负载均衡SLB实例，该实例下挂载了多台云服务器ECS实例，每个ECS实例上都部署了多个不同的站点，并使用不同域名访问。现在负载均衡SLB实例可以通过配置<strong>____</strong>来实现对同一台ECS实例上不同站点的健康检查。",
     "options": [
       "A.主机头（Http Host）",
@@ -3426,7 +3426,7 @@ export const questions: Question[] = [
   },
   {
     "id": 245,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业的网站构建在阿里云的云服务器ECS实例、负载均衡SLB实例以及弹性伸缩（Auto Scaling）之上，其中负载均衡SLB实例已和弹性伸缩绑定，且已开启健康检查。负载均衡检SLB实例检查出后端云服务器ECS实例ecs_inst1处于不健康状态，且ecs_inst1在弹性伸缩的伸缩组中。以下说法中正确的是？",
     "options": [
       "A.弹性伸缩的弹性自愈功能将会把ecs_inst1移出当前伸缩组，且会新创建一个ECS实例添加进来，该新添加实例会被SLB实例分配负载",
@@ -3440,7 +3440,7 @@ export const questions: Question[] = [
   },
   {
     "id": 246,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云负载均衡SLB的管理控制台时，如果需要添加某台云服务器ECS实例到某负载均衡SLB实例的后端服务器池中，ECS实例必须处于<strong>____</strong>状态。",
     "options": [
       "A.运行中",
@@ -3454,7 +3454,7 @@ export const questions: Question[] = [
   },
   {
     "id": 247,
-    "type": "单选题",
+    "type": "single",
     "title": "SLB是将访问流量根据转发策略分发到后端多台云服务器（ECS实例）的流量分发控制服务。下列关于SLB说法错误的是？",
     "options": [
       "A.SLB的服务能力与后端ECS的公网宽带规格无关",
@@ -3468,7 +3468,7 @@ export const questions: Question[] = [
   },
   {
     "id": 248,
-    "type": "单选题",
+    "type": "single",
     "title": "负载均衡支持按带宽计费的负载均衡实例下的所有监听共享实例的总带宽,假如您购买了一个带宽峰值为 10MB 的负载均衡实例，并在该实例下创建了三个监听（监听A、监听B和监听C）。监听A的带宽峰值设置为 4MB，另外两个监听没有设置带宽峰值，如果监听A和监听C一直没有流量进入，那么关于监听B的说法，以下说法正确的是<strong>____</strong>。",
     "options": [
       "A.监听B最多也只能跑满 6MB 带宽",
@@ -3482,7 +3482,7 @@ export const questions: Question[] = [
   },
   {
     "id": 249,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB提供对多台后端服务器进行流量分发的服务。对于后端服务器的选择，以下说法中正确的是<strong>____</strong>。",
     "options": [
       "A.只能是阿里云的云服务器ECS实例",
@@ -3496,7 +3496,7 @@ export const questions: Question[] = [
   },
   {
     "id": 250,
-    "type": "单选题",
+    "type": "single",
     "title": "某创业团队刚刚成立，几个核心的程序员分布在5个不同的城市异地办公，新发布的线上系统使用了阿里云的云数据库RDS。 由于程序员需要在异地用动态IP连接RDS，所以管理员只能打开RDS的公网连接地址和端口，并每天多次从管理控制台查看RDS的连接信息，防止黑客远程登录RDS。 管理员通过<strong><strong>___</strong></strong>方法可以最简单地降低这种担忧和人工防护的成本。",
     "options": [
       "A.开通云盾态势感知服务，一旦有非常用IP登录数据库rds即可收到报警信息",
@@ -3510,7 +3510,7 @@ export const questions: Question[] = [
   },
   {
     "id": 251,
-    "type": "单选题",
+    "type": "single",
     "title": "采用云计算服务与传统自建IT系统不同，相比传统自建方式，云计算带来了巨大的便利性。以阿里云服务器ECS为例，这些便利性中不包括？",
     "options": [
       "A.用户无需再去维护和管理硬件",
@@ -3524,7 +3524,7 @@ export const questions: Question[] = [
   },
   {
     "id": 252,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾安骑士可以记录远程访问服务器的源IP地址,并对频繁连接的可疑IP进行屏蔽,日常运维过程中需要通过<strong>____</strong>功能对系统管理员常用的IP进行设置。",
     "options": [
       "A.安全组",
@@ -3538,7 +3538,7 @@ export const questions: Question[] = [
   },
   {
     "id": 253,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)是根据用户的业务需求和策略,自动调整其弹性计算资源的管理服务。为了在弹性伸缩创建的ECS实中可以直接正常处理用户请求,无需任何额外的系统调度和配置,弹性伸缩的云服务器ECS实例中部署的应用必须满足<strong>____</strong>。",
     "options": [
       "A.无状态且可横向扩展的",
@@ -3552,7 +3552,7 @@ export const questions: Question[] = [
   },
   {
     "id": 254,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云弹性伸缩(Auto Scaling)时,需要先创建伸缩组,然后会基于伸缩组提供按照策略或者业务需求弹性伸缩计算资源的服务。当某个伸缩组不再使用时,可以将其删除,其中<strong>____</strong>不依赖于伸缩组的生命周期,即不会随着伸缩组的删除而被删除。",
     "options": [
       "A.定时任务",
@@ -3566,7 +3566,7 @@ export const questions: Question[] = [
   },
   {
     "id": 255,
-    "type": "单选题",
+    "type": "single",
     "title": "您基于阿里云的云服务器ECS实例部署了Mysql数据库,随着业务量的不断上涨,您的运维工作不断增加,包括数据库的备份、主备数据库之间的数据同步等问题,可以采用阿里云的<strong>____</strong>产品来快速解决该问题。",
     "options": [
       "A.表格存储",
@@ -3580,7 +3580,7 @@ export const questions: Question[] = [
   },
   {
     "id": 256,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。可以广泛应用于各种场景。例如:图片和音视频类应用的海量存储、静态网站、应用中的静态网页。以下<strong>____</strong>场景适合使用OSS服务。",
     "options": [
       "A.客户A是一个网店老板,每天产生10Gb的高清图片,需要稳定可靠的存储",
@@ -3594,7 +3594,7 @@ export const questions: Question[] = [
   },
   {
     "id": 257,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算的一个显著特点是提供按需供应、按需付费的服务。所有的资源以资源池的方式存在，提供配置化的访问方式，资源类型包括网络、服务器、存储、应用和服务。关于资源池的说法错误的是？",
     "options": [
       "A.资源池无法突破单台物理机所拥有的资源",
@@ -3608,7 +3608,7 @@ export const questions: Question[] = [
   },
   {
     "id": 258,
-    "type": "单选题",
+    "type": "single",
     "title": "当您确认不再需要某个阿里云的弹性公网IP（EIP）时，可以释放指定的EIP。在释放EIP之前，要确定已经从云产品实例上解绑EIP，才能释放该EIP。",
     "options": [
       "A.对",
@@ -3620,7 +3620,7 @@ export const questions: Question[] = [
   },
   {
     "id": 259,
-    "type": "单选题",
+    "type": "single",
     "title": "共享存储是指是多台服务器访问(读写)同一个存储设备的同一个分区,即系统允许多个用户共享同一份文件。如阿里云的文件存储（Network Attached Storage,简称NAS）就提供了共享存储的服务,以下说法错误的是?",
     "options": [
       "A.多个云服务器实例可以同时访问同一个共享文件系统",
@@ -3634,7 +3634,7 @@ export const questions: Question[] = [
   },
   {
     "id": 260,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾态势感知用大数据分析技术,按攻击者的视角来建立安全防御体系,颠覆了传统单一的入侵和漏洞检测,让用户对安全“可见、可控、可管”。 以下关于态势感知功能的描述错误的是<strong>____</strong>。",
     "options": [
       "A.可以发现webshell,恶意病毒攻击",
@@ -3648,7 +3648,7 @@ export const questions: Question[] = [
   },
   {
     "id": 261,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB提供对多台云服务器ECS实例进行流量分发的服务，可以扩展应用系统对外的服务能力，并且可以消除单点故障提升应用系统的可用性。结合<strong>____</strong>共同使用，可以提供WAF及防DDoS攻击能力，使应用环境更安全。",
     "options": [
       "A.云盾的DDoS高防IP",
@@ -3662,7 +3662,7 @@ export const questions: Question[] = [
   },
   {
     "id": 262,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling),是根据用户的业务需要和策略,自动调整其弹性计算资源的管理服务。支持用户添加已有的云服务器ECS实例到伸缩组中去,但是对云服务器ECS实例所在地域有一定要求。以下说法中正确的是?",
     "options": [
       "A.该实例和伸缩组必须在同一个地域(Region)中,对可用区(Zone)没有要求",
@@ -3676,7 +3676,7 @@ export const questions: Question[] = [
   },
   {
     "id": 263,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云弹性伸缩(Auto Scaling)时，伸缩组中包含的云服务器ECS实例有两种类型，一种是根据用户的伸缩配置和伸缩规则由弹性伸缩服务自动创建的云服务器ECS实例，另外一种是由用户手工添加到伸缩组中的ECS实例。关于这两种云服务器ECS实例，以下说法正确的是？",
     "options": [
       "A.当ECS实例被弹性伸缩从伸缩组中移出时，对于自动创建的ECS实例会停止和释放，对于手工添加的ECS实例则不会停止和释放",
@@ -3690,7 +3690,7 @@ export const questions: Question[] = [
   },
   {
     "id": 264,
-    "type": "单选题",
+    "type": "single",
     "title": "某大型互联网公司，原来的业务都运行在物理机上，并且有自建的监控和报警系统，最近准备把一部分业务迁到阿里云上，并通过云监控来监控云服务器ECS实例并设置报警。用户需要<strong><strong>___</strong></strong>才能快速将云监控现有的报警通知对接到自建的报警系统，并在自建的报警系统中综合处理物理机和云服务器ECS实例的报警信息。",
     "options": [
       "A.无法实现",
@@ -3704,7 +3704,7 @@ export const questions: Question[] = [
   },
   {
     "id": 265,
-    "type": "单选题",
+    "type": "single",
     "title": "您成功地创建了一台阿里云的云服务器ECS实例,准备进行应用的部署。在部署应用之前,如何保证该云服务器ECS实例具备防御500M以内的DDoS攻击的能力？",
     "options": [
       "A.其他都不对",
@@ -3718,7 +3718,7 @@ export const questions: Question[] = [
   },
   {
     "id": 266,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云弹性伸缩(Auto Scaling)时,希望能根据计算资源的使用情况来增加或者减少云服务器ECS实例,如当CPU利用率小于等于30%时则减少一台云服务器ECS实例,首先配置伸缩规则为“减少1台ECS”,然后还需要<strong>____</strong>来实现。",
     "options": [
       "A.创建报警任务",
@@ -3732,7 +3732,7 @@ export const questions: Question[] = [
   },
   {
     "id": 267,
-    "type": "单选题",
+    "type": "single",
     "title": "在众多的网络攻击类型中，“钓鱼网站”是最常见的攻击之一。钓鱼网站的页面看上去与真实网站界面完全一致，要求访问者提交账号和密码，以此来骗取用户银行或信用卡账号、密码等私人资料。以下有关钓鱼网站的传播手段，说法错误的是<strong><strong>__</strong></strong>。",
     "options": [
       "A.通过QQ、旺旺等客户端聊天工具发送传播钓鱼网站链接",
@@ -3746,7 +3746,7 @@ export const questions: Question[] = [
   },
   {
     "id": 268,
-    "type": "单选题",
+    "type": "single",
     "title": "您成功地创建了一台阿里云的云服务器ECS实例，准备进行应用的部署。在部署应用之前，如何保证该云服务器ECS实例具备防御500M以内的DDoS攻击的能力？",
     "options": [
       "A.阿里云的云盾产品提供免费的基础DDoS防护服务，不需要单独购买",
@@ -3760,7 +3760,7 @@ export const questions: Question[] = [
   },
   {
     "id": 269,
-    "type": "单选题",
+    "type": "single",
     "title": "您需要进行某台云服务ECS实例的磁盘快照的创建，只有该云服务器ECS实例处于<strong>____</strong>状态下时才可以进行快照创建的操作。",
     "options": [
       "A.启动中",
@@ -3774,7 +3774,7 @@ export const questions: Question[] = [
   },
   {
     "id": 270,
-    "type": "单选题",
+    "type": "single",
     "title": "通过<strong>____</strong>操作，可以实现在阿里云的同一个专有网络VPC下的三个交换机下的云服务器ECS实例之间内网互相不能访问，但并不影响该专有网络VPC的内网其他流量？",
     "options": [
       "A.创建三个安全组，分别包含三个交换机下的所有云服务器ECS实例，先为每个安全组设置允许所有网段访问的规则，再设置禁止另外两个交换机所在网段访问的规则（优先级要高于前者）",
@@ -3788,7 +3788,7 @@ export const questions: Question[] = [
   },
   {
     "id": 271,
-    "type": "单选题",
+    "type": "single",
     "title": "A公司将最近两年的内部培训录像都保存在阿里云对象存储OSS中，以方便员工在需要的时候学习。随着智能手机的普及，很多员工希望通过手机来观看视频，但是保存在OSS中的视频格式无法在手机上直接播放，遇到这种问题时客户可以使用阿里云的<strong>____</strong> 产品很高效地解决。",
     "options": [
       "A.云服务器ECS",
@@ -3802,7 +3802,7 @@ export const questions: Question[] = [
   },
   {
     "id": 272,
-    "type": "单选题",
+    "type": "single",
     "title": "服务器安全托管是阿里云云盾的一项高级服务,服务内容包括专家人工安全体检、清除木马,VIP 技术支持等,此服务是针对阿里云<strong>____</strong>产品提供的。",
     "options": [
       "A.云数据库RDS",
@@ -3816,7 +3816,7 @@ export const questions: Question[] = [
   },
   {
     "id": 273,
-    "type": "单选题",
+    "type": "single",
     "title": "跨站脚本攻击（Crosssite scripting，通常简称为XSS）可被用于进行窃取隐私、钓鱼欺骗、偷取密码、传播恶意代码等攻击行为。请问XSS攻击主要发生在<strong>____</strong>。",
     "options": [
       "A.用户浏览器",
@@ -3830,7 +3830,7 @@ export const questions: Question[] = [
   },
   {
     "id": 274,
-    "type": "单选题",
+    "type": "single",
     "title": "某公司属于传统行业，一年前刚刚发展互联网线上业务，用了5台云服务器ECS实例，没有专门的系统管理员，最近半年来线上系统总是出现各种安全问题，几次高危漏洞被黑客利用，差点将核心数据泄露。使用阿里云的<strong><strong>__</strong></strong>可以快速解决这个问题。",
     "options": [
       "A.安骑士",
@@ -3844,7 +3844,7 @@ export const questions: Question[] = [
   },
   {
     "id": 275,
-    "type": "单选题",
+    "type": "single",
     "title": "小王是某新闻网站的技术负责人，该网站目前部署在一台阿里云的云服务器ECS实例上。随着用户访问量的增加，小王发现用户访问网站的响应速度在变慢，通过分析发现是应用服务器的Web会话数量太多且CPU利用率超过75%。为了快速缓解该应用服务器的压力，您认为最紧要的事情是<strong>____</strong>。",
     "options": [
       "A.增加一台云服务器ECS实例，并采用负载均衡SLB进行负载分担",
@@ -3858,7 +3858,7 @@ export const questions: Question[] = [
   },
   {
     "id": 276,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的云服务器ECS实例的使用中，要创建新的安全组规则时，不可以规定<strong>____</strong>类型的授权。",
     "options": [
       "A.IP授权",
@@ -3872,7 +3872,7 @@ export const questions: Question[] = [
   },
   {
     "id": 277,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS实例的快照是指某一个时间点上某一块磁盘的数据拷贝。下列关于云服务器ECS实例快照的说法错误的是<strong>____</strong>。",
     "options": [
       "A.用户可以手动创建快照和也可以设置自动快照策略",
@@ -3886,7 +3886,7 @@ export const questions: Question[] = [
   },
   {
     "id": 278,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您需要对某个域名(如abc.com)通过阿里云内容分发网络CDN加速，必须要在CDN服务中将该域名（如abc.com）添加到“加速域名”中。添加完成之后您会获得一个CNAME地址A，接下来需要进行域名解析的修改，将该加速域名(如abc.com)指向这个CNAME地址A。以下有关修改域名解析的说法中错误的是？",
     "options": [
       "A.该加速域名（如abc.com）所使用的DNS系统必须支持“智能解析”功能",
@@ -3900,7 +3900,7 @@ export const questions: Question[] = [
   },
   {
     "id": 279,
-    "type": "单选题",
+    "type": "single",
     "title": "当您的云服务器ECS实例的镜像选择了Aliyun Linux，可以兼容以下<strong>____</strong>操作系统。",
     "options": [
       "A.CentOS",
@@ -3914,7 +3914,7 @@ export const questions: Question[] = [
   },
   {
     "id": 280,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)中，伸缩组是一组部署了相同应用的云服务器ECS实例的集合。以下关于伸缩组的说法中正确的是？",
     "options": [
       "A.当伸缩组对应的伸缩规则的条件触发后，弹性伸缩会根据设定的伸缩规则添加或者减少伸缩组中的云服务器ECS实例",
@@ -3928,7 +3928,7 @@ export const questions: Question[] = [
   },
   {
     "id": 281,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS提供了海量的文件存储能力，对于文件管理除了支持简单上传、断点续传和大文件分片上传功能外，还提供了多种删除文件的功能。如果需要删除的Object数目很多，而且删除的Object是有一定的规律，比如定期删除某些天之前的Object，或者干脆是要清空整个Bucket，特别适合使用哪个功能来完成？",
     "options": [
       "A.管理控制台逐个删除",
@@ -3942,7 +3942,7 @@ export const questions: Question[] = [
   },
   {
     "id": 282,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云OSS产品的账单费用由三部分组成，包括：存储空间费用、流量费用和OSS API请求费用。 每一次对OSS的操作都算作一次API请求，上传文件是PUT请求，下载文件是GET请求。OSS API请求费用的付费方式支持<strong>____</strong>。",
     "options": [
       "A.包年包月和按量付费",
@@ -3956,7 +3956,7 @@ export const questions: Question[] = [
   },
   {
     "id": 283,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云OSS产品的账单费用由三部分组成，包括：存储空间费用、流量费用和OSS API请求费用。其中存储费用是根据应用所占用的存储空间的大小计费，存储费用的付费方式支持<strong>___</strong>。",
     "options": [
       "A.包年包月和按量付费",
@@ -3970,7 +3970,7 @@ export const questions: Question[] = [
   },
   {
     "id": 284,
-    "type": "单选题",
+    "type": "single",
     "title": "某创业团队基于阿里云的产品构建了一个网盘应用，允许用户通过WEB方式进行文件的上传和下载。当前版本的实现方式是所有文件都保存在多台云服务器ECS实例的数据盘上。随着业务量的增长，ECS实例的数量也同步增加，系统整体的运维成本越来越高。如果用户开通阿里云的<strong>___</strong>产品与ECS实例搭配，可以很好地降低运维成本。",
     "options": [
       "A.负载均衡SLB",
@@ -3984,7 +3984,7 @@ export const questions: Question[] = [
   },
   {
     "id": 285,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB是对多台后端服务器进行流量分发的服务。以下关于负载均衡SLB的说法正确的是<strong>____</strong>。",
     "options": [
       "A.通过集群提供服务，具有高可靠性",
@@ -3998,7 +3998,7 @@ export const questions: Question[] = [
   },
   {
     "id": 286,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云负载均衡服务SLB支持用户可以同时设置实例维度上的“后端服务器”、监听维度上的“虚拟服务器组”和“转发规则”，那么当用户流量经过负载均衡某端口时，关于SLB判断流量转发的顺序，以下说法正确的是<strong>____</strong>。",
     "options": [
       "A.先判断其是否能够匹配上某条“转发规则”，如果匹配，则将流量转发到该规则的后端服务器组上；",
@@ -4012,7 +4012,7 @@ export const questions: Question[] = [
   },
   {
     "id": 287,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云负载均衡SLB在四层（TCP）转发时，设置了会话保持，在会话保持的超时时间内，以下说法中正确的是<strong>____</strong>。",
     "options": [
       "A.来源IP地址相同的连接都会转发到同一台后端云服务器ECS实例上",
@@ -4026,7 +4026,7 @@ export const questions: Question[] = [
   },
   {
     "id": 288,
-    "type": "单选题",
+    "type": "single",
     "title": "新建阿里云的专有网络VPC时会自动创建一个路由器，路由器自带1个路由表。路由表的操作中说法错误的是<strong>____</strong>。",
     "options": [
       "A.删除VPC时，系统会自动删除对应的路由表",
@@ -4040,7 +4040,7 @@ export const questions: Question[] = [
   },
   {
     "id": 289,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的华东1（杭州）跟华北2（北京）都创建了专有网络VPC，通过<strong>____</strong>可以最快速的把华东1（杭州）跟华北2（北京）的VPC通过内网连接起来实现两地云服务器ECS实例可以互相访问。",
     "options": [
       "A.VPN",
@@ -4054,7 +4054,7 @@ export const questions: Question[] = [
   },
   {
     "id": 290,
-    "type": "单选题",
+    "type": "single",
     "title": "关于用户使用阿里云专有网络VPC产品的费用，以下说法中错误的是<strong><strong>__</strong></strong>。",
     "options": [
       "A.专有网络VPC是一个免费的网络容器",
@@ -4068,7 +4068,7 @@ export const questions: Question[] = [
   },
   {
     "id": 291,
-    "type": "单选题",
+    "type": "single",
     "title": "在创建阿里云的云产品实例时，可以选择默认类型的专有网络VPC和交换机，这两项配置确定了专有网络类型的云产品创建时在相应地域和可用区下唯一的默认网络位置，与非默认的专有网络VPC和交换机之间的区别主要在于默认类型的VPC和交换机只能由阿里云为您创建。下列关于默认专有网络VPC的描述错误的是<strong><strong>_</strong></strong>。",
     "options": [
       "A.每个地域的默认专有网络VPC唯一",
@@ -4082,7 +4082,7 @@ export const questions: Question[] = [
   },
   {
     "id": 292,
-    "type": "单选题",
+    "type": "single",
     "title": "您的应用部署在阿里云的云服务器ECS实例上，想自己采集指标做应用层面的监控。阿里云提供的云监控服务的<strong>____</strong>功能可以提供指标收集、聚合和报警的服务。",
     "options": [
       "A.自定义监控",
@@ -4096,7 +4096,7 @@ export const questions: Question[] = [
   },
   {
     "id": 293,
-    "type": "单选题",
+    "type": "single",
     "title": "防DDoS攻击是阿里云的云盾最主要的功能之一，为了帮助客户抵御不同规模的网络攻击，云盾提供了多种抗DDoS攻击的产品，其中“DDoS基础防护”的开通方法是<strong>____</strong>。",
     "options": [
       "A.联系客户经理线下开通",
@@ -4110,7 +4110,7 @@ export const questions: Question[] = [
   },
   {
     "id": 294,
-    "type": "单选题",
+    "type": "single",
     "title": "用户A是公司的系统管理员，经常去上海出差，每当他在上海远程登录服务器时系统就会发出报警信息，提示“有人异地登录，请注意服务器安全”。通过<strong><strong>___</strong></strong>方法可以快速、自助解决这个问题。",
     "options": [
       "A.立即提交工单，咨询阿里云工程师",
@@ -4124,7 +4124,7 @@ export const questions: Question[] = [
   },
   {
     "id": 295,
-    "type": "单选题",
+    "type": "single",
     "title": "虚拟化（英语：Virtualization）是云计算的底层结构。它是一种资源管理技术，是将计算机的各种实体资源，如服务器、网络、内存及存储等，予以抽象、转换后呈现出来，打破实体结构间的不可切割的障碍，使用户可以比原本的组态更好的方式来应用这些资源。虚拟化架构描述错误的是以下哪个？",
     "options": [
       "A.虚拟化技术可以将单个CPU模拟成多个CPU",
@@ -4138,7 +4138,7 @@ export const questions: Question[] = [
   },
   {
     "id": 296,
-    "type": "单选题",
+    "type": "single",
     "title": "B公司运营着一个手机APP应用商店，类似Apple的AppStore，创业初期所有的软件包都存储在云服务器ECS实例的数据盘上。 从上个月开始，公司做了大量的推广，下载量增长了200倍，用户覆盖范围也从之前的一个省扩展到了全国。为了节约存储和带宽成本，同时又能提高用户下载速度，B公司选择阿里云的<strong>__</strong>产品组合，可达到最佳效果。",
     "options": [
       "A.弹性伸缩(Auto Scaling)+云服务器ECS",
@@ -4152,7 +4152,7 @@ export const questions: Question[] = [
   },
   {
     "id": 297,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾加密服务采用<strong>____</strong>机制来保证密钥的安全。",
     "options": [
       "A.符合国家密码管理局要求的算法",
@@ -4166,7 +4166,7 @@ export const questions: Question[] = [
   },
   {
     "id": 298,
-    "type": "单选题",
+    "type": "single",
     "title": "游戏行业有个明显的特点是业务流量很难预估，波动很大，例如今天上线1台云服务器ECS实例就足够处理所有的业务需求，明天可能就需要10台云服务器ECS实例来处理所有的需求。这样的场景下，您不知道所需的云服务器ECS实例的数量，准备的少无法应对业务峰值，投入的多又造成大量的资源浪费。在阿里云上，您认为应对游戏行业这种场景的最佳阿里云产品的组合方式是<strong>____</strong>。",
     "options": [
       "A.负载均衡SLB+云服务器ECS+云数据库RDS+弹性伸缩Auto Scaling",
@@ -4180,7 +4180,7 @@ export const questions: Question[] = [
   },
   {
     "id": 299,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在创建Windows操作系统的阿里云的云服务器ECS实例时选择了数据盘，在登录实例后要完成<strong>____</strong>操作才可以正常使用该数据盘。",
     "options": [
       "A.格式化数据盘",
@@ -4194,7 +4194,7 @@ export const questions: Question[] = [
   },
   {
     "id": 300,
-    "type": "单选题",
+    "type": "single",
     "title": "ECS服务器会对每个访问的请求进行身份验证，以下哪一个是用于标识访问者身份的？",
     "options": [
       "A.Access Key Secret",
@@ -4208,7 +4208,7 @@ export const questions: Question[] = [
   },
   {
     "id": 301,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠 的云存储服务。与自建存储对比，OSS在可靠性、安全、成本和数据处理能力等几个方面都具有优势。以下<strong><strong>_</strong></strong>是OSS在可靠性方面表现出来的优势。",
     "options": [
       "A.受限于硬件可靠性,易出问题,一旦出现磁盘坏道,容易出现不可逆转的数据丢失",
@@ -4222,7 +4222,7 @@ export const questions: Question[] = [
   },
   {
     "id": 302,
-    "type": "单选题",
+    "type": "single",
     "title": "在传统IT解决方案中，要想对海量数据存储实现高于99.99999999%的数据可靠性，并且在单台物理硬件发生损坏的情况下不影响正常服务，至少需要购买多台专业的存储服务器，配合双电源+双控制器+磁盘冗余+故障报警等功能才有可能完成。阿里云的<strong><strong>____</strong></strong>服务天然就具备这个特性，即开即用。",
     "options": [
       "A.负载均衡SLB",
@@ -4236,7 +4236,7 @@ export const questions: Question[] = [
   },
   {
     "id": 303,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS出于安全考虑，直接在浏览器地址栏输入OSS通信域名(oss.aliyuncs.com)，如访问：<a href=\"http://bucketname.oss.aliyuncs.com/a.jpg\" target=\"_blank\" rel=\"noopener\">http://bucketname.oss.aliyuncs.com/a.jpg</a> (文件类型包括：txt、html、htm、图片格式、视频格式、音频格式等安全敏感文件)，均限制在浏览器客户端以“另存为”下载的方式打开文件。若需要直接在浏览器打开这类文件，需要如何配置？",
     "options": [
       "A.在OSS的安全管理菜单中修改ACL，允许浏览器直接访问，设置时需要短信验证",
@@ -4250,7 +4250,7 @@ export const questions: Question[] = [
   },
   {
     "id": 304,
-    "type": "单选题",
+    "type": "single",
     "title": "某社区网站每天的PV量高达2000万次，应用程序部署在阿里云的云服务器ECS实例上，日志记录在单台ECS实例的数据盘。现在业务部门提出新的需求，网站的访问日志要保存24个月，并且在需要的时候可以按照日期快速下载，单台ECS实例的数据盘扩到最大容量，可以保存存三个月的日志数据。您认为在该系统上增加阿里云的<strong>___</strong>产品可以一次性解决日志的保存问题。",
     "options": [
       "A.对象存储OSS",
@@ -4264,7 +4264,7 @@ export const questions: Question[] = [
   },
   {
     "id": 305,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云负载均衡SLB时后端服务器可以设置主备服务器组,当主机工作正常时，流量将直接走主机；当主机宕机时，流量将走到备机。关于主备服务器组支持的协议，以下说法正确的是<strong>____</strong>。",
     "options": [
       "A.主备服务器组只支持四层监听（TCP和UDP协议）",
@@ -4278,7 +4278,7 @@ export const questions: Question[] = [
   },
   {
     "id": 306,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云负载均衡服务SLB支持配置域名或者URL转发策略，将来自不同域名或者URL的请求转发给不同的ECS处理，关于域名或者URL转发策略支持的协议，以下说法正确的是<strong>____</strong>。",
     "options": [
       "A.只有4层监听（TCP和UDP协议）支持配置转发策略",
@@ -4292,7 +4292,7 @@ export const questions: Question[] = [
   },
   {
     "id": 307,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，可以通过健康检查来判断后端云服务器ECS实例的可用性。针对7层服务（HTTP协议），负载均衡SLB实例通过<strong>____</strong>来判断云服务器ECS实例是否可用。",
     "options": [
       "A.端口检查是否超时",
@@ -4306,7 +4306,7 @@ export const questions: Question[] = [
   },
   {
     "id": 308,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，可以通过健康检查来判断后端云服务器ECS实例的可用性。针对4层服务（TCP协议），负载均衡SLB实例通过<strong>____</strong>来判断云服务器ECS实例是否可用。",
     "options": [
       "A.端口检查是否超时",
@@ -4320,7 +4320,7 @@ export const questions: Question[] = [
   },
   {
     "id": 309,
-    "type": "单选题",
+    "type": "single",
     "title": "使用集群是解决高并发，海量数据的通常手段，对于这种类型的网站而言，不管多么强大的服务器都满足不了持续增长的业务需求。这种情况下，需要增加服务器来分担原有系统的压力,我们可以开通阿里云上哪个服务来实现该请求的分发？",
     "options": [
       "A.ECS",
@@ -4334,7 +4334,7 @@ export const questions: Question[] = [
   },
   {
     "id": 310,
-    "type": "单选题",
+    "type": "single",
     "title": "您所在的公司半年前在自建机房内刚刚构建了一套财务系统，计划上线的客户管理系统准备基于阿里云的产品构建，同时财务系统与客户管理系统之间需要通过内网互联互通，<strong>____</strong>方案可以最大限度的使用已有的系统投资并满足新的业务需求。",
     "options": [
       "A.基于经典网络的云产品实例构建客户管理系统，结合专线来实现两个系统之间的内网互联互通",
@@ -4348,7 +4348,7 @@ export const questions: Question[] = [
   },
   {
     "id": 311,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的专有网络VPC下的云服务器ECS实例如果绑定了EIP，就可以实现该服务器ECS实例对公网的服务。出于安全的考虑要限制某台绑定了EIP的云服务器ECS实例的3389远程端口的访问，可以通过<strong>____</strong>方法来实现。",
     "options": [
       "A.在这台云服务器实例的安全组规则中添加一条内网规则，拒绝TCP协议来自3389端口的入方向访问",
@@ -4362,7 +4362,7 @@ export const questions: Question[] = [
   },
   {
     "id": 312,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您希望在阿里云专有网络VPC内创建不同可用区的云服务器ECS实例，获得更高的容灾能力，以下<strong>____</strong>方式是可行的。",
     "options": [
       "A.可以通过将处于不同可用区的云服务器ECS实例部署到同一台交换机下，从而实现多可用区容灾",
@@ -4376,7 +4376,7 @@ export const questions: Question[] = [
   },
   {
     "id": 313,
-    "type": "单选题",
+    "type": "single",
     "title": "在互联网上存在着各种以盈利为目的的黑客组织，他们控制着大量的服务器资源，可以随时对目标服务器发起网络攻击，其中有一种很常见的，也是破坏性比较强的攻击，可以让目标服务器的资源耗尽，使正常客户无法连接到服务器。以下<strong><strong>___</strong></strong>属于此类攻击。",
     "options": [
       "A.DDoS攻击",
@@ -4390,7 +4390,7 @@ export const questions: Question[] = [
   },
   {
     "id": 314,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云监控产品的监控数据可以采用<strong><strong>___</strong></strong>方式下载。",
     "options": [
       "A.从管理控制台直接下载",
@@ -4404,7 +4404,7 @@ export const questions: Question[] = [
   },
   {
     "id": 315,
-    "type": "单选题",
+    "type": "single",
     "title": "日常工作和生活中，很多用户在不同网站使用的是相同的帐号和密码，因此黑客可以通过获取用户在A网站的账户从而尝试登录B网址，这种攻击行为被称作“撞库攻击”。当您在云盾态势感知中发现有撞库攻击的威胁时，应该采取<strong><strong>___</strong></strong>应对。",
     "options": [
       "A.立即修改云服务器ECS实例的所有密码，并检查登录日志",
@@ -4418,7 +4418,7 @@ export const questions: Question[] = [
   },
   {
     "id": 316,
-    "type": "单选题",
+    "type": "single",
     "title": "硬件虚拟化是使用软件的方法重新定义划分IT资源，可以实现IT资源的动态分配、灵活调度、跨域共享，提高IT资源利用率，是云计算的基础技术。如果一个虚拟机因为错误而崩溃，同一物理主机上的其他虚拟机不会受到影响，这是描述虚拟化技术的哪种特性？",
     "options": [
       "A.隔离性",
@@ -4432,7 +4432,7 @@ export const questions: Question[] = [
   },
   {
     "id": 317,
-    "type": "单选题",
+    "type": "single",
     "title": "G公司开发了一款购物的APP，全部系统都基于阿里云的产品构建，用到了华北1(青岛)地域的云服务器ECS实例和对象存储OSS，静态网页和图片全部放在OSS中。上线后在中国大陆范围内访问速度良好。最近公司想拓展美国市场，希望美国用户使用APP时也能实现较快的速度。G公司使用阿里云的<strong><strong>_</strong></strong>方案是最佳的。",
     "options": [
       "A.启用华东1(杭州)和华北2(北京)双地域的对象存储OSS和内容分发网络CDN",
@@ -4446,7 +4446,7 @@ export const questions: Question[] = [
   },
   {
     "id": 318,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)的冷却时间是指在同一个伸缩组内，当有一个伸缩活动被成功执行后的一段锁定时间内，该伸缩组不执行其他的伸缩活动。以下关于冷却时间的开始计时的时间点的说法正确的是？",
     "options": [
       "A.当伸缩组加入或移出多个ECS实例时，最后一个ECS实例加入或移出完成后，整个伸缩组冷却时间才开始计时",
@@ -4460,7 +4460,7 @@ export const questions: Question[] = [
   },
   {
     "id": 319,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾<strong><strong>_</strong></strong>是通过领先的行为收集技术和机器学习模型，解决用户的WEB应用和手机APP的账号、活动、支付等关键业务环节存在的欺诈威胁，最终实现降低企业损失。比如：帮助客户发现代金券套现行为，恶意刷单行为，恶意注册片区新用户奖励的行为等。",
     "options": [
       "A.态势感知",
@@ -4474,7 +4474,7 @@ export const questions: Question[] = [
   },
   {
     "id": 320,
-    "type": "单选题",
+    "type": "single",
     "title": "云产品的可用区指的是一套独立的基础设施，不同的可用区之间基础设施（网络，电力和空调等）相互独立，即一个可用区出现基础设施故障不影响另外一个可用区。下列关于阿里云ECS的可用区说法正确的是？",
     "options": [
       "A.可用区是在用户购买时指定的，购买后不支持更改",
@@ -4488,7 +4488,7 @@ export const questions: Question[] = [
   },
   {
     "id": 321,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS产品的应用非常广泛，既可以单独的作为Web服务器，也可以与其他阿里云产品配合提供多媒体解决方案。在多媒体、大流量的APP或网站应用场景下，云服务器ECS实例与阿里云的<strong>____</strong>产品搭配，可以存储静态图片、视频、下载包等来降低存储费用。",
     "options": [
       "A.对象存储",
@@ -4502,7 +4502,7 @@ export const questions: Question[] = [
   },
   {
     "id": 322,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的对象存储OSS可以与云服务器ECS实例协同来实现文件存储的功能。下列关于云服务器ECS实例与OSS之间的关系描述正确的是<strong>____</strong>。",
     "options": [
       "A.华东1（杭州）的云服务器ECS实例与华北1（青岛）OSS之间可以通过内网进行访问",
@@ -4515,7 +4515,7 @@ export const questions: Question[] = [
   },
   {
     "id": 323,
-    "type": "单选题",
+    "type": "single",
     "title": "创建阿里云弹性伸缩(Auto Scaling)伸缩组的时候，可以配置“移出策略”。现将移出策略配置为“最早伸缩配置对应的实例”，以下说法中正确的是？",
     "options": [
       "A.只移除通过弹性规则创建的ECS实例，并且是按照伸缩配置创建ECS实例的时间先后顺序优先移出先建的ECS实例",
@@ -4529,7 +4529,7 @@ export const questions: Question[] = [
   },
   {
     "id": 324,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云OSS产品的账单费用由三部分组成，包括：存储空间费用、流量费用和OSS API请求费用。其中流量费用是根据用户使用OSS的下行流量多少收费，上行流量和通过内网访问的流量免费，以下使用OSS的场景中哪一个是不产生OSS流量费用的？",
     "options": [
       "A.在阿里云ECS上静态网站直接引用了OSS中的图片，该网站来自公网的访问量是每天1000次",
@@ -4543,7 +4543,7 @@ export const questions: Question[] = [
   },
   {
     "id": 325,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS里存储的文件可以进行分享和下载，当文件所在的Bucket的读写权限为“私有”时，OSS分享链接采用的安全机制是<strong><strong>__</strong></strong>。",
     "options": [
       "A.在管理控制台中获取文件访问URL时设置分享链接的访问密码，访客下载文件时凭密码访问",
@@ -4557,7 +4557,7 @@ export const questions: Question[] = [
   },
   {
     "id": 326,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云负载均衡SLB实例中的后端服务器ECS实例需要设置权重，可以给对外服务能力更强的ECS实例设置更大的权重，这些ECS实例就会有机会处理更多的访问请求。在提供稳定服务的同时，充分的利用了已有资源。如果将一台ECS实例的权重设置为0，以下说法正确的是<strong>____</strong>。",
     "options": [
       "A.该ECS实例不会再得到负载均衡SLB实例分发的外部访问请求",
@@ -4571,7 +4571,7 @@ export const questions: Question[] = [
   },
   {
     "id": 327,
-    "type": "单选题",
+    "type": "single",
     "title": "您需要进行阿里云的云服务器ECS实例的系统盘更换操作之前,无需停止ECS实例。系统盘更换之后,ECS实例数据盘的数据不会受到影响。",
     "options": [
       "A.正确",
@@ -4583,7 +4583,7 @@ export const questions: Question[] = [
   },
   {
     "id": 328,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的弹性伸缩主要可以提供的功能，下面说法错误的是？",
     "options": [
       "A.根据客户业务需求横向扩展ECS实例的容量，即自动增加和减少ECS实例，数量是有限制的。",
@@ -4597,7 +4597,7 @@ export const questions: Question[] = [
   },
   {
     "id": 329,
-    "type": "单选题",
+    "type": "single",
     "title": "云监控的http提交指令是哪一个？",
     "options": [
       "A.post",
@@ -4611,7 +4611,7 @@ export const questions: Question[] = [
   },
   {
     "id": 330,
-    "type": "单选题",
+    "type": "single",
     "title": "下面哪种镜像可以进行复制？",
     "options": [
       "A.自定义镜像",
@@ -4625,7 +4625,7 @@ export const questions: Question[] = [
   },
   {
     "id": 331,
-    "type": "单选题",
+    "type": "single",
     "title": "F公司新推出一款手机APP，将安装包链接挂在公司的官网（基于云服务器ECS实例）进行下载（安装包大小：6Mb），上线前两个月下载速度还能接受。 自从上周公司在CCTV做了一次广告后，下载量持续爆增，不仅用户体验下降了，官网ECS实例的带宽成本也急剧上升。F公司可以选择阿里云的<strong>____</strong>产品组合，同时解决下载速度和带宽成本的问题。",
     "options": [
       "A.对象存储OSS和内容分发网络CDN",
@@ -4639,7 +4639,7 @@ export const questions: Question[] = [
   },
   {
     "id": 332,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云购买了一台云服务器ECS实例，部署好Python环境后，通过<strong><strong>___</strong></strong>能最简单快捷的监控Python进程是否持续运行，当进程不存在时发出报警信息。",
     "options": [
       "A.自己写脚本监控",
@@ -4653,7 +4653,7 @@ export const questions: Question[] = [
   },
   {
     "id": 333,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾<strong>____</strong>是通过领先的行为收集技术和机器学习模型，解决用户的WEB应用和手机APP的账号、活动、支付等关键业务环节存在的欺诈威胁，最终实现降低企业损失。比如:帮助客户发现代金券套现行为，恶意刷单行为、恶意注册骗取新用户奖励的行为等。",
     "options": [
       "A.态势感知",
@@ -4667,7 +4667,7 @@ export const questions: Question[] = [
   },
   {
     "id": 334,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云DDoS高防IP时，CNAME配置非常简单，只需要配一条DNS记录就可以启用。",
     "options": [
       "A.正确",
@@ -4679,7 +4679,7 @@ export const questions: Question[] = [
   },
   {
     "id": 335,
-    "type": "单选题",
+    "type": "single",
     "title": "在阿里云的云盾的网络防护体系中，有一种服务默认为所有客户开通，可提供最高5G以下的小规模DDoS防御功能。该项服务的名称是<strong>____</strong>。",
     "options": [
       "A.态势感知",
@@ -4693,7 +4693,7 @@ export const questions: Question[] = [
   },
   {
     "id": 336,
-    "type": "单选题",
+    "type": "single",
     "title": "交换机，是组成 VPC 网络的基础网络设备。它可以连接不同的云产品实例。在 VPC 网络内创建云产品实例的时候，必须指定云产品实例所在的交换机。下面关于交换机说法错误的是?",
     "options": [
       "A.VPC 的交换机，是一个 3 层交换机，不支持 2 层广播和组播;",
@@ -4708,7 +4708,7 @@ export const questions: Question[] = [
   },
   {
     "id": 337,
-    "type": "单选题",
+    "type": "single",
     "title": "BGP(边界网关协议)主要用于互联网AS(自治系统)之间的互联，BGP的最主要功能在于控制路由的传播和选择最好的路由，BGP线路可有效避免不同运营商之间网络访问慢的问题。",
     "options": [
       "A.正确",
@@ -4720,7 +4720,7 @@ export const questions: Question[] = [
   },
   {
     "id": 338,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling) 的一个伸缩活动在12：00执行完成，设置的冷却时间是15分钟。假如这时用户停用再启用伸缩组，在12：05伸缩组完成启动，如果在12：10云监控触发伸缩活动，当前伸缩组将如何处理该请求？",
     "options": [
       "A.接受执行该请求，无需等待",
@@ -4734,7 +4734,7 @@ export const questions: Question[] = [
   },
   {
     "id": 339,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾加密服务通过在阿里云上使用经国家密码管理局检测认证的硬件密码机，帮助用户满足数据安全方面的监管合规要求，保护云上业务数据的隐私性和机密性。管理云盾加密服务的密钥时，必须通过<strong><strong>___</strong></strong>方式的认证。",
     "options": [
       "A.身份卡(USB Key)",
@@ -4748,7 +4748,7 @@ export const questions: Question[] = [
   },
   {
     "id": 340,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云提供的安全产品云盾涵盖从网络、主机、应用、数据、图片识别、混合云到数字证书和业务风控、保险等多个子产品，遇到不同的风险时选择合适的产品可以做到事半功倍。当客户服务器经常遭受大流量的攻击，导致服务器无法正常对外提供服务时，选择<strong>____</strong>产品进行防护最合适。",
     "options": [
       "A.安全众测",
@@ -4764,7 +4764,7 @@ export const questions: Question[] = [
   },
   {
     "id": 341,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，针对7层（HTTP协议）服务，由于采取替换HTTP头文件IP地址的方式来进行请求转发，所以后端云服务器ECS实例看到的访问IP是负载均衡SLB实例的IP地址，而不是实际来访者的真实IP。",
     "options": [
       "A.对",
@@ -4776,7 +4776,7 @@ export const questions: Question[] = [
   },
   {
     "id": 342,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云弹性伸缩（AutoScaling）时如果在伸缩组中指定了RDS实例，伸缩组会自动将加入伸缩组的ECS实例的内网IP添加到指定的RDS实例的访问白名单当中，下面说法错误的是?",
     "options": [
       "A.如果ECS实例无法加入到RDS访问白名单，该ECS实例不会被回滚操作并释放",
@@ -4790,7 +4790,7 @@ export const questions: Question[] = [
   },
   {
     "id": 343,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾的先知计划，是调动众多网络安全专家的力量一起维护互联网平台和业务的安全，降低客户的安全损失。先知计划为企业提供的是<strong>____</strong>服务。",
     "options": [
       "A.为企业收集情报（漏洞）",
@@ -4804,7 +4804,7 @@ export const questions: Question[] = [
   },
   {
     "id": 344,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算在极大地方便用户和企业廉价使用存储资源、软件资源、计算资源的同时,同样也面临着安全方面的挑战。上云并不会增加安全风险,同时云计算厂商也不会帮助客户解决一切安全问题,需要用户积极参予。目前普遍遵循“三不变”原则,不包括以下哪项？",
     "options": [
       "A.数据归属关系不变",
@@ -4818,7 +4818,7 @@ export const questions: Question[] = [
   },
   {
     "id": 345,
-    "type": "单选题",
+    "type": "single",
     "title": "A 公司管理员小牛近期发现公司的网站访问速度越来越慢，偶尔会出现无法打开的现象，从 web 日志中发现了数据被恶意爬取的行为，且并发访问量较大，这种情况下可以使用阿里云的<strong>____</strong>安全产品进行防护。",
     "options": [
       "A.安全管家",
@@ -4832,7 +4832,7 @@ export const questions: Question[] = [
   },
   {
     "id": 346,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾先知计划的目的是帮助企业建立私有的<strong>____</strong>中心，以较低的成本发现企业自身企业的安全风险，并得到解决方案。",
     "options": [
       "A.私有数据中心",
@@ -4846,7 +4846,7 @@ export const questions: Question[] = [
   },
   {
     "id": 347,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾先知计划的目的是帮助企业建立私有的什么中心？",
     "options": [
       "A.应急响应中心",
@@ -4860,7 +4860,7 @@ export const questions: Question[] = [
   },
   {
     "id": 348,
-    "type": "单选题",
+    "type": "single",
     "title": "对于阿里云态势感知典型的功能点描述正确的是<strong>____</strong>。",
     "options": [
       "A.恶意进程查杀",
@@ -4875,7 +4875,7 @@ export const questions: Question[] = [
   },
   {
     "id": 349,
-    "type": "单选题",
+    "type": "single",
     "title": "用户在使用阿里云云服务器ECS的时候，经常收到密码被暴力破解的报警信息，虽然都没有成功，但是很担心某一天会被攻破。为了提升系统的安全性，并不再接收到该ECS实例的密码暴力破解报警信息，以下<strong><strong>_</strong></strong>是最安全的措施。",
     "options": [
       "A.关闭云监控的异常报警机制",
@@ -4889,7 +4889,7 @@ export const questions: Question[] = [
   },
   {
     "id": 350,
-    "type": "单选题",
+    "type": "single",
     "title": "以下<strong>____</strong>安全事件是不能由阿里云态势感知集中管理的。",
     "options": [
       "A.发现主机有异常进程",
@@ -4903,7 +4903,7 @@ export const questions: Question[] = [
   },
   {
     "id": 351,
-    "type": "单选题",
+    "type": "single",
     "title": "伸缩活动的生命周期为：判断伸缩组的健康状态和边界条件 步骤与 启动 cooldown 步骤之间的所有活动。手工加入既有的ECS实例，还包括A:判断ECS实例的状态、类型；B:分配ActivityId和执行伸缩活动；C:修改Total Capacity；D:加入ECS实例等活动，这些活动正确的顺序是<strong><strong>_</strong></strong>。",
     "options": [
       "A.ABDC",
@@ -4917,7 +4917,7 @@ export const questions: Question[] = [
   },
   {
     "id": 352,
-    "type": "单选题",
+    "type": "single",
     "title": "在使用阿里云的公网IP的负载均衡SLB实例的四层（TCP协议）转发时，后端云服务器池中的ECS实例不能直接向该ECS实例所在的负载均衡SLB实例的公网IP发送请求。",
     "options": [
       "A.对",
@@ -4929,7 +4929,7 @@ export const questions: Question[] = [
   },
   {
     "id": 353,
-    "type": "单选题",
+    "type": "single",
     "title": "在同一个阿里云的专有网络VPC内，不同的虚拟交换机中的云服务器ECS实例是默认内网是不互通的，需要通过添加路由的方式实现互相访问。",
     "options": [
       "A.对",
@@ -4941,7 +4941,7 @@ export const questions: Question[] = [
   },
   {
     "id": 354,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云专有网络VPC使用了隧道技术，每个VPC都有一个独立的隧道号，一个隧道号对应着一张虚拟化网络，达到与传统VLAN方式类似的隔离效果。",
     "options": [
       "A.对",
@@ -4953,7 +4953,7 @@ export const questions: Question[] = [
   },
   {
     "id": 355,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN优化功能可以提高CDN缓存的命中率，降低带宽成本，但是会增加源站的安全风险，用户应该在应用层安全防护上多加关注。",
     "options": [
       "A.对",
@@ -4965,7 +4965,7 @@ export const questions: Question[] = [
   },
   {
     "id": 356,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在已经创建好的阿里云的云服务器ECS实例中进行了更改网卡mac地址的操作，可能会导致网络不通的问题。",
     "options": [
       "A.对",
@@ -4977,7 +4977,7 @@ export const questions: Question[] = [
   },
   {
     "id": 357,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS上的文件可以直接通过阿里云内容分发网络CDN进行加速，加速成功后可以提升文件的访问速度，同时可以节约OSS的流量成本。",
     "options": [
       "A.对",
@@ -4989,7 +4989,7 @@ export const questions: Question[] = [
   },
   {
     "id": 358,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS可以用于进行海量文件的存储，但是单个bucket下保存的文件数量是有限的，最大只能是65535个。",
     "options": [
       "A.对",
@@ -5001,7 +5001,7 @@ export const questions: Question[] = [
   },
   {
     "id": 359,
-    "type": "单选题",
+    "type": "single",
     "title": "某期货交易网站，使用阿里云负载均衡SLB服务。由于期货交易对于负载有高敏感性，高频的健康检查有可能会对用户的正常访问带来影响。该网站可以通过以下方式减少健康检查对正常业务的影响：降低健康检查的频率，增大健康检查间隔。",
     "options": [
       "A.对",
@@ -5013,7 +5013,7 @@ export const questions: Question[] = [
   },
   {
     "id": 360,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾数据风控服务可以输出风险评估报告，实时呈现今日、昨日及特定时间段的风险情况，便捷跟踪、掌握风险防控情况。",
     "options": [
       "A.对",
@@ -5025,7 +5025,7 @@ export const questions: Question[] = [
   },
   {
     "id": 361,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾的内容安全（原名：绿网）产品提供网站内容和图片的合规自动检查功能，支持基于HTTP协议的静态和动态网站。",
     "options": [
       "A.对",
@@ -5037,7 +5037,7 @@ export const questions: Question[] = [
   },
   {
     "id": 362,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云上安全运维最佳实践中，推荐客户使用云服务器ECS实例的安全组将ECS实例分组管理，结合堡垒机和VPN提供安全的远程运维。在阿里云的云市场中有多种堡垒机和VPN的成熟方案可以选择。",
     "options": [
       "A.对",
@@ -5049,7 +5049,7 @@ export const questions: Question[] = [
   },
   {
     "id": 363,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算服务可以提供可靠性非常高的数据存储能力，比如阿里云的对象存储（Object Storage Service，简称OSS）的数据可靠性就不低于99.99999999%。云计算的数据可靠性完全是由于磁盘采用了RAID 0+1 的冗余技术实现的。",
     "options": [
       "A.对",
@@ -5061,7 +5061,7 @@ export const questions: Question[] = [
   },
   {
     "id": 364,
-    "type": "单选题",
+    "type": "single",
     "title": "在OSS服务创建了存储空间之后，用户可以上传任意类型文件到存储空间中，OSS服务所有元素都是用文件形式来存储。",
     "options": [
       "A.对",
@@ -5073,7 +5073,7 @@ export const questions: Question[] = [
   },
   {
     "id": 365,
-    "type": "单选题",
+    "type": "single",
     "title": "加入到阿里云的云盾先知计划的安全专家100%通过了支付宝实名认证。",
     "options": [
       "A.对",
@@ -5085,7 +5085,7 @@ export const questions: Question[] = [
   },
   {
     "id": 366,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾的安全管家包含端口检测、异地登录提醒、密码暴力破解、WebShell检测服务。",
     "options": [
       "A.对",
@@ -5097,7 +5097,7 @@ export const questions: Question[] = [
   },
   {
     "id": 367,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB实例会检查后端云服务器ECS实例的健康状态，对于异常状态的云服务器ECS实例，将会移出后端云服务器池，并新建一个云服务器ECS实例添加到后端服务器池中来，从而解决了单台云服务器ECS实例的单点问题，同时提高了应用的整体服务能力。",
     "options": [
       "A.对",
@@ -5109,7 +5109,7 @@ export const questions: Question[] = [
   },
   {
     "id": 368,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的linux操作系统的云服务器ECS实例中开启了NetWorkManger服务之后，对该云服务器ECS实例的所有网络连接服务都没有任何影响。",
     "options": [
       "A.对",
@@ -5121,7 +5121,7 @@ export const questions: Question[] = [
   },
   {
     "id": 369,
-    "type": "单选题",
+    "type": "single",
     "title": "在创建阿里云的专有网络VPC时，用户需要以CIDRBlock的形式指定专有网络VPC内使用的私网网段。专有网络VPC创建成功之后，CIDRBlock可以进行修改。",
     "options": [
       "A.对",
@@ -5133,7 +5133,7 @@ export const questions: Question[] = [
   },
   {
     "id": 370,
-    "type": "单选题",
+    "type": "single",
     "title": "客户小王准备建立一个静态的网站，想基于阿里云提供的多线BGP能力为客户提供网站的快速访问，小王可以仅通过阿里云对象存储OSS这个产品就能实现。",
     "options": [
       "A.对",
@@ -5145,7 +5145,7 @@ export const questions: Question[] = [
   },
   {
     "id": 371,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS的Bucket不支持重命名。如果有变更Bucket名称的需求，可以先创建一个新的Bucket，然后用COPY Object的方式将原Bucket下的文件复制到新Bucket。",
     "options": [
       "A.对",
@@ -5157,7 +5157,7 @@ export const questions: Question[] = [
   },
   {
     "id": 372,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS与云服务器ECS实例结合，可以实现一个完整的动静分离的网站，静态页面放在OSS上提供快速访问能有效降低ECS实例的负载。",
     "options": [
       "A.对",
@@ -5169,7 +5169,7 @@ export const questions: Question[] = [
   },
   {
     "id": 373,
-    "type": "单选题",
+    "type": "single",
     "title": "由于阿里云提供了对象存储OSS的海量存储服务，因此在任何场景下都可以使用OSS作为数据的存储服务，包括结构化的数据和非结构化的数据的存储。",
     "options": [
       "A.对",
@@ -5181,7 +5181,7 @@ export const questions: Question[] = [
   },
   {
     "id": 374,
-    "type": "单选题",
+    "type": "single",
     "title": "由于阿里云提供了云数据库RDS的服务，因此在阿里云的云服务器ECS实例上不支持用户自行进行数据库的部署。",
     "options": [
       "A.对",
@@ -5193,7 +5193,7 @@ export const questions: Question[] = [
   },
   {
     "id": 375,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在已经创建好的云服务器ECS实例进行了更改网卡mac地址的操作，可能会导致网络不通的问题。",
     "options": [
       "A.对",
@@ -5205,7 +5205,7 @@ export const questions: Question[] = [
   },
   {
     "id": 376,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾的安骑士提供了服务器密码暴力破解防护，用户再也不用设置难记的复杂密码了。",
     "options": [
       "A.对",
@@ -5217,7 +5217,7 @@ export const questions: Question[] = [
   },
   {
     "id": 377,
-    "type": "单选题",
+    "type": "single",
     "title": "您需要进行阿里云的云服务器ECS实例的系统盘更换操作之前，无需停止ECS实例。系统盘更换之后，ECS实例数据盘的数据不会受到影响。",
     "options": [
       "A.对",
@@ -5229,7 +5229,7 @@ export const questions: Question[] = [
   },
   {
     "id": 378,
-    "type": "单选题",
+    "type": "single",
     "title": "开通阿里绿网后，对用户阿里云的服务器上公开对外发布的网页内容进行实时检测，支持针对URL进行内容屏蔽。",
     "options": [
       "A.对",
@@ -5241,7 +5241,7 @@ export const questions: Question[] = [
   },
   {
     "id": 379,
-    "type": "单选题",
+    "type": "single",
     "title": "分布式计算是把一个任务分成许多小的部分，然后把这些部分分配给多个计算节点进行处理，最后把这些计算结果综合起来得到最终的结果。",
     "options": [
       "A.对",
@@ -5253,7 +5253,7 @@ export const questions: Question[] = [
   },
   {
     "id": 380,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB、云服务器ECS以及弹性伸缩（Auto Scaling）配合使用时，同一个负载均衡SLB实例的后端服务器池中可以包含多个伸缩组。",
     "options": [
       "A.对",
@@ -5265,7 +5265,7 @@ export const questions: Question[] = [
   },
   {
     "id": 381,
-    "type": "单选题",
+    "type": "single",
     "title": "某快递公司开发一款APP，供分布在全国各地的20万名快递员使用，随时接收发件请求，查看总部发来的内部公告及其它的共享信息（上述信息为敏感数据），服务器端平台建在阿里云上。为了提高快递员的访问速度，该公司可以选用阿里云内容分发网络CDN服务，其中敏感数据的访问采用URL鉴权的方法可以有效解决非授权访问，在安全的基础上实现加速访问。",
     "options": [
       "A.对",
@@ -5277,7 +5277,7 @@ export const questions: Question[] = [
   },
   {
     "id": 382,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）中的伸缩活动有ECS实例加入伸缩组失败时，需要保持伸缩活动级的事务完整性，而非ECS实例事务的完整性，即需要进行伸缩活动级的回滚。比如当某伸缩活动要创建并添加20台ECS实例到伸缩组中，但只有19台加入成功时，整个伸缩活动会回退，加入到伸缩组中的19台机器会移出并释放。",
     "options": [
       "A.对",
@@ -5289,7 +5289,7 @@ export const questions: Question[] = [
   },
   {
     "id": 383,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾安骑士具有“密码暴力破解”防护功能，因此用户如果开启了安骑士，就没有必要定期修改云服务器ECS实例的管理员密码，也没有必要设置复杂密码。",
     "options": [
       "A.对",
@@ -5301,7 +5301,7 @@ export const questions: Question[] = [
   },
   {
     "id": 384,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。OSS采用多副本数据冗余机制，当底层硬件出现故障时OSS服务一定会短暂中断，最快在2分钟内修复。",
     "options": [
       "A.对",
@@ -5313,7 +5313,7 @@ export const questions: Question[] = [
   },
   {
     "id": 385,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。通过阿里云的管理控制台或OpenAPI上传文件到OSS，不收取任何流量费。",
     "options": [
       "A.对",
@@ -5325,7 +5325,7 @@ export const questions: Question[] = [
   },
   {
     "id": 386,
-    "type": "单选题",
+    "type": "single",
     "title": "镜像是阿里云的云服务器ECS实例的运行环境的模版，可以包括操作系统和预装软件。",
     "options": [
       "A.对",
@@ -5337,7 +5337,7 @@ export const questions: Question[] = [
   },
   {
     "id": 387,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS产品支持的应用非常广泛，可以与其他的阿里云的产品进行搭配提供网站、存储、视频直播、物联网等丰富的应用解决方案。",
     "options": [
       "A.对",
@@ -5349,7 +5349,7 @@ export const questions: Question[] = [
   },
   {
     "id": 388,
-    "type": "单选题",
+    "type": "single",
     "title": "用户可以使用阿里云对象存储OSS图片处理服务（Image Service）对.JPG的图片进行缩放和添加水印。",
     "options": [
       "A.对",
@@ -5361,7 +5361,7 @@ export const questions: Question[] = [
   },
   {
     "id": 389,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB可以把用户请求分发给后端的云服务器ECS实例，这些云服务器ECS实例的规格配置必须相同。",
     "options": [
       "A.对",
@@ -5373,7 +5373,7 @@ export const questions: Question[] = [
   },
   {
     "id": 390,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB实例默认会把来自同一客户端的访问请求分发到同一台后端云服务器ECS实例上进行处理，无需额外的配置。",
     "options": [
       "A.对",
@@ -5385,7 +5385,7 @@ export const questions: Question[] = [
   },
   {
     "id": 391,
-    "type": "单选题",
+    "type": "single",
     "title": "用户可以卸载阿里云的云服务器ECS实例上的云盾安骑士客户端，在需要的时候可以再次安装。",
     "options": [
       "A.对",
@@ -5397,7 +5397,7 @@ export const questions: Question[] = [
   },
   {
     "id": 392,
-    "type": "单选题",
+    "type": "single",
     "title": "您在开通阿里云的云服务器ECS实例的同时，阿里云会免费为您开通云盾的基础防护功能，包括基础DDoS攻击等服务，来保证您的ECS实例的网络安全得到基本的保护。",
     "options": [
       "A.对",
@@ -5409,7 +5409,7 @@ export const questions: Question[] = [
   },
   {
     "id": 393,
-    "type": "单选题",
+    "type": "single",
     "title": "客户小赵想使用阿里云对象存储OSS实现公司内部文件共享（100人），但是小赵没有任何技术开发经验，小赵可以选择在阿里云云市场下载支持OSS的FTP工具来实现。",
     "options": [
       "A.对",
@@ -5421,7 +5421,7 @@ export const questions: Question[] = [
   },
   {
     "id": 394,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云对象存储OSS保存云服务器ECS实例上的业务系统日志，可以有效降低存储成本。如果ECS实例和OSS在同一地域，只能通过公网地址传输数据。",
     "options": [
       "A.对",
@@ -5433,7 +5433,7 @@ export const questions: Question[] = [
   },
   {
     "id": 395,
-    "type": "单选题",
+    "type": "single",
     "title": "您希望将服务部署在阿里云上，可以通过将业务的模块进行拆分、采用多个低配置的云服务ECS实例结合负载均衡SLB的方案，来提高业务的整体可用性。",
     "options": [
       "A.对",
@@ -5445,7 +5445,7 @@ export const questions: Question[] = [
   },
   {
     "id": 396,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）创建伸缩组时，可以指定配合使用的云数据库RDS实例，伸缩组会自动将ECS实例的内网IP添加到RDS实例的IP白名单中，允许ECS通过内网连接RDS实例。",
     "options": [
       "A.对",
@@ -5457,7 +5457,7 @@ export const questions: Question[] = [
   },
   {
     "id": 397,
-    "type": "单选题",
+    "type": "single",
     "title": "您在开通阿里云的云服务器ECS实例之后，希望通过阿里云提供的管理控制台对该ECS实例的运行情况进行监控，需要开通收费的云监控服务来满足需求。",
     "options": [
       "A.对",
@@ -5469,7 +5469,7 @@ export const questions: Question[] = [
   },
   {
     "id": 398,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN建立并覆盖在承载网之上，由分布在不同区域的边缘节点服务器群组成的分布式网络替代传统以WEB Server为中心的数据传输模式。阿里云CDN支持动态网站加速，用户不需要做动静分离。",
     "options": [
       "A.对",
@@ -5481,7 +5481,7 @@ export const questions: Question[] = [
   },
   {
     "id": 399,
-    "type": "单选题",
+    "type": "single",
     "title": "若您的阿里云的云服务器ECS的实例希望能够和internet直接连通，就一定要开启公网带宽或者绑定EIP。",
     "options": [
       "A.对",
@@ -5493,7 +5493,7 @@ export const questions: Question[] = [
   },
   {
     "id": 400,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾的DDoS防护功能可以保护阿里云机房内的所有云产品，包括：ECS、SLB、RDS、OCS、OSS、ODPS、ADS等。",
     "options": [
       "A.对",
@@ -5505,7 +5505,7 @@ export const questions: Question[] = [
   },
   {
     "id": 401,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾安骑士可以保防阿里云以外的服务器。",
     "options": [
       "A.对",
@@ -5517,7 +5517,7 @@ export const questions: Question[] = [
   },
   {
     "id": 402,
-    "type": "单选题",
+    "type": "single",
     "title": "云盾反欺诈服务（数据风控）可以输出风险评估报告，实时呈现今日、昨日及特定时间段的风险情况，便捷跟踪、掌握风险防控情况。",
     "options": [
       "A.对",
@@ -5529,7 +5529,7 @@ export const questions: Question[] = [
   },
   {
     "id": 403,
-    "type": "单选题",
+    "type": "single",
     "title": "当用户通过ECS Open API进行跨账户的ECS资源访问时，ECS后台向RAM进行权限检查，以确保资源拥有者将相关资源的相应权限授予给了调用者。",
     "options": [
       "A.对",
@@ -5541,7 +5541,7 @@ export const questions: Question[] = [
   },
   {
     "id": 404,
-    "type": "单选题",
+    "type": "single",
     "title": "报警任务名称在用户账号下唯一。如果该报警任务名称已经存在，则用新的值进行替换。",
     "options": [
       "A.对",
@@ -5553,7 +5553,7 @@ export const questions: Question[] = [
   },
   {
     "id": 405,
-    "type": "单选题",
+    "type": "single",
     "title": "对安全组的操作调整，对用户的服务连续性没有影响。",
     "options": [
       "A.对",
@@ -5565,7 +5565,7 @@ export const questions: Question[] = [
   },
   {
     "id": 406,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云CDN不仅支持图片和css文件加速，还支持视频流媒体加速。",
     "options": [
       "A.对",
@@ -5577,7 +5577,7 @@ export const questions: Question[] = [
   },
   {
     "id": 407,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云数据库可以完美兼容Oracle的PL/SQL、数据类型、高级函数、数据字典。",
     "options": [
       "A.对",
@@ -5589,7 +5589,7 @@ export const questions: Question[] = [
   },
   {
     "id": 408,
-    "type": "单选题",
+    "type": "single",
     "title": "无论伸缩组内是否有伸缩活动，都可以停用伸缩组。",
     "options": [
       "A.对",
@@ -5601,7 +5601,7 @@ export const questions: Question[] = [
   },
   {
     "id": 409,
-    "type": "单选题",
+    "type": "single",
     "title": "经典网络的内网网段不支持用户自定义，专有网络用户可自定义内网网段。",
     "options": [
       "A.对",
@@ -5613,7 +5613,7 @@ export const questions: Question[] = [
   },
   {
     "id": 410,
-    "type": "单选题",
+    "type": "single",
     "title": "弹性伸缩一定要搭配负载均衡SLB、云监控才能使用。",
     "options": [
       "A.对",
@@ -5625,7 +5625,7 @@ export const questions: Question[] = [
   },
   {
     "id": 411,
-    "type": "单选题",
+    "type": "single",
     "title": "ECS API调用成功返回的数据格式主要有XML和JSON两种，外部系统可以在请求时传入参数来制定返回的数据格式，默认为JSON格式。",
     "options": [
       "A.对",
@@ -5637,7 +5637,7 @@ export const questions: Question[] = [
   },
   {
     "id": 412,
-    "type": "单选题",
+    "type": "single",
     "title": "动静分离是指将一个网站的动态和静态内容分成两个以上的站点分别承载， 动静分离的网站不利于通过CDN加速。",
     "options": [
       "A.对",
@@ -5649,7 +5649,7 @@ export const questions: Question[] = [
   },
   {
     "id": 413,
-    "type": "单选题",
+    "type": "single",
     "title": "选择阿里云本地磁盘或者本地SSD盘的ECS实例，一旦创建后，不能修改实例规格。",
     "options": [
       "A.对",
@@ -5661,7 +5661,7 @@ export const questions: Question[] = [
   },
   {
     "id": 414,
-    "type": "单选题",
+    "type": "single",
     "title": "不同VPC之间内部网络完全隔离，只能通过对外映射的IP（弹性IP和NAT IP）互联。",
     "options": [
       "A.对",
@@ -5673,7 +5673,7 @@ export const questions: Question[] = [
   },
   {
     "id": 415,
-    "type": "单选题",
+    "type": "single",
     "title": "对于阿里云OSS服务来说，每个Bucket中只能存放10000个Object。",
     "options": [
       "A.对",
@@ -5685,7 +5685,7 @@ export const questions: Question[] = [
   },
   {
     "id": 416,
-    "type": "单选题",
+    "type": "single",
     "title": "某客户的网站在原服务商做过ICP备案，拥有了自己的备案号，现在他想将网站迁移至阿里云ECS，必须在阿里云进行一次备案接入操作。",
     "options": [
       "A.对",
@@ -5697,7 +5697,7 @@ export const questions: Question[] = [
   },
   {
     "id": 417,
-    "type": "单选题",
+    "type": "single",
     "title": "ECS实例不支持强制停止，强制停止等同于断电，可能会丢失ECS实例操作系统中所有磁盘的数据。",
     "options": [
       "A.对",
@@ -5709,7 +5709,7 @@ export const questions: Question[] = [
   },
   {
     "id": 418,
-    "type": "单选题",
+    "type": "single",
     "title": "对ECS API接口调用是通过向ECS API的服务端地址发送HTTP GET请求，并按照接口说明在请求中加入相应请求参数来完成的。",
     "options": [
       "A.对",
@@ -5721,7 +5721,7 @@ export const questions: Question[] = [
   },
   {
     "id": 419,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的linux操作系统的云服务器ECS实例中开启了NetWorkManager服务之后，对该云服务器ECS实例的所有网络连接服务都没有任何影响。",
     "options": [
       "A.对",
@@ -5733,7 +5733,7 @@ export const questions: Question[] = [
   },
   {
     "id": 420,
-    "type": "单选题",
+    "type": "single",
     "title": "对阿里云的云服务器ECS实例进行停止操作之后，ECS实例将停止工作，从而中断您的业务，需谨慎执行。由于停止操作之后ECS实例处于停止状态，阿里云将不再对该ECS实例进行收费。",
     "options": [
       "A.对",
@@ -5745,7 +5745,7 @@ export const questions: Question[] = [
   },
   {
     "id": 421,
-    "type": "单选题",
+    "type": "single",
     "title": "专有网络类型的ECS实例只能在创建时指定，这类实例可以属于多个虚拟交换机。",
     "options": [
       "A.对",
@@ -5757,7 +5757,7 @@ export const questions: Question[] = [
   },
   {
     "id": 422,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在Linux操作系统的阿里云的云服务器ECS实例中开启SELINUX服务，该云服务器ECS实例的监控功能不会受到任何影响。",
     "options": [
       "A.对",
@@ -5769,7 +5769,7 @@ export const questions: Question[] = [
   },
   {
     "id": 423,
-    "type": "单选题",
+    "type": "single",
     "title": "基于阿里云提供的云服务器ECS实例，可以快速完成您的系统部署来提高效率。同时，阿里云提供的多线BGP接入可以提高您在全国各地的客户访问质量。",
     "options": [
       "A.对",
@@ -5781,7 +5781,7 @@ export const questions: Question[] = [
   },
   {
     "id": 424,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的Linux操作系统的云服务器ECS实例中可以随意更改系统根目录的目录权限，不会对云服务器ECS实例的所有服务产生任何影响。",
     "options": [
       "A.对",
@@ -5793,7 +5793,7 @@ export const questions: Question[] = [
   },
   {
     "id": 425,
-    "type": "单选题",
+    "type": "single",
     "title": "您如果更改了阿里云的云服务器ECS实例的网卡的MAC地址，对该ECS实例的网络访问没有任何影响。",
     "options": [
       "A.对",
@@ -5805,7 +5805,7 @@ export const questions: Question[] = [
   },
   {
     "id": 426,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的Windows系统的云服务器ECS实例中不建议删除或者重命名administrator账户，如果进行以上操作可能会引起在阿里云的管理控制台上修改密码失效。",
     "options": [
       "A.对",
@@ -5817,7 +5817,7 @@ export const questions: Question[] = [
   },
   {
     "id": 427,
-    "type": "单选题",
+    "type": "single",
     "title": "如果在阿里云的Linux系统的云服务器ECS实例中执行fdisk l命令，发现没有/dev/xvdb，/dev/xvdc，…，/dev/xvdz的设备，则表明该ECS实例无数据盘。",
     "options": [
       "A.对",
@@ -5829,7 +5829,7 @@ export const questions: Question[] = [
   },
   {
     "id": 428,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS实例的Linux系统内核是经过优化的，为了不影响您的云服务器ECS实例的正常使用，不建议您自行进行Linux内核的编译。",
     "options": [
       "A.对",
@@ -5841,7 +5841,7 @@ export const questions: Question[] = [
   },
   {
     "id": 429,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）时，为了应对一些复杂的场景，可以把多种伸缩模式混合使用，比如对于同一个伸缩组可以同时设置固定数量模式、定时模式以及动态模式。",
     "options": [
       "A.对",
@@ -5853,7 +5853,7 @@ export const questions: Question[] = [
   },
   {
     "id": 430,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS的同一个Bucket中的文件不能重名，但是支持对文件进行重命名。",
     "options": [
       "A.对",
@@ -5865,7 +5865,7 @@ export const questions: Question[] = [
   },
   {
     "id": 431,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS支持子帐号，并且可以为每个子帐号分配不同Bucket的使用权限。",
     "options": [
       "A.对",
@@ -5877,7 +5877,7 @@ export const questions: Question[] = [
   },
   {
     "id": 432,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS的用户可以直接将保存在OSS上的高清电影文件通过阿里云CDN分发，在不需要其它阿里云的产品配合的情况下，可实现在线视频直播网站。",
     "options": [
       "A.对",
@@ -5889,7 +5889,7 @@ export const questions: Question[] = [
   },
   {
     "id": 433,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS自身提供的了 “IP黑白名单”功能，当发现有恶意IP频繁访问OSS时，可以直接将IP拉黑，屏蔽访问。",
     "options": [
       "A.对",
@@ -5901,7 +5901,7 @@ export const questions: Question[] = [
   },
   {
     "id": 434,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云提供的海量、安全、低成本、高可靠的云存储服务。如果访问OSS文件的并发用户数和流量特别大，可以使用负载均衡SLB进行访问加速。",
     "options": [
       "A.对",
@@ -5913,7 +5913,7 @@ export const questions: Question[] = [
   },
   {
     "id": 435,
-    "type": "单选题",
+    "type": "single",
     "title": "如果用户更改负载均衡SLB服务的相关配置策略，可以通过SLB控制台进行更改，但更改策略会导致负载均衡SLB服务地址（IP）的变更。",
     "options": [
       "A.对",
@@ -5925,7 +5925,7 @@ export const questions: Question[] = [
   },
   {
     "id": 436,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB支持同一地域（Region）跨可用区（Zone）容灾，结合DNS还可以支持跨地域（Region）的容灾。",
     "options": [
       "A.对",
@@ -5937,7 +5937,7 @@ export const questions: Question[] = [
   },
   {
     "id": 437,
-    "type": "单选题",
+    "type": "single",
     "title": "负载均衡集群采用LVS和Tengine实现，其中4层监听（TCP/UDP）经过LVS后直接到达后端服务器，而7层监听（HTTP/HTTPS）经过LVS和Tengine最后达到后端服务器。7层性能没有4层性能好。",
     "options": [
       "A.对",
@@ -5949,7 +5949,7 @@ export const questions: Question[] = [
   },
   {
     "id": 438,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云专有网络VPC内部存在虚拟交换机和虚拟路由器，可以像传统网络环境一样划分子网，每个子网内的云服务器ECS实例之间使用同一个虚拟交换机互联，不同子网间的ECS实例之间使用虚拟路由器互联。",
     "options": [
       "A.对",
@@ -5961,7 +5961,7 @@ export const questions: Question[] = [
   },
   {
     "id": 439,
-    "type": "单选题",
+    "type": "single",
     "title": "路由表是指阿里云专有网络VPC中的路由器上管理路由条目的列表，VPC可以支持任意创建和删除路由表。",
     "options": [
       "A.对",
@@ -5973,7 +5973,7 @@ export const questions: Question[] = [
   },
   {
     "id": 440,
-    "type": "单选题",
+    "type": "single",
     "title": "路由器是阿里云专有网络VPC的枢纽，可以连接本VPC内的各个交换机，但不是连接本VPC与其他网络的网关设备。",
     "options": [
       "A.对",
@@ -5985,7 +5985,7 @@ export const questions: Question[] = [
   },
   {
     "id": 441,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云专有网络VPC和VPN是不同的概念。专有网络VPC是一个二层隔离的网络环境；VPN是一种远程访问技术，利用公网架设虚拟专用网络。",
     "options": [
       "A.对",
@@ -5997,7 +5997,7 @@ export const questions: Question[] = [
   },
   {
     "id": 442,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云监控除了可以为云服务器ECS实例提供安全有效的监控服务外，还能够监控客户放在传统机房的服务器上的HTTP站点，只是配置比较复杂，必须自己开发脚本进行数据收集。",
     "options": [
       "A.对",
@@ -6009,7 +6009,7 @@ export const questions: Question[] = [
   },
   {
     "id": 443,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾DDoS基础防护提供最高5G的默认DDoS防护能力，阿里云在此基础上，推出了安全信誉防护联盟计划，如果安全信誉分较高，可进一步提升DDoS防护能力。",
     "options": [
       "A.对",
@@ -6021,7 +6021,7 @@ export const questions: Question[] = [
   },
   {
     "id": 444,
-    "type": "单选题",
+    "type": "single",
     "title": "在安全性方面，为了防止源站信息被恶意访问，阿里云内容分发网络CDN同时提供了“IP黑名单”和“Refer黑名单”、“Refer白名单”功能。",
     "options": [
       "A.对",
@@ -6033,7 +6033,7 @@ export const questions: Question[] = [
   },
   {
     "id": 445,
-    "type": "单选题",
+    "type": "single",
     "title": "未经用户允许阿里云的云盾先知计划不会对外公开任何漏洞标题及细节。",
     "options": [
       "A.对",
@@ -6045,7 +6045,7 @@ export const questions: Question[] = [
   },
   {
     "id": 446,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾先知计划共享了众多实名认证过的安全专家和第三方安全公司的能力，提供服务前必须首先签署用户保密协议。",
     "options": [
       "A.对",
@@ -6057,7 +6057,7 @@ export const questions: Question[] = [
   },
   {
     "id": 447,
-    "type": "单选题",
+    "type": "single",
     "title": "由于阿里云提供了云数据库RDS的服务，因此阿里云不支持用户在云服务器ECS实例上自行部署数据库。",
     "options": [
       "A.对",
@@ -6069,7 +6069,7 @@ export const questions: Question[] = [
   },
   {
     "id": 448,
-    "type": "单选题",
+    "type": "single",
     "title": "对阿里云的云服务器ECS实例进行磁盘快照回滚操作后，在没有任何额外操作的情况下，该磁盘上回滚前的原有数据也可以恢复。",
     "options": [
       "A.对",
@@ -6081,7 +6081,7 @@ export const questions: Question[] = [
   },
   {
     "id": 449,
-    "type": "单选题",
+    "type": "single",
     "title": "您创建的处于阿里云的不同可用区内的云服务器ECS实例之间内网一定不互通。",
     "options": [
       "A.对",
@@ -6093,7 +6093,7 @@ export const questions: Question[] = [
   },
   {
     "id": 450,
-    "type": "单选题",
+    "type": "single",
     "title": "您创建阿里云的云服务器ECS实例时，如果系统盘选择了SSD云盘后，可以在线修改系统盘的类型。",
     "options": [
       "A.对",
@@ -6105,7 +6105,7 @@ export const questions: Question[] = [
   },
   {
     "id": 451,
-    "type": "单选题",
+    "type": "single",
     "title": "您注册好阿里云账号后，可以单独开通阿里云的云监控服务，云监控服务可以帮助您收集并获取云服务器ECS实例的多项监控指标，还可以针对各项指标设置警报，提升您的监控及运维效率。",
     "options": [
       "A.对",
@@ -6117,7 +6117,7 @@ export const questions: Question[] = [
   },
   {
     "id": 452,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）中的伸缩组是指部署了相同应用的云服务器ECS实例的集合，其中的ECS实例既可以是包年包月的，也可以是按量付费的。对于业务量突变的场景，按量计费的ECS实例会在满足业务需求的同时尽可能的节省成本；对于用户已有的包年包月的闲置的ECS实例，也可以手工添加到满足一定条件的伸缩组，能充分利用闲置资源。",
     "options": [
       "A.对",
@@ -6129,7 +6129,7 @@ export const questions: Question[] = [
   },
   {
     "id": 453,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）时，为了应对一些复杂的场景，可以把多种伸缩模式混合使用，比如对于同一个伸缩组可以同时设置固定数量模式、定时模式以及动态模式。",
     "options": [
       "A.对",
@@ -6141,7 +6141,7 @@ export const questions: Question[] = [
   },
   {
     "id": 454,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）中，当进行弹性收缩时，对于运行在需要移出伸缩组的ECS实例上的应用，如果简单的中断服务，会影响到客户体验。如果需要确保在ECS实例上任务处理完成才释放该实例，弹性伸缩提供了解决方案：在创建ECS实例使用的镜像中存放一个包含处理逻辑的脚本，并设置成在ECS实例操作系统关机时自动执行该脚本。",
     "options": [
       "A.对",
@@ -6153,7 +6153,7 @@ export const questions: Question[] = [
   },
   {
     "id": 455,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS与云服务器ECS实例之间的内网通信免费，只要OSS Bucket和ECS实例的所属地域在中国大陆范围内，就可以使用内网地址免费通信。",
     "options": [
       "A.对",
@@ -6165,7 +6165,7 @@ export const questions: Question[] = [
   },
   {
     "id": 456,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS的存储空间Bucket支持删除操作，在删除Bucket前必须先删除Bucket中的所有文件，包括未完成的分片文件。",
     "options": [
       "A.对",
@@ -6177,7 +6177,7 @@ export const questions: Question[] = [
   },
   {
     "id": 457,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS自身提供的了 “IP黑白名单”功能，当发现有恶意IP频繁访问OSS时，可以直接将IP拉黑，屏蔽访问。",
     "options": [
       "A.对",
@@ -6189,7 +6189,7 @@ export const questions: Question[] = [
   },
   {
     "id": 458,
-    "type": "单选题",
+    "type": "single",
     "title": "Bucket的拥有者可以通过OSS控制台为其所拥有的Bucket开启访问日志记录功能,OSS用户需要手动保存访问日志纪录",
     "options": [
       "A.对",
@@ -6201,7 +6201,7 @@ export const questions: Question[] = [
   },
   {
     "id": 459,
-    "type": "单选题",
+    "type": "single",
     "title": "负载均衡提供获取客户端真实IP地址的功能，针对4层（TCP协议）负载均衡服务，SLB后端云服务器ECS可以直接获得来访者的真实IP",
     "options": [
       "A.对",
@@ -6213,7 +6213,7 @@ export const questions: Question[] = [
   },
   {
     "id": 460,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB可以把用户请求分发给后端的云服务器ECS实例，这些云服务器ECS实例的规格配置必须相同。",
     "options": [
       "A.对",
@@ -6225,7 +6225,7 @@ export const questions: Question[] = [
   },
   {
     "id": 461,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN建立并覆盖在承载网之上，由分布在不同区域的边缘节点服务器群组成的分布式网络替代传统以WEB Server为中心的数据传输模式。CDN加速特别适合在站点访问量大，且静态资源被不同用户重复访问的比例高的场景中使用，重复访问率越高加速效果越明显。",
     "options": [
       "A.对",
@@ -6237,7 +6237,7 @@ export const questions: Question[] = [
   },
   {
     "id": 462,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）根据业务需求和策略，自动调整其弹性计算资源的管理服务,用户只需购买1台云市场中的镜像,就可以弹出n台同类型镜像的ECS实例。",
     "options": [
       "A.对",
@@ -6249,7 +6249,7 @@ export const questions: Question[] = [
   },
   {
     "id": 463,
-    "type": "单选题",
+    "type": "single",
     "title": "用户开启SLB会话保持功能后，SLB会把来自同一客户端的访问请求分发到不同的后端ECS上进行处理。",
     "options": [
       "A.对",
@@ -6261,7 +6261,7 @@ export const questions: Question[] = [
   },
   {
     "id": 464,
-    "type": "单选题",
+    "type": "single",
     "title": "路由器是阿里云专有网络VPC的枢纽，可以连接本VPC内的各个交换机，但不是连接本VPC与其他网络的网关设备。",
     "options": [
       "A.对",
@@ -6273,7 +6273,7 @@ export const questions: Question[] = [
   },
   {
     "id": 465,
-    "type": "单选题",
+    "type": "single",
     "title": "用户开启阿里绿网后不会占用云服务器ECS实例的CPU资源。",
     "options": [
       "A.对",
@@ -6285,7 +6285,7 @@ export const questions: Question[] = [
   },
   {
     "id": 466,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾“DDoS基础防护”和“安骑士”都是阿里云提供的的DDoS防护产品，只是部署的位置不同，一个在IDC入口防护，一个在云服务器内部防护。",
     "options": [
       "A.对",
@@ -6297,7 +6297,7 @@ export const questions: Question[] = [
   },
   {
     "id": 467,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的专有网络VPC下的云服务器ECS实例可以绑定EIP，通过EIP打通与外网的连接，可以通过将绑定EIP的云服务器ECS实例配置成公网网关，实现VPC内其他云服务器ECS实例的公网访问。",
     "options": [
       "A.对",
@@ -6309,7 +6309,7 @@ export const questions: Question[] = [
   },
   {
     "id": 468,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾DDos基础防护的工作流程是:当出现网络攻击时,系统自动检测并促发清洗异常流量,如果攻击流量超过DDos基础防护的服务上限,自动做黑洞处理。",
     "options": [
       "A.对",
@@ -6321,7 +6321,7 @@ export const questions: Question[] = [
   },
   {
     "id": 469,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）时,弹性伸缩支持对数据盘的自动弹性伸缩,只需在伸缩配置中进行相应的设置即可。",
     "options": [
       "A.对",
@@ -6333,7 +6333,7 @@ export const questions: Question[] = [
   },
   {
     "id": 470,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)自动增加云服务器ECS实例后，需要把这些实例的IP手工增加到负载均衡SLB的白名单中去，否则这些新增云服务器ECS实例将无法被负载均衡SLB识别。",
     "options": [
       "A.对",
@@ -6345,7 +6345,7 @@ export const questions: Question[] = [
   },
   {
     "id": 471,
-    "type": "单选题",
+    "type": "single",
     "title": "TCP是面向连接的协议，在正式收发数据前，必须和对方建立可靠的连接；而UDP协议在数据发送前需要与对方先进行三次握手，然后进行数据包发送和接收。UDP协议的性能要优于TCP。",
     "options": [
       "A.对",
@@ -6357,7 +6357,7 @@ export const questions: Question[] = [
   },
   {
     "id": 472,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。OSS中创建文件夹本质上来说是创建了一个size为0的object",
     "options": [
       "A.对",
@@ -6369,7 +6369,7 @@ export const questions: Question[] = [
   },
   {
     "id": 473,
-    "type": "单选题",
+    "type": "single",
     "title": "在用户自己创建的阿里云专有网络VPC内创建云产品实例的时候，必须指定云产品实例所在的交换机，否则无法创建VPC的云产品实例。",
     "options": [
       "A.对",
@@ -6381,7 +6381,7 @@ export const questions: Question[] = [
   },
   {
     "id": 474,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您在已经创建好的阿里云的云服务器ECS实例的操作系统内部更改了该ECS实例的私网IP地址，一定不会影响该云服务器ECS实例与其他ECS实例之间私网通信。",
     "options": [
       "A.对",
@@ -6393,7 +6393,7 @@ export const questions: Question[] = [
   },
   {
     "id": 475,
-    "type": "单选题",
+    "type": "single",
     "title": "如果您使用了阿里云的云服务器ECS部署应用，可以结合公网的负载均衡SLB提升web服务的可用性，同时还可以选择内网的负载均衡SLB来提升后台服务的可用性，从而提升整个应用的可用性。",
     "options": [
       "A.对",
@@ -6405,7 +6405,7 @@ export const questions: Question[] = [
   },
   {
     "id": 476,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云弹性伸缩（Auto Scaling）时，某伸缩活动一次要增加10台ECS实例，但其中一台ECS实例创建时失败，其余9台创建成功，则弹性伸缩服务会继续创建一台新的ECS实例，而不会将已经创建好的9台实例释放后再重新创建10台ECS实例。",
     "options": [
       "A.对",
@@ -6417,7 +6417,7 @@ export const questions: Question[] = [
   },
   {
     "id": 477,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)可以根据用户配置的伸缩规则，自动调整云服务器ECS实例的个数，以满足业务需求。如果用户无法预测业务的变化情况，即无法准确的预测对计算资源的需求，也可以通过使用动态的伸缩模式，基于云监控性能指标（如CPU利用率等）自动增加或者减少云服务器ECS实例。",
     "options": [
       "A.对",
@@ -6429,7 +6429,7 @@ export const questions: Question[] = [
   },
   {
     "id": 478,
-    "type": "单选题",
+    "type": "single",
     "title": "用户如果需要使用弹性伸缩服务自动调整弹性计算资源，则必须要和负载均衡服务、云数据库RDS服务、云监控等共同使用才能发挥作用。",
     "options": [
       "A.对",
@@ -6441,7 +6441,7 @@ export const questions: Question[] = [
   },
   {
     "id": 479,
-    "type": "单选题",
+    "type": "single",
     "title": "一个SLB实例最多对应10个监听，每个监听可独立配置限定规则。",
     "options": [
       "A.对",
@@ -6453,7 +6453,7 @@ export const questions: Question[] = [
   },
   {
     "id": 480,
-    "type": "单选题",
+    "type": "single",
     "title": "某公司使用阿里云产品作为企业门户网站的解决方案，通过负载均衡SLB服务转发客户请求到后端的云服务器ECS实例中去处理。目前他们要在网站中新增加一个库存查询的功能，需要访问云数据库RDS实例，他们的方案是：把RDS实例挂到SLB实例的后端服务器池中，在现有的SLB实例上多配置一个监听（Listener）专门负责监听库存查询的需求，然后把需求分发给RDS实例处理。",
     "options": [
       "A.对",
@@ -6465,7 +6465,7 @@ export const questions: Question[] = [
   },
   {
     "id": 481,
-    "type": "单选题",
+    "type": "single",
     "title": "用户开启SLB健康检查功能后，当后端某个ECS健康检查出现问题时会将请求转发到其他健康检查正常的ECS上，而当该ECS恢复正常运行时，SLB会将其自动恢复到对外或对内的服务中。",
     "options": [
       "A.对",
@@ -6477,7 +6477,7 @@ export const questions: Question[] = [
   },
   {
     "id": 482,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的负载均衡SLB实例和后端云服务器ECS实例之间是通过公网进行通信的，所以云服务器ECS实例必须配置外网带宽。",
     "options": [
       "A.对",
@@ -6489,7 +6489,7 @@ export const questions: Question[] = [
   },
   {
     "id": 483,
-    "type": "单选题",
+    "type": "single",
     "title": "不同的阿里云专有网络VPC之间完全隔离，默认内网不互通，但可以通过公网建立VPN的方式实现互通。",
     "options": [
       "A.对",
@@ -6501,7 +6501,7 @@ export const questions: Question[] = [
   },
   {
     "id": 484,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾安骑士是一款服务器安全管理软件，可以保护阿里云的云服务器ECS实例的安全，也可以保护非阿里云主机。",
     "options": [
       "A.对",
@@ -6513,7 +6513,7 @@ export const questions: Question[] = [
   },
   {
     "id": 485,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾DDoS高防IP可以抵御数百G的DDoS攻击，阿里云及非阿里云主机都可以使用云盾DDoS高防IP服务。",
     "options": [
       "A.对",
@@ -6525,7 +6525,7 @@ export const questions: Question[] = [
   },
   {
     "id": 486,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN支持大文件下载加速、音视频点播加速，以及HTTPS安全加速。",
     "options": [
       "A.对",
@@ -6537,7 +6537,7 @@ export const questions: Question[] = [
   },
   {
     "id": 487,
-    "type": "单选题",
+    "type": "single",
     "title": "由于阿里云提供了对象存储OSS的海量存储服务，因此在多种场景下均可以使用OSS作为数据的存储服务，包括结构化的数据和非结构化的数据的存储。",
     "options": [
       "A.对",
@@ -6549,7 +6549,7 @@ export const questions: Question[] = [
   },
   {
     "id": 488,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云服务器ECS实例中的快照（Snapshot）是磁盘上的数据在某一时间点的拷贝，存储在用户自己构建的云数据库RDS实例上。",
     "options": [
       "A.对",
@@ -6561,7 +6561,7 @@ export const questions: Question[] = [
   },
   {
     "id": 489,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩（Auto Scaling）经常会和负载均衡SLB一起配合使用，伸缩组和负载均衡SLB必须在同一个地域（Region）。",
     "options": [
       "A.对",
@@ -6573,7 +6573,7 @@ export const questions: Question[] = [
   },
   {
     "id": 490,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业运维人员小王基于阿里云弹性伸缩（Auto Scaling）配置了一个完整的弹性伸缩方案，通过定时任务每次添加2台ECS实例到伸缩组中去。定时任务启动后，创建ECS实例的伸缩活动正在执行中，当创建到第3台ECS实例时，小王发现因为自己粗心错把“增加2台ECS”配置成了“增加20台ECS”，为了减少损失，他可以强行终止该伸缩活动。",
     "options": [
       "A.对",
@@ -6585,7 +6585,7 @@ export const questions: Question[] = [
   },
   {
     "id": 491,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)弹性伸缩免费，但是通过弹性伸缩自动创建或者手工加入的 ECS 实例，需要按照 ECS 相关实例类型进行付费,只有当ECS实例被移出伸缩组之后才不再收取实例费用。",
     "options": [
       "A.对",
@@ -6597,7 +6597,7 @@ export const questions: Question[] = [
   },
   {
     "id": 492,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云弹性伸缩(Auto Scaling)不能单独使用，必须要和云服务器ECS以及负载均衡SLB配合使用。",
     "options": [
       "A.对",
@@ -6609,7 +6609,7 @@ export const questions: Question[] = [
   },
   {
     "id": 493,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云对象存储OSS是阿里云对外提供的海量、安全、低成本、高可靠的云存储服务。 OSS支持管理控制台和API（包括SDK）两种文件上传和下载方式。",
     "options": [
       "A.对",
@@ -6621,7 +6621,7 @@ export const questions: Question[] = [
   },
   {
     "id": 494,
-    "type": "单选题",
+    "type": "single",
     "title": "某企业使用阿里云负载均衡SLB服务提供对外的网站服务，其后端服务器池中的ECS实例上运行的操作系统必须一致，他们选择使用了CentOS，只能把之前一部分运行在Windows上的应用迁移到CentOS上来，否则SLB实例将无法正常工作。",
     "options": [
       "A.对",
@@ -6633,7 +6633,7 @@ export const questions: Question[] = [
   },
   {
     "id": 495,
-    "type": "单选题",
+    "type": "single",
     "title": "使用阿里云的负载均衡SLB实例时，用户开启健康检查功能后，当后端某个云服务器ECS实例健康检查的状态为异常时，会将请求转发给其他健康检查的状态为正常的云服务器ECS实例，而当该状态异常的云服务器ECS实例恢复正常运行时，负载均衡SLB实例会将其自动恢复到正常的服务中。",
     "options": [
       "A.对",
@@ -6645,7 +6645,7 @@ export const questions: Question[] = [
   },
   {
     "id": 496,
-    "type": "单选题",
+    "type": "single",
     "title": "如果用户只使用阿里云的云盾的DDoS基础防护功能，当攻击规模超过服务上限时，会触发黑洞规则，之后用户的服务器仍可以对外提供服务，只是速度受到限制。",
     "options": [
       "A.对",
@@ -6657,7 +6657,7 @@ export const questions: Question[] = [
   },
   {
     "id": 497,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云为云上客户提供了从网络、主机、应用至数据库和内容的全方位安全保护。用户在使用阿里云的服务时不需要考虑安全护问题，只要专注到自己的业务就可以了。",
     "options": [
       "A.对",
@@ -6669,7 +6669,7 @@ export const questions: Question[] = [
   },
   {
     "id": 498,
-    "type": "单选题",
+    "type": "single",
     "title": "高效的数据处理和管理技术是云计算不可或缺的核心技术之一，不仅要保证数据的存储和访问，还要能够对海量数据进行特定的检索和分析，业界比较流行的有Google的BigTable、阿里云的表格存储（Table MyVuex，原OTS）等，它们提供的其实是关系型数据库服务。",
     "options": [
       "A.对",
@@ -6681,7 +6681,7 @@ export const questions: Question[] = [
   },
   {
     "id": 499,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云内容分发网络CDN建立并覆盖在承载网之上，由分布在不同区域的边缘节点服务器群组成的分布式网络替代传统以WEB Server为中心的数据传输模式。阿里云CDN可以直接对IP地址进行加速，被加速的网站可以不绑定域名。",
     "options": [
       "A.对",
@@ -6693,7 +6693,7 @@ export const questions: Question[] = [
   },
   {
     "id": 500,
-    "type": "单选题",
+    "type": "single",
     "title": "负载均衡系统会根据负载均衡实例类型来分配不同的服务地址（公网IP或私网IP），所以当您要进行负载均衡实例类型切换操作时，必须在管理控制台中进行更改设置。",
     "options": [
       "A.对",
@@ -6705,7 +6705,7 @@ export const questions: Question[] = [
   },
   {
     "id": 501,
-    "type": "单选题",
+    "type": "single",
     "title": "您在阿里云的Windows操作系统的云服务器ECS实例中结束了shutdown.exe进程之后，通过阿里云的管理控制台对云服务器ECS实例进行任何操作都不会受到影响。",
     "options": [
       "A.对",
@@ -6717,7 +6717,7 @@ export const questions: Question[] = [
   },
   {
     "id": 502,
-    "type": "单选题",
+    "type": "single",
     "title": "调用阿里云的云服务器ECS提供的Open API接口，是通过向阿里云的API服务端地址发送HTTP GET请求，并按照接口说明在请求中加入相应请求参数来完成的。",
     "options": [
       "A.对",
@@ -6729,7 +6729,7 @@ export const questions: Question[] = [
   },
   {
     "id": 503,
-    "type": "单选题",
+    "type": "single",
     "title": "云计算有多种不同的服务模式，以下场景描述的是典型的SaaS（软件即服务）服务：用户只要接上网络，通过浏览器就能直接使用在云端上运行的应用，而不需要考虑安装、维护等工作，并且免去初期高昂的软硬件投入。",
     "options": [
       "A.对",
@@ -6741,7 +6741,7 @@ export const questions: Question[] = [
   },
   {
     "id": 504,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云专有网络VPC中支持将云服务器ECS实例从同一个路由器下的一台交换机转移到另一台交换机，也支持从一个路由器切换到另一个路由器。",
     "options": [
       "A.对",
@@ -6753,7 +6753,7 @@ export const questions: Question[] = [
   },
   {
     "id": 505,
-    "type": "单选题",
+    "type": "single",
     "title": "如果阿里云上的用户拥有多台云服务器ECS实例，且没有专业的运维团队或者不愿意在运维上花精力，可以开通阿里云的云盾安骑士，提供专家人工安全体检、清除木马、系统加固、人工安全技术支持、托管服务报告。",
     "options": [
       "A.对",
@@ -6765,7 +6765,7 @@ export const questions: Question[] = [
   },
   {
     "id": 506,
-    "type": "单选题",
+    "type": "single",
     "title": "阿里云的云盾的DDoS防护功能可以保护阿里云机房内的所有云产品，包括：云服务器ECS、负载均衡SLB、云数据库RDS、对象存储OSS等。",
     "options": [
       "A.对",

@@ -11,12 +11,10 @@ const StyledCard = styled(Card)`
   border-radius: var(--mei-radius-lg);
   border: 1px solid var(--mei-theme-border-default);
   box-shadow: var(--mei-shadow-sm);
-  transition: transform var(--mei-motion-fast) var(--mei-ease-out), box-shadow var(--mei-motion-fast) var(--mei-ease-out);
-  will-change: transform, box-shadow;
+  transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out);
   overflow: hidden;
   
   &:hover {
-    transform: translateY(-2px);
     box-shadow: var(--mei-shadow-md);
   }
   
@@ -42,16 +40,13 @@ const OptionItem = styled.div<{ isSelected?: boolean; isCorrect?: boolean; showA
   background: var(--mei-theme-bg-elevated);
   display: flex;
   align-items: center;
-  transition: transform var(--mei-motion-fast) var(--mei-ease-out),
-              background-color var(--mei-motion-fast) var(--mei-ease-out),
+  transition: background-color var(--mei-motion-fast) var(--mei-ease-out),
               border-color var(--mei-motion-fast) var(--mei-ease-out),
               box-shadow var(--mei-motion-fast) var(--mei-ease-out);
-  will-change: transform, background-color, border-color;
   
   &:hover {
     border-color: var(--mei-color-primary-300);
     background-color: var(--mei-color-primary-50);
-    transform: translateX(4px);
   }
   
   ${props => props.isSelected && !props.showAnswer && `
@@ -89,6 +84,8 @@ interface QuestionCardProps {
   questionNumber?: number;
 }
 
+const typeLabel = (t: string) => ({ single: '单选题', multiple: '多选题', judge: '判断题' }[t] || t);
+
 const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
   onAnswer,
@@ -113,7 +110,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       <QuestionMeta>
         <Space>
           {questionNumber && <Tag color="blue">第{questionNumber}题</Tag>}
-          <Tag color={question.type === '单选题' ? 'green' : 'orange'}>{question.type}</Tag>
+          <Tag color={question.type === 'single' ? 'green' : question.type === 'multiple' ? 'orange' : 'blue'}>{typeLabel(question.type)}</Tag>
           {question.category && <Tag color="purple">{question.category}</Tag>}
         </Space>
         {showAnswer && hasAnswered && (

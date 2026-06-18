@@ -1,15 +1,15 @@
 import React from 'react';
-import { Layout, Menu, Avatar, Breadcrumb, Button, Select } from 'antd';
-import { 
-  BookOutlined, 
-  FileTextOutlined, 
-  TrophyOutlined, 
-  BarChartOutlined, 
-  ExclamationCircleOutlined, 
-  UserOutlined,
+import { Layout, Menu, Breadcrumb, Button, Select, Tooltip } from 'antd';
+import {
+  BookOutlined,
+  FileTextOutlined,
+  TrophyOutlined,
+  BarChartOutlined,
+  ExclamationCircleOutlined,
   UnorderedListOutlined,
   SwapOutlined,
   UploadOutlined,
+  GithubOutlined
 } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -87,9 +87,12 @@ const StyledHeader = styled(Header)`
 `;
 
 const StyledContent = styled(Content)`
-  background: var(--mei-theme-bg-surface);
+  background: var(--mei-theme-bg-page);
   min-height: calc(100vh - 64px);
-  padding: var(--mei-spacing-stack-xl) var(--mei-spacing-inset-xl);
+  padding: var(--mei-spacing-stack-xl) 0;
+  max-width: 1040px;
+  margin: 0 auto;
+  width: 100%;
 `;
 
 const CollapseIcon = ({ collapsed }: { collapsed: boolean }) => (
@@ -108,8 +111,11 @@ const BottomSection = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 12px;
-  border-top: 1px solid var(--mei-theme-border-default);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--mei-spacing-inset-lg);
+  background: var(--mei-theme-bg-page);
 `;
 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -123,7 +129,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const breadcrumbItems = [
     <Breadcrumb.Item key="home">
-      <Link to="/" style={{ color: 'var(--mei-theme-text-secondary)', paddingRight: 8 }}>首页</Link>
+      <Link to="/" style={{ color: 'var(--mei-theme-text-secondary)', paddingRight: 4 }}>首页</Link>
     </Breadcrumb.Item>,
     ...pathSnippets.map((snippet, idx) => {
       const url = `/${pathSnippets.slice(0, idx + 1).join('/')}`;
@@ -136,7 +142,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         case 'preview': name = '题库预览'; break;
         default: name = snippet;
       }
-      return <Breadcrumb.Item key={url}><Link to={url} style={{ color: 'var(--mei-theme-text-primary)', fontWeight: 600, paddingLeft: 8 }}>{name}</Link></Breadcrumb.Item>;
+      return <Breadcrumb.Item key={url}><Link to={url} style={{ color: 'var(--mei-theme-text-primary)', fontWeight: 600 }}>{name}</Link></Breadcrumb.Item>;
     })
   ];
 
@@ -197,6 +203,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <BottomSection>
             <Button
               block
+              size="large"
               icon={<UploadOutlined />}
               onClick={() => setImportOpen(true)}
               style={{ borderRadius: 'var(--mei-radius-md)' }}
@@ -206,7 +213,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </BottomSection>
         )}
       </StyledSider>
-      <Layout style={{ marginLeft: collapsed ? 64 : 200, transition: 'all 0.2s' }}>
+      <Layout style={{ marginLeft: collapsed ? 64 : 200, transition: 'all 0.2s', background: 'var(--mei-theme-bg-page)' }}>
         <StyledHeader>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <Button 
@@ -221,27 +228,26 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             >
               <CollapseIcon collapsed={collapsed} />
             </Button>
-            <Breadcrumb separator="">
+            <Breadcrumb separator={<span style={{ color: 'var(--mei-theme-border-strong)', fontSize: 12, margin: '0 4px' }}>/</span>}>
               {breadcrumbItems}
             </Breadcrumb>
           </div>
-          <div>
-            <Avatar 
-              size={40} 
-              icon={<UserOutlined style={{ color: 'var(--mei-color-purple-700)' }} />} 
-              style={{ 
-                background: 'var(--mei-color-purple-100)', 
-                border: '1px solid var(--mei-theme-border-default)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center' 
-              }} 
+          <Tooltip title="在 GitHub 上查看">
+            <Button
+              type="text"
+              icon={<GithubOutlined style={{ fontSize: 20 }} />}
+              style={{ color: 'var(--mei-theme-text-secondary)', width: 36, height: 36 }}
+              onClick={() => window.open('https://github.com/my1243762750/acp-exam-prep', '_blank')}
             />
-          </div>
+          </Tooltip>
         </StyledHeader>
-        <StyledContent>
-          <div className="fade-in">
-            {children}
-          </div>
-        </StyledContent>
+        <div style={{ background: 'var(--mei-theme-bg-page)', flex: 1, padding: '0 var(--mei-spacing-inset-xl)' }}>
+          <StyledContent>
+            <div className="fade-in">
+              {children}
+            </div>
+          </StyledContent>
+        </div>
       </Layout>
       <ImportModal open={importOpen} onClose={() => setImportOpen(false)} />
     </Layout>

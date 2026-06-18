@@ -29,19 +29,54 @@ const ImportModal: React.FC<Props> = ({ open, onClose }) => {
     const template = {
       name: '示例题库',
       shortName: '示例',
-      description: '这是一个导入模板',
+      description: '这是一个导入模板，categories 字段可选，系统会自动从题目中提取分类',
       questions: [
         {
           id: 1,
-          type: '单选题',
+          type: 'single',
           title: '阿里云对象存储OSS的基本数据单元是什么？',
           options: ['A.Object', 'B.Bucket', 'C.Service', 'D.安全组'],
           answer: 'A',
           explanation: 'OSS的基本数据单元是对象（Object）。',
           category: 'OSS',
         },
+        {
+          id: 2,
+          type: 'multiple',
+          title: '以下哪些是阿里云的安全服务？（多选）',
+          options: ['A.云盾', 'B.安骑士', 'C.DDoS高防IP', 'D.SLB'],
+          answer: 'ABC',
+          explanation: 'SLB是负载均衡服务，不属于安全服务。',
+          category: '安全',
+        },
+        {
+          id: 3,
+          type: 'judge',
+          title: '阿里云对象存储OSS支持图片处理功能。',
+          options: ['A.对', 'B.错'],
+          answer: 'A',
+          explanation: 'OSS支持图片处理，包括缩放、裁剪、水印等功能。',
+          category: 'OSS',
+        },
+        {
+          id: 4,
+          type: 'single',
+          title: '阿里云CDN加速域名的默认超时时间是多少秒？',
+          options: ['A.120秒', 'B.180秒', 'C.360秒', 'D.600秒'],
+          answer: 'C',
+          explanation: 'CDN默认超时时间为360秒。',
+          category: 'CDN',
+        },
+        {
+          id: 5,
+          type: 'judge',
+          title: '云服务器ECS实例创建后，可以随时更换为不同的操作系统。',
+          options: ['A.对', 'B.错'],
+          answer: 'A',
+          explanation: 'ECS实例可以通过更换系统盘来更换操作系统。',
+          category: 'ECS',
+        },
       ],
-      categories: ['OSS'],
     };
     const blob = new Blob([JSON.stringify(template, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

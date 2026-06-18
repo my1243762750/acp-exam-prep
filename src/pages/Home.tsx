@@ -15,10 +15,10 @@ import { getStats } from '../utils/storage';
 const { Title, Paragraph } = Typography;
 
 const statColors = [
-  { color: 'var(--mei-color-blue-600)', bg: 'var(--mei-color-blue-50)' },       // 基础数据: 蓝
-  { color: 'var(--mei-color-primary-600)', bg: 'var(--mei-color-primary-50)' }, // 主操作数据: 靛紫
-  { color: 'var(--mei-color-success-dark)', bg: 'var(--mei-color-success-light)' },// 正确率/成就: 绿
-  { color: 'var(--mei-color-warning-dark)', bg: 'var(--mei-color-warning-light)' } // 坚持/天数: 金/橙
+  { color: 'var(--mei-color-blue-600)', bg: 'var(--mei-color-blue-50)' },
+  { color: 'var(--mei-color-primary-600)', bg: 'var(--mei-color-primary-50)' },
+  { color: 'var(--mei-color-primary-500)', bg: 'var(--mei-color-primary-50)' },
+  { color: 'var(--mei-color-blue-500)', bg: 'var(--mei-color-blue-50)' }
 ];
 
 const StatCard = styled(Card)<{ bgcolor: string }>`
@@ -27,12 +27,10 @@ const StatCard = styled(Card)<{ bgcolor: string }>`
   border: 1px solid var(--mei-theme-border-default);
   box-shadow: var(--mei-shadow-sm);
   background: ${(props) => props.bgcolor};
-  transition: transform var(--mei-motion-fast) var(--mei-ease-out), box-shadow var(--mei-motion-fast) var(--mei-ease-out);
-  will-change: transform, box-shadow; /* 开启硬件加速 */
+  transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out);
   
   &:hover {
     box-shadow: var(--mei-shadow-md);
-    transform: translateY(-4px);
   }
   .ant-card-body {
     padding: var(--mei-spacing-inset-lg);
@@ -60,21 +58,17 @@ const QuickActionCard = styled(Card)<{ basecolor: string; lightcolor: string }>`
   overflow: hidden;
   position: relative;
   box-shadow: var(--mei-shadow-sm);
-  transition: transform var(--mei-motion-fast) var(--mei-ease-out), 
-              box-shadow var(--mei-motion-fast) var(--mei-ease-out),
+  transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out),
               background-color var(--mei-motion-fast) var(--mei-ease-out),
               border-color var(--mei-motion-fast) var(--mei-ease-out);
-  will-change: transform, box-shadow, background-color, border-color;
 
   &:hover {
     border-color: ${(props) => props.basecolor};
-    box-shadow: var(--mei-shadow-lg);
+    box-shadow: var(--mei-shadow-md);
     background: ${(props) => props.lightcolor};
-    transform: translateY(-4px);
 
     .icon-wrapper {
       color: ${(props) => props.basecolor} !important;
-      transform: scale(1.1);
     }
     .quick-title {
       color: ${(props) => props.basecolor} !important;
@@ -94,7 +88,7 @@ const IconWrapper = styled.div<{ color: string }>`
   font-size: 56px;
   margin-bottom: var(--mei-spacing-stack-md);
   color: ${(props) => props.color};
-  transition: transform var(--mei-motion-fast) var(--mei-ease-spring), color var(--mei-motion-fast) var(--mei-ease-out);
+  transition: color var(--mei-motion-fast) var(--mei-ease-out);
 `;
 
 const Home: React.FC = () => {
@@ -140,8 +134,8 @@ const Home: React.FC = () => {
       description: '查看学习进度',
       icon: <TrophyOutlined />,
       path: '/statistics',
-      basecolor: 'var(--mei-color-purple-500)',
-      lightcolor: 'var(--mei-color-purple-50)'
+      basecolor: 'var(--mei-color-primary-400)',
+      lightcolor: 'var(--mei-color-primary-50)'
     }
   ];
 
