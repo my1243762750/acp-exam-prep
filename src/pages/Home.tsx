@@ -27,7 +27,9 @@ const StatCard = styled(Card)<{ bgcolor: string }>`
   border: 1px solid var(--mei-theme-border-default);
   box-shadow: var(--mei-shadow-sm);
   background: ${(props) => props.bgcolor};
-  transition: all var(--mei-motion-normal);
+  transition: transform var(--mei-motion-fast) var(--mei-ease-out), box-shadow var(--mei-motion-fast) var(--mei-ease-out);
+  will-change: transform, box-shadow; /* 开启硬件加速 */
+  
   &:hover {
     box-shadow: var(--mei-shadow-md);
     transform: translateY(-4px);
@@ -52,13 +54,17 @@ const StatValue = styled.span<{ color: string }>`
 const QuickActionCard = styled(Card)<{ basecolor: string; lightcolor: string }>`
   text-align: center;
   cursor: pointer;
-  transition: all var(--mei-motion-normal);
   border-radius: var(--mei-radius-xl);
   border: 1px solid var(--mei-theme-border-default);
   background: var(--mei-theme-bg-elevated);
   overflow: hidden;
   position: relative;
   box-shadow: var(--mei-shadow-sm);
+  transition: transform var(--mei-motion-fast) var(--mei-ease-out), 
+              box-shadow var(--mei-motion-fast) var(--mei-ease-out),
+              background-color var(--mei-motion-fast) var(--mei-ease-out),
+              border-color var(--mei-motion-fast) var(--mei-ease-out);
+  will-change: transform, box-shadow, background-color, border-color;
 
   &:hover {
     border-color: ${(props) => props.basecolor};
@@ -88,7 +94,7 @@ const IconWrapper = styled.div<{ color: string }>`
   font-size: 56px;
   margin-bottom: var(--mei-spacing-stack-md);
   color: ${(props) => props.color};
-  transition: all var(--mei-motion-normal);
+  transition: transform var(--mei-motion-fast) var(--mei-ease-spring), color var(--mei-motion-fast) var(--mei-ease-out);
 `;
 
 const Home: React.FC = () => {

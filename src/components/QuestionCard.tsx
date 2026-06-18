@@ -11,7 +11,8 @@ const StyledCard = styled(Card)`
   border-radius: var(--mei-radius-lg);
   border: 1px solid var(--mei-theme-border-default);
   box-shadow: var(--mei-shadow-sm);
-  transition: all var(--mei-motion-normal) var(--mei-motion-easing-easeOut);
+  transition: transform var(--mei-motion-fast) var(--mei-ease-out), box-shadow var(--mei-motion-fast) var(--mei-ease-out);
+  will-change: transform, box-shadow;
   overflow: hidden;
   
   &:hover {
@@ -38,10 +39,14 @@ const OptionItem = styled.div<{ isSelected?: boolean; isCorrect?: boolean; showA
   border-radius: var(--mei-radius-md);
   margin-bottom: var(--mei-spacing-stack-sm);
   cursor: pointer;
-  transition: all var(--mei-motion-fast);
   background: var(--mei-theme-bg-elevated);
   display: flex;
   align-items: center;
+  transition: transform var(--mei-motion-fast) var(--mei-ease-out),
+              background-color var(--mei-motion-fast) var(--mei-ease-out),
+              border-color var(--mei-motion-fast) var(--mei-ease-out),
+              box-shadow var(--mei-motion-fast) var(--mei-ease-out);
+  will-change: transform, background-color, border-color;
   
   &:hover {
     border-color: var(--mei-color-primary-300);

@@ -134,6 +134,13 @@
   --mei-motion-fast: 150ms;
   --mei-motion-normal: 250ms;
   --mei-motion-slow: 400ms;
+
+  /* Easing Curves */
+  --mei-ease-linear: linear;
+  --mei-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* 加速再减速 (标准) */
+  --mei-ease-out: cubic-bezier(0.0, 0, 0.2, 1);    /* 初始极快，柔和刹车 (适用于 Hover 进入) */
+  --mei-ease-in: cubic-bezier(0.4, 0, 1, 1);       /* 初始慢，最后快 (适用于元素退出) */
+  --mei-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 带轻微回弹的物理曲线 */
 }
 
 [data-theme='dark'] {
