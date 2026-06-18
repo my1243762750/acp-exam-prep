@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Avatar, Breadcrumb, Button } from 'antd';
+import { Layout, Menu, Avatar, Breadcrumb, Button, Select } from 'antd';
 import { 
   BookOutlined, 
   FileTextOutlined, 
@@ -7,14 +7,18 @@ import {
   BarChartOutlined, 
   ExclamationCircleOutlined, 
   UserOutlined,
-  UnorderedListOutlined 
+  UnorderedListOutlined,
+  SwapOutlined,
+  UploadOutlined,
 } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getCurrentSubjectInfo, getAllSubjects, setCurrentSubjectId } from '../data/subject';
+import ImportModal from './ImportModal';
 
 const { Header, Sider, Content } = Layout;
+const { Option } = Select;
 
-// Mei Brand Mark (Logo)
 const MeiLogo = () => (
   <svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -34,10 +38,15 @@ const MeiLogo = () => (
 
 const LogoBar = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 64px;
-  justify-content: flex-start;
-  padding: 0 var(--mei-spacing-inset-lg);
+  padding: 16px var(--mei-spacing-inset-lg) 8px;
+`;
+
+const LogoRow = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
 `;
 
 const StyledSider = styled(Sider)`
@@ -56,9 +65,9 @@ const StyledSider = styled(Sider)`
   &.ant-layout-sider-collapsed {
     min-width: 64px !important;
     max-width: 64px !important;
-    .logo-text {
-      display: none;
-    }
+    .logo-text { display: none; }
+    .subject-selector { display: none; }
+    .import-btn { display: none; }
   }
 `;
 
@@ -83,23 +92,9 @@ const StyledContent = styled(Content)`
   padding: var(--mei-spacing-stack-xl) var(--mei-spacing-inset-xl);
 `;
 
-const menuItems = [
-  { key: '/', icon: <BookOutlined />, label: <Link to="/">首页</Link> },
-  { key: '/practice', icon: <FileTextOutlined />, label: <Link to="/practice">练习模式</Link> },
-  { key: '/exam', icon: <TrophyOutlined />, label: <Link to="/exam">模拟考试</Link> },
-  { key: '/review', icon: <ExclamationCircleOutlined />, label: <Link to="/review">错题复习</Link> },
-  { key: '/statistics', icon: <BarChartOutlined />, label: <Link to="/statistics">学习统计</Link> },
-  { key: '/preview', icon: <UnorderedListOutlined />, label: <Link to="/preview">题库预览</Link> },
-];
-
-// 自定义折叠图标 (参考图 2)
 const CollapseIcon = ({ collapsed }: { collapsed: boolean }) => (
   <svg 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
+    width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
     style={{ transform: collapsed ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s' }}
   >
     <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -108,9 +103,23 @@ const CollapseIcon = ({ collapsed }: { collapsed: boolean }) => (
   </svg>
 );
 
+const BottomSection = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  border-top: 1px solid var(--mei-theme-border-default);
+`;
+
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
-  // 面包屑
+  const navigate = useNavigate();
+  const subject = getCurrentSubjectInfo();
+  const allSubjects = getAllSubjects();
+  const [collapsed, setCollapsed] = React.useState(false);
+  const [importOpen, setImportOpen] = React.useState(false);
+
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const breadcrumbItems = [
     <Breadcrumb.Item key="home">
@@ -130,8 +139,22 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       return <Breadcrumb.Item key={url}><Link to={url} style={{ color: 'var(--mei-theme-text-primary)', fontWeight: 600, paddingLeft: 8 }}>{name}</Link></Breadcrumb.Item>;
     })
   ];
-  // 折叠按钮
-  const [collapsed, setCollapsed] = React.useState(false);
+
+  const handleSubjectChange = (id: string) => {
+    setCurrentSubjectId(id);
+    navigate('/');
+    window.location.reload();
+  };
+
+  const menuItems = [
+    { key: '/', icon: <BookOutlined />, label: <Link to="/">首页</Link> },
+    { key: '/practice', icon: <FileTextOutlined />, label: <Link to="/practice">练习模式</Link> },
+    { key: '/exam', icon: <TrophyOutlined />, label: <Link to="/exam">模拟考试</Link> },
+    { key: '/review', icon: <ExclamationCircleOutlined />, label: <Link to="/review">错题复习</Link> },
+    { key: '/statistics', icon: <BarChartOutlined />, label: <Link to="/statistics">学习统计</Link> },
+    { key: '/preview', icon: <UnorderedListOutlined />, label: <Link to="/preview">题库预览</Link> },
+  ];
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <StyledSider
@@ -142,9 +165,27 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         onCollapse={setCollapsed}
         trigger={null}
       >
-        <LogoBar style={{ justifyContent: collapsed ? 'center' : 'flex-start' }}>
-          <MeiLogo />
-          {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-600)', whiteSpace: 'nowrap' }}>ACP 助手</span>}
+        <LogoBar>
+          <LogoRow style={{ justifyContent: collapsed ? 'center' : 'flex-start' }}>
+            <MeiLogo />
+            {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-600)', whiteSpace: 'nowrap' }}>{subject.shortName} 助手</span>}
+          </LogoRow>
+          {!collapsed && allSubjects.length > 1 && (
+            <div className="subject-selector" style={{ width: '100%', marginTop: 8 }}>
+              <Select
+                size="small"
+                value={subject.id}
+                onChange={handleSubjectChange}
+                style={{ width: '100%' }}
+                bordered={false}
+                suffixIcon={<SwapOutlined style={{ fontSize: 12, color: 'var(--mei-theme-text-tertiary)' }} />}
+              >
+                {allSubjects.map(s => (
+                  <Option key={s.id} value={s.id}>{s.shortName} - {s.name}</Option>
+                ))}
+              </Select>
+            </div>
+          )}
         </LogoBar>
         <Menu
           mode="inline"
@@ -152,6 +193,18 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           style={{ border: 'none', background: 'transparent', marginTop: 8 }}
           items={menuItems}
         />
+        {!collapsed && (
+          <BottomSection>
+            <Button
+              block
+              icon={<UploadOutlined />}
+              onClick={() => setImportOpen(true)}
+              style={{ borderRadius: 'var(--mei-radius-md)' }}
+            >
+              导入题库
+            </Button>
+          </BottomSection>
+        )}
       </StyledSider>
       <Layout style={{ marginLeft: collapsed ? 64 : 200, transition: 'all 0.2s' }}>
         <StyledHeader>
@@ -160,12 +213,8 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               type="text" 
               style={{ 
                 color: 'var(--mei-theme-text-secondary)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                width: 32,
-                height: 32,
-                padding: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: 32, height: 32, padding: 0,
                 borderRadius: 'var(--mei-radius-sm)'
               }} 
               onClick={() => setCollapsed(c => !c)}
@@ -183,9 +232,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               style={{ 
                 background: 'var(--mei-color-purple-100)', 
                 border: '1px solid var(--mei-theme-border-default)',
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center' 
+                display: 'flex', alignItems: 'center', justifyContent: 'center' 
               }} 
             />
           </div>
@@ -196,8 +243,9 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
         </StyledContent>
       </Layout>
+      <ImportModal open={importOpen} onClose={() => setImportOpen(false)} />
     </Layout>
   );
 };
 
-export default MainLayout; 
+export default MainLayout;

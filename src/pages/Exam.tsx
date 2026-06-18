@@ -3,7 +3,8 @@ import { Card, Button, Space, Typography, Row, Col, Progress, Modal, Statistic, 
 import { PlayCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
-import { getRandomQuestions, Question } from '../data/questions';
+import type { Question } from '../data/questions';
+import { getCurrentQuestions } from '../data/subject';
 import { saveAnswer, saveExamRecord } from '../utils/storage';
 
 const { Title, Paragraph, Text } = Typography;
@@ -39,23 +40,31 @@ const Timer = styled.div`
   gap: 8px;
 `;
 
+function getRandomQuestions(count: number): Question[] {
+  const all = getCurrentQuestions();
+  const shuffled = [...all].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, Math.min(count, all.length));
+}
+
+const EXAM_DURATION = 90 * 60; // 90 minutes
+const EXAM_QUESTION_COUNT = 100;
+
 const Exam: React.FC = () => {
   const [examQuestions, setExamQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
   const [isStarted, setIsStarted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(90 * 60);
+  const [timeLeft, setTimeLeft] = useState(EXAM_DURATION);
   const [isFinished, setIsFinished] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const autoSubmitted = useRef(false);
 
   useEffect(() => {
     if (isStarted && !isFinished) {
       timerRef.current = setInterval(() => {
         setTimeLeft(prev => {
-          if (prev <= 1) {
-            return 0;
-          }
+          if (prev <= 1) return 0;
           return prev - 1;
         });
       }, 1000);
@@ -68,8 +77,7 @@ const Exam: React.FC = () => {
     };
   }, [isStarted, isFinished]);
 
-  const autoSubmitted = useRef(false);
-
+  // auto-submit when timer hits 0
   useEffect(() => {
     if (isStarted && timeLeft === 0 && !isFinished && !autoSubmitted.current) {
       autoSubmitted.current = true;
@@ -84,30 +92,30 @@ const Exam: React.FC = () => {
         if (q) saveAnswer(Number(qId), answer, answer === q.answer);
       });
 
-      const record = {
+      saveExamRecord({
         date: new Date().toISOString().slice(0, 10),
         score: Math.round((correctCount / examQuestions.length) * 100),
         total: examQuestions.length,
         correct: correctCount,
         answers: userAnswers,
-      };
-      saveExamRecord(record);
+      });
 
       setIsFinished(true);
       setShowResults(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);
 
   const handleStartExam = () => {
-    const questions = getRandomQuestions(100);
+    const questions = getRandomQuestions(EXAM_QUESTION_COUNT);
     setExamQuestions(questions);
     setCurrentQuestionIndex(0);
     setUserAnswers({});
     setIsStarted(true);
     setIsFinished(false);
     setShowResults(false);
-    setTimeLeft(90 * 60);
+    setTimeLeft(EXAM_DURATION);
+    autoSubmitted.current = false;
   };
 
   const handleAnswer = (questionId: number, answer: string) => {
@@ -143,19 +151,16 @@ const Exam: React.FC = () => {
 
     Object.entries(userAnswers).forEach(([qId, answer]) => {
       const q = examQuestions.find(eq => eq.id === Number(qId));
-      if (q) {
-        saveAnswer(Number(qId), answer, answer === q.answer);
-      }
+      if (q) saveAnswer(Number(qId), answer, answer === q.answer);
     });
 
-    const record = {
+    saveExamRecord({
       date: new Date().toISOString().slice(0, 10),
       score: Math.round((correctCount / examQuestions.length) * 100),
       total: examQuestions.length,
       correct: correctCount,
       answers: userAnswers,
-    };
-    saveExamRecord(record);
+    });
 
     setIsFinished(true);
     setShowResults(true);
@@ -168,31 +173,32 @@ const Exam: React.FC = () => {
     setExamQuestions([]);
     setCurrentQuestionIndex(0);
     setUserAnswers({});
-    setTimeLeft(90 * 60);
+    setTimeLeft(EXAM_DURATION);
+    autoSubmitted.current = false;
   };
 
   const formatTime = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   };
 
   const currentQuestion = examQuestions[currentQuestionIndex];
   const totalQuestions = examQuestions.length;
   const answeredCount = Object.keys(userAnswers).length;
   const progress = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
-
   const correctAnswers = Object.values(userAnswers).filter((answer, index) =>
     answer === examQuestions[index]?.answer
   ).length;
   const score = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+  const passed = score >= 80;
 
   return (
     <div>
       <Title level={2} style={{ color: 'var(--mei-theme-text-primary)' }}>模拟考试</Title>
       <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', marginBottom: 24 }}>
-        全真模拟ACP认证考试环境，测试您的学习成果
+        全真模拟考试环境，测试您的学习成果
       </Paragraph>
 
       {!isStarted ? (
@@ -205,9 +211,8 @@ const Exam: React.FC = () => {
                 description={
                   <ul style={{ paddingLeft: 20, marginTop: 8 }}>
                     <li>考试时间：90分钟</li>
-                    <li>题目数量：100道单选题</li>
+                    <li>题目数量：{EXAM_QUESTION_COUNT}道</li>
                     <li>及格分数：80分</li>
-                    <li>涵盖知识点：阿里云产品和服务</li>
                     <li>时间到自动提交</li>
                     <li>可提前交卷</li>
                   </ul>
@@ -319,7 +324,7 @@ const Exam: React.FC = () => {
                       title="总分"
                       value={score}
                       suffix="分"
-                      valueStyle={{ color: score >= 80 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 800, fontSize: 32 }}
+                      valueStyle={{ color: passed ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 800, fontSize: 32 }}
                     />
                   </Col>
                   <Col span={12}>
@@ -333,9 +338,9 @@ const Exam: React.FC = () => {
                 </Row>
 
                 <Alert
-                  message={<span style={{ fontWeight: 700 }}>{score >= 80 ? "恭喜通过！" : "未达到及格线"}</span>}
-                  description={score >= 80 ? "您已通过模拟考试，继续保持！" : "请继续努力，加强薄弱环节的学习。"}
-                  type={score >= 80 ? "success" : "error"}
+                  message={<span style={{ fontWeight: 700 }}>{passed ? '恭喜通过！' : '未达到及格线'}</span>}
+                  description={passed ? '您已通过模拟考试，继续保持！' : '请继续努力，加强薄弱环节的学习。'}
+                  type={passed ? 'success' : 'error'}
                   showIcon
                   style={{ marginTop: 24, borderRadius: 'var(--mei-radius-md)' }}
                 />
@@ -355,7 +360,9 @@ const Exam: React.FC = () => {
                         {userAnswers[question.id] === question.answer ? (
                           <Text style={{ color: 'var(--mei-color-success-base)', fontWeight: 600 }}> 正确</Text>
                         ) : (
-                          <Text style={{ color: 'var(--mei-color-error-base)', fontWeight: 600 }}> 错误 <span style={{ color: 'var(--mei-theme-text-secondary)', fontWeight: 400 }}>(正确答案: {question.answer})</span></Text>
+                          <Text style={{ color: 'var(--mei-color-error-base)', fontWeight: 600 }}>
+                            错误 <span style={{ color: 'var(--mei-theme-text-secondary)', fontWeight: 400 }}>(正确答案: {question.answer})</span>
+                          </Text>
                         )}
                       </div>
                     ))}

@@ -1,3 +1,5 @@
+import { getCurrentSubjectId, getCurrentTotalQuestions } from '../data/subject';
+
 export interface UserAnswer {
   answer: string;
   correct: boolean;
@@ -12,10 +14,10 @@ export interface ExamRecord {
   answers: Record<number, string>;
 }
 
-const KEYS = {
-  ANSWERS: 'acp_answers',
-  EXAM_HISTORY: 'acp_exam_history',
-} as const;
+function subjectKey(base: string): string {
+  const subj = getCurrentSubjectId();
+  return `${base}_${subj}`;
+}
 
 function getItem<T>(key: string, fallback: T): T {
   try {
@@ -37,13 +39,13 @@ function setItem<T>(key: string, value: T): void {
 // ---- User Answers ----
 
 export function getAnswers(): Record<number, UserAnswer> {
-  return getItem<Record<number, UserAnswer>>(KEYS.ANSWERS, {});
+  return getItem<Record<number, UserAnswer>>(subjectKey('acp_answers'), {});
 }
 
 export function saveAnswer(questionId: number, answer: string, correct: boolean): void {
   const all = getAnswers();
   all[questionId] = { answer, correct, timestamp: Date.now() };
-  setItem(KEYS.ANSWERS, all);
+  setItem(subjectKey('acp_answers'), all);
 }
 
 // ---- Computed Stats ----
@@ -61,7 +63,7 @@ export function getStats() {
   });
 
   return {
-    totalQuestions: 506, // known constant from question bank
+    totalQuestions: getCurrentTotalQuestions(),
     answeredQuestions,
     correctAnswers,
     wrongAnswers: answeredQuestions - correctAnswers,
@@ -80,21 +82,21 @@ export function getWrongQuestionIds(): number[] {
 export function removeWrongQuestion(questionId: number): void {
   const all = getAnswers();
   delete all[questionId];
-  setItem(KEYS.ANSWERS, all);
+  setItem(subjectKey('acp_answers'), all);
 }
 
 export function clearWrongQuestions(): void {
-  setItem(KEYS.ANSWERS, {});
+  setItem(subjectKey('acp_answers'), {});
 }
 
 // ---- Exam History ----
 
 export function getExamHistory(): ExamRecord[] {
-  return getItem<ExamRecord[]>(KEYS.EXAM_HISTORY, []);
+  return getItem<ExamRecord[]>(subjectKey('acp_exam_history'), []);
 }
 
 export function saveExamRecord(record: ExamRecord): void {
   const history = getExamHistory();
   history.unshift(record);
-  setItem(KEYS.EXAM_HISTORY, history);
+  setItem(subjectKey('acp_exam_history'), history);
 }

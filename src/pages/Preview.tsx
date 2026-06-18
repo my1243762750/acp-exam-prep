@@ -1,45 +1,52 @@
 import React, { useState, useMemo } from 'react';
-import { Button, Row, Col, Space, Pagination, Input } from 'antd';
+import { Button, Row, Col, Space, Pagination, Input, Select } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined, SearchOutlined } from '@ant-design/icons';
-import { questions } from '../data/questions';
+import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
 import QuestionCard from '../components/QuestionCard';
 
+const { Option } = Select;
 const PAGE_SIZE = 10;
 
 const Preview: React.FC = () => {
-  const [searchText, setSearchText] = useState('');
   const [showAll, setShowAll] = useState(false);
   const [showMap, setShowMap] = useState<{ [id: number]: boolean }>({});
   const [page, setPage] = useState(1);
+  const [searchText, setSearchText] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState<string>('');
 
-  // 过滤题目
-  const filteredQuestions = useMemo(() => {
-    if (!searchText) return questions;
-    const lowerSearch = searchText.toLowerCase();
-    return questions.filter(q => 
-      q.title.toLowerCase().includes(lowerSearch) ||
-      q.options.some(opt => opt.toLowerCase().includes(lowerSearch))
-    );
-  }, [searchText]);
+  const allQuestions = getCurrentQuestions();
+  const categories = getCurrentCategories();
 
-  const total = filteredQuestions.length;
+  const filtered = useMemo(() => {
+    let list = allQuestions;
+    if (searchText) {
+      const kw = searchText.toLowerCase();
+      list = list.filter(q => q.title.toLowerCase().includes(kw) || (q.explanation && q.explanation.toLowerCase().includes(kw)));
+    }
+    if (categoryFilter) {
+      list = list.filter(q => q.category === categoryFilter);
+    }
+    return list;
+  }, [allQuestions, searchText, categoryFilter]);
+
+  const total = filtered.length;
   const start = (page - 1) * PAGE_SIZE;
-  const pageQuestions = filteredQuestions.slice(start, start + PAGE_SIZE);
+  const pageQuestions = filtered.slice(start, start + PAGE_SIZE);
 
   const handleToggleAll = () => {
-    setShowAll((prev) => !prev);
+    const next = !showAll;
+    setShowAll(next);
     const newMap: { [id: number]: boolean } = {};
-    filteredQuestions.forEach(q => { newMap[q.id] = !showAll; });
+    pageQuestions.forEach(q => { newMap[q.id] = next; });
     setShowMap(newMap);
   };
 
   const handleToggleOne = (id: number) => {
-    setShowMap((prev) => ({ ...prev, [id]: !prev[id] }));
+    setShowMap(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  // 搜索变化时重置页码
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+  const handleSearch = (val: string) => {
+    setSearchText(val);
     setPage(1);
   };
 
@@ -67,26 +74,36 @@ const Preview: React.FC = () => {
           flexWrap: 'wrap',
           gap: 20
         }}>
-          <Space size="large" style={{ flex: 1, minWidth: 300 }}>
+          <Space size="large" style={{ flex: 1, minWidth: 300 }} wrap>
             <Input
               placeholder="搜索题目或选项内容..."
               prefix={<SearchOutlined style={{ color: 'var(--mei-color-primary-400)', fontSize: 18 }} />}
               value={searchText}
-              onChange={handleSearchChange}
+              onChange={e => handleSearch(e.target.value)}
               allowClear
               size="large"
               style={{ 
                 borderRadius: 'var(--mei-radius-lg)', 
-                width: '100%',
+                width: 280,
                 height: 52,
                 borderWidth: 2,
                 borderColor: 'var(--mei-theme-border-default)',
                 transition: 'all 0.3s'
               }}
             />
+            <Select
+              placeholder="分类筛选"
+              allowClear
+              value={categoryFilter || undefined}
+              onChange={val => { setCategoryFilter(val || ''); setPage(1); }}
+              style={{ width: 140 }}
+              size="large"
+            >
+              {categories.map(c => <Option key={c} value={c}>{c}</Option>)}
+            </Select>
           </Space>
           
-          <Space size="large">
+          <Space size="large" wrap>
             <Button 
               type={showAll ? 'default' : 'primary'} 
               icon={showAll ? <EyeInvisibleOutlined /> : <EyeOutlined />} 
@@ -124,22 +141,13 @@ const Preview: React.FC = () => {
                 showAnswer={!!showMap[q.id]}
                 questionNumber={start + idx + 1}
               />
-              <div style={{ 
-                position: 'absolute', 
-                top: 24, 
-                right: 24,
-                zIndex: 10
-              }}>
+              <div style={{ position: 'absolute', top: 24, right: 24, zIndex: 10 }}>
                 <Button
                   size="middle"
+                  type={showMap[q.id] ? 'default' : 'primary'}
                   icon={showMap[q.id] ? <EyeInvisibleOutlined /> : <EyeOutlined />}
                   onClick={() => handleToggleOne(q.id)}
-                  style={{ 
-                    borderRadius: 'var(--mei-radius-md)',
-                    borderColor: 'var(--mei-color-primary-300)',
-                    color: 'var(--mei-color-primary-600)',
-                    fontWeight: 500
-                  }}
+                  style={{ borderRadius: 'var(--mei-radius-md)' }}
                 >
                   {showMap[q.id] ? '隐藏答案' : '显示答案'}
                 </Button>
@@ -147,16 +155,9 @@ const Preview: React.FC = () => {
             </div>
           </Col>
         ))}
-        {total === 0 && (
-          <Col span={24}>
-            <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--mei-theme-text-tertiary)' }}>
-              未找到相关题目
-            </div>
-          </Col>
-        )}
       </Row>
 
-      {total > 0 && (
+      {total > PAGE_SIZE && (
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
           <Pagination
             current={page}

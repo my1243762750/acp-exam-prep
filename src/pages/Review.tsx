@@ -3,7 +3,8 @@ import { Card, Select, Button, Space, Typography, Row, Col, Tag, Empty, List } f
 import { ExclamationCircleOutlined, EyeOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
-import { questions, categories, Question } from '../data/questions';
+import type { Question } from '../data/questions';
+import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
 import { getWrongQuestionIds, removeWrongQuestion, clearWrongQuestions } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
@@ -33,10 +34,13 @@ const Review: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
   const [refreshKey, setRefreshKey] = useState(0);
 
+  const categories = getCurrentCategories();
+  const allQuestions = getCurrentQuestions();
+
   const wrongQuestionIds = useMemo(() => getWrongQuestionIds(), [refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
   const wrongQuestions = useMemo(() => {
-    return questions.filter(q => wrongQuestionIds.includes(q.id));
-  }, [wrongQuestionIds]);
+    return allQuestions.filter(q => wrongQuestionIds.includes(q.id));
+  }, [wrongQuestionIds, allQuestions]);
 
   const filteredQuestions = useMemo(() => {
     if (selectedCategory) {
@@ -83,9 +87,7 @@ const Review: React.FC = () => {
         <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
           <ReviewHeader>
             <div>
-              <Title level={4} style={{ margin: 0 }}>
-                错题管理
-              </Title>
+              <Title level={4} style={{ margin: 0 }}>错题管理</Title>
               <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: '4px 0 0 0' }}>
                 共 {wrongQuestions.length} 道错题，按分类筛选复习
               </Paragraph>

@@ -3,7 +3,8 @@ import { Card, Select, Button, Space, Typography, Row, Col, Tag, Progress } from
 import { PlayCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
-import { categories, getQuestionsByCategory, getRandomQuestions, Question } from '../data/questions';
+import type { Question } from '../data/questions';
+import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
 import { saveAnswer } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
@@ -26,6 +27,16 @@ const PracticeHeader = styled.div`
   gap: var(--mei-spacing-inline-md);
 `;
 
+function getQuestionsByCategory(category: string): Question[] {
+  return getCurrentQuestions().filter(q => q.category === category);
+}
+
+function getRandomQuestions(count: number): Question[] {
+  const all = getCurrentQuestions();
+  const shuffled = [...all].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
 const Practice: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [practiceQuestions, setPracticeQuestions] = useState<Question[]>([]);
@@ -33,6 +44,8 @@ const Practice: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
   const [showAnswer, setShowAnswer] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
+
+  const categories = getCurrentCategories();
 
   const handleStartPractice = () => {
     let questionsToPractice: Question[];

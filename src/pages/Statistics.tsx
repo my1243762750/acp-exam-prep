@@ -9,7 +9,7 @@ import {
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import styled from 'styled-components';
 import { getStats, getAnswers, getExamHistory } from '../utils/storage';
-import { questions, categories } from '../data/questions';
+import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
 
 const { Title, Paragraph } = Typography;
 
@@ -36,6 +36,8 @@ const Statistics: React.FC = () => {
   const stats = getStats();
   const answers = getAnswers();
   const examHistory = getExamHistory();
+  const questions = getCurrentQuestions();
+  const categories = getCurrentCategories();
 
   const accuracy = stats.answeredQuestions > 0
     ? Math.round((stats.correctAnswers / stats.answeredQuestions) * 100)
@@ -43,7 +45,6 @@ const Statistics: React.FC = () => {
   const progress = stats.totalQuestions > 0
     ? Math.round((stats.answeredQuestions / stats.totalQuestions) * 100)
     : 0;
-
   const hasData = stats.answeredQuestions > 0;
 
   const dailyMap = new Map<string, { questions: number; correct: number }>();
@@ -136,20 +137,13 @@ const Statistics: React.FC = () => {
             <div style={{ padding: '8px 0' }}>
               {hasData ? (
                 <>
-                  <Progress
-                    percent={progress}
-                    status="active"
-                    strokeColor="var(--mei-color-primary-500)"
-                    strokeWidth={12}
-                  />
+                  <Progress percent={progress} status="active" strokeColor="var(--mei-color-primary-500)" strokeWidth={12} />
                   <div style={{ marginTop: 12, color: 'var(--mei-theme-text-secondary)', fontWeight: 500 }}>
                     已完成 {stats.answeredQuestions} / {stats.totalQuestions} 题
                   </div>
                 </>
               ) : (
-                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>
-                  还没有答题记录
-                </Paragraph>
+                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>还没有答题记录</Paragraph>
               )}
             </div>
           </StyledCard>
@@ -160,7 +154,7 @@ const Statistics: React.FC = () => {
               {hasData ? (
                 <>
                   <Progress
-                    percent={stats.answeredQuestions > 0 ? Math.round((stats.wrongAnswers / stats.answeredQuestions) * 100) : 0}
+                    percent={Math.round((stats.wrongAnswers / stats.answeredQuestions) * 100)}
                     status="exception"
                     strokeColor="var(--mei-color-error-base)"
                     strokeWidth={12}
@@ -171,9 +165,7 @@ const Statistics: React.FC = () => {
                   </div>
                 </>
               ) : (
-                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>
-                  还没有答题记录
-                </Paragraph>
+                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>还没有答题记录</Paragraph>
               )}
             </div>
           </StyledCard>
@@ -188,23 +180,8 @@ const Statistics: React.FC = () => {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--mei-theme-border-default)" />
                 <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: 'var(--mei-theme-text-tertiary)' }} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: 'var(--mei-theme-text-tertiary)' }} domain={[0, 100]} />
-                <Tooltip 
-                  contentStyle={{ 
-                    borderRadius: 'var(--mei-radius-md)', 
-                    border: 'none', 
-                    boxShadow: 'var(--mei-shadow-md)',
-                    background: 'var(--mei-theme-bg-elevated)'
-                  }} 
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="score" 
-                  stroke="var(--mei-color-primary-500)" 
-                  strokeWidth={3}
-                  dot={{ r: 4, fill: 'var(--mei-color-primary-500)', strokeWidth: 2, stroke: '#fff' }}
-                  activeDot={{ r: 6, strokeWidth: 0 }}
-                  name="得分"
-                />
+                <Tooltip contentStyle={{ borderRadius: 'var(--mei-radius-md)', border: 'none', boxShadow: 'var(--mei-shadow-md)', background: 'var(--mei-theme-bg-elevated)' }} />
+                <Line type="monotone" dataKey="score" stroke="var(--mei-color-primary-500)" strokeWidth={3} dot={{ r: 4, fill: 'var(--mei-color-primary-500)', strokeWidth: 2, stroke: '#fff' }} activeDot={{ r: 6, strokeWidth: 0 }} name="得分" />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -218,26 +195,12 @@ const Statistics: React.FC = () => {
               <div style={{ padding: '16px 0' }}>
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
-                    <Pie
-                      data={categoryData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
+                    <Pie data={categoryData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value">
                       {categoryData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip 
-                      contentStyle={{ 
-                        borderRadius: 'var(--mei-radius-md)', 
-                        border: 'none', 
-                        boxShadow: 'var(--mei-shadow-md)' 
-                      }} 
-                    />
+                    <Tooltip contentStyle={{ borderRadius: 'var(--mei-radius-md)', border: 'none', boxShadow: 'var(--mei-shadow-md)' }} />
                   </PieChart>
                 </ResponsiveContainer>
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12, marginTop: 16 }}>
@@ -261,29 +224,17 @@ const Statistics: React.FC = () => {
             {examHistory.length > 0 ? (
               <div style={{ maxHeight: 340, overflowY: 'auto', paddingRight: 8 }}>
                 {examHistory.map((record, index) => (
-                  <div key={index} style={{ 
-                    padding: '16px 0', 
-                    borderBottom: index < examHistory.length - 1 ? '1px solid var(--mei-theme-border-default)' : 'none' 
-                  }}>
+                  <div key={index} style={{ padding: '16px 0', borderBottom: index < examHistory.length - 1 ? '1px solid var(--mei-theme-border-default)' : 'none' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
                         <div style={{ fontWeight: 700, fontSize: 16 }}>{record.date}</div>
-                        <div style={{ color: 'var(--mei-theme-text-secondary)', fontSize: 13, marginTop: 4 }}>
-                          正确: {record.correct}/{record.total}
-                        </div>
+                        <div style={{ color: 'var(--mei-theme-text-secondary)', fontSize: 13, marginTop: 4 }}>正确: {record.correct}/{record.total}</div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ 
-                          fontSize: 22, 
-                          fontWeight: 800,
-                          color: record.score >= 80 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)'
-                        }}>
+                        <div style={{ fontSize: 22, fontWeight: 800, color: record.score >= 80 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)' }}>
                           {record.score}分
                         </div>
-                        <Tag 
-                          color={record.score >= 80 ? 'green' : 'red'}
-                          style={{ borderRadius: 'var(--mei-radius-full)', marginTop: 4 }}
-                        >
+                        <Tag color={record.score >= 80 ? 'green' : 'red'} style={{ borderRadius: 'var(--mei-radius-full)', marginTop: 4 }}>
                           {record.score >= 80 ? '通过' : '未通过'}
                         </Tag>
                       </div>
@@ -306,33 +257,25 @@ const Statistics: React.FC = () => {
             <Col xs={24} md={12}>
               <div style={{ padding: '8px 0' }}>
                 <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>学习趋势</Title>
-                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
-                  您的学习趋势良好，建议继续保持每日学习习惯，稳步提升成绩。
-                </Paragraph>
+                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>您的学习趋势良好，建议继续保持每日学习习惯。</Paragraph>
               </div>
             </Col>
             <Col xs={24} md={12}>
               <div style={{ padding: '8px 0' }}>
                 <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>重点突破</Title>
-                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
-                  重点关注错题知识点，加强薄弱环节的学习。
-                </Paragraph>
+                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>重点关注错题知识点，加强薄弱环节的学习。</Paragraph>
               </div>
             </Col>
             <Col xs={24} md={12}>
               <div style={{ padding: '8px 0' }}>
                 <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>时间管理</Title>
-                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
-                  建议每天保持一定学习时间，保持学习的连续性。
-                </Paragraph>
+                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>建议每天保持一定学习时间，保持学习的连续性。</Paragraph>
               </div>
             </Col>
             <Col xs={24} md={12}>
               <div style={{ padding: '8px 0' }}>
                 <Title level={5} style={{ color: 'var(--mei-color-primary-600)' }}>目标设定</Title>
-                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>
-                  设定每周学习目标，逐步完成所有知识点。
-                </Paragraph>
+                <Paragraph style={{ color: 'var(--mei-theme-text-secondary)' }}>设定每周学习目标，逐步完成所有知识点。</Paragraph>
               </div>
             </Col>
           </Row>
