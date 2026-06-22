@@ -6,7 +6,9 @@
 
 | 首页 | 练习模式 |
 |------|----------|
-| ![首页](screenshots/home.png) | ![练习模式](screenshots/practice.png) |
+| ![首页](public/screenshots/home.png) | ![练习模式](public/screenshots/practice.png) |
+
+首页展示当前题库信息、答题进度统计（正确率/已答题数/学习天数）以及各功能模块的快捷入口。练习模式支持按分类筛选或随机抽题，顶部显示答题进度条和答题卡，每题可查看答案与解析。
 
 ## 功能
 
