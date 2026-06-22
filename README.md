@@ -83,19 +83,43 @@ src/
   "name": "示例题库",
   "shortName": "示例",
   "description": "导入题库说明",
-  "categories": ["OSS"],
   "questions": [
     {
       "id": 1,
-      "type": "单选题",
+      "type": "single",
       "title": "OSS 的基本数据单元是什么？",
       "options": ["A.Object", "B.Bucket", "C.Service", "D.安全组"],
       "answer": "A",
       "explanation": "OSS 的基本数据单元是对象 Object。",
+      "category": "OSS"
+    },
+    {
+      "id": 2,
+      "type": "multiple",
+      "title": "以下哪些是阿里云的安全服务？（多选）",
+      "options": ["A.云盾", "B.安骑士", "C.DDoS高防IP", "D.SLB"],
+      "answer": "ABC",
+      "explanation": "SLB是负载均衡服务，不属于安全服务。",
+      "category": "安全"
+    },
+    {
+      "id": 3,
+      "type": "judge",
+      "title": "阿里云对象存储OSS支持图片处理功能。",
+      "options": ["A.对", "B.错"],
+      "answer": "A",
+      "explanation": "OSS支持图片处理，包括缩放、裁剪、水印等功能。",
       "category": "OSS"
     }
   ]
 }
 ```
 
-题目类型支持 `单选题`、`多选题`、`判断题`。
+### 字段说明
+- `type`: 题目类型，必须为英文值：`"single"` (单选题), `"multiple"` (多选题), `"judge"` (判断题)。
+- `options`: 选项数组。若是判断题，通常为两个元素（如 `["A.对", "B.错"]`）。
+- `answer`: 答案。多选题答案为无分隔的连续大写字母（如 `"ABC"`）。
+- `category`: 题目分类，用于按分类练习和进度统计。
+
+> [!WARNING]
+> **本地存储限制**：练习进度、错题本和导入的题库数据均保存在浏览器 `localStorage` 中。`localStorage` 的容量上限一般为 5MB，请避免导入超大型题库。另外，清理浏览器缓存或使用无痕模式会导致刷题数据丢失，请妥善备份您的 JSON 题库源文件。
