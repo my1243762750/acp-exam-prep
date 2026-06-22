@@ -2,6 +2,8 @@
 
 阿里云 ACP 认证刷题工具。项目是一个纯前端 React 应用，内置题库，也支持导入 JSON 题库；练习记录、错题和考试历史保存在浏览器 localStorage。
 
+在线体验：[acp-exam-prep.vercel.app](https://acp-exam-prep.vercel.app/)
+
 ## 截图
 
 | 首页 | 练习模式 |
