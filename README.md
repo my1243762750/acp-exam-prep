@@ -1,4 +1,7 @@
-# ACP 考试助手
+<div align="center">
+  <img src="./public/logo.svg" width="120" height="120" alt="ACP Exam Prep Logo" />
+  <h1>ACP 考试助手</h1>
+</div>
 
 阿里云 ACP 认证刷题工具。项目是一个纯前端 React 应用，内置题库，也支持导入 JSON 题库；练习记录、错题和考试历史保存在浏览器 localStorage。
 
