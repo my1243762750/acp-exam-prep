@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, App as AntApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -15,18 +15,20 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <ConfigProvider locale={zhCN}>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/practice" element={<Practice />} />
-            <Route path="/exam" element={<Exam />} />
-            <Route path="/review" element={<Review />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/preview" element={<Preview />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <AntApp>
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/practice" element={<Practice />} />
+              <Route path="/exam" element={<Exam />} />
+              <Route path="/review" element={<Review />} />
+              <Route path="/statistics" element={<Statistics />} />
+              <Route path="/preview" element={<Preview />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </AntApp>
     </ConfigProvider>
   );
 };

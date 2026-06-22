@@ -15,22 +15,22 @@ import { getStats } from '../utils/storage';
 const { Title, Paragraph } = Typography;
 
 const statColors = [
-  { color: 'var(--mei-color-blue-600)', bg: 'var(--mei-color-blue-50)' },
-  { color: 'var(--mei-color-primary-600)', bg: 'var(--mei-color-primary-50)' },
   { color: 'var(--mei-color-primary-500)', bg: 'var(--mei-color-primary-50)' },
-  { color: 'var(--mei-color-blue-500)', bg: 'var(--mei-color-blue-50)' }
+  { color: 'var(--mei-color-primary-500)', bg: 'var(--mei-color-primary-50)' },
+  { color: 'var(--mei-color-primary-500)', bg: 'var(--mei-color-primary-50)' },
+  { color: 'var(--mei-color-primary-500)', bg: 'var(--mei-color-primary-50)' }
 ];
 
 const StatCard = styled(Card)<{ bgcolor: string }>`
   margin-bottom: var(--mei-spacing-stack-md);
   border-radius: var(--mei-radius-lg);
-  border: 1px solid var(--mei-theme-border-default);
-  box-shadow: var(--mei-shadow-sm);
+  border: 1px solid var(--mei-color-neutral-200);
+  box-shadow: var(--mei-shadow-md);
   background: ${(props) => props.bgcolor};
   transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out);
   
   &:hover {
-    box-shadow: var(--mei-shadow-md);
+    box-shadow: var(--mei-shadow-lg);
   }
   .ant-card-body {
     padding: var(--mei-spacing-inset-lg);
@@ -53,18 +53,19 @@ const QuickActionCard = styled(Card)<{ basecolor: string; lightcolor: string }>`
   text-align: center;
   cursor: pointer;
   border-radius: var(--mei-radius-xl);
-  border: 1px solid var(--mei-theme-border-default);
+  border: 1px solid var(--mei-color-neutral-200);
   background: var(--mei-theme-bg-elevated);
   overflow: hidden;
   position: relative;
-  box-shadow: var(--mei-shadow-sm);
-  transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out),
-              background-color var(--mei-motion-fast) var(--mei-ease-out),
+  box-shadow: var(--mei-shadow-md);
+  transition: transform var(--mei-motion-fast) var(--mei-ease-out),
+              box-shadow var(--mei-motion-fast) var(--mei-ease-out),
               border-color var(--mei-motion-fast) var(--mei-ease-out);
 
   &:hover {
+    transform: translateY(-2px);
     border-color: ${(props) => props.basecolor};
-    box-shadow: var(--mei-shadow-md);
+    box-shadow: var(--mei-shadow-lg);
     background: ${(props) => props.lightcolor};
 
     .icon-wrapper {
@@ -85,7 +86,7 @@ const QuickActionCard = styled(Card)<{ basecolor: string; lightcolor: string }>`
 `;
 
 const IconWrapper = styled.div<{ color: string }>`
-  font-size: 56px;
+  font-size: 48px;
   margin-bottom: var(--mei-spacing-stack-md);
   color: ${(props) => props.color};
   transition: color var(--mei-motion-fast) var(--mei-ease-out);
@@ -110,8 +111,8 @@ const Home: React.FC = () => {
       description: '按分类练习题目',
       icon: <BookOutlined />,
       path: '/practice',
-      basecolor: 'var(--mei-color-blue-500)',
-      lightcolor: 'var(--mei-color-blue-50)'
+      basecolor: 'var(--mei-color-primary-500)',
+      lightcolor: 'var(--mei-color-primary-50)'
     },
     {
       title: '模拟考试',
@@ -134,7 +135,7 @@ const Home: React.FC = () => {
       description: '查看学习进度',
       icon: <TrophyOutlined />,
       path: '/statistics',
-      basecolor: 'var(--mei-color-primary-400)',
+      basecolor: 'var(--mei-color-primary-500)',
       lightcolor: 'var(--mei-color-primary-50)'
     }
   ];
@@ -188,7 +189,7 @@ const Home: React.FC = () => {
               percent={progress}
               status="active"
               strokeColor={{
-                '0%': 'var(--mei-color-blue-400)',
+                '0%': 'var(--mei-color-primary-400)',
                 '100%': 'var(--mei-color-primary-600)',
               }}
               strokeWidth={12}

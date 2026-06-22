@@ -16,19 +16,19 @@ const { Title, Paragraph } = Typography;
 const StyledCard = styled(Card)`
   margin-bottom: var(--mei-spacing-stack-md);
   border-radius: var(--mei-radius-lg);
-  box-shadow: var(--mei-shadow-sm);
-  border: 1px solid var(--mei-theme-border-default);
+  box-shadow: var(--mei-shadow-md);
+  border: 1px solid var(--mei-color-neutral-200);
   background: var(--mei-theme-bg-elevated);
 `;
 
 const chartColors = [
   'var(--mei-color-error-base)',
-  'var(--mei-color-blue-500)',
+  'var(--mei-color-primary-400)',
   'var(--mei-color-success-base)',
   'var(--mei-color-warning-base)',
-  'var(--mei-color-purple-500)',
   'var(--mei-color-primary-500)',
-  'var(--mei-color-blue-700)',
+  'var(--mei-color-primary-600)',
+  'var(--mei-color-neutral-400)',
   'var(--mei-color-neutral-500)',
 ];
 
@@ -103,7 +103,7 @@ const Statistics: React.FC = () => {
             <Statistic
               title={<span style={{ fontWeight: 600 }}>已答题数</span>}
               value={stats.answeredQuestions}
-              prefix={<CheckCircleOutlined style={{ color: 'var(--mei-color-blue-500)' }} />}
+              prefix={<CheckCircleOutlined style={{ color: 'var(--mei-color-primary-400)' }} />}
               valueStyle={{ fontWeight: 700 }}
             />
           </StyledCard>
@@ -124,7 +124,7 @@ const Statistics: React.FC = () => {
             <Statistic
               title={<span style={{ fontWeight: 600 }}>学习天数</span>}
               value={stats.studyDays}
-              prefix={<ClockCircleOutlined style={{ color: 'var(--mei-color-purple-500)' }} />}
+              prefix={<ClockCircleOutlined style={{ color: 'var(--mei-color-primary-500)' }} />}
               valueStyle={{ fontWeight: 700 }}
             />
           </StyledCard>

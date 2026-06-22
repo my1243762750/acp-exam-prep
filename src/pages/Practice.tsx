@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Card, Select, Button, Space, Typography, Row, Col, Tag, Progress } from 'antd';
-import { PlayCircleOutlined, ReloadOutlined } from '@ant-design/icons';
+import { Card, Select, Button, Space, Typography, Tag, Progress } from 'antd';
+import { PlayCircleOutlined, ReloadOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
+import AnswerCard from '../components/AnswerCard';
 import type { Question } from '../data/questions';
 import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
 import { saveAnswer } from '../utils/storage';
@@ -18,15 +19,6 @@ const StyledCard = styled(Card)`
   box-shadow: none;
 `;
 
-const PracticeHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--mei-spacing-stack-lg);
-  flex-wrap: wrap;
-  gap: var(--mei-spacing-inline-md);
-`;
-
 function getQuestionsByCategory(category: string): Question[] {
   return getCurrentQuestions().filter(q => q.category === category);
 }
@@ -36,6 +28,35 @@ function getRandomQuestions(count: number): Question[] {
   const shuffled = [...all].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
+
+const PracticeLayout = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+  position: relative;
+  
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const QuestionSection = styled.div`
+  min-width: 0;
+`;
+
+const SidebarSection = styled.div`
+  position: sticky;
+  top: 88px; // Below header + spacing
+  height: calc(100vh - 112px - 72px); // Viewport - Header - Footer
+  min-width: 300px;
+
+  @media (max-width: 992px) {
+    position: static;
+    height: auto;
+    margin-bottom: 24px;
+  }
+`;
 
 const Practice: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -68,13 +89,15 @@ const Practice: React.FC = () => {
     }));
   };
 
-  const handleShowAnswer = () => {
-    const q = practiceQuestions[currentQuestionIndex];
-    const userAns = userAnswers[q.id];
-    if (userAns) {
-      saveAnswer(q.id, userAns, userAns === q.answer);
+  const handleToggleAnswer = () => {
+    if (!showAnswer) {
+      const q = practiceQuestions[currentQuestionIndex];
+      const userAns = userAnswers[q.id];
+      if (userAns) {
+        saveAnswer(q.id, userAns, userAns === q.answer);
+      }
     }
-    setShowAnswer(true);
+    setShowAnswer(prev => !prev);
   };
 
   const handleNextQuestion = () => {
@@ -105,12 +128,7 @@ const Practice: React.FC = () => {
   const progress = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   return (
-    <div>
-      <Title level={2} style={{ color: 'var(--mei-theme-text-primary)' }}>练习模式</Title>
-      <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', marginBottom: 24 }}>
-        选择分类进行针对性练习，或随机练习题目
-      </Paragraph>
-
+    <div style={{ paddingBottom: 80 }}>
       {!isStarted ? (
         <StyledCard>
           <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
@@ -145,113 +163,106 @@ const Practice: React.FC = () => {
         </StyledCard>
       ) : (
         <div>
-          <StyledCard>
-            <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
-              <PracticeHeader>
-                <div>
-                  <Title level={4} style={{ margin: 0 }}>
-                    练习进度
-                    {selectedCategory && <Tag color="blue" style={{ marginLeft: 12 }}>{selectedCategory}</Tag>}
-                  </Title>
-                  <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: '4px 0 0 0' }}>
-                    第 {currentQuestionIndex + 1} 题 / 共 {totalQuestions} 题
-                  </Paragraph>
+          <PracticeLayout>
+            <QuestionSection>
+              <StyledCard>
+                <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+                    <div>
+                      <Title level={4} style={{ margin: 0 }}>
+                        练习进度
+                        {selectedCategory && <Tag color="blue" style={{ marginLeft: 12 }}>{selectedCategory}</Tag>}
+                      </Title>
+                      <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: '4px 0 0 0' }}>
+                        第 {currentQuestionIndex + 1} 题 / 共 {totalQuestions} 题
+                      </Paragraph>
+                    </div>
+                    <Button icon={<ReloadOutlined />} onClick={handleReset} type="default">
+                      重新开始
+                    </Button>
+                  </div>
+                  <Progress percent={progress} status="active" strokeColor="var(--mei-color-primary-500)" />
                 </div>
-                <Space>
-                  <Button icon={<ReloadOutlined />} onClick={handleReset} ghost type="primary">
-                    重新开始
-                  </Button>
-                </Space>
-              </PracticeHeader>
-              <Progress percent={progress} status="active" strokeColor="var(--mei-color-primary-500)" />
-            </div>
-          </StyledCard>
+              </StyledCard>
 
-          {currentQuestion && (
-            <QuestionCard
-              key={currentQuestion.id}
-              question={currentQuestion}
-              onAnswer={handleAnswer}
-              showAnswer={showAnswer}
-              userAnswer={userAnswers[currentQuestion.id]}
-              questionNumber={currentQuestionIndex + 1}
-            />
-          )}
-
-          <StyledCard>
-            <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
-              <Row gutter={24} justify="center">
-                <Col>
-                  <Button
-                    size="large"
-                    disabled={currentQuestionIndex === 0}
-                    onClick={handlePrevQuestion}
-                    style={{ minWidth: 120, borderRadius: 'var(--mei-radius-md)' }}
-                  >
-                    上一题
-                  </Button>
-                </Col>
-                <Col>
-                  {!showAnswer ? (
+              {currentQuestion && (
+                <div style={{ position: 'relative' }}>
+                  <QuestionCard
+                    key={currentQuestion.id}
+                    question={currentQuestion}
+                    onAnswer={handleAnswer}
+                    showAnswer={showAnswer}
+                    userAnswer={userAnswers[currentQuestion.id]}
+                    questionNumber={currentQuestionIndex + 1}
+                  />
+                  <div style={{ position: 'absolute', top: 24, right: 24, zIndex: 10 }}>
                     <Button
-                      type="primary"
-                      size="large"
-                      onClick={handleShowAnswer}
-                      disabled={!userAnswers[currentQuestion?.id]}
-                      style={{ minWidth: 120, borderRadius: 'var(--mei-radius-md)' }}
+                      size="middle"
+                      type={showAnswer ? 'default' : 'primary'}
+                      icon={showAnswer ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+                      onClick={handleToggleAnswer}
+                      style={{ borderRadius: 'var(--mei-radius-md)' }}
                     >
-                      查看答案
+                      {showAnswer ? '隐藏答案' : '显示答案'}
                     </Button>
-                  ) : (
-                    <Button
-                      type="primary"
-                      size="large"
-                      onClick={handleNextQuestion}
-                      disabled={currentQuestionIndex === totalQuestions - 1}
-                      style={{ minWidth: 120, borderRadius: 'var(--mei-radius-md)' }}
-                    >
-                      下一题
-                    </Button>
-                  )}
-                </Col>
-              </Row>
-            </div>
-          </StyledCard>
+                  </div>
+                </div>
+              )}
+            </QuestionSection>
 
-          {showAnswer && (
-            <StyledCard title={<span style={{ fontWeight: 700 }}>答题统计</span>}>
-              <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
-                <Row gutter={[24, 24]}>
-                  <Col span={8}>
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: 'var(--mei-color-primary-500)' }}>
-                        {answeredCount}
-                      </div>
-                      <div style={{ color: 'var(--mei-theme-text-secondary)' }}>已答题数</div>
-                    </div>
-                  </Col>
-                  <Col span={8}>
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: 'var(--mei-color-success-base)' }}>
-                        {Object.values(userAnswers).filter((answer, index) =>
-                          answer === practiceQuestions[index]?.answer
-                        ).length}
-                      </div>
-                      <div style={{ color: 'var(--mei-theme-text-secondary)' }}>正确题数</div>
-                    </div>
-                  </Col>
-                  <Col span={8}>
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '28px', fontWeight: 'bold', color: 'var(--mei-color-warning-base)' }}>
-                        {totalQuestions - answeredCount}
-                      </div>
-                      <div style={{ color: 'var(--mei-theme-text-secondary)' }}>未答题数</div>
-                    </div>
-                  </Col>
-                </Row>
+            <SidebarSection>
+              <AnswerCard
+                questions={practiceQuestions}
+                userAnswers={userAnswers}
+                showAnswer={showAnswer}
+                currentIndex={currentQuestionIndex}
+                onNavigate={(index) => { setCurrentQuestionIndex(index); setShowAnswer(false); }}
+              />
+            </SidebarSection>
+          </PracticeLayout>
+
+          <div style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 200,
+            right: 0,
+            height: 80,
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderTop: '1px solid var(--mei-theme-border-default)',
+            padding: '0 40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 -4px 12px rgba(0,0,0,0.05)',
+            zIndex: 1000
+          }}>
+            <div style={{ maxWidth: 800, width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Button
+                size="large"
+                disabled={currentQuestionIndex === 0}
+                onClick={handlePrevQuestion}
+                style={{ minWidth: 120, height: 48, borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
+              >
+                上一题
+              </Button>
+              
+              <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--mei-theme-text-secondary)' }}>
+                第 <span style={{ color: 'var(--mei-color-primary-600)' }}>{currentQuestionIndex + 1}</span> / {totalQuestions} 题
               </div>
-            </StyledCard>
-          )}
+
+              <Button
+                type="primary"
+                size="large"
+                onClick={handleNextQuestion}
+                disabled={currentQuestionIndex === totalQuestions - 1}
+                style={{ minWidth: 120, height: 48, borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
+              >
+                下一题
+              </Button>
+            </div>
+          </div>
         </div>
       )}
     </div>

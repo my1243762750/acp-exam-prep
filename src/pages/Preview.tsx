@@ -3,6 +3,7 @@ import { Button, Row, Col, Space, Pagination, Input, Select, Tooltip } from 'ant
 import { EyeOutlined, EyeInvisibleOutlined, SearchOutlined, SwapOutlined } from '@ant-design/icons';
 import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
 import QuestionCard from '../components/QuestionCard';
+import AnswerCard from '../components/AnswerCard';
 
 const { Option } = Select;
 const PAGE_SIZE = 10;
@@ -146,6 +147,12 @@ const Preview: React.FC = () => {
           </Space>
         </div>
       </div>
+
+      <AnswerCard
+        questions={pageQuestions}
+        userAnswers={{}}
+        showAnswer={false}
+      />
 
       <Row gutter={[0, 24]}>
         {pageQuestions.map((q, idx) => (

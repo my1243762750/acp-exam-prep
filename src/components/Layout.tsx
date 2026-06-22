@@ -23,9 +23,8 @@ const MeiLogo = () => (
   <svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="mei-mark-gradient" x1="104" y1="88" x2="408" y2="424" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#3B82F6"/>
-        <stop offset="0.56" stop-color="#6C5CE7"/>
-        <stop offset="1" stop-color="#8B5CF6"/>
+        <stop offset="0" stop-color="#6366F1"/>
+        <stop offset="1" stop-color="#4F46E5"/>
       </linearGradient>
     </defs>
     <rect x="72" y="72" width="368" height="368" rx="84" fill="url(#mei-mark-gradient)"/>
@@ -51,7 +50,7 @@ const LogoRow = styled.div`
 
 const StyledSider = styled(Sider)`
   background: var(--mei-theme-bg-page) !important;
-  border-right: 1px solid var(--mei-theme-border-default);
+  border-right: 1px solid var(--mei-color-neutral-200);
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
   min-width: 200px !important;
   max-width: 200px !important;
@@ -74,7 +73,7 @@ const StyledSider = styled(Sider)`
 const StyledHeader = styled(Header)`
   background: var(--mei-theme-bg-page) !important;
   color: var(--mei-theme-text-primary);
-  border-bottom: 1px solid var(--mei-theme-border-default);
+  border-bottom: 1px solid var(--mei-color-neutral-200);
   display: flex;
   align-items: center;
   height: 64px !important;
@@ -90,7 +89,7 @@ const StyledContent = styled(Content)`
   background: var(--mei-theme-bg-page);
   min-height: calc(100vh - 64px);
   padding: var(--mei-spacing-stack-xl) 0;
-  max-width: 1040px;
+  max-width: 1280px;
   margin: 0 auto;
   width: 100%;
 `;
@@ -174,7 +173,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <LogoBar>
           <LogoRow style={{ justifyContent: collapsed ? 'center' : 'flex-start' }}>
             <MeiLogo />
-            {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-600)', whiteSpace: 'nowrap' }}>{subject.shortName} 助手</span>}
+            {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-500)', whiteSpace: 'nowrap' }}>{subject.shortName} 助手</span>}
           </LogoRow>
           {!collapsed && allSubjects.length > 1 && (
             <div className="subject-selector" style={{ width: '100%', marginTop: 8 }}>

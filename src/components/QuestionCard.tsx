@@ -31,7 +31,7 @@ const QuestionTitle = styled.div`
   color: var(--mei-theme-text-primary);
 `;
 
-const OptionItem = styled.div<{ isSelected?: boolean; isCorrect?: boolean; showAnswer?: boolean }>`
+const OptionItem = styled.div<{ $isSelected?: boolean; $isCorrect?: boolean; $showAnswer?: boolean }>`
   padding: var(--mei-spacing-inset-md) var(--mei-spacing-inline-lg);
   border: 1px solid var(--mei-theme-border-default);
   border-radius: var(--mei-radius-md);
@@ -49,20 +49,20 @@ const OptionItem = styled.div<{ isSelected?: boolean; isCorrect?: boolean; showA
     background-color: var(--mei-color-primary-50);
   }
   
-  ${props => props.isSelected && !props.showAnswer && `
+  ${props => props.$isSelected && !props.$showAnswer && `
     border-color: var(--mei-color-primary-500);
     background: var(--mei-color-primary-50);
     box-shadow: var(--mei-shadow-sm);
     font-weight: 500;
   `}
   
-  ${props => props.showAnswer && props.isCorrect && `
+  ${props => props.$showAnswer && props.$isCorrect && `
     border-color: var(--mei-color-success-base);
     background: var(--mei-color-success-light);
     color: var(--mei-color-success-dark);
   `}
   
-  ${props => props.showAnswer && props.isSelected && !props.isCorrect && `
+  ${props => props.$showAnswer && props.$isSelected && !props.$isCorrect && `
     border-color: var(--mei-color-error-base);
     background: var(--mei-color-error-light);
     color: var(--mei-color-error-dark);
@@ -144,9 +144,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             return (
               <OptionItem
                 key={index}
-                isSelected={isSelected}
-                isCorrect={isCorrectOption}
-                showAnswer={showAnswer}
+                $isSelected={isSelected}
+                $isCorrect={isCorrectOption}
+                $showAnswer={showAnswer}
                 onClick={() => handleOptionSelect(optionValue)}
               >
                 <Radio value={optionValue} style={{ marginRight: 8 }}>

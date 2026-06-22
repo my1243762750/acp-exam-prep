@@ -45,29 +45,34 @@ code {
 }
 
 .ant-menu-item {
-  color: var(--mei-theme-text-secondary) !important;
+  color: var(--mei-color-neutral-600) !important;
   font-weight: var(--mei-font-weight-medium);
   border-radius: var(--mei-radius-md) !important;
-  margin: var(--mei-spacing-stack-xs) 0 !important; /* Remove horizontal margin from the item itself */
-  width: 100% !important; /* Ensure item takes full width of the padded container */
+  margin: var(--mei-spacing-stack-xs) 0 !important;
+  width: 100% !important;
+  transition: all var(--mei-motion-fast) var(--mei-ease-out);
+}
+
+.ant-menu-item:hover {
+  color: var(--mei-theme-text-primary) !important;
 }
 
 .ant-menu-item-selected {
   background: var(--mei-color-primary-50) !important;
-  color: var(--mei-color-primary-600) !important;
-  font-weight: var(--mei-font-weight-bold);
+  color: var(--mei-color-primary-500) !important;
+  font-weight: var(--mei-font-weight-semibold);
 }
 
 .ant-card {
   background: var(--mei-theme-bg-elevated) !important;
   border-radius: var(--mei-radius-lg) !important;
-  box-shadow: var(--mei-shadow-sm) !important;
-  border: 1px solid var(--mei-theme-border-default) !important;
+  box-shadow: var(--mei-shadow-md) !important;
+  border: 1px solid var(--mei-color-neutral-200) !important;
   transition: box-shadow var(--mei-motion-fast) var(--mei-ease-out) !important;
 }
 
 .ant-card:hover {
-  box-shadow: var(--mei-shadow-md) !important;
+  box-shadow: var(--mei-shadow-lg) !important;
 }
 
 .ant-btn-primary {
@@ -104,8 +109,8 @@ code {
 }
 
 .ant-tag-blue {
-  background: var(--mei-color-blue-50) !important;
-  color: var(--mei-color-blue-600) !important;
+  background: var(--mei-color-primary-50) !important;
+  color: var(--mei-color-primary-500) !important;
 }
 
 .ant-tag-green {
@@ -114,8 +119,8 @@ code {
 }
 
 .ant-tag-purple {
-  background: var(--mei-color-primary-50) !important;
-  color: var(--mei-color-primary-600) !important;
+  background: var(--mei-color-purple-50) !important;
+  color: var(--mei-color-purple-600) !important;
 }
 
 .ant-tag-orange {
@@ -125,7 +130,7 @@ code {
 
 .ant-tag-red {
   background: var(--mei-color-error-light) !important;
-  color: var(--mei-color-error-dark) !important;
+  color: var(--mei-color-error-base) !important;
 }
 
 .ant-select-selector, .ant-input {
