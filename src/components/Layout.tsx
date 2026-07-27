@@ -176,7 +176,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <LogoBar>
           <LogoRow style={{ justifyContent: collapsed ? 'center' : 'flex-start' }}>
             <MeiLogo />
-            {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-500)', whiteSpace: 'nowrap' }}>认证考试助手</span>}
+            {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-500)', whiteSpace: 'nowrap' }}>考试助手</span>}
           </LogoRow>
           {!collapsed && allSubjects.length > 1 && (
             <div className="subject-selector" style={{ width: '100%', marginTop: 8 }}>
@@ -208,7 +208,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               size="large"
               icon={<UploadOutlined />}
               onClick={() => setImportOpen(true)}
-              style={{ borderRadius: 'var(--mei-radius-md)' }}
+              style={{ borderRadius: 'var(--mei-radius-md)', fontSize: 14 }}
             >
               导入题库
             </Button>
