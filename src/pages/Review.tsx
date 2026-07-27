@@ -25,6 +25,21 @@ const ReviewHeader = styled.div`
   margin-bottom: var(--mei-spacing-stack-lg);
   flex-wrap: wrap;
   gap: var(--mei-spacing-inline-md);
+
+  @media (max-width: 768px) {
+    align-items: stretch;
+
+    > .ant-space {
+      width: 100%;
+      display: flex;
+      gap: 8px !important;
+    }
+
+    .ant-select {
+      min-width: 0;
+      flex: 1;
+    }
+  }
 `;
 
 const Review: React.FC = () => {

@@ -51,7 +51,76 @@ const SidebarSection = styled.div`
   @media (max-width: 992px) {
     position: static;
     height: auto;
+    min-width: 0;
     margin-bottom: 24px;
+  }
+`;
+
+const AnswerToggle = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    top: 12px;
+    right: 12px;
+
+    .ant-btn-icon + span {
+      display: none;
+    }
+  }
+`;
+
+const PageFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 200px;
+  right: 0;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--mei-theme-border-default);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    left: 0;
+    height: 72px;
+    padding: 0 12px;
+  }
+`;
+
+const FooterContent = styled.div`
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  .ant-btn {
+    min-width: 120px;
+    height: 48px;
+  }
+
+  @media (max-width: 768px) {
+    gap: 8px;
+
+    .ant-btn {
+      min-width: 0;
+      flex: 1;
+      padding-inline: 12px;
+    }
+
+    .question-counter {
+      white-space: nowrap;
+      font-size: 13px !important;
+    }
   }
 `;
 
@@ -159,7 +228,7 @@ const Practice: React.FC = () => {
                 size="large"
                 icon={<PlayCircleOutlined />}
                 onClick={handleStartPractice}
-                style={{ padding: '0 40px', height: 48, borderRadius: 'var(--mei-radius-md)' }}
+                style={{ padding: '0 40px', height: 48, borderRadius: 'var(--mei-radius-md)', maxWidth: '100%' }}
               >
                 开始练习
               </Button>
@@ -205,7 +274,7 @@ const Practice: React.FC = () => {
                     userAnswer={userAnswers[currentQuestion.id]}
                     questionNumber={currentQuestionIndex + 1}
                   />
-                  <div style={{ position: 'absolute', top: 24, right: 24, zIndex: 10 }}>
+                  <AnswerToggle>
                     <Button
                       size="middle"
                       type={showAnswer ? 'default' : 'primary'}
@@ -215,7 +284,7 @@ const Practice: React.FC = () => {
                     >
                       {showAnswer ? '隐藏答案' : '显示答案'}
                     </Button>
-                  </div>
+                  </AnswerToggle>
                 </div>
               )}
             </QuestionSection>
@@ -231,34 +300,18 @@ const Practice: React.FC = () => {
             </SidebarSection>
           </PracticeLayout>
 
-          <div style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 200,
-            right: 0,
-            height: 80,
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)',
-            borderTop: '1px solid var(--mei-theme-border-default)',
-            padding: '0 40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 -4px 12px rgba(0,0,0,0.05)',
-            zIndex: 1000
-          }}>
-            <div style={{ maxWidth: 800, width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <PageFooter>
+            <FooterContent>
               <Button
                 size="large"
                 disabled={currentQuestionIndex === 0}
                 onClick={handlePrevQuestion}
-                style={{ minWidth: 120, height: 48, borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
+                style={{ borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
               >
                 上一题
               </Button>
               
-              <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--mei-theme-text-secondary)' }}>
+              <div className="question-counter" style={{ fontSize: 16, fontWeight: 600, color: 'var(--mei-theme-text-secondary)' }}>
                 第 <span style={{ color: 'var(--mei-color-primary-600)' }}>{currentQuestionIndex + 1}</span> / {totalQuestions} 题
               </div>
 
@@ -267,12 +320,12 @@ const Practice: React.FC = () => {
                 size="large"
                 onClick={handleNextQuestion}
                 disabled={currentQuestionIndex === totalQuestions - 1}
-                style={{ minWidth: 120, height: 48, borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
+                style={{ borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
               >
                 下一题
               </Button>
-            </div>
-          </div>
+            </FooterContent>
+          </PageFooter>
         </div>
       )}
     </div>

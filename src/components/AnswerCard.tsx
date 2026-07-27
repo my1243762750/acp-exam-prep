@@ -46,6 +46,10 @@ const Legend = styled.div<{ $compact: boolean }>`
   background: var(--mei-theme-bg-page);
   border-radius: var(--mei-radius-md);
   border: 1px solid var(--mei-theme-border-default);
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const LegendItem = styled.div`

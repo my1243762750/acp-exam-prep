@@ -25,6 +25,18 @@ const StyledCard = styled(Card)`
   border: 1px solid var(--mei-theme-border-default);
   background: var(--mei-theme-bg-page);
   box-shadow: none;
+
+  @media (max-width: 768px) {
+    .exam-start-controls {
+      align-items: stretch !important;
+    }
+
+    .exam-start-controls > div,
+    .exam-start-controls .ant-select,
+    .exam-start-controls > .ant-btn {
+      width: 100% !important;
+    }
+  }
 `;
 
 const ExamHeader = styled.div`
@@ -34,6 +46,16 @@ const ExamHeader = styled.div`
   margin-bottom: var(--mei-spacing-stack-lg);
   flex-wrap: wrap;
   gap: var(--mei-spacing-inline-md);
+
+  @media (max-width: 768px) {
+    align-items: stretch;
+
+    > .ant-space {
+      width: 100%;
+      justify-content: space-between;
+      gap: 8px !important;
+    }
+  }
 `;
 
 const Timer = styled.div`
@@ -50,6 +72,11 @@ const Timer = styled.div`
   gap: 8px;
   font-variant-numeric: tabular-nums;
   font-family: var(--mei-font-mono);
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
 `;
 
 const ReviewPanel = styled.div`
@@ -135,6 +162,7 @@ const SidebarSection = styled.div`
   @media (max-width: 992px) {
     position: static;
     height: auto;
+    min-width: 0;
     margin-bottom: 24px;
   }
 `;
@@ -150,6 +178,64 @@ const ExamHUD = styled.div`
   padding: 16px 24px;
   margin: -32px -24px 24px -24px;
   box-shadow: var(--mei-shadow-sm);
+
+  @media (max-width: 768px) {
+    top: 64px;
+    padding: 12px;
+    margin: -16px -12px 16px;
+  }
+`;
+
+const PageFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 200px;
+  right: 0;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--mei-theme-border-default);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    left: 0;
+    height: 72px;
+    padding: 0 12px;
+  }
+`;
+
+const FooterContent = styled.div`
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  .ant-btn {
+    min-width: 120px;
+    height: 48px;
+  }
+
+  @media (max-width: 768px) {
+    gap: 8px;
+
+    .ant-btn {
+      min-width: 0;
+      flex: 1;
+      padding-inline: 12px;
+    }
+
+    .question-counter {
+      white-space: nowrap;
+      font-size: 13px !important;
+    }
+  }
 `;
 
 const Exam: React.FC = () => {
@@ -367,7 +453,7 @@ const Exam: React.FC = () => {
                 </Col>
               </Row>
 
-              <div style={{ 
+              <div className="exam-start-controls" style={{
                 background: 'var(--mei-color-primary-50)', 
                 padding: '20px', 
                 borderRadius: 'var(--mei-radius-lg)',
@@ -470,35 +556,18 @@ const Exam: React.FC = () => {
           )}
 
           {!isFinished && (
-            <div style={{
-              position: 'fixed',
-              bottom: 0,
-              left: 200, // Matches Sidebar width
-              right: 0,
-              height: 80,
-              background: 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              borderTop: '1px solid var(--mei-theme-border-default)',
-              padding: '0 40px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 -4px 12px rgba(0,0,0,0.05)',
-              zIndex: 1000,
-              transition: 'left 0.2s'
-            }}>
-              <div style={{ maxWidth: 800, width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <PageFooter>
+              <FooterContent>
                 <Button
                   size="large"
                   disabled={currentQuestionIndex === 0}
                   onClick={handlePrevQuestion}
-                  style={{ minWidth: 120, height: 48, borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
+                  style={{ borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
                 >
                   上一题
                 </Button>
                 
-                <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--mei-theme-text-secondary)' }}>
+                <div className="question-counter" style={{ fontSize: 16, fontWeight: 600, color: 'var(--mei-theme-text-secondary)' }}>
                   第 <span style={{ color: 'var(--mei-color-primary-600)' }}>{currentQuestionIndex + 1}</span> / {totalQuestions} 题
                 </div>
 
@@ -507,12 +576,12 @@ const Exam: React.FC = () => {
                   size="large"
                   onClick={handleNextQuestion}
                   disabled={currentQuestionIndex === totalQuestions - 1}
-                  style={{ minWidth: 120, height: 48, borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
+                  style={{ borderRadius: 'var(--mei-radius-md)', fontWeight: 600 }}
                 >
                   下一题
                 </Button>
-              </div>
-            </div>
+              </FooterContent>
+            </PageFooter>
           )}
 
           {showSubmitConfirm && (

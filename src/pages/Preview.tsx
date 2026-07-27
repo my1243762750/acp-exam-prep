@@ -23,6 +23,17 @@ const StyledCard = styled(Card)`
   .ant-card-body {
     padding: 0;
   }
+
+  @media (max-width: 768px) {
+    top: 72px;
+
+    .preview-toolbar,
+    .preview-toolbar .ant-space,
+    .preview-toolbar .ant-input-affix-wrapper,
+    .preview-toolbar .ant-select {
+      width: 100% !important;
+    }
+  }
 `;
 
 const PreviewLayout = styled.div`
@@ -52,6 +63,48 @@ const SidebarSection = styled.div`
     position: static;
     max-height: none;
     margin-bottom: 24px;
+  }
+`;
+
+const AnswerToggle = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    top: 12px;
+    right: 12px;
+
+    .ant-btn-icon + span {
+      display: none;
+    }
+  }
+`;
+
+const PageFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 200px;
+  right: 0;
+  min-height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--mei-theme-border-default);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    left: 0;
+    padding: 8px 12px;
+
+    .ant-pagination-total-text {
+      display: none;
+    }
   }
 `;
 
@@ -134,7 +187,7 @@ const Preview: React.FC = () => {
     <div style={{ paddingBottom: 80 }}>
       <StyledCard>
         <div style={{ padding: '16px 24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <div className="preview-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <div>
               <span style={{ fontSize: 20, fontWeight: 700, color: 'var(--mei-theme-text-primary)' }}>题库预览</span>
               <Tag color="blue" style={{ marginLeft: 12 }}>共 {total} 题</Tag>
@@ -193,7 +246,7 @@ const Preview: React.FC = () => {
                     showAnswer={showMap[q.id] ?? showAll}
                     questionNumber={start + idx + 1}
                   />
-                  <div style={{ position: 'absolute', top: 24, right: 24, zIndex: 10 }}>
+                  <AnswerToggle>
                     <Button
                       size="middle"
                       type={(showMap[q.id] ?? showAll) ? 'default' : 'primary'}
@@ -203,7 +256,7 @@ const Preview: React.FC = () => {
                     >
                       {(showMap[q.id] ?? showAll) ? '隐藏答案' : '显示答案'}
                     </Button>
-                  </div>
+                  </AnswerToggle>
                 </div>
               </Col>
             ))}
@@ -228,23 +281,7 @@ const Preview: React.FC = () => {
       </PreviewLayout>
 
       {total > 0 && (
-        <div style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 200, // Account for Sider width
-          right: 0,
-          height: 72,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '0 24px',
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          borderTop: '1px solid var(--mei-theme-border-default)',
-          boxShadow: '0 -4px 12px rgba(0,0,0,0.05)',
-          zIndex: 1000
-        }}>
+        <PageFooter>
           <Pagination
             current={page}
             total={total}
@@ -253,7 +290,7 @@ const Preview: React.FC = () => {
             showSizeChanger={false}
             showTotal={(t) => `共 ${t} 题`}
           />
-        </div>
+        </PageFooter>
       )}
     </div>
   );

@@ -22,6 +22,12 @@ const StyledCard = styled(Card)`
   .ant-card-body {
     padding: var(--mei-spacing-inset-xl);
   }
+
+  @media (max-width: 768px) {
+    .ant-card-body {
+      padding: 16px;
+    }
+  }
 `;
 
 const QuestionTitle = styled.div`
@@ -30,6 +36,12 @@ const QuestionTitle = styled.div`
   margin-bottom: var(--mei-spacing-stack-lg);
   line-height: var(--mei-font-lineHeight-relaxed);
   color: var(--mei-theme-text-primary);
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin-bottom: 16px;
+    overflow-wrap: anywhere;
+  }
 `;
 
 const OptionItem = styled.div<{ $isSelected?: boolean; $isCorrect?: boolean; $showAnswer?: boolean }>`
@@ -44,6 +56,11 @@ const OptionItem = styled.div<{ $isSelected?: boolean; $isCorrect?: boolean; $sh
   transition: background-color var(--mei-motion-fast) var(--mei-ease-out),
               border-color var(--mei-motion-fast) var(--mei-ease-out),
               box-shadow var(--mei-motion-fast) var(--mei-ease-out);
+
+  @media (max-width: 768px) {
+    padding: 12px;
+    align-items: flex-start;
+  }
   
   &:hover {
     border-color: var(--mei-color-primary-300);
@@ -75,6 +92,19 @@ const QuestionMeta = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--mei-spacing-stack-md);
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-right: 44px;
+
+    > .ant-space {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px !important;
+    }
+  }
 `;
 
 interface QuestionCardProps {

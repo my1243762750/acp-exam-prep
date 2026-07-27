@@ -49,7 +49,7 @@ const LogoRow = styled.div`
   width: 100%;
 `;
 
-const StyledSider = styled(Sider)`
+const StyledSider = styled(Sider)<{ $mobileOpen: boolean }>`
   background: var(--mei-theme-bg-page) !important;
   border-right: 1px solid var(--mei-color-neutral-200);
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
@@ -69,6 +69,15 @@ const StyledSider = styled(Sider)`
     .subject-selector { display: none; }
     .import-btn { display: none; }
   }
+
+  @media (max-width: 768px) {
+    min-width: 240px !important;
+    max-width: 240px !important;
+    width: 240px !important;
+    z-index: 1002;
+    transform: translateX(${props => props.$mobileOpen ? '0' : '-100%'});
+    transition: transform 0.2s ease;
+  }
 `;
 
 const StyledHeader = styled(Header)`
@@ -84,6 +93,10 @@ const StyledHeader = styled(Header)`
   top: 0;
   z-index: 1000;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 0 12px !important;
+  }
 `;
 
 const StyledContent = styled(Content)`
@@ -93,6 +106,42 @@ const StyledContent = styled(Content)`
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 16px 0 88px;
+  }
+`;
+
+const MainContentLayout = styled(Layout)<{ $collapsed: boolean }>`
+  margin-left: ${props => props.$collapsed ? '64px' : '200px'};
+  transition: margin-left 0.2s;
+  background: var(--mei-theme-bg-page);
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+`;
+
+const ContentShell = styled.div`
+  background: var(--mei-theme-bg-page);
+  flex: 1;
+  padding: 0 var(--mei-spacing-inset-xl);
+
+  @media (max-width: 768px) {
+    padding: 0 12px;
+  }
+`;
+
+const MobileOverlay = styled.div<{ $open: boolean }>`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: ${props => props.$open ? 'block' : 'none'};
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 1001;
+  }
 `;
 
 const CollapseIcon = ({ collapsed }: { collapsed: boolean }) => (
@@ -124,7 +173,23 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const subject = getCurrentSubjectInfo();
   const allSubjects = getAllSubjects();
   const [collapsed, setCollapsed] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(() => window.matchMedia('(max-width: 768px)').matches);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [importOpen, setImportOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+      if (!event.matches) setMobileOpen(false);
+    };
+    media.addEventListener('change', handleChange);
+    return () => media.removeEventListener('change', handleChange);
+  }, []);
+
+  React.useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const breadcrumbItems = [
@@ -166,19 +231,20 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <StyledSider
+        $mobileOpen={mobileOpen}
         width={200}
         collapsedWidth={64}
         collapsible
-        collapsed={collapsed}
+        collapsed={isMobile ? false : collapsed}
         onCollapse={setCollapsed}
         trigger={null}
       >
         <LogoBar>
-          <LogoRow style={{ justifyContent: collapsed ? 'center' : 'flex-start' }}>
+          <LogoRow style={{ justifyContent: !isMobile && collapsed ? 'center' : 'flex-start' }}>
             <MeiLogo />
-            {!collapsed && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-500)', whiteSpace: 'nowrap' }}>考试助手</span>}
+            {(isMobile || !collapsed) && <span className="logo-text" style={{ marginLeft: 12, fontWeight: 700, fontSize: 18, color: 'var(--mei-color-primary-500)', whiteSpace: 'nowrap' }}>考试助手</span>}
           </LogoRow>
-          {!collapsed && allSubjects.length > 1 && (
+          {(isMobile || !collapsed) && allSubjects.length > 1 && (
             <div className="subject-selector" style={{ width: '100%', marginTop: 8 }}>
               <Select
                 size="small"
@@ -198,10 +264,11 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <Menu
           mode="inline"
           selectedKeys={[location.pathname]}
+          onClick={() => isMobile && setMobileOpen(false)}
           style={{ border: 'none', background: 'transparent', marginTop: 8 }}
           items={menuItems}
         />
-        {!collapsed && (
+        {(isMobile || !collapsed) && (
           <BottomSection>
             <Button
               block
@@ -215,20 +282,22 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </BottomSection>
         )}
       </StyledSider>
-      <Layout style={{ marginLeft: collapsed ? 64 : 200, transition: 'all 0.2s', background: 'var(--mei-theme-bg-page)' }}>
+      <MobileOverlay $open={mobileOpen} onClick={() => setMobileOpen(false)} />
+      <MainContentLayout $collapsed={collapsed}>
         <StyledHeader>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <Button 
               type="text" 
+              aria-label={isMobile ? (mobileOpen ? '关闭导航' : '打开导航') : (collapsed ? '展开导航' : '收起导航')}
               style={{ 
                 color: 'var(--mei-theme-text-secondary)', 
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 width: 32, height: 32, padding: 0,
                 borderRadius: 'var(--mei-radius-sm)'
               }} 
-              onClick={() => setCollapsed(c => !c)}
+              onClick={() => isMobile ? setMobileOpen(open => !open) : setCollapsed(c => !c)}
             >
-              <CollapseIcon collapsed={collapsed} />
+              <CollapseIcon collapsed={isMobile ? !mobileOpen : collapsed} />
             </Button>
             <Breadcrumb separator={<span style={{ color: 'var(--mei-theme-border-strong)', fontSize: 12, margin: '0 4px' }}>/</span>}>
               {breadcrumbItems}
@@ -243,14 +312,14 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             />
           </Tooltip>
         </StyledHeader>
-        <div style={{ background: 'var(--mei-theme-bg-page)', flex: 1, padding: '0 var(--mei-spacing-inset-xl)' }}>
+        <ContentShell>
           <StyledContent>
             <div className="fade-in">
               {children}
             </div>
           </StyledContent>
-        </div>
-      </Layout>
+        </ContentShell>
+      </MainContentLayout>
       <ImportModal open={importOpen} onClose={() => setImportOpen(false)} />
     </Layout>
   );
