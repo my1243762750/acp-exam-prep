@@ -3,21 +3,21 @@ import styled from 'styled-components';
 import type { SalesforceQuestion } from '../data/salesforce';
 import { isCorrectAnswer } from '../data/salesforce';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $compact: boolean }>`
   background: var(--mei-theme-bg-surface);
   border: 1px solid var(--mei-theme-border-default);
   border-radius: var(--mei-radius-lg);
-  padding: 16px;
+  padding: ${props => props.$compact ? '12px' : '16px'};
   height: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-const Header = styled.div`
+const Header = styled.div<{ $compact: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: ${props => props.$compact ? '8px' : '16px'};
 `;
 
 const Title = styled.span`
@@ -37,12 +37,12 @@ const Title = styled.span`
   }
 `;
 
-const Legend = styled.div`
+const Legend = styled.div<{ $compact: boolean }>`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: ${props => props.$compact ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)'};
   gap: 8px;
-  margin-bottom: 20px;
-  padding: 12px;
+  margin-bottom: ${props => props.$compact ? '12px' : '20px'};
+  padding: ${props => props.$compact ? '8px 12px' : '12px'};
   background: var(--mei-theme-bg-page);
   border-radius: var(--mei-radius-md);
   border: 1px solid var(--mei-theme-border-default);
@@ -96,10 +96,10 @@ const GridContainer = styled.div`
   }
 `;
 
-const Grid = styled.div`
+const Grid = styled.div<{ $compact: boolean }>`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(${props => props.$compact ? '38px' : '44px'}, 1fr));
+  gap: ${props => props.$compact ? '6px' : '8px'};
 `;
 
 const Cell = styled.div<{ $status: 'correct' | 'wrong' | 'answered' | 'unanswered'; $active: boolean }>`
@@ -151,11 +151,12 @@ interface AnswerCardProps {
   questions: SalesforceQuestion[]
   userAnswers: Record<number, string[]>
   showAnswer: boolean
+  compact?: boolean
   currentIndex?: number
   onNavigate?: (index: number) => void
 }
 
-const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAnswer, currentIndex, onNavigate }) => {
+const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAnswer, compact = false, currentIndex, onNavigate }) => {
   const total = questions.length;
   const answered = Object.values(userAnswers).filter(answer => answer.length > 0).length;
   const correct = questions.filter(question => {
@@ -164,12 +165,12 @@ const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAns
   }).length;
 
   return (
-    <Wrapper>
-      <Header>
+    <Wrapper $compact={compact}>
+      <Header $compact={compact}>
         <Title>答题进度</Title>
       </Header>
       
-      <Legend>
+      <Legend $compact={compact}>
         <LegendItem>
           <Swatch $status="answered" />
           <span>已答 {answered}</span>
@@ -193,7 +194,7 @@ const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAns
       </Legend>
 
       <GridContainer>
-        <Grid>
+        <Grid $compact={compact}>
           {questions.map((q, index) => {
             const userAns = userAnswers[q.id];
             let status: 'correct' | 'wrong' | 'answered' | 'unanswered' = 'unanswered';

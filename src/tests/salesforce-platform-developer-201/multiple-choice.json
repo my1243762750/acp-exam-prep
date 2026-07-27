@@ -1,0 +1,2151 @@
+[
+  {
+    "type": "multiple_choice",
+    "question": "What are three characteristics of change set deployments?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Change sets can deploy custom settings data."
+      },
+      {
+        "key": "B",
+        "text": "Change sets can only be used between related organizations."
+      },
+      {
+        "key": "C",
+        "text": "Deployment is done in a one-way, single transaction."
+      },
+      {
+        "key": "D",
+        "text": "Sending a change set between two orgs requires a deployment connection."
+      },
+      {
+        "key": "E",
+        "text": "Change sets can be used to transfer records."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "B": "Change sets can only be used between related organizations:\n\nChange sets require a relationship between the source and target Salesforce orgs, such as a production org and its sandboxes. You cannot use change sets between unrelated Salesforce orgs.\n\n\n\n\nDeployment is done in a one-way, single transaction:\n\nWhen a change set is deployed, it is applied to the target org as a single transaction. If there are any errors in the deployment, the entire transaction is rolled back.\n\nSending a change set between two orgs requires a deployment connection:\n\nBefore sending or deploying a change set, a deployment connection must be established between the source and target orgs. This connection is configured in the setup menu under 'Deployment Connections.'\n\nIncorrect Options:\n\nA . Change sets can deploy custom settings data:\n\nChange sets cannot deploy data, including custom settings data. They only move metadata.\n\nE . Change sets can be used to transfer records:\n\nRecords (data) are not supported by change sets; they only facilitate metadata migration.",
+      "C": "Change sets can only be used between related organizations:\n\nChange sets require a relationship between the source and target Salesforce orgs, such as a production org and its sandboxes. You cannot use change sets between unrelated Salesforce orgs.\n\n\n\n\nDeployment is done in a one-way, single transaction:\n\nWhen a change set is deployed, it is applied to the target org as a single transaction. If there are any errors in the deployment, the entire transaction is rolled back.\n\nSending a change set between two orgs requires a deployment connection:\n\nBefore sending or deploying a change set, a deployment connection must be established between the source and target orgs. This connection is configured in the setup menu under 'Deployment Connections.'\n\nIncorrect Options:\n\nA . Change sets can deploy custom settings data:\n\nChange sets cannot deploy data, including custom settings data. They only move metadata.\n\nE . Change sets can be used to transfer records:\n\nRecords (data) are not supported by change sets; they only facilitate metadata migration.",
+      "D": "Change sets can only be used between related organizations:\n\nChange sets require a relationship between the source and target Salesforce orgs, such as a production org and its sandboxes. You cannot use change sets between unrelated Salesforce orgs.\n\n\n\n\nDeployment is done in a one-way, single transaction:\n\nWhen a change set is deployed, it is applied to the target org as a single transaction. If there are any errors in the deployment, the entire transaction is rolled back.\n\nSending a change set between two orgs requires a deployment connection:\n\nBefore sending or deploying a change set, a deployment connection must be established between the source and target orgs. This connection is configured in the setup menu under 'Deployment Connections.'\n\nIncorrect Options:\n\nA . Change sets can deploy custom settings data:\n\nChange sets cannot deploy data, including custom settings data. They only move metadata.\n\nE . Change sets can be used to transfer records:\n\nRecords (data) are not supported by change sets; they only facilitate metadata migration."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer identifies the following triggers on the Expense _c object:\n\nThe triggers process before delete, before insert, and before update events respectively.\n\nWhich two techniques should the developer implement to ensure trigger best practices are followed?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Unity all three triggers In a single trigger on the Expense__c object that Includes all events."
+      },
+      {
+        "key": "B",
+        "text": "Unify the before insert and before update triggers and use Flow for the delete action."
+      },
+      {
+        "key": "C",
+        "text": "Create helper classes to execute the appropriate logic when a record is saved."
+      },
+      {
+        "key": "D",
+        "text": "Maintain all three triggers on the Expense __c object, but move the Apex logic out of the trigger definition."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "A . Unify all three triggers in a single trigger on the Expense__c object that includes all events:\n\nSalesforce best practices recommend having only one trigger per object to avoid redundancy and conflicts.\n\nBy combining all the events (before delete, before insert, and before update) into a single trigger, the developer can manage the logic in an organized and maintainable manner.\n\nThis also simplifies debugging and ensures that the trigger logic executes in a predictable order.\n\nC . Create helper classes to execute the appropriate logic when a record is saved:\n\nUsing helper classes allows for a clean separation of concerns. The trigger becomes a dispatcher that delegates logic to dedicated classes.\n\nFor example, you can create methods like applyDefaultsToExpense(), validateExpenseUpdate(), and deleteExpense() in a helper class and invoke them from the trigger.\n\nThis improves reusability, readability, and testability of the code.\n\nWhy not the other options?\n\nB . Unify the before insert and before update triggers and use Flow for the delete action:\n\nWhile Flow is a powerful tool, it is not ideal for deleting records or replacing Apex trigger functionality, especially when triggers already exist for other events.\n\nD . Maintain all three triggers on the Expense__c object but move the Apex logic out of the trigger definition:\n\nMaintaining multiple triggers on the same object can lead to conflicts and execution order issues, even if the logic is moved to helper classes.\n\n\n\n\nTrigger Best Practices\n\nTrigger Design Patterns",
+      "C": "A . Unify all three triggers in a single trigger on the Expense__c object that includes all events:\n\nSalesforce best practices recommend having only one trigger per object to avoid redundancy and conflicts.\n\nBy combining all the events (before delete, before insert, and before update) into a single trigger, the developer can manage the logic in an organized and maintainable manner.\n\nThis also simplifies debugging and ensures that the trigger logic executes in a predictable order.\n\nC . Create helper classes to execute the appropriate logic when a record is saved:\n\nUsing helper classes allows for a clean separation of concerns. The trigger becomes a dispatcher that delegates logic to dedicated classes.\n\nFor example, you can create methods like applyDefaultsToExpense(), validateExpenseUpdate(), and deleteExpense() in a helper class and invoke them from the trigger.\n\nThis improves reusability, readability, and testability of the code.\n\nWhy not the other options?\n\nB . Unify the before insert and before update triggers and use Flow for the delete action:\n\nWhile Flow is a powerful tool, it is not ideal for deleting records or replacing Apex trigger functionality, especially when triggers already exist for other events.\n\nD . Maintain all three triggers on the Expense__c object but move the Apex logic out of the trigger definition:\n\nMaintaining multiple triggers on the same object can lead to conflicts and execution order issues, even if the logic is moved to helper classes.\n\n\n\n\nTrigger Best Practices\n\nTrigger Design Patterns"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer creates a Lightning web component that imports a method within an Apex class. When a Validate button is pressed, the method runs to execute complex validations.\n\nIn this implementation scenario, which two options are.. of the Controller according to the MVC architecture?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "HTML file"
+      },
+      {
+        "key": "B",
+        "text": "Apex class"
+      },
+      {
+        "key": "C",
+        "text": "JavaScript file"
+      },
+      {
+        "key": "D",
+        "text": "XML file"
+      },
+      {
+        "key": "D",
+        "text": "XML file: Used for metadata configuration and is not part of the controller functionality."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "In the context of the MVC (Model-View-Controller) architecture for a Lightning Web Component (LWC), the Apex class and JavaScript file are responsible for handling the controller's role:\n\nApex Class (Controller):\n\nActs as the server-side controller.\n\nExecutes business logic, such as the complex validations mentioned in the scenario.\n\nExposes methods for the LWC to call using@AuraEnabled.\n\n\n\n\nJavaScript File (Controller):\n\nActs as the client-side controller.\n\nManages the interaction between the HTML (View) and Apex methods.\n\nExecutes functions triggered by user actions, such as clicking the 'Validate' button.\n\nWhy Not the Other Options?A. HTML file: Represents the 'View' in MVC, focusing on UI rendering.",
+      "C": "In the context of the MVC (Model-View-Controller) architecture for a Lightning Web Component (LWC), the Apex class and JavaScript file are responsible for handling the controller's role:\n\nApex Class (Controller):\n\nActs as the server-side controller.\n\nExecutes business logic, such as the complex validations mentioned in the scenario.\n\nExposes methods for the LWC to call using@AuraEnabled.\n\n\n\n\nJavaScript File (Controller):\n\nActs as the client-side controller.\n\nManages the interaction between the HTML (View) and Apex methods.\n\nExecutes functions triggered by user actions, such as clicking the 'Validate' button.\n\nWhy Not the Other Options?A. HTML file: Represents the 'View' in MVC, focusing on UI rendering."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two use cases for executing Anonymous Apex code?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "schedule an Apex class to run periodically"
+      },
+      {
+        "key": "B",
+        "text": "To delete 15,000 inactive Accounts in a single transaction after a deployment"
+      },
+      {
+        "key": "C",
+        "text": "To run a batch Apex class to update all Contacts"
+      },
+      {
+        "key": "D",
+        "text": "To add unit test code coverage to an org"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "Anonymous Apex allows developers to execute ad hoc code snippets without creating a permanent class or trigger. It is useful for tasks like bulk data manipulation or testing.\n\nB . Deleting 15,000 inactive Accounts:\n\nAnonymous Apex can perform ad hoc bulk operations to clean up data after a deployment.\n\nExample:\n\nUse Cases:List<Account> inactiveAccounts = [SELECT Id FROM Account WHERE IsActive__c = false LIMIT 15000];\n\ndelete inactiveAccounts;\n\nC . Running a batch Apex class:\n\nAnonymous Apex can execute batch jobs for data processing.\n\nExample:\n\napex\n\nCopy code\n\nDatabase.executeBatch(new UpdateContactBatch());\n\nA . Schedule an Apex class to run periodically: This requires a scheduled job, not Anonymous Apex.\n\nD . Add unit test code coverage: Unit tests must be written in test classes and cannot be added using Anonymous Apex.",
+      "C": "Anonymous Apex allows developers to execute ad hoc code snippets without creating a permanent class or trigger. It is useful for tasks like bulk data manipulation or testing.\n\nB . Deleting 15,000 inactive Accounts:\n\nAnonymous Apex can perform ad hoc bulk operations to clean up data after a deployment.\n\nExample:\n\nUse Cases:List<Account> inactiveAccounts = [SELECT Id FROM Account WHERE IsActive__c = false LIMIT 15000];\n\ndelete inactiveAccounts;\n\nC . Running a batch Apex class:\n\nAnonymous Apex can execute batch jobs for data processing.\n\nExample:\n\napex\n\nCopy code\n\nDatabase.executeBatch(new UpdateContactBatch());\n\nA . Schedule an Apex class to run periodically: This requires a scheduled job, not Anonymous Apex.\n\nD . Add unit test code coverage: Unit tests must be written in test classes and cannot be added using Anonymous Apex."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer created a Lightning web component called statuscomponent to be Inserted into the Account record page.\n\nWhich two things should the developer do to make this component available?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add <targer>lightning_Recordpage</target> to the statuscomponent. js file,"
+      },
+      {
+        "key": "B",
+        "text": "Add <target>lightning RecordPage</target> to the statusComp .js-meta.xml file."
+      },
+      {
+        "key": "C",
+        "text": "Set is Exposes to true In the statuscomponent.js-meta.xml file."
+      },
+      {
+        "key": "D",
+        "text": "Add <mastertabel>Account </masterLabel> to the statusComponent. js-meta.xm1 file."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "To make an LWC available for use on a record page:\n\nTarget Configuration:\n\nAdd<target>lightning__RecordPage</target>in the component's.js-meta.xmlfile to specify where the component can be used.\n\nExpose the Component:\n\nSetisExposedtotruein the.js-meta.xmlfile to make the component available for use.\n\nExample.js-meta.xmlFile:<?xml version='1.0'encoding='UTF-8'?>\n\n<LightningComponentBundlexmlns='http://soap.sforce.com/2006/04/metadata'>\n\n57.0\n\n<isExposed>true</isExposed>\n\n<targets>\n\n<target>lightning__RecordPage</target>\n\n</targets>\n\n</LightningComponentBundle>\n\nA: Incorrect placement. The<target>tag must be in the.js-meta.xmlfile, not the JavaScript file.\n\nD: The<masterLabel>tag is used for metadata labeling, not for exposing or targeting a component.",
+      "C": "To make an LWC available for use on a record page:\n\nTarget Configuration:\n\nAdd<target>lightning__RecordPage</target>in the component's.js-meta.xmlfile to specify where the component can be used.\n\nExpose the Component:\n\nSetisExposedtotruein the.js-meta.xmlfile to make the component available for use.\n\nExample.js-meta.xmlFile:<?xml version='1.0'encoding='UTF-8'?>\n\n<LightningComponentBundlexmlns='http://soap.sforce.com/2006/04/metadata'>\n\n57.0\n\n<isExposed>true</isExposed>\n\n<targets>\n\n<target>lightning__RecordPage</target>\n\n</targets>\n\n</LightningComponentBundle>\n\nA: Incorrect placement. The<target>tag must be in the.js-meta.xmlfile, not the JavaScript file.\n\nD: The<masterLabel>tag is used for metadata labeling, not for exposing or targeting a component."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two benefits of using declarative customizations over code?\n\nChoose 2 answer",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Declarative customizations automatically update with each Salesforce release."
+      },
+      {
+        "key": "B",
+        "text": "Declarative customizations automatically generate test classes."
+      },
+      {
+        "key": "C",
+        "text": "Declarative customizations cannot generate run time errors"
+      },
+      {
+        "key": "D",
+        "text": "Declarative customizations generally require less maintenance"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "Declarative customizations, such as workflows, process builder, validation rules, and flows, offer a no-code approach to customizing Salesforce. Below are the key benefits:\n\nDeclarative customizations automatically update with each Salesforce release (A):Salesforce ensures that declarative tools are automatically updated during new releases, eliminating the need for manual intervention or code refactoring.\n\n\n\n\nDeclarative customizations generally require less maintenance (D):Because declarative tools use configurations rather than custom code, they are simpler tomanage, troubleshoot, and update. This significantly reduces the maintenance overhead compared to custom code.\n\nIncorrect Options:\n\nB:Declarative tools do not automatically generate test classes. This is specific to Apex code.\n\nC:Declarative customizations can still result in runtime errors, such as invalid field updates or logic conflicts.",
+      "D": "Declarative customizations, such as workflows, process builder, validation rules, and flows, offer a no-code approach to customizing Salesforce. Below are the key benefits:\n\nDeclarative customizations automatically update with each Salesforce release (A):Salesforce ensures that declarative tools are automatically updated during new releases, eliminating the need for manual intervention or code refactoring.\n\n\n\n\nDeclarative customizations generally require less maintenance (D):Because declarative tools use configurations rather than custom code, they are simpler tomanage, troubleshoot, and update. This significantly reduces the maintenance overhead compared to custom code.\n\nIncorrect Options:\n\nB:Declarative tools do not automatically generate test classes. This is specific to Apex code.\n\nC:Declarative customizations can still result in runtime errors, such as invalid field updates or logic conflicts."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which three Salesforce resources can be accessed from a Lightning web component?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Static resources"
+      },
+      {
+        "key": "B",
+        "text": "All external libraries"
+      },
+      {
+        "key": "C",
+        "text": "SVG resources"
+      },
+      {
+        "key": "D",
+        "text": "Third-party web components"
+      },
+      {
+        "key": "E",
+        "text": "Content asset files"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "A": "Lightning Web Components (LWCs) have access to a variety of resources in Salesforce. Below are the supported resources:\n\nStatic Resources (A):You can use static resources to reference JavaScript libraries, images, and other files needed in an LWC.\n\n\n\n\nSVG Resources (C):LWCs can use custom SVG files for icons or other visual elements.\n\nContent Asset Files (E):Content asset files, like images or videos, stored in Salesforce can be accessed and used in LWC.\n\nIncorrect Options:\n\nB . All external libraries:Only libraries uploaded as static resources are supported, not directly external libraries.\n\nD . Third-party web components:While supported, additional configuration is needed to use them effectively.",
+      "C": "Lightning Web Components (LWCs) have access to a variety of resources in Salesforce. Below are the supported resources:\n\nStatic Resources (A):You can use static resources to reference JavaScript libraries, images, and other files needed in an LWC.\n\n\n\n\nSVG Resources (C):LWCs can use custom SVG files for icons or other visual elements.\n\nContent Asset Files (E):Content asset files, like images or videos, stored in Salesforce can be accessed and used in LWC.\n\nIncorrect Options:\n\nB . All external libraries:Only libraries uploaded as static resources are supported, not directly external libraries.\n\nD . Third-party web components:While supported, additional configuration is needed to use them effectively.",
+      "E": "Lightning Web Components (LWCs) have access to a variety of resources in Salesforce. Below are the supported resources:\n\nStatic Resources (A):You can use static resources to reference JavaScript libraries, images, and other files needed in an LWC.\n\n\n\n\nSVG Resources (C):LWCs can use custom SVG files for icons or other visual elements.\n\nContent Asset Files (E):Content asset files, like images or videos, stored in Salesforce can be accessed and used in LWC.\n\nIncorrect Options:\n\nB . All external libraries:Only libraries uploaded as static resources are supported, not directly external libraries.\n\nD . Third-party web components:While supported, additional configuration is needed to use them effectively."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers recently transitioned fromClassic to Lightning Experience. One of its business processes requirescertain values from the Opportunity objectto be sent via anHTTP REST calloutto itsexternal order management systemwhen the user presses a custom button on the Opportunity detail page.\n\nExample fields:\n\nName\n\nAmount\n\nAccount\n\nWhich two methods should the developer implement to fulfill the business requirement?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a customVisualforce quick actionthat performs the HTTP REST callout and use it on the Opportunity detail page."
+      },
+      {
+        "key": "B",
+        "text": "Create anafter update triggeron the Opportunity object that calls a helper method using @future(callout=true) to perform the HTTP REST callout."
+      },
+      {
+        "key": "C",
+        "text": "Create aLightning component quick actionthat performs the HTTP REST callout and use it on the Opportunity detail page."
+      },
+      {
+        "key": "D",
+        "text": "Create aRemote Actionon the Opportunity object that executes an Apex immediate action to perform the HTTP REST callout whenever the Opportunity is updated."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "Comprehensive and Detailed Explanation From Exact Extract:\n\nA (Correct):AVisualforce quick actioncan include Apex logic for a callout, and Visualforce is still valid in Lightning Experience.\n\nC (Correct):ALightning Web Component (or Aura component)exposed as aquick actioncan perform callouts via Apex when the user clicks a button. This supports a more modern UI experience.\n\nIncorrect options:\n\nB:@future(callout=true) works but cannot be triggeredsynchronously by a button press. It's for background/automated processes.\n\nD:Remote Actionis legacy functionality used with Visualforce/Aura and doesn't suit modern Lightning and button-driven synchronous actions.\n\n\n\n\nThis is part ofUser Interface (25%)andProcess Automation and Logic (30%), involvingintegration techniques and callouts.",
+      "C": "Comprehensive and Detailed Explanation From Exact Extract:\n\nA (Correct):AVisualforce quick actioncan include Apex logic for a callout, and Visualforce is still valid in Lightning Experience.\n\nC (Correct):ALightning Web Component (or Aura component)exposed as aquick actioncan perform callouts via Apex when the user clicks a button. This supports a more modern UI experience.\n\nIncorrect options:\n\nB:@future(callout=true) works but cannot be triggeredsynchronously by a button press. It's for background/automated processes.\n\nD:Remote Actionis legacy functionality used with Visualforce/Aura and doesn't suit modern Lightning and button-driven synchronous actions.\n\n\n\n\nThis is part ofUser Interface (25%)andProcess Automation and Logic (30%), involvingintegration techniques and callouts."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "In terms of the MVC paradigm, what are two advantages of implementing the view layer of a Salesforce application using Lightning Web Component-based development over Visualforce?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Rich component ecosystem"
+      },
+      {
+        "key": "B",
+        "text": "Leg capturing via the Debug Logs Setup page"
+      },
+      {
+        "key": "C",
+        "text": "Built-in standard and custom set controllers"
+      },
+      {
+        "key": "D",
+        "text": "Self-contained and reusable units of an application"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "Advantages of Lightning Web Components (LWC):\n\nA . Rich component ecosystem:\n\nLWCs have a modern, rich component library designed for modular and reusable development.\n\nD . Self-contained and reusable units:\n\nLWCs are designed to be modular, reusable, and self-contained, reducing duplication and enhancing maintainability.\n\nWhy Not Other Options?\n\nB . Log capturing via Debug Logs Setup page: This is unrelated to LWC and is a debugging feature.\n\nC . Built-in standard and custom set controllers: Relevant to Visualforce, not LWCs.",
+      "D": "Advantages of Lightning Web Components (LWC):\n\nA . Rich component ecosystem:\n\nLWCs have a modern, rich component library designed for modular and reusable development.\n\nD . Self-contained and reusable units:\n\nLWCs are designed to be modular, reusable, and self-contained, reducing duplication and enhancing maintainability.\n\nWhy Not Other Options?\n\nB . Log capturing via Debug Logs Setup page: This is unrelated to LWC and is a debugging feature.\n\nC . Built-in standard and custom set controllers: Relevant to Visualforce, not LWCs."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two ways a developer can get the status of an enqueued job for a class that implements the queueable interface?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "View the Apex Status page"
+      },
+      {
+        "key": "B",
+        "text": "View the Apex Jobs page"
+      },
+      {
+        "key": "C",
+        "text": "Query the AsyncApexJob object"
+      },
+      {
+        "key": "D",
+        "text": "View the Apex Flex Queue"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "Apex Jobs Page:\n\nProvides a user-friendly interface to view the status and details of enqueued jobs, including those implementing theQueueableinterface.\n\nAsyncApexJob Object:\n\nTheAsyncApexJobobject stores information about queued Apex jobs.\n\nDevelopers can query this object for job details likeStatus,JobType, etc.\n\nExample SOQL Query:SELECT Id, Status, JobType, CreatedDate\n\nFROM AsyncApexJob\n\nWHERE JobType = 'Queueable'\n\nWhy Not Other Options?\n\nA . Apex Status page: Not a relevant Salesforce feature.\n\nD . Apex Flex Queue: Only applicable to Batch Apex jobs, not Queueable jobs.",
+      "C": "Apex Jobs Page:\n\nProvides a user-friendly interface to view the status and details of enqueued jobs, including those implementing theQueueableinterface.\n\nAsyncApexJob Object:\n\nTheAsyncApexJobobject stores information about queued Apex jobs.\n\nDevelopers can query this object for job details likeStatus,JobType, etc.\n\nExample SOQL Query:SELECT Id, Status, JobType, CreatedDate\n\nFROM AsyncApexJob\n\nWHERE JobType = 'Queueable'\n\nWhy Not Other Options?\n\nA . Apex Status page: Not a relevant Salesforce feature.\n\nD . Apex Flex Queue: Only applicable to Batch Apex jobs, not Queueable jobs."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer created a child Lightning web component nested inside a parent Lightning web component. The parent component needs to pass a string value to the child component.\n\nIn which two ways can this be accomplished?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "The parent component can invoke a public method in the child component."
+      },
+      {
+        "key": "B",
+        "text": "The parent component can use a public property to pass the data to the child component,"
+      },
+      {
+        "key": "C",
+        "text": "The parent can use the Apex controller class to send data to the child component."
+      },
+      {
+        "key": "D",
+        "text": "The parent component can use a custom event to pass the data to the child component."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Public Method (A):The parent component can call a public method defined in the child component to pass data directly.\n\n\n\n\nPublic Property (B):The parent component can bind data to a public property in the child component using the attribute syntax.\n\nIncorrect Options:\n\nC:Apex controllers are not used for direct communication between parent and child components.\n\nD:Custom events are used for communication from child to parent, not parent to child.",
+      "B": "Public Method (A):The parent component can call a public method defined in the child component to pass data directly.\n\n\n\n\nPublic Property (B):The parent component can bind data to a public property in the child component using the attribute syntax.\n\nIncorrect Options:\n\nC:Apex controllers are not used for direct communication between parent and child components.\n\nD:Custom events are used for communication from child to parent, not parent to child."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer completed modifications feature that is comprised of two elements:\n\n* Apex trigger\n\n* Trigger handler Apex class\n\nWhat are two factors that the developer must take into account to properly deploy them to the production environment?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Apex classes must have at least 75% code coverage org-wide."
+      },
+      {
+        "key": "B",
+        "text": "All methods in the test classes must use @istest."
+      },
+      {
+        "key": "C",
+        "text": "At least one line of code must be executed for the Apex trigger."
+      },
+      {
+        "key": "D",
+        "text": "Test methods must be declared with the testMethod keyword."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "75% Code Coverage (A):To deploy Apex code to production, Salesforce requires at least 75% of the code to be covered by tests across the organization.\n\n\n\n\nTrigger Coverage (C):Apex triggers must have at least one line of code covered by test execution to deploy.\n\nIncorrect Options:\n\nB:Although@isTestis recommended, it is not mandatory for all methods.\n\nD:ThetestMethodkeyword is outdated and replaced by@isTest.",
+      "C": "75% Code Coverage (A):To deploy Apex code to production, Salesforce requires at least 75% of the code to be covered by tests across the organization.\n\n\n\n\nTrigger Coverage (C):Apex triggers must have at least one line of code covered by test execution to deploy.\n\nIncorrect Options:\n\nB:Although@isTestis recommended, it is not mandatory for all methods.\n\nD:ThetestMethodkeyword is outdated and replaced by@isTest."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer wants to send an outbound message when a record meets a specific criteria.\n\nWhich two features satisfy this use case?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Flow Builder can be used to check the record criteria and send an outbound message."
+      },
+      {
+        "key": "B",
+        "text": "Approval Process can be used to check the record criteria and send an outbound message without Apex code."
+      },
+      {
+        "key": "C",
+        "text": "Entitlement Process can be used to check the record criteria and send an outbound message without Apex code."
+      },
+      {
+        "key": "D",
+        "text": "Next Best Action can be used to check the record criteria and send an outbound message."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Flow Builder:\n\nFlow Builder can evaluate record criteria using a Decision element and then send an outbound message using the 'Action' element.\n\nAllows automation without Apex.\n\nApproval Process:\n\nApproval Processes can evaluate criteria and trigger outbound messages as one of the associated actions.\n\nWhy Not Other Options?\n\nC . Entitlement Process: Focuses on managing entitlements, not triggering outbound messages.\n\nD . Next Best Action: Used for recommendations and guided actions, not for triggering outbound messages.\n\n\n\n\nApproval Process Documentation:https://help.salesforce.com/s/articleView?id=approval_defining.htm",
+      "B": "Flow Builder:\n\nFlow Builder can evaluate record criteria using a Decision element and then send an outbound message using the 'Action' element.\n\nAllows automation without Apex.\n\nApproval Process:\n\nApproval Processes can evaluate criteria and trigger outbound messages as one of the associated actions.\n\nWhy Not Other Options?\n\nC . Entitlement Process: Focuses on managing entitlements, not triggering outbound messages.\n\nD . Next Best Action: Used for recommendations and guided actions, not for triggering outbound messages.\n\n\n\n\nApproval Process Documentation:https://help.salesforce.com/s/articleView?id=approval_defining.htm"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers hires a developer to build a custom search page to help users find the Accounts they want. Users will be able to search on Name, Description, and a custom comments field.\n\nWhich consideration should the developer be aware of when deciding between SOQL and SOSL?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "SOSL is faster for text searches."
+      },
+      {
+        "key": "B",
+        "text": "SOQL is able to return more records"
+      },
+      {
+        "key": "C",
+        "text": "SOQL Is faster for text searches."
+      },
+      {
+        "key": "D",
+        "text": "SOSL is able to return more records."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "SOSL:\n\nDesigned for full-text searches, making it faster for unstructured or broad text searches across multiple objects.\n\nIdeal for searching multiple fields simultaneously.\n\nSOQL:\n\nOptimized for structured queries where you need more control over filtering and relationships.\n\nCan return up to 50,000 records in a single query, while SOSL returns only 2,000.\n\nCandDare incorrect because SOSL is faster for text searches, not SOQL.",
+      "B": "SOSL:\n\nDesigned for full-text searches, making it faster for unstructured or broad text searches across multiple objects.\n\nIdeal for searching multiple fields simultaneously.\n\nSOQL:\n\nOptimized for structured queries where you need more control over filtering and relationships.\n\nCan return up to 50,000 records in a single query, while SOSL returns only 2,000.\n\nCandDare incorrect because SOSL is faster for text searches, not SOQL."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers wants Opportunities to no longer be editable when they reach the Closed/Wonstage.\n\nWhich two strategies can a developer use to accomplish this?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use an automatically launched Approval Process."
+      },
+      {
+        "key": "B",
+        "text": "Use a Validation Rule."
+      },
+      {
+        "key": "C",
+        "text": "Use a before-save Apex Trigger."
+      },
+      {
+        "key": "D",
+        "text": "Use an Auto-Response Rule."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Comprehensive and Detailed Explanation From Exact Extract:\n\nA (Correct):AnApproval Processcan lock a record (making it read-only) once the record meets certain criteria like stage = Closed/Won.\n\nB (Correct):AValidation Rulecan prevent users from saving changes when the stage is Closed/Won, by throwing an error.\n\nExample validation formula:\n\ntext\n\nCopyEdit\n\nAND(ISCHANGED(StageName), ISPICKVAL(StageName, 'Closed Won'))\n\nIncorrect options:\n\nC:Before triggers run before the record is saved but don't prevent UI-level edits unless combined with DML rollbacks or errors.\n\nD:Auto-response rules are for sending emails, not restricting edits.\n\n\n\n\nThis topic relates to bothProcess Automation and Logic (30%)andSecurity and Data Integritypractices.",
+      "B": "Comprehensive and Detailed Explanation From Exact Extract:\n\nA (Correct):AnApproval Processcan lock a record (making it read-only) once the record meets certain criteria like stage = Closed/Won.\n\nB (Correct):AValidation Rulecan prevent users from saving changes when the stage is Closed/Won, by throwing an error.\n\nExample validation formula:\n\ntext\n\nCopyEdit\n\nAND(ISCHANGED(StageName), ISPICKVAL(StageName, 'Closed Won'))\n\nIncorrect options:\n\nC:Before triggers run before the record is saved but don't prevent UI-level edits unless combined with DML rollbacks or errors.\n\nD:Auto-response rules are for sending emails, not restricting edits.\n\n\n\n\nThis topic relates to bothProcess Automation and Logic (30%)andSecurity and Data Integritypractices."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two are phases in the Aura application event propagation framework?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Control"
+      },
+      {
+        "key": "B",
+        "text": "default"
+      },
+      {
+        "key": "C",
+        "text": "Buddle"
+      },
+      {
+        "key": "D",
+        "text": "Emit"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "Event Propagation Phases in Aura Framework:\n\nDefault Phase: The framework executes handlers withevent.setDefault().\n\nBubble Phase: The event propagates upward from the target component to the root component.\n\nWhy Not Other Options?\n\nA . Control: Not a valid Aura event propagation phase.\n\nD . Emit: This is part of event creation, not propagation.",
+      "C": "Event Propagation Phases in Aura Framework:\n\nDefault Phase: The framework executes handlers withevent.setDefault().\n\nBubble Phase: The event propagates upward from the target component to the root component.\n\nWhy Not Other Options?\n\nA . Control: Not a valid Aura event propagation phase.\n\nD . Emit: This is part of event creation, not propagation."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two ways for a developer to execute tests in an org?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tooling API"
+      },
+      {
+        "key": "B",
+        "text": "Metadata API"
+      },
+      {
+        "key": "C",
+        "text": "Bulk API"
+      },
+      {
+        "key": "D",
+        "text": "Developer Console"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "Tooling API:\n\nThe Tooling API provides programmatic access to manage tests and other metadata in the org.\n\nIt can execute test classes or methods remotely.\n\nDeveloper Console:\n\nThe Developer Console is a built-in Salesforce tool to execute Apex tests, debug logs, and more.\n\nAllows developers to execute tests interactively.\n\nB . Metadata API: Used for managing metadata, not for running tests.\n\nC . Bulk API: Used for data operations, not related to testing.\n\n\n\n\nTesting with Developer Console:https://help.salesforce.com/s/articleView?id=sf.code_dev_console_test.htm",
+      "D": "Tooling API:\n\nThe Tooling API provides programmatic access to manage tests and other metadata in the org.\n\nIt can execute test classes or methods remotely.\n\nDeveloper Console:\n\nThe Developer Console is a built-in Salesforce tool to execute Apex tests, debug logs, and more.\n\nAllows developers to execute tests interactively.\n\nB . Metadata API: Used for managing metadata, not for running tests.\n\nC . Bulk API: Used for data operations, not related to testing.\n\n\n\n\nTesting with Developer Console:https://help.salesforce.com/s/articleView?id=sf.code_dev_console_test.htm"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer needs to allow users to complete a form on an Account record that will create a record for a custom object.\n\nThe form needs to display different fields depending on the user's job role, The functionality should only be available to a small group of users.\n\nWhich three things should the developer do to satisfy these requirements?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a Dynamic Form."
+      },
+      {
+        "key": "B",
+        "text": "Create a Custom Permission for the users."
+      },
+      {
+        "key": "C",
+        "text": "Add a Dynamic Action to the Users' assigned Page Layouts."
+      },
+      {
+        "key": "D",
+        "text": "Create a Lightning wed component."
+      },
+      {
+        "key": "E",
+        "text": "Add a Dynamic Action to the Account Record Page."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "B": "Custom Permission:\n\nEnsures that only the small group of users has access to this functionality.\n\nDynamic Action:\n\nAllows displaying different fields depending on the user's role directly on the Account Record Page.\n\nWhy Not A or C:\n\nDynamic Forms are not used to create records for custom objects in this context.\n\nA Lightning Web Component is unnecessary when Dynamic Actions can be used.\n\n\n\n\nCustom Permissions:https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_perms_custom.htm",
+      "C": "Custom Permission:\n\nEnsures that only the small group of users has access to this functionality.\n\nDynamic Action:\n\nAllows displaying different fields depending on the user's role directly on the Account Record Page.\n\nWhy Not A or C:\n\nDynamic Forms are not used to create records for custom objects in this context.\n\nA Lightning Web Component is unnecessary when Dynamic Actions can be used.\n\n\n\n\nCustom Permissions:https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_perms_custom.htm",
+      "D": "Custom Permission:\n\nEnsures that only the small group of users has access to this functionality.\n\nDynamic Action:\n\nAllows displaying different fields depending on the user's role directly on the Account Record Page.\n\nWhy Not A or C:\n\nDynamic Forms are not used to create records for custom objects in this context.\n\nA Lightning Web Component is unnecessary when Dynamic Actions can be used.\n\n\n\n\nCustom Permissions:https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_perms_custom.htm"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A development team wants to use a deployment script to automatically deploy to a sandbox during their development cycles.\n\nWhich two tools can they use to run a script that deploys to a sandbox?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "SFDX CLI"
+      },
+      {
+        "key": "B",
+        "text": "Developer Console"
+      },
+      {
+        "key": "C",
+        "text": "Change Sets"
+      },
+      {
+        "key": "D",
+        "text": "Ant Migration Tool"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "SFDX CLI (A):Salesforce CLI allows the automation of deployment scripts to sandboxes. Using commands likesfdx force:source:deploy, developers can deploy metadata directly from source control.\n\n\n\n\nAnt Migration Tool (D):The Ant Migration Tool is a command-line utility used for automating metadata deployments. It uses build.xml files to script deployments to sandboxes or production.\n\nIncorrect Options:\n\nB:Developer Console does not support deployment scripting.\n\nC:Change Sets cannot be scripted; they require manual selection and deployment.",
+      "D": "SFDX CLI (A):Salesforce CLI allows the automation of deployment scripts to sandboxes. Using commands likesfdx force:source:deploy, developers can deploy metadata directly from source control.\n\n\n\n\nAnt Migration Tool (D):The Ant Migration Tool is a command-line utility used for automating metadata deployments. It uses build.xml files to script deployments to sandboxes or production.\n\nIncorrect Options:\n\nB:Developer Console does not support deployment scripting.\n\nC:Change Sets cannot be scripted; they require manual selection and deployment."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer creates a custom exception as shown below:\n\npublic class ParityException extends Exception { }\n\nWhat are two ways the developer can fire the exception in Apex?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "throw new ParityException ();"
+      },
+      {
+        "key": "B",
+        "text": "throw new parityException ('parity does not match');"
+      },
+      {
+        "key": "C",
+        "text": "new ParityException ();"
+      },
+      {
+        "key": "D",
+        "text": "new ParityException('parity does not match');"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Throwing Exceptions in Apex:\n\nthrow new ExceptionType();creates a new instance and throws it.\n\nA: No argument constructor.\n\nB: Constructor with a custom error message.\n\nWhy Not Other Options?\n\nC and D: These create exception instances but do not throw them, which is not valid syntax for firing an exception.",
+      "B": "Throwing Exceptions in Apex:\n\nthrow new ExceptionType();creates a new instance and throws it.\n\nA: No argument constructor.\n\nB: Constructor with a custom error message.\n\nWhy Not Other Options?\n\nC and D: These create exception instances but do not throw them, which is not valid syntax for firing an exception."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "When a user edits the Postal Code on an Account, a custom Account text field named 'Timezone' must be updated based on the values in a PostalCodeToTimezone__c custom object.\n\nWhich two automation tools can be used to implement this feature? Choose 2 answers",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Quick actions"
+      },
+      {
+        "key": "B",
+        "text": "Approval process"
+      },
+      {
+        "key": "C",
+        "text": "Account trigger"
+      },
+      {
+        "key": "D",
+        "text": "Fast Field Updates record-triggered flow"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "C": "Account Trigger:\n\nApex triggers allow for complex logic to retrieve and update theTimezonefield based onPostalCodeToTimezone__c.\n\nFast Field Updates Record-Triggered Flow:\n\nA record-triggered flow in Fast Field Updates mode can fetch the necessary data fromPostalCodeToTimezone__cand update the Account.\n\nWhy Not Other Options?\n\nA . Quick actions: Used for user interface updates, not for automation based on edits.\n\nB . Approval process: Not relevant to dynamic field updates.",
+      "D": "Account Trigger:\n\nApex triggers allow for complex logic to retrieve and update theTimezonefield based onPostalCodeToTimezone__c.\n\nFast Field Updates Record-Triggered Flow:\n\nA record-triggered flow in Fast Field Updates mode can fetch the necessary data fromPostalCodeToTimezone__cand update the Account.\n\nWhy Not Other Options?\n\nA . Quick actions: Used for user interface updates, not for automation based on edits.\n\nB . Approval process: Not relevant to dynamic field updates."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "As part of new feature development, a developer is asked to build a responsive application capable of responding to touch events, that will be executed on stateful clients.\n\nWhich two technologies are built on a framework that fully supports the business requirement? Choose 2 answers",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Lightning Web Components"
+      },
+      {
+        "key": "B",
+        "text": "Visualforce Components"
+      },
+      {
+        "key": "C",
+        "text": "Visualforce Pages"
+      },
+      {
+        "key": "D",
+        "text": "Aura Components"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "Lightning Web Components (LWC):\n\nFully responsive and designed to handle touch events.\n\nExecutes on stateful clients with high performance.\n\nAura Components:\n\nSupports responsive designs and touch events but is slightly less efficient than LWC.\n\nWhy Not Other Options?\n\nB . Visualforce Components: Not designed for responsiveness or touch event handling.\n\nC . Visualforce Pages: Primarily server-rendered and not stateful for touch interactions.",
+      "D": "Lightning Web Components (LWC):\n\nFully responsive and designed to handle touch events.\n\nExecutes on stateful clients with high performance.\n\nAura Components:\n\nSupports responsive designs and touch events but is slightly less efficient than LWC.\n\nWhy Not Other Options?\n\nB . Visualforce Components: Not designed for responsiveness or touch event handling.\n\nC . Visualforce Pages: Primarily server-rendered and not stateful for touch interactions."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Assuming that name is a String obtained by a Visualforce page, which two SOQL queries performed are safe from SOQL injection? (Choose two.)",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "apex\nCopy\nString query = '%' + name + '%';\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];"
+      },
+      {
+        "key": "B",
+        "text": "apex\nCopy\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name.noQuotes() + '%\\'';\nList<Account> results = Database.query(query);"
+      },
+      {
+        "key": "C",
+        "text": "apex\nCopy\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\nList<Account> results = Database.query(query);"
+      },
+      {
+        "key": "D",
+        "text": "apex\nCopy\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name + '%\\'';\nList<Account> results = Database.query(query);"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "Comprehensive and Detailed Explanation From Exact Extract: To determine which SOQL queries are safe from SOQL injection, we need to evaluate each option for how it handles the name parameter (user input from a Visualforce page) and whether it properly mitigates the risk of SOQL injection. SOQL injection occurs when untrusted user input is directly embedded into a query string, allowing malicious users to manipulate the query's logic. Let's analyze each option systematically, referencing Salesforce's official documentation, particularly the Secure Coding Guidelines and Apex Developer Guide.\n\nUnderstanding SOQL Injection:\n\nSOQL Injection: This vulnerability arises when user input is dynamically concatenated into a SOQL query string without proper sanitization, allowing an attacker to alter the query's behavior. For example, if name is ' OR '1'='1, an unsafe query might return all records instead of the intended subset. The Salesforce Secure Coding Guidelines state: ''SOQL injection occurs when untrusted input is concatenated into a query string, potentially allowing an attacker to bypass intended logic'' (Salesforce Secure Coding Guidelines, SOQL Injection).\n\nPrevention Techniques:\n\nBind Variables (:variable): Using bind variables in SOQL queries ensures user input is treated as a value, not part of the query logic, preventing injection. The Apex Developer Guide notes: ''Using bind variables (:variable) in SOQL queries is the safest way to prevent SOQL injection'' (Salesforce Apex Developer Guide, Secure Coding for SOQL).\n\nSanitization: If dynamic SOQL (e.g., Database.query()) is used, user input must be sanitized using methods like String.escapeSingleQuotes() to escape special characters (e.g., single quotes) that could alter the query.\n\nContext: The name variable comes from a Visualforce page, meaning it's untrusted user input and must be handled carefully to prevent injection.\n\nEvaluating the Options:\n\nA.\n\napex\n\nCopy\n\nString query = '%' + name + '%';\n\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];\n\nApproach: Constructs a query string by concatenating wildcards (%) with the name variable, then uses a bind variable (:query) in the SOQL query.\n\nSecurity: Using a bind variable (:query) ensures that the value of query (which includes name) is treated as a literal value in the LIKE clause, not as part of the query's syntax. Even if name contains malicious input (e.g., ' OR '1'='1), the SOQL engine treats it as a single string to match against Name, preventing injection. The Apex Developer Guide confirms: ''Bind variables prevent SOQL injection by treating user input as data, not executable code'' (Salesforce Apex Developer Guide, Secure Coding for SOQL).\n\nExample: If name = 'Test' OR '1'='1, then query = '%Test' OR '1'='1%'. The SOQL query becomes:\n\napex\n\nCopy\n\n[SELECT Id FROM Account WHERE Name LIKE '%Test\\' OR \\'1\\'=\\'1%']\n\nThis searches for records where Name matches the literal string %Test' OR '1'='1%, which is safe and does not alter the query logic.\n\nConclusion: Safe from SOQL injection due to the use of a bind variable.\n\nB.\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name.noQuotes() + '%\\'';\n\nList<Account> results = Database.query(query);\n\nApproach: Dynamically constructs a SOQL query string by concatenating name.noQuotes() into the query, then executes it using Database.query().\n\nSecurity: The noQuotes() method is not a standard Apex method on the String class. The Apex Developer Guide does not define noQuotes() as a built-in method (Salesforce Apex Developer Guide, String Class). Assuming it's a custom method, it likely attempts to remove quotes from the string, but this does not prevent SOQL injection. Concatenating user input directly into the query string is inherently unsafe unless properly sanitized.\n\nExample: If name = 'Test' OR '1'='1, and assuming noQuotes() does nothing (or removes quotes, which doesn't help), the query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%Test' OR '1'='1%'\n\nThe OR '1'='1' condition evaluates to true for all records, returning all Accounts, which is a successful SOQL injection attack.\n\nConclusion: Not safe, as it directly concatenates user input without proper sanitization or bind variables, and noQuotes() is not a reliable or standard method for preventing injection.\n\nC.\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\n\nList<Account> results = Database.query(query);\n\nApproach: Dynamically constructs a SOQL query string by concatenating name into the query after applying String.escapeSingleQuotes(), then executes it using Database.query().\n\nSecurity: The String.escapeSingleQuotes() method escapes single quotes in the input by adding a backslash (\\), preventing the input from breaking out of the string literal in the SOQL query. The Apex Developer Guide states: ''String.escapeSingleQuotes() prevents SOQL injection in dynamic queries by escaping single quotes, ensuring the input cannot alter the query structure'' (Salesforce Apex Developer Guide, String Class). This ensures that even malicious input cannot manipulate the query logic.\n\nExample: If name = 'Test' OR '1'='1, then String.escapeSingleQuotes(name) returns Test\\' OR \\'1\\'=\\'1. The query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%Test\\' OR \\'1\\'=\\'1%'\n\nThis searches for records where Name matches the literal string %Test' OR '1'='1%, which is safe and does not allow the OR condition to execute as logic.\n\nConclusion: Safe from SOQL injection due to the use of String.escapeSingleQuotes() to sanitize the user input in a dynamic query.\n\nD.\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name + '%\\'';\n\nList<Account> results = Database.query(query);\n\nApproach: Dynamically constructs a SOQL query string by directly concatenating name into the query, then executes it using Database.query().\n\nSecurity: This approach is vulnerable to SOQL injection because name is directly embedded into the query string without sanitization. The Salesforce Secure Coding Guidelines warn: ''Directly concatenating user input into a dynamic SOQL query without escaping can lead to SOQL injection'' (Salesforce Secure Coding Guidelines, SOQL Injection).\n\nExample: If name = 'Test' OR '1'='1, the query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%Test' OR '1'='1%'\n\nThe OR '1'='1' condition evaluates to true for all records, returning all Accounts, demonstrating a successful SOQL injection attack.\n\nConclusion: Not safe, as it directly concatenates user input without sanitization or bind variables.\n\nWhy Options A and C are Correct:\n\nOption A: Uses a bind variable (:query) in the SOQL query, ensuring that the user input (name) is treated as a literal value, not executable code. This is the most secure way to prevent SOQL injection, as recommended by Salesforce.\n\nOption C: Uses String.escapeSingleQuotes() to sanitize the user input before embedding it into a dynamic SOQL query, preventing the input from altering the query's logic. This is a safe approach for dynamic queries when bind variables cannot be used directly.\n\nOptions B and D: Both concatenate user input directly into the query string without adequate sanitization (noQuotes() is not a standard or reliable method in B, and D has no sanitization), making them vulnerable to SOQL injection.\n\nExample of Vulnerability (Option D):\n\nConsider a Visualforce page where name is set via a user input field:\n\napex\n\nCopy\n\nString name = ApexPages.currentPage().getParameters().get('name');\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name + '%\\'';\n\nList<Account> results = Database.query(query);\n\nIf a malicious user submits name = ' OR '1'='1, the query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%' OR '1'='1%'\n\nThis returns all Accounts, bypassing the intended filtering, which is a successful SOQL injection attack.\n\nMitigating SOQL Injection:\n\nPreferred (Option A): Use bind variables whenever possible:\n\napex\n\nCopy\n\nString query = '%' + name + '%';\n\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];\n\nAlternative (Option C): If dynamic SOQL is required, sanitize input with String.escapeSingleQuotes():\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\n\nList<Account> results = Database.query(query);\n\nHandling Typos:\n\nThe options are syntactically correct in the provided image, with no typos to address.\n\nOption B's name.noQuotes() is not a standard Apex method, but the analysis assumes it's a custom method that fails to prevent injection, as it's not a recognized sanitization technique.\n\n\n\n\nSalesforce Apex Developer Guide:\n\n''Secure Coding for SOQL'' section: Recommends using bind variables to prevent SOQL injection.\n\n''String Class'' section: Details String.escapeSingleQuotes() for sanitizing dynamic queries.\n\n''Database Class'' section: Describes Database.query() for dynamic SOQL execution. (Available at: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/)\n\nSalesforce Secure Coding Guidelines:\n\n''SOQL Injection'' section: Warns against concatenating untrusted input and recommends bind variables or sanitization. (Available at: https://developer.salesforce.com/docs/atlas.en-us.secure_coding_guide.meta/secure_coding_guide/)\n\nPlatform Developer I Study Guide:\n\nSection on ''Salesforce Platform and Declarative Features'': Covers secure coding practices, including preventing SOQL injection in Visualforce contexts. (Available at: https://trailhead.salesforce.com/en/content/learn/modules/platform-developer-i-certification-study-guide)",
+      "C": "Comprehensive and Detailed Explanation From Exact Extract: To determine which SOQL queries are safe from SOQL injection, we need to evaluate each option for how it handles the name parameter (user input from a Visualforce page) and whether it properly mitigates the risk of SOQL injection. SOQL injection occurs when untrusted user input is directly embedded into a query string, allowing malicious users to manipulate the query's logic. Let's analyze each option systematically, referencing Salesforce's official documentation, particularly the Secure Coding Guidelines and Apex Developer Guide.\n\nUnderstanding SOQL Injection:\n\nSOQL Injection: This vulnerability arises when user input is dynamically concatenated into a SOQL query string without proper sanitization, allowing an attacker to alter the query's behavior. For example, if name is ' OR '1'='1, an unsafe query might return all records instead of the intended subset. The Salesforce Secure Coding Guidelines state: ''SOQL injection occurs when untrusted input is concatenated into a query string, potentially allowing an attacker to bypass intended logic'' (Salesforce Secure Coding Guidelines, SOQL Injection).\n\nPrevention Techniques:\n\nBind Variables (:variable): Using bind variables in SOQL queries ensures user input is treated as a value, not part of the query logic, preventing injection. The Apex Developer Guide notes: ''Using bind variables (:variable) in SOQL queries is the safest way to prevent SOQL injection'' (Salesforce Apex Developer Guide, Secure Coding for SOQL).\n\nSanitization: If dynamic SOQL (e.g., Database.query()) is used, user input must be sanitized using methods like String.escapeSingleQuotes() to escape special characters (e.g., single quotes) that could alter the query.\n\nContext: The name variable comes from a Visualforce page, meaning it's untrusted user input and must be handled carefully to prevent injection.\n\nEvaluating the Options:\n\nA.\n\napex\n\nCopy\n\nString query = '%' + name + '%';\n\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];\n\nApproach: Constructs a query string by concatenating wildcards (%) with the name variable, then uses a bind variable (:query) in the SOQL query.\n\nSecurity: Using a bind variable (:query) ensures that the value of query (which includes name) is treated as a literal value in the LIKE clause, not as part of the query's syntax. Even if name contains malicious input (e.g., ' OR '1'='1), the SOQL engine treats it as a single string to match against Name, preventing injection. The Apex Developer Guide confirms: ''Bind variables prevent SOQL injection by treating user input as data, not executable code'' (Salesforce Apex Developer Guide, Secure Coding for SOQL).\n\nExample: If name = 'Test' OR '1'='1, then query = '%Test' OR '1'='1%'. The SOQL query becomes:\n\napex\n\nCopy\n\n[SELECT Id FROM Account WHERE Name LIKE '%Test\\' OR \\'1\\'=\\'1%']\n\nThis searches for records where Name matches the literal string %Test' OR '1'='1%, which is safe and does not alter the query logic.\n\nConclusion: Safe from SOQL injection due to the use of a bind variable.\n\nB.\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name.noQuotes() + '%\\'';\n\nList<Account> results = Database.query(query);\n\nApproach: Dynamically constructs a SOQL query string by concatenating name.noQuotes() into the query, then executes it using Database.query().\n\nSecurity: The noQuotes() method is not a standard Apex method on the String class. The Apex Developer Guide does not define noQuotes() as a built-in method (Salesforce Apex Developer Guide, String Class). Assuming it's a custom method, it likely attempts to remove quotes from the string, but this does not prevent SOQL injection. Concatenating user input directly into the query string is inherently unsafe unless properly sanitized.\n\nExample: If name = 'Test' OR '1'='1, and assuming noQuotes() does nothing (or removes quotes, which doesn't help), the query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%Test' OR '1'='1%'\n\nThe OR '1'='1' condition evaluates to true for all records, returning all Accounts, which is a successful SOQL injection attack.\n\nConclusion: Not safe, as it directly concatenates user input without proper sanitization or bind variables, and noQuotes() is not a reliable or standard method for preventing injection.\n\nC.\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\n\nList<Account> results = Database.query(query);\n\nApproach: Dynamically constructs a SOQL query string by concatenating name into the query after applying String.escapeSingleQuotes(), then executes it using Database.query().\n\nSecurity: The String.escapeSingleQuotes() method escapes single quotes in the input by adding a backslash (\\), preventing the input from breaking out of the string literal in the SOQL query. The Apex Developer Guide states: ''String.escapeSingleQuotes() prevents SOQL injection in dynamic queries by escaping single quotes, ensuring the input cannot alter the query structure'' (Salesforce Apex Developer Guide, String Class). This ensures that even malicious input cannot manipulate the query logic.\n\nExample: If name = 'Test' OR '1'='1, then String.escapeSingleQuotes(name) returns Test\\' OR \\'1\\'=\\'1. The query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%Test\\' OR \\'1\\'=\\'1%'\n\nThis searches for records where Name matches the literal string %Test' OR '1'='1%, which is safe and does not allow the OR condition to execute as logic.\n\nConclusion: Safe from SOQL injection due to the use of String.escapeSingleQuotes() to sanitize the user input in a dynamic query.\n\nD.\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name + '%\\'';\n\nList<Account> results = Database.query(query);\n\nApproach: Dynamically constructs a SOQL query string by directly concatenating name into the query, then executes it using Database.query().\n\nSecurity: This approach is vulnerable to SOQL injection because name is directly embedded into the query string without sanitization. The Salesforce Secure Coding Guidelines warn: ''Directly concatenating user input into a dynamic SOQL query without escaping can lead to SOQL injection'' (Salesforce Secure Coding Guidelines, SOQL Injection).\n\nExample: If name = 'Test' OR '1'='1, the query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%Test' OR '1'='1%'\n\nThe OR '1'='1' condition evaluates to true for all records, returning all Accounts, demonstrating a successful SOQL injection attack.\n\nConclusion: Not safe, as it directly concatenates user input without sanitization or bind variables.\n\nWhy Options A and C are Correct:\n\nOption A: Uses a bind variable (:query) in the SOQL query, ensuring that the user input (name) is treated as a literal value, not executable code. This is the most secure way to prevent SOQL injection, as recommended by Salesforce.\n\nOption C: Uses String.escapeSingleQuotes() to sanitize the user input before embedding it into a dynamic SOQL query, preventing the input from altering the query's logic. This is a safe approach for dynamic queries when bind variables cannot be used directly.\n\nOptions B and D: Both concatenate user input directly into the query string without adequate sanitization (noQuotes() is not a standard or reliable method in B, and D has no sanitization), making them vulnerable to SOQL injection.\n\nExample of Vulnerability (Option D):\n\nConsider a Visualforce page where name is set via a user input field:\n\napex\n\nCopy\n\nString name = ApexPages.currentPage().getParameters().get('name');\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name + '%\\'';\n\nList<Account> results = Database.query(query);\n\nIf a malicious user submits name = ' OR '1'='1, the query becomes:\n\napex\n\nCopy\n\nSELECT Id FROM Account WHERE Name LIKE '%' OR '1'='1%'\n\nThis returns all Accounts, bypassing the intended filtering, which is a successful SOQL injection attack.\n\nMitigating SOQL Injection:\n\nPreferred (Option A): Use bind variables whenever possible:\n\napex\n\nCopy\n\nString query = '%' + name + '%';\n\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];\n\nAlternative (Option C): If dynamic SOQL is required, sanitize input with String.escapeSingleQuotes():\n\napex\n\nCopy\n\nString query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\n\nList<Account> results = Database.query(query);\n\nHandling Typos:\n\nThe options are syntactically correct in the provided image, with no typos to address.\n\nOption B's name.noQuotes() is not a standard Apex method, but the analysis assumes it's a custom method that fails to prevent injection, as it's not a recognized sanitization technique.\n\n\n\n\nSalesforce Apex Developer Guide:\n\n''Secure Coding for SOQL'' section: Recommends using bind variables to prevent SOQL injection.\n\n''String Class'' section: Details String.escapeSingleQuotes() for sanitizing dynamic queries.\n\n''Database Class'' section: Describes Database.query() for dynamic SOQL execution. (Available at: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/)\n\nSalesforce Secure Coding Guidelines:\n\n''SOQL Injection'' section: Warns against concatenating untrusted input and recommends bind variables or sanitization. (Available at: https://developer.salesforce.com/docs/atlas.en-us.secure_coding_guide.meta/secure_coding_guide/)\n\nPlatform Developer I Study Guide:\n\nSection on ''Salesforce Platform and Declarative Features'': Covers secure coding practices, including preventing SOQL injection in Visualforce contexts. (Available at: https://trailhead.salesforce.com/en/content/learn/modules/platform-developer-i-certification-study-guide)"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two characteristics are true for Lightning Web Component custom events?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Data may be passed in the payload of a custom event using @wire decorated properties."
+      },
+      {
+        "key": "B",
+        "text": "Data may be passed In the payload of a custom event using a property called detail."
+      },
+      {
+        "key": "C",
+        "text": "By default a custom event only propagates to its immediate container and to its immediate child component."
+      },
+      {
+        "key": "D",
+        "text": "By default a custom event only propagates to it's immediate container."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "Option B:Custom events in LWC allow data to be passed using thedetailproperty of theCustomEventobject. This is the recommended way to pass data in a custom event.\n\n\n\n\nOption C:By default, custom events propagate to their immediate parent and child components. Additional propagation can be managed using thecomposedandbubblesproperties.",
+      "C": "Option B:Custom events in LWC allow data to be passed using thedetailproperty of theCustomEventobject. This is the recommended way to pass data in a custom event.\n\n\n\n\nOption C:By default, custom events propagate to their immediate parent and child components. Additional propagation can be managed using thecomposedandbubblesproperties."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Where are two locations a developer can look to find information about the status of batch or future methods?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Developer Console"
+      },
+      {
+        "key": "B",
+        "text": "Apex Jobs"
+      },
+      {
+        "key": "C",
+        "text": "Paused Flow Interviews component"
+      },
+      {
+        "key": "D",
+        "text": "Apex Flex Queue"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Option A (Developer Console):The Developer Console provides a detailed view of the execution logs and the status of Apex batch or future methods.\n\nOption B (Apex Jobs):The Apex Jobs page in Salesforce Setup shows the status of queued, in-progress, or completed batch and scheduled jobs.\n\n\n\n\nIncorrect Options:\n\nC (Paused Flow Interviews):Only used for paused flows, not batch or future jobs.\n\nD (Apex Flex Queue):Used for managing batch job execution order, not monitoring job status.",
+      "B": "Option A (Developer Console):The Developer Console provides a detailed view of the execution logs and the status of Apex batch or future methods.\n\nOption B (Apex Jobs):The Apex Jobs page in Salesforce Setup shows the status of queued, in-progress, or completed batch and scheduled jobs.\n\n\n\n\nIncorrect Options:\n\nC (Paused Flow Interviews):Only used for paused flows, not batch or future jobs.\n\nD (Apex Flex Queue):Used for managing batch job execution order, not monitoring job status."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two considerations for deploying from a sandbox to production?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "At least 75% of Apex code must be covered by unit tests."
+      },
+      {
+        "key": "B",
+        "text": "Unit tests must have calls to the System.assert method."
+      },
+      {
+        "key": "C",
+        "text": "Should deploy during business hours to ensure feedback can be quickly addressed."
+      },
+      {
+        "key": "D",
+        "text": "All triggers must have at least one line of test coverage."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "A . 75% Test Coverage:Salesforce mandates that 75% of all Apex code must be covered by tests to be deployable to production.\n\nD . Trigger Coverage:Each Apex trigger must have at least one line of test coverage to ensure it is properly tested.\n\n\n\n\nIncorrect Options:\n\nB:Assertions (System.assert) are recommended but not required.\n\nC:Deployment during business hours is not a requirement.",
+      "D": "A . 75% Test Coverage:Salesforce mandates that 75% of all Apex code must be covered by tests to be deployable to production.\n\nD . Trigger Coverage:Each Apex trigger must have at least one line of test coverage to ensure it is properly tested.\n\n\n\n\nIncorrect Options:\n\nB:Assertions (System.assert) are recommended but not required.\n\nC:Deployment during business hours is not a requirement."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers decides to use purely declarative development to build out a new Salesforce application.\n\nWhich two options can be used to build out the business logic layer for this application?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Record-Triggered Flow"
+      },
+      {
+        "key": "B",
+        "text": "Batch Jobs"
+      },
+      {
+        "key": "C",
+        "text": "Remote Actions"
+      },
+      {
+        "key": "D",
+        "text": "Validation Rules"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "For declarative development:\n\nA . Record-Triggered Flow:Allows building complex logic declaratively without code.\n\nD . Validation Rules:Enforce data quality by validating record fields before saving.\n\n\n\n\nIncorrect Options:\n\nB:Batch jobs are not declarative.\n\nC:Remote Actions require code.",
+      "D": "For declarative development:\n\nA . Record-Triggered Flow:Allows building complex logic declaratively without code.\n\nD . Validation Rules:Enforce data quality by validating record fields before saving.\n\n\n\n\nIncorrect Options:\n\nB:Batch jobs are not declarative.\n\nC:Remote Actions require code."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which three resources in an Aura component can contain JavaScript functions?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Style"
+      },
+      {
+        "key": "B",
+        "text": "Renderer"
+      },
+      {
+        "key": "C",
+        "text": "Controller"
+      },
+      {
+        "key": "D",
+        "text": "Design"
+      },
+      {
+        "key": "E",
+        "text": "Helper"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "B": "In Aura components:\n\nB . Renderer:Contains custom rendering logic.\n\nC . Controller:Manages user interaction and component events.\n\nE . Helper:Contains reusable JavaScript functions for logic.\n\n\n\n\nIncorrect Options:\n\nA (Style):Contains CSS, not JavaScript.\n\nD (Design):Defines design-time attributes, not JavaScript logic.",
+      "C": "In Aura components:\n\nB . Renderer:Contains custom rendering logic.\n\nC . Controller:Manages user interaction and component events.\n\nE . Helper:Contains reusable JavaScript functions for logic.\n\n\n\n\nIncorrect Options:\n\nA (Style):Contains CSS, not JavaScript.\n\nD (Design):Defines design-time attributes, not JavaScript logic.",
+      "E": "In Aura components:\n\nB . Renderer:Contains custom rendering logic.\n\nC . Controller:Manages user interaction and component events.\n\nE . Helper:Contains reusable JavaScript functions for logic.\n\n\n\n\nIncorrect Options:\n\nA (Style):Contains CSS, not JavaScript.\n\nD (Design):Defines design-time attributes, not JavaScript logic."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which three statements are accurate about debug logs?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Debug logs can be set for specific users, classes, and triggers."
+      },
+      {
+        "key": "B",
+        "text": "System debug logs are retained for 24 hours."
+      },
+      {
+        "key": "C",
+        "text": "Only the 20 most recent debug logs for a user are kept."
+      },
+      {
+        "key": "D",
+        "text": "Debug log levels are cumulative, where FINE log level includes all events logged at the DEBUG, INFO, WARN, and ERROR levels."
+      },
+      {
+        "key": "E",
+        "text": "The maximum size of a debug log is 5 MB."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "A": "A . Debug logs can be set for specific users, classes, and triggers:\n\nDebug logs can be configured for users, classes, and triggers by setting trace flags.\n\nC . Only the 20 most recent debug logs for a user are kept:\n\nSalesforce retains only the 20 most recent debug logs per user. Older logs are overwritten.\n\nE . The maximum size of a debug log is 5 MB:\n\nDebug logs are capped at 5 MB. If this limit is exceeded, logging stops for that transaction.\n\nWhy Not B and D?\n\nB: Debug logs are retained for7 days, not 24 hours.\n\nD: Debug log levels are not cumulative. Each level is independent.",
+      "C": "A . Debug logs can be set for specific users, classes, and triggers:\n\nDebug logs can be configured for users, classes, and triggers by setting trace flags.\n\nC . Only the 20 most recent debug logs for a user are kept:\n\nSalesforce retains only the 20 most recent debug logs per user. Older logs are overwritten.\n\nE . The maximum size of a debug log is 5 MB:\n\nDebug logs are capped at 5 MB. If this limit is exceeded, logging stops for that transaction.\n\nWhy Not B and D?\n\nB: Debug logs are retained for7 days, not 24 hours.\n\nD: Debug log levels are not cumulative. Each level is independent.",
+      "E": "A . Debug logs can be set for specific users, classes, and triggers:\n\nDebug logs can be configured for users, classes, and triggers by setting trace flags.\n\nC . Only the 20 most recent debug logs for a user are kept:\n\nSalesforce retains only the 20 most recent debug logs per user. Older logs are overwritten.\n\nE . The maximum size of a debug log is 5 MB:\n\nDebug logs are capped at 5 MB. If this limit is exceeded, logging stops for that transaction.\n\nWhy Not B and D?\n\nB: Debug logs are retained for7 days, not 24 hours.\n\nD: Debug log levels are not cumulative. Each level is independent."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two actions may cause triggers to fire?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Changing a user's default division when the transfer division option is checked"
+      },
+      {
+        "key": "B",
+        "text": "Updates to FeedItem"
+      },
+      {
+        "key": "C",
+        "text": "Cascading delete operations"
+      },
+      {
+        "key": "D",
+        "text": "Renaming or replacing a picklist entry"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "B . Updates to FeedItem:\n\nTriggers can fire when FeedItem records are updated, such as posts on records or Chatter updates.\n\nC . Cascading delete operations:\n\nWhen a parent record is deleted, cascading delete operations on related child records can trigger child object triggers.\n\nWhy Not Other Options?\n\nA: Changing a user's default division does not fire triggers.\n\nD: Renaming or replacing a picklist entry does not fire triggers.",
+      "C": "B . Updates to FeedItem:\n\nTriggers can fire when FeedItem records are updated, such as posts on records or Chatter updates.\n\nC . Cascading delete operations:\n\nWhen a parent record is deleted, cascading delete operations on related child records can trigger child object triggers.\n\nWhy Not Other Options?\n\nA: Changing a user's default division does not fire triggers.\n\nD: Renaming or replacing a picklist entry does not fire triggers."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer is implementing an Apex class for a financial system. Within the class, the variables 'creditAmount' and 'debitAmount' should not be able to change once a value is assigned.\n\nIn which two ways can the developer declare the variables to ensure their value can only be assigned one time?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the static keyword and assign its value in a static initializer."
+      },
+      {
+        "key": "B",
+        "text": "Use the final keyword and assign its value in the class constructor."
+      },
+      {
+        "key": "C",
+        "text": "Use the final keyword and assign its value when declaring the variable."
+      },
+      {
+        "key": "D",
+        "text": "Use the static keyword and assign its value in the class constructor."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "Why Usefinal?\n\nThefinalkeyword ensures that a variable's value can only be assigned once.\n\nOption B: Assigning the value in the constructor is valid as it allows for flexibility when creating class instances.\n\nOption C: Assigning the value directly when declaring the variable is also valid for constants.\n\nWhy Not Other Options?\n\nA: Static variables can have their values reassigned unless marked as final.\n\nD: Static variables cannot be assigned within a class constructor.",
+      "C": "Why Usefinal?\n\nThefinalkeyword ensures that a variable's value can only be assigned once.\n\nOption B: Assigning the value in the constructor is valid as it allows for flexibility when creating class instances.\n\nOption C: Assigning the value directly when declaring the variable is also valid for constants.\n\nWhy Not Other Options?\n\nA: Static variables can have their values reassigned unless marked as final.\n\nD: Static variables cannot be assigned within a class constructor."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer created a trigger on the Account object and wants to test if the trigger is properly bulkified. The developer team decided that the trigger should be tested with 200 account records with unique names.\n\nWhat two things should be done to create the test data within the unit test with the least amount of code?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the @isTest (seeAllData=true) annotation in the test class."
+      },
+      {
+        "key": "B",
+        "text": "Use the @isTest (isParallel=true) annotation in the test class."
+      },
+      {
+        "key": "C",
+        "text": "Create a static resource containing test data."
+      },
+      {
+        "key": "D",
+        "text": "Use Test, loadData to populate data in your test methods."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "C": "Why Use Static Resources andTest.loadData?\n\nC: Static resources allow you to define reusable test data (e.g., in a CSV file).\n\nD:Test.loadDatasimplifies loading bulk test data into test classes from static resources.\n\nWhy Not Other Options?\n\nA: Using@isTest(seeAllData=true)violates test isolation principles and is discouraged.\n\nB:@isTest(isParallel=true)is used for parallel execution, not for creating test data.",
+      "D": "Why Use Static Resources andTest.loadData?\n\nC: Static resources allow you to define reusable test data (e.g., in a CSV file).\n\nD:Test.loadDatasimplifies loading bulk test data into test classes from static resources.\n\nWhy Not Other Options?\n\nA: Using@isTest(seeAllData=true)violates test isolation principles and is discouraged.\n\nB:@isTest(isParallel=true)is used for parallel execution, not for creating test data."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A business has a proprietary Order Management System (OMS) that creates orders from its website and fulfills the orders. When the order is created in the OMS, an integration also creates an order record inSalesforce and relates it to the contact as identified by the email on the order. As the order goes through different stages in the OMS, the integration also updates it in Salesforce.\n\nThe business notices that each update from the OMS creates a new order record in Salesforce.\n\nWhich two actions should prevent the duplicate order records from being created in Salesforce?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the order number from the OMS as an external ID."
+      },
+      {
+        "key": "B",
+        "text": "Ensure that the order number in the OMS is unique."
+      },
+      {
+        "key": "C",
+        "text": "O Use the email on the contact record as an external ID."
+      },
+      {
+        "key": "D",
+        "text": "O Write a trigger on the Order object to delete the duplicates."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "A:Using the order number as an external ID ensures Salesforce can identify and update existing records instead of creating duplicates during updates.\n\nB:Ensuring the order number is unique in the OMS guarantees that there will not be multiple records in Salesforce corresponding to a single order.\n\n\n\n\nIncorrect Options:\n\nC:Email on the contact is unrelated to the uniqueness of order records.\n\nD:Deleting duplicates with triggers is reactive and not a best practice.",
+      "B": "A:Using the order number as an external ID ensures Salesforce can identify and update existing records instead of creating duplicates during updates.\n\nB:Ensuring the order number is unique in the OMS guarantees that there will not be multiple records in Salesforce corresponding to a single order.\n\n\n\n\nIncorrect Options:\n\nC:Email on the contact is unrelated to the uniqueness of order records.\n\nD:Deleting duplicates with triggers is reactive and not a best practice."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which three data types can a SOQL query return?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Double"
+      },
+      {
+        "key": "B",
+        "text": "O Long"
+      },
+      {
+        "key": "C",
+        "text": "sObject"
+      },
+      {
+        "key": "D",
+        "text": "dg Integer"
+      },
+      {
+        "key": "E",
+        "text": "List"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "A": "sObject:SOQL queries can return single or multiple records assObjectinstances.\n\nList:SOQL queries often return results as aListofsObject.\n\nDouble:SOQL aggregate queries can return numeric data types likeDouble(e.g., COUNT, SUM).\n\n\n\n\nIncorrect Options:\n\nB (Long):SOQL does not directly returnLongvalues.\n\nD (Integer):Aggregate results useDouble, notInteger",
+      "C": "sObject:SOQL queries can return single or multiple records assObjectinstances.\n\nList:SOQL queries often return results as aListofsObject.\n\nDouble:SOQL aggregate queries can return numeric data types likeDouble(e.g., COUNT, SUM).\n\n\n\n\nIncorrect Options:\n\nB (Long):SOQL does not directly returnLongvalues.\n\nD (Integer):Aggregate results useDouble, notInteger",
+      "E": "sObject:SOQL queries can return single or multiple records assObjectinstances.\n\nList:SOQL queries often return results as aListofsObject.\n\nDouble:SOQL aggregate queries can return numeric data types likeDouble(e.g., COUNT, SUM).\n\n\n\n\nIncorrect Options:\n\nB (Long):SOQL does not directly returnLongvalues.\n\nD (Integer):Aggregate results useDouble, notInteger"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two statements are true about using the @testSetup annotation in an Apex test class?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Records created in the test setup method cannot be updated in individual test methods."
+      },
+      {
+        "key": "B",
+        "text": "In a test setup method, test data is inserted once and made available for all test methods In the test class."
+      },
+      {
+        "key": "C",
+        "text": "A method defined with the @testSetup annotation executes once for each test method in the test class and counts towards system limits."
+      },
+      {
+        "key": "D",
+        "text": "The @testSetup annotation is not supported when the @isTest(SeeAllData=True) annotation is used ."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "B": "B:@testSetupinserts data once and shares it across all test methods in the class, saving system resources.\n\nD:@isTest(SeeAllData=true)is incompatible with@testSetupdue to their differing purposes for managing test data.\n\n\n\n\nIncorrect Options:\n\nA:Records can be updated in individual test methods.\n\nC:@testSetupdoes not execute repeatedly; it runs once per class.",
+      "D": "B:@testSetupinserts data once and shares it across all test methods in the class, saving system resources.\n\nD:@isTest(SeeAllData=true)is incompatible with@testSetupdue to their differing purposes for managing test data.\n\n\n\n\nIncorrect Options:\n\nA:Records can be updated in individual test methods.\n\nC:@testSetupdoes not execute repeatedly; it runs once per class."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Managers at Universal Containers want to ensure that only decommissioned containers are able to be deleted in the system. To meet the business requirement a Salesforce developer adds 'Decommissioned' as a picklist value for the Status _c custom field within the Container _c object.\n\nWhich two approaches could a developer use to enforce only Container records with a status of 'Decommissioned' can be deleted?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Before record-triggered flaw"
+      },
+      {
+        "key": "B",
+        "text": "Apex trigger"
+      },
+      {
+        "key": "C",
+        "text": "After record-triggered flow"
+      },
+      {
+        "key": "D",
+        "text": "Validation rule"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "B": "Apex Trigger (Option B):\n\nAn Apex trigger can be written on theContainer__cobject to prevent deletion unless theStatus__cfield value is 'Decommissioned'.\n\nThis allows custom logic to be executed during the deletion process.\n\n:Apex Triggers Documentation\n\nValidation Rule (Option D):\n\nA validation rule is typically used to enforce conditions during record creation or update. However, it cannot directly restrict deletions.\n\nTo ensure deletion restriction, an Apex trigger is more effective.\n\nNot Suitable:\n\nOption A(Before record-triggered flow): Flows triggered 'before delete' are not available.\n\nOption C(After record-triggered flow): These occur after a record is deleted, so they cannot prevent the deletion process.",
+      "D": "Apex Trigger (Option B):\n\nAn Apex trigger can be written on theContainer__cobject to prevent deletion unless theStatus__cfield value is 'Decommissioned'.\n\nThis allows custom logic to be executed during the deletion process.\n\n:Apex Triggers Documentation\n\nValidation Rule (Option D):\n\nA validation rule is typically used to enforce conditions during record creation or update. However, it cannot directly restrict deletions.\n\nTo ensure deletion restriction, an Apex trigger is more effective.\n\nNot Suitable:\n\nOption A(Before record-triggered flow): Flows triggered 'before delete' are not available.\n\nOption C(After record-triggered flow): These occur after a record is deleted, so they cannot prevent the deletion process."
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "The Account object in an organization has a master-detail relationship to a child object called Branch. The following automations exist:\n\n* Roll-up summary fields\n\n* Custom validation rules\n\n* Duplicate rules\n\ndeveloper created a trigger on the Account object.\n\nWhich two things should the developer consider while testing the trigger code?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Rollup summary fields can cause the parent record to go through Save."
+      },
+      {
+        "key": "B",
+        "text": "Duplicate rules are executed once all DML operations commit to the database."
+      },
+      {
+        "key": "C",
+        "text": "The trigger may fire multiple times during a transaction."
+      },
+      {
+        "key": "D",
+        "text": "The validation rules will cause the trigger to fire again."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "A . Roll-up summary fields can cause the parent record to go through Save:\n\nWhen a roll-up summary field on a parent object (like Account) is updated due to changes in child records (like Branch), the parent record (Account) is implicitly saved again.\n\nThis can result in the execution of the trigger on the parent object. Developers must consider this behavior to avoid unintended recursion or infinite loops.\n\n\n\n\nC . The trigger may fire multiple times during a transaction:\n\nTriggers can execute multiple times within a single transaction, especially when there are operations such as updates to the parent record caused by roll-up summary fields or workflows.\n\nDevelopers should implement logic to ensure that the trigger handles multiple executions correctly (e.g., using a static variable to prevent recursion).\n\nWhy not the other options?\n\nB . Duplicate rules are executed once all DML operations commit to the database:\n\nThis is incorrect because duplicate rules executebeforethe DML operation is committed. Duplicate rules prevent duplicate records from being created or updated before the database operation occurs.\n\nD . The validation rules will cause the trigger to fire again:\n\nThis is incorrect because validation rules do not cause triggers to fire again. Validation rules validate the record and may prevent DML operations, but they do not independently re-trigger the Apex trigger.\n\nTrigger Context and Recursion\n\nRoll-Up Summary Field Documentation",
+      "C": "A . Roll-up summary fields can cause the parent record to go through Save:\n\nWhen a roll-up summary field on a parent object (like Account) is updated due to changes in child records (like Branch), the parent record (Account) is implicitly saved again.\n\nThis can result in the execution of the trigger on the parent object. Developers must consider this behavior to avoid unintended recursion or infinite loops.\n\n\n\n\nC . The trigger may fire multiple times during a transaction:\n\nTriggers can execute multiple times within a single transaction, especially when there are operations such as updates to the parent record caused by roll-up summary fields or workflows.\n\nDevelopers should implement logic to ensure that the trigger handles multiple executions correctly (e.g., using a static variable to prevent recursion).\n\nWhy not the other options?\n\nB . Duplicate rules are executed once all DML operations commit to the database:\n\nThis is incorrect because duplicate rules executebeforethe DML operation is committed. Duplicate rules prevent duplicate records from being created or updated before the database operation occurs.\n\nD . The validation rules will cause the trigger to fire again:\n\nThis is incorrect because validation rules do not cause triggers to fire again. Validation rules validate the record and may prevent DML operations, but they do not independently re-trigger the Apex trigger.\n\nTrigger Context and Recursion\n\nRoll-Up Summary Field Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "If Apex code executes inside the execute() method of an Apex class when implementing the Batchable interface, which two statements are true regarding governor limits?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "The Apex governor limits are reset for each iteration of the execute () method."
+      },
+      {
+        "key": "B",
+        "text": "The Apex governor limits cannot be exceeded due to the asynchronaus nature of the transaction."
+      },
+      {
+        "key": "C",
+        "text": "The Apex governor limits will use the asynchronous limit levels."
+      },
+      {
+        "key": "D",
+        "text": "The Apex governor limits are omitted while calling the constructor of the Apex class."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "Option A: Governor limits are reset for each execution of theexecute()method in a batch job because each batch is treated as a separate transaction.\n\nOption C: Batch jobs use asynchronous governor limits, which are higher than synchronous limits.\n\n:Apex Governor Limits Documentation",
+      "C": "Option A: Governor limits are reset for each execution of theexecute()method in a batch job because each batch is treated as a separate transaction.\n\nOption C: Batch jobs use asynchronous governor limits, which are higher than synchronous limits.\n\n:Apex Governor Limits Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two operations affect the number of times a trigger can fire?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Criteria-based sharing calculations"
+      },
+      {
+        "key": "B",
+        "text": "Email messages"
+      },
+      {
+        "key": "C",
+        "text": "Roll-up summary fields"
+      },
+      {
+        "key": "D",
+        "text": "After-save record-triggered flow"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "C": "Option C: Roll-up summary fields can cause triggers to fire again as they recalculate parent records.\n\nOption D: After-save record-triggered flows can update records, which may fire triggers on those records.\n\n:Salesforce Triggers Documentation",
+      "D": "Option C: Roll-up summary fields can cause triggers to fire again as they recalculate parent records.\n\nOption D: After-save record-triggered flows can update records, which may fire triggers on those records.\n\n:Salesforce Triggers Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two are best practices when it comes to Aura component and application event handling?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Try to use application events as opposed to component events."
+      },
+      {
+        "key": "B",
+        "text": "Reuse the event logic in a component bundle, by putting the logic in the helper."
+      },
+      {
+        "key": "C",
+        "text": "Use component events to communicate actions that should be handled at the application level."
+      },
+      {
+        "key": "D",
+        "text": "Handle low-level events in the event handler and re-fire them as higher-level events."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "B": "Option B: Reusing event logic in the helper ensures cleaner and reusable code.\n\nOption D: Handling low-level events in handlers and re-firing them as higher-level events allows for better abstraction and modularity.\n\n:Aura Event Handling Documentation",
+      "D": "Option B: Reusing event logic in the helper ensures cleaner and reusable code.\n\nOption D: Handling low-level events in handlers and re-firing them as higher-level events allows for better abstraction and modularity.\n\n:Aura Event Handling Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are three considerations when using the @lnvocableMethod annotation in Apex?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Only one method using the @invecableMethod annotation can be defined per Apex class_"
+      },
+      {
+        "key": "B",
+        "text": "A method using the @invecableMethod annotation can have multiple input parameters."
+      },
+      {
+        "key": "C",
+        "text": "A method using the @invocablemethod annotation must be declaredas static,"
+      },
+      {
+        "key": "D",
+        "text": "GO A method using the @invocablemethod annotation must define a return value."
+      },
+      {
+        "key": "E",
+        "text": "A method using the @invocableMethod annotation can be declared as Public or Global."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "A": "Option A: Only one method annotated with@InvocableMethodcan exist per class.\n\nOption C: The method must bestatic.\n\nOption E: The method can be declared asPublicorGlobalfor broader accessibility.\n\n:Invocable Methods Documentation",
+      "C": "Option A: Only one method annotated with@InvocableMethodcan exist per class.\n\nOption C: The method must bestatic.\n\nOption E: The method can be declared asPublicorGlobalfor broader accessibility.\n\n:Invocable Methods Documentation",
+      "E": "Option A: Only one method annotated with@InvocableMethodcan exist per class.\n\nOption C: The method must bestatic.\n\nOption E: The method can be declared asPublicorGlobalfor broader accessibility.\n\n:Invocable Methods Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two settings must be defined In order to update a record of a junction object?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Read/Write access on the secondary relationship"
+      },
+      {
+        "key": "B",
+        "text": "Read/Write access on the primary relationship"
+      },
+      {
+        "key": "C",
+        "text": "Read/Write access on the junction object"
+      },
+      {
+        "key": "D",
+        "text": "Read access on the primary relationship"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "Option B: To update a junction object, the user needsRead/Writeaccess to the primary relationship object.\n\nOption C: The user must also haveRead/Writeaccess on the junction object itself.\n\n:Junction Objects Documentation",
+      "C": "Option B: To update a junction object, the user needsRead/Writeaccess to the primary relationship object.\n\nOption C: The user must also haveRead/Writeaccess on the junction object itself.\n\n:Junction Objects Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers wants to assess the advantages of declarative development versus programmatic customization for specific use cases in its Salesforce implementation.\n\nWhat are two characteristics of declarative development over programmatic customization?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Declarative development does not require Apex test classes."
+      },
+      {
+        "key": "B",
+        "text": "Declarative development has higher design limits and query limits,"
+      },
+      {
+        "key": "C",
+        "text": "Declarative development can be done using the Setup menu."
+      },
+      {
+        "key": "D",
+        "text": "Declarative code logic does not require maintenance or review."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "A: Declarative development does not require Apex test classes since it leverages built-in Salesforce features such as flows, process builders, and validation rules.\n\nC: Declarative development can be done using the Setup menu, which includes point-and-click tools like page layouts, workflows, and Lightning App Builder.\n\nWhy not other options?\n\nB: Declarative development has strict limits (e.g., process builders and flows have governor limits that are lower than programmatic approaches like Apex).\n\nD: Declarative logic still requires maintenance, especially as business needs evolve.\n\n:\n\nDeclarative vs Programmatic Development",
+      "C": "A: Declarative development does not require Apex test classes since it leverages built-in Salesforce features such as flows, process builders, and validation rules.\n\nC: Declarative development can be done using the Setup menu, which includes point-and-click tools like page layouts, workflows, and Lightning App Builder.\n\nWhy not other options?\n\nB: Declarative development has strict limits (e.g., process builders and flows have governor limits that are lower than programmatic approaches like Apex).\n\nD: Declarative logic still requires maintenance, especially as business needs evolve.\n\n:\n\nDeclarative vs Programmatic Development"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "For which three items can a trace flag be configured?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Apex Class"
+      },
+      {
+        "key": "B",
+        "text": "Flow"
+      },
+      {
+        "key": "C",
+        "text": "User"
+      },
+      {
+        "key": "D",
+        "text": "Visualforce"
+      },
+      {
+        "key": "E",
+        "text": "Apex Trigger"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "A": "Option A (Apex Class): Trace flags can be configured for specific Apex classes to debug issues during their execution.\n\nOption C (User): Trace flags can be set for specific users to debug issues occurring in their transactions.\n\nOption E (Apex Trigger): Trace flags can be set for specific triggers to debug execution.\n\nNot Suitable:\n\nOption B (Flow): Trace flags cannot be configured for Flows directly.\n\nOption D (Visualforce): Trace flags are not used to debug Visualforce pages directly.\n\n:Debug Logs and Trace Flags",
+      "C": "Option A (Apex Class): Trace flags can be configured for specific Apex classes to debug issues during their execution.\n\nOption C (User): Trace flags can be set for specific users to debug issues occurring in their transactions.\n\nOption E (Apex Trigger): Trace flags can be set for specific triggers to debug execution.\n\nNot Suitable:\n\nOption B (Flow): Trace flags cannot be configured for Flows directly.\n\nOption D (Visualforce): Trace flags are not used to debug Visualforce pages directly.\n\n:Debug Logs and Trace Flags",
+      "E": "Option A (Apex Class): Trace flags can be configured for specific Apex classes to debug issues during their execution.\n\nOption C (User): Trace flags can be set for specific users to debug issues occurring in their transactions.\n\nOption E (Apex Trigger): Trace flags can be set for specific triggers to debug execution.\n\nNot Suitable:\n\nOption B (Flow): Trace flags cannot be configured for Flows directly.\n\nOption D (Visualforce): Trace flags are not used to debug Visualforce pages directly.\n\n:Debug Logs and Trace Flags"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are three capabilities of the <ltng: require> tag when loading JavaScript resources in Aura components?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "One-time loading for duplicate scripts"
+      },
+      {
+        "key": "B",
+        "text": "Loading scripts in parallel"
+      },
+      {
+        "key": "C",
+        "text": "Loading Files from Documents"
+      },
+      {
+        "key": "D",
+        "text": "Specifying loading order"
+      },
+      {
+        "key": "E",
+        "text": "Loading externally hosted scripts"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "A": "Option A: The<ltng:require>tag ensures that scripts are loaded only once, even if referenced multiple times.\n\nOption D: The tag allows you to specify the order of scripts to ensure dependencies are loaded correctly.\n\nOption E: Externally hosted scripts can be loaded using thescriptsattribute.\n\nNot Suitable:\n\nOption B (Loading scripts in parallel): Scripts are loaded sequentially to ensure proper dependency handling.\n\nOption C (Loading Files from Documents): Files must be hosted externally or in static resources, not in Documents.\n\n:ltng:require Documentation",
+      "D": "Option A: The<ltng:require>tag ensures that scripts are loaded only once, even if referenced multiple times.\n\nOption D: The tag allows you to specify the order of scripts to ensure dependencies are loaded correctly.\n\nOption E: Externally hosted scripts can be loaded using thescriptsattribute.\n\nNot Suitable:\n\nOption B (Loading scripts in parallel): Scripts are loaded sequentially to ensure proper dependency handling.\n\nOption C (Loading Files from Documents): Files must be hosted externally or in static resources, not in Documents.\n\n:ltng:require Documentation",
+      "E": "Option A: The<ltng:require>tag ensures that scripts are loaded only once, even if referenced multiple times.\n\nOption D: The tag allows you to specify the order of scripts to ensure dependencies are loaded correctly.\n\nOption E: Externally hosted scripts can be loaded using thescriptsattribute.\n\nNot Suitable:\n\nOption B (Loading scripts in parallel): Scripts are loaded sequentially to ensure proper dependency handling.\n\nOption C (Loading Files from Documents): Files must be hosted externally or in static resources, not in Documents.\n\n:ltng:require Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Within the class, the developer identifies the following method as a security threat:\n\nist<Contact> performSearch (String lastName} [\n\nreturn Database.query('SELECT Id, FirstName, LastName FROM Contact WHERE LastName Like\n\ns'+lastName+'s'')?;\n\nWhat are two ways the developer can update the method to prevent a SOQL injection attack?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use variable binding and replace the dynamic query with a static SOQL."
+      },
+      {
+        "key": "B",
+        "text": "Use the sacapeSingleQuotes method to sanitize the parameter before its use."
+      },
+      {
+        "key": "C",
+        "text": "Use the Readonly annotation and the with sharing keyword on the class."
+      },
+      {
+        "key": "D",
+        "text": "Use a regular expression on the parameter to remove special characters."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Option A: Using variable binding eliminates the need for concatenating dynamic values in the query, which is the safest approach.\n\nOption B: UsingString.escapeSingleQuotesensures special characters are handled safely, reducing the risk of SOQL injection.\n\nNot Suitable:\n\nOption C: Whilewith sharingensures sharing rules are applied, it does not prevent SOQL injection.\n\nOption D: Regular expressions are not a reliable method for sanitizing input.\n\n:Preventing SOQL Injection",
+      "B": "Option A: Using variable binding eliminates the need for concatenating dynamic values in the query, which is the safest approach.\n\nOption B: UsingString.escapeSingleQuotesensures special characters are handled safely, reducing the risk of SOQL injection.\n\nNot Suitable:\n\nOption C: Whilewith sharingensures sharing rules are applied, it does not prevent SOQL injection.\n\nOption D: Regular expressions are not a reliable method for sanitizing input.\n\n:Preventing SOQL Injection"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two benefits of using External IDs?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "An External ID field can be used to reference an ID from another external system."
+      },
+      {
+        "key": "B",
+        "text": "An External ID can be a formula field ta help create a unique key from two fields in Salesforce."
+      },
+      {
+        "key": "C",
+        "text": "An External ID can be used with Salesforce Mobile to make external data visible."
+      },
+      {
+        "key": "D",
+        "text": "An External 1D is indexed and can improve the performance of SOOL queries."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "A": "A: An External ID field is designed to store an ID from another external system, which can be used to match Salesforce records with data from an external source during data imports or integrations.\n\nD: External ID fields are automatically indexed, which can significantly improve the performance of SOQL queries when filtering based on the External ID.\n\nWhy not other options?\n\nB: External IDs cannot be formula fields. Only text, number, email, and auto-number fields can be set as External IDs.\n\nC: While External IDs are useful for integrations, they do not make external data visible within Salesforce Mobile.\n\n:\n\nExternal IDs Overview",
+      "D": "A: An External ID field is designed to store an ID from another external system, which can be used to match Salesforce records with data from an external source during data imports or integrations.\n\nD: External ID fields are automatically indexed, which can significantly improve the performance of SOQL queries when filtering based on the External ID.\n\nWhy not other options?\n\nB: External IDs cannot be formula fields. Only text, number, email, and auto-number fields can be set as External IDs.\n\nC: While External IDs are useful for integrations, they do not make external data visible within Salesforce Mobile.\n\n:\n\nExternal IDs Overview"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "What are two characteristics related to formulas?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Formulas are calculated at runtime and are not stored in the database."
+      },
+      {
+        "key": "B",
+        "text": "Formulas can reference themselves."
+      },
+      {
+        "key": "C",
+        "text": "Formulas can reference values in related objects."
+      },
+      {
+        "key": "D",
+        "text": "Fields that are used in a formula field can be deleted or edited without editing the formula."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "A: Formula fields are calculated at runtime based on the formula definition and are not stored in the database.\n\nC: Formula fields can reference fields from related objects, allowing cross-object calculations.\n\nWhy not other options?\n\nB: Formulas cannot reference themselves; doing so would result in a circular reference error.\n\nD: If a field used in a formula field is deleted, the formula field will break, and Salesforce will prevent deletion until the formula field is updated.\n\n:\n\nFormula Fields Documentation",
+      "C": "A: Formula fields are calculated at runtime based on the formula definition and are not stored in the database.\n\nC: Formula fields can reference fields from related objects, allowing cross-object calculations.\n\nWhy not other options?\n\nB: Formulas cannot reference themselves; doing so would result in a circular reference error.\n\nD: If a field used in a formula field is deleted, the formula field will break, and Salesforce will prevent deletion until the formula field is updated.\n\n:\n\nFormula Fields Documentation"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer has a single custom controller class that works with a Visualforce Wizard to support creating and editing multiple sObjects. The wizard accepts data from user inputs across multiple Visualforce pages and from a parameter on the initial URL.\n\nWhich three statements are useful inside the unit test to effectively test the custom controller?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "String nextPage = controller.save().getUrl ();"
+      },
+      {
+        "key": "B",
+        "text": "ApexPages.currentPage ().getParametera(}.put{'input', 'TeatValue');"
+      },
+      {
+        "key": "C",
+        "text": "insert pageret;"
+      },
+      {
+        "key": "D",
+        "text": "public Extendedcontroller (ApexPages.Standardcontraller entrl) { }"
+      },
+      {
+        "key": "E",
+        "text": "Test. setCurrentPage (pageRef) ;"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "A": "A: Thesave()method in the custom controller must be tested to ensure it works as intended and redirects to the correct page.\n\nB: Setting parameters viaApexPages.currentPage().getParameters()is crucial to test scenarios where user input or URL parameters drive logic.\n\nD: UsingTest.setCurrentPage(pageRef)is essential for simulating page context in unit tests.\n\nWhy not other options?\n\nC: This statement does not belong to testing a custom controller.\n\nB (second occurrence): It appears to be incorrectly formatted in the question.\n\n:\n\nTesting Apex Controllers",
+      "B": "A: Thesave()method in the custom controller must be tested to ensure it works as intended and redirects to the correct page.\n\nB: Setting parameters viaApexPages.currentPage().getParameters()is crucial to test scenarios where user input or URL parameters drive logic.\n\nD: UsingTest.setCurrentPage(pageRef)is essential for simulating page context in unit tests.\n\nWhy not other options?\n\nC: This statement does not belong to testing a custom controller.\n\nB (second occurrence): It appears to be incorrectly formatted in the question.\n\n:\n\nTesting Apex Controllers",
+      "D": "A: Thesave()method in the custom controller must be tested to ensure it works as intended and redirects to the correct page.\n\nB: Setting parameters viaApexPages.currentPage().getParameters()is crucial to test scenarios where user input or URL parameters drive logic.\n\nD: UsingTest.setCurrentPage(pageRef)is essential for simulating page context in unit tests.\n\nWhy not other options?\n\nC: This statement does not belong to testing a custom controller.\n\nB (second occurrence): It appears to be incorrectly formatted in the question.\n\n:\n\nTesting Apex Controllers"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer at AW Computing is tasked to create the supporting test class for a programmatic customization that leverages records stored within the custom object, Pricing Structure c. AW Computing has a complex pricing structure for each item on the store, spanning more than 500 records.\n\nWhich two approaches can the developer use to ensure Pricing _Structure__c records are available when the test class is executed?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a Test Date Factory class."
+      },
+      {
+        "key": "B",
+        "text": "Use the @TsTest (SeeAllData=true) annotation."
+      },
+      {
+        "key": "C",
+        "text": "Use the Test. leadteat{) method."
+      },
+      {
+        "key": "D",
+        "text": "Use without sharing on the class declaration."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "Option A: Using aTest Data Factoryclass is a recommended approach to create test records programmatically. This ensures that the test is independent of existing data and can be executed in isolation.\n\nOption B: The@IsTest(SeeAllData=true)annotation allows the test to access existing records in the database, includingPricing_Structure__c. However, this is less recommended as it creates a dependency on existing org data.\n\nNot Suitable:\n\nOption C:Test.loadDatais used to load records from a static resource (CSV) but doesn't suit the requirement directly.\n\nOption D: Addingwithout sharingto a class impacts sharing rules but does not create or ensure the existence of test data.\n\n:Testing Best Practices",
+      "B": "Option A: Using aTest Data Factoryclass is a recommended approach to create test records programmatically. This ensures that the test is independent of existing data and can be executed in isolation.\n\nOption B: The@IsTest(SeeAllData=true)annotation allows the test to access existing records in the database, includingPricing_Structure__c. However, this is less recommended as it creates a dependency on existing org data.\n\nNot Suitable:\n\nOption C:Test.loadDatais used to load records from a static resource (CSV) but doesn't suit the requirement directly.\n\nOption D: Addingwithout sharingto a class impacts sharing rules but does not create or ensure the existence of test data.\n\n:Testing Best Practices"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "When importing and exporting data into Salesforce, which two statements are true?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Bulk API can be used to bypass the storage limits when importing large data volumes in development environments."
+      },
+      {
+        "key": "B",
+        "text": "Data import wizard is an application that is installed on your computer"
+      },
+      {
+        "key": "C",
+        "text": "Bulk APL can be used to import large data volumes in development environments without bypassing the storage limits."
+      },
+      {
+        "key": "D",
+        "text": "Developer and Developer Pro sandboxes have different storage limits."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "C": "C: The Bulk API is designed for importing or exporting large volumes of data and works efficiently in development environments, but it respects storage limits.\n\nD: Developer and Developer Pro sandboxes have different storage limits. Developer Pro has a larger storage limit compared to a Developer sandbox.\n\nWhy not other options?\n\nA: Bulk API does not bypass storage limits.\n\nB: The Data Import Wizard is a web-based tool, not an application installed on your computer.\n\n:\n\nSalesforce Data Import and Export\n\nSalesforce Bulk API",
+      "D": "C: The Bulk API is designed for importing or exporting large volumes of data and works efficiently in development environments, but it respects storage limits.\n\nD: Developer and Developer Pro sandboxes have different storage limits. Developer Pro has a larger storage limit compared to a Developer sandbox.\n\nWhy not other options?\n\nA: Bulk API does not bypass storage limits.\n\nB: The Data Import Wizard is a web-based tool, not an application installed on your computer.\n\n:\n\nSalesforce Data Import and Export\n\nSalesforce Bulk API"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers decides to use exclusively declarative development to build out a new Salesforce application.\n\nWhich three options should be used to build out the database layer for the application?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Custom objects and fields"
+      },
+      {
+        "key": "B",
+        "text": "Triggers"
+      },
+      {
+        "key": "C",
+        "text": "Roll-up summaries"
+      },
+      {
+        "key": "D",
+        "text": "Relationships"
+      },
+      {
+        "key": "E",
+        "text": "Flows"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "A": "A: Custom objects and fields are the fundamental building blocks of the database layer in Salesforce for creating and storing custom data.\n\nC: Roll-up summary fields are a declarative feature used to perform calculations (e.g., sum, count) on child records and display the results on the parent record.\n\nD: Relationships (e.g., master-detail, lookup) are essential for defining how data objects are related to each other.\n\nWhy not other options?\n\nB: Triggers are a programmatic solution, which goes against the declarative-only requirement.\n\nE: Flows are used for automation and logic, not for building the database layer.\n\n:\n\nSalesforce Data Modeling",
+      "C": "A: Custom objects and fields are the fundamental building blocks of the database layer in Salesforce for creating and storing custom data.\n\nC: Roll-up summary fields are a declarative feature used to perform calculations (e.g., sum, count) on child records and display the results on the parent record.\n\nD: Relationships (e.g., master-detail, lookup) are essential for defining how data objects are related to each other.\n\nWhy not other options?\n\nB: Triggers are a programmatic solution, which goes against the declarative-only requirement.\n\nE: Flows are used for automation and logic, not for building the database layer.\n\n:\n\nSalesforce Data Modeling",
+      "D": "A: Custom objects and fields are the fundamental building blocks of the database layer in Salesforce for creating and storing custom data.\n\nC: Roll-up summary fields are a declarative feature used to perform calculations (e.g., sum, count) on child records and display the results on the parent record.\n\nD: Relationships (e.g., master-detail, lookup) are essential for defining how data objects are related to each other.\n\nWhy not other options?\n\nB: Triggers are a programmatic solution, which goes against the declarative-only requirement.\n\nE: Flows are used for automation and logic, not for building the database layer.\n\n:\n\nSalesforce Data Modeling"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "A developer has identified a method in an Apex class that performs resource intensive actions in memory by iterating over the result set of a SOQL statement on the account. The method also performs a DML statement to save the changes to the database.\n\nWhich two techniques should the developer implement as a best practice to ensure transaction control and avoid exceeding governor limits'*",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the @ReadOnly annotation to bypass the number of rows returned by a SOQL."
+      },
+      {
+        "key": "B",
+        "text": "Use partial DML statements to ensure only valid data is committed."
+      },
+      {
+        "key": "C",
+        "text": "Use the System.limit class to monitor the current CPU governor limit consumption."
+      },
+      {
+        "key": "D",
+        "text": "Use the Database.Savepoint method to enforce database integrity."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "B": "B: Using partial DML statements (e.g.,Database.insert(list, false)) allows only valid records to be committed while identifying invalid ones, avoiding runtime errors.\n\nD: TheDatabase.Savepointmethod ensures transactional control by allowing rollback to a specific savepoint if an error occurs.\n\nWhy not other options?\n\nA: The@ReadOnlyannotation is for read-only operations and would not allow DML operations.\n\nC: TheSystem.Limitclass helps monitor limits but does not directly control transaction behavior.\n\n:\n\nBest Practices for Apex Transactions",
+      "D": "B: Using partial DML statements (e.g.,Database.insert(list, false)) allows only valid records to be committed while identifying invalid ones, avoiding runtime errors.\n\nD: TheDatabase.Savepointmethod ensures transactional control by allowing rollback to a specific savepoint if an error occurs.\n\nWhy not other options?\n\nA: The@ReadOnlyannotation is for read-only operations and would not allow DML operations.\n\nC: TheSystem.Limitclass helps monitor limits but does not directly control transaction behavior.\n\n:\n\nBest Practices for Apex Transactions"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers is developing a new Lightning web component for their marketing department. They want to ensure that the component is fine-tuned and provides a seamless user experience.\n\nWhat are some benefits of using the Lightning Component framework?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Better performance due to client-side rendering"
+      },
+      {
+        "key": "B",
+        "text": "Automatic support for accessibility standards"
+      },
+      {
+        "key": "C",
+        "text": "Compatibility with all web browsers"
+      },
+      {
+        "key": "D",
+        "text": "Easy integration with third-party libraries"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "A": "Option A: The Lightning Component Framework uses client-side rendering for improved performance and responsiveness.\n\nOption B: Lightning components automatically adhere to accessibility standards (e.g., ARIA).\n\nOption D: The framework allows for seamless integration with external libraries via JavaScript.\n\nNot Suitable:\n\nOption C: Lightning components are compatible with modern browsers but not all browsers.\n\n:Lightning Component Benefits",
+      "B": "Option A: The Lightning Component Framework uses client-side rendering for improved performance and responsiveness.\n\nOption B: Lightning components automatically adhere to accessibility standards (e.g., ARIA).\n\nOption D: The framework allows for seamless integration with external libraries via JavaScript.\n\nNot Suitable:\n\nOption C: Lightning components are compatible with modern browsers but not all browsers.\n\n:Lightning Component Benefits",
+      "D": "Option A: The Lightning Component Framework uses client-side rendering for improved performance and responsiveness.\n\nOption B: Lightning components automatically adhere to accessibility standards (e.g., ARIA).\n\nOption D: The framework allows for seamless integration with external libraries via JavaScript.\n\nNot Suitable:\n\nOption C: Lightning components are compatible with modern browsers but not all browsers.\n\n:Lightning Component Benefits"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which three steps allow a custom Scalable Vector Graphic (SVG) to be included in a Lightning web component?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Import the static resource and provide a JavaScript property for it."
+      },
+      {
+        "key": "B",
+        "text": "Upload the SVG as a static resource."
+      },
+      {
+        "key": "C",
+        "text": "Reference the import in the HTML template."
+      },
+      {
+        "key": "D",
+        "text": "Import the SVG as a content asset file."
+      },
+      {
+        "key": "E",
+        "text": "Reference the property in the HTML template."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "A": "Upload the SVG file as astatic resourcein Salesforce.\n\nImport it in the LWC JavaScript file and define it as a property.\n\nReference the property in the component's HTML template.\n\nExample:\n\nimportmySvgfrom'@salesforce/resourceUrl/mySvg';\n\nexportdefaultclassMyComponentextendsLightningElement{\n\nsvgUrl = mySvg;\n\n}\n\n:Lightning Web Components Static Resources",
+      "B": "Upload the SVG file as astatic resourcein Salesforce.\n\nImport it in the LWC JavaScript file and define it as a property.\n\nReference the property in the component's HTML template.\n\nExample:\n\nimportmySvgfrom'@salesforce/resourceUrl/mySvg';\n\nexportdefaultclassMyComponentextendsLightningElement{\n\nsvgUrl = mySvg;\n\n}\n\n:Lightning Web Components Static Resources",
+      "C": "Upload the SVG file as astatic resourcein Salesforce.\n\nImport it in the LWC JavaScript file and define it as a property.\n\nReference the property in the component's HTML template.\n\nExample:\n\nimportmySvgfrom'@salesforce/resourceUrl/mySvg';\n\nexportdefaultclassMyComponentextendsLightningElement{\n\nsvgUrl = mySvg;\n\n}\n\n:Lightning Web Components Static Resources"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which three code lines are required to create a Lightning component on a Visualforce page?",
+    "score": 1,
+    "chooseCount": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "$Lightning.use"
+      },
+      {
+        "key": "B",
+        "text": "$Lightning.useComponent"
+      },
+      {
+        "key": "C",
+        "text": "<apex:includeLightning/>"
+      },
+      {
+        "key": "D",
+        "text": "<apex:slds/>"
+      },
+      {
+        "key": "E",
+        "text": "$Lightning.createComponent"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "A": "Comprehensive and Detailed Explanation From Exact Extract:\n\nTo embed a Lightning component in a Visualforce page, you need to:\n\nInclude the Lightning framework using .\n\nUse $Lightning.use to load Lightning components and resources.\n\nUse $Lightning.createComponent to render the component dynamically in the Visualforce page.\n\n\n\n\nLightning Components for Visualforce Developer Guide",
+      "C": "Comprehensive and Detailed Explanation From Exact Extract:\n\nTo embed a Lightning component in a Visualforce page, you need to:\n\nInclude the Lightning framework using .\n\nUse $Lightning.use to load Lightning components and resources.\n\nUse $Lightning.createComponent to render the component dynamically in the Visualforce page.\n\n\n\n\nLightning Components for Visualforce Developer Guide",
+      "E": "Comprehensive and Detailed Explanation From Exact Extract:\n\nTo embed a Lightning component in a Visualforce page, you need to:\n\nInclude the Lightning framework using .\n\nUse $Lightning.use to load Lightning components and resources.\n\nUse $Lightning.createComponent to render the component dynamically in the Visualforce page.\n\n\n\n\nLightning Components for Visualforce Developer Guide"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Universal Containers (UC) is developing a process for their sales teams that requires all sales reps to go through a set of scripted steps with each new customer they create.\n\nIn the first step of collecting information, UC's ERP system must be checked via a REST endpoint to see if the customer exists. If the customer exists, the data must be presented to the sales rep in Salesforce.\n\nWhich two should a developer implement to satisfy the requirements?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Flow"
+      },
+      {
+        "key": "B",
+        "text": "Invocable method"
+      },
+      {
+        "key": "C",
+        "text": "Future method"
+      },
+      {
+        "key": "D",
+        "text": "Trigger"
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "A": "A: A Flow can guide sales reps through a set of scripted steps and call an Apex action to interact with an external REST endpoint.\n\nB: An Invocable method is used to make an Apex method callable from a Flow. This method can call the REST endpoint and return the data for display.\n\nWhy not other options?\n\nC: Future methods are asynchronous and cannot return data to the user in real time.\n\nD: Triggers are used for database events, not for guiding users through scripted processes or making REST calls.\n\n:\n\nInvocable Methods in Flows",
+      "B": "A: A Flow can guide sales reps through a set of scripted steps and call an Apex action to interact with an external REST endpoint.\n\nB: An Invocable method is used to make an Apex method callable from a Flow. This method can call the REST endpoint and return the data for display.\n\nWhy not other options?\n\nC: Future methods are asynchronous and cannot return data to the user in real time.\n\nD: Triggers are used for database events, not for guiding users through scripted processes or making REST calls.\n\n:\n\nInvocable Methods in Flows"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Management asked for opportunities to be automatically created for accounts with annual revenue greater than $1, 000,000. A developer created the following trigger on the Account object to satisfy this requirement.\n\nfor (Account a : Trigger.new) {\n\nif (a.AnnualRevenue > 1000000) {\n\nList<Opportunity> oppList = [SELECT Id FROM Opportunity WHERE AccountId = :a.Id];\n\nif (oppList.size() == 0) {\n\nOpportunity oppty = new Opportunity(Name = a.Name, StageName = 'Prospecting', CloseDate = System.today().addDays(30));\n\ninsert oppty;\n\n}\n\n}\n\n}\n\nUsers are able to update the account records via the UI and can see an opportunity created for high annual revenue accounts. However, when the administrator tries to upload a list of 179 accounts using Data Loader, it fails with system, Exception errors.\n\nWhich two actions should the developer take to fix the code segment shown above?\n\nChoose 2. answers",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Query for existing opportunities outside the for loop."
+      },
+      {
+        "key": "B",
+        "text": "Check if all the required fields for Opportunity are being added on creation."
+      },
+      {
+        "key": "C",
+        "text": "Move the DML that saves opportunities outside the for loop."
+      },
+      {
+        "key": "D",
+        "text": "Use Database query to query the opportunities."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "A": "This is a classicbulkification problem, covered under'Apex Development Best Practices'in the PD1 guide.\n\n\n\n\nD (Correct):DML operations (like insert) in a loop can cause theDML 151 limiterror. Moving them outside the loop and collecting records in a list before performing a single DML operation is best practice.Reference:Salesforce Platform Developer I Study Guide -- Process Automation and Logic (30%)",
+      "C": "This is a classicbulkification problem, covered under'Apex Development Best Practices'in the PD1 guide.\n\n\n\n\nD (Correct):DML operations (like insert) in a loop can cause theDML 151 limiterror. Moving them outside the loop and collecting records in a list before performing a single DML operation is best practice.Reference:Salesforce Platform Developer I Study Guide -- Process Automation and Logic (30%)"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  },
+  {
+    "type": "multiple_choice",
+    "question": "Which two events need to happen when deploying to a production org?",
+    "score": 1,
+    "chooseCount": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "All custom objects must have visibility set to a value other than in Development."
+      },
+      {
+        "key": "B",
+        "text": "All Apex code must have at least 75% test coverage."
+      },
+      {
+        "key": "C",
+        "text": "All triggers must have some test coverage"
+      },
+      {
+        "key": "D",
+        "text": "All Visual flows must have at least 1% test coverage."
+      }
+    ],
+    "userAnswers": [],
+    "correctAnswers": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "B": "B: Salesforce requires that all Apex code have at least 75% test coverage in production before deployment. This ensures that the system remains reliable.\n\nC: All triggers must have some test coverage as part of the overall 75% requirement for Apex code.\n\nWhy not other options?\n\nA: Object visibility settings are not a deployment requirement.\n\nD: Visual Flows do not require test coverage for deployment to production.\n\n:\n\nApex Test Coverage Requirements",
+      "C": "B: Salesforce requires that all Apex code have at least 75% test coverage in production before deployment. This ensures that the system remains reliable.\n\nC: All triggers must have some test coverage as part of the overall 75% requirement for Apex code.\n\nWhy not other options?\n\nA: Object visibility settings are not a deployment requirement.\n\nD: Visual Flows do not require test coverage for deployment to production.\n\n:\n\nApex Test Coverage Requirements"
+    },
+    "difficulty": "未标注",
+    "accuracy": null
+  }
+]

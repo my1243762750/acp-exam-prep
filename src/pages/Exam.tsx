@@ -60,6 +60,21 @@ const ReviewPanel = styled.div`
   margin-top: 16px;
 `;
 
+const ResultSummary = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 16px;
+  align-items: stretch;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    .ant-alert {
+      grid-column: 1 / -1;
+    }
+  }
+`;
+
 const RuleItem = styled.div`
   display: flex;
   align-items: flex-start;
@@ -527,43 +542,43 @@ const Exam: React.FC = () => {
                   重新考试
                 </Button>
               ]}
-              width={720}
-              style={{ top: 40 }}
+              width={960}
+              style={{ top: '8vh' }}
+              styles={{ body: { maxHeight: 'calc(100vh - 170px)', overflowY: 'auto' } }}
             >
               <div style={{ padding: '8px 0' }}>
-                <Row gutter={[24, 24]}>
-                  <Col span={12}>
+                <ResultSummary>
+                  <div>
                     <Statistic
                       title="总分"
                       value={score}
                       suffix="分"
                       valueStyle={{ color: passed ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 800, fontSize: 32 }}
                     />
-                  </Col>
-                  <Col span={12}>
+                  </div>
+                  <div>
                     <Statistic
                       title="正确题数"
                       value={correctAnswers}
                       suffix={`/ ${totalQuestions}`}
                       valueStyle={{ fontWeight: 700 }}
                     />
-                  </Col>
-                </Row>
+                  </div>
+                  <Alert
+                    message={<span style={{ fontWeight: 700 }}>{passed ? '恭喜通过！' : '未达到及格线'}</span>}
+                    description={passed ? '您已通过模拟考试，继续保持！' : '请继续努力，加强薄弱环节的学习。'}
+                    type={passed ? 'success' : 'error'}
+                    showIcon
+                    style={{ borderRadius: 'var(--mei-radius-md)' }}
+                  />
+                </ResultSummary>
 
-                <Alert
-                  message={<span style={{ fontWeight: 700 }}>{passed ? '恭喜通过！' : '未达到及格线'}</span>}
-                  description={passed ? '您已通过模拟考试，继续保持！' : '请继续努力，加强薄弱环节的学习。'}
-                  type={passed ? 'success' : 'error'}
-                  showIcon
-                  style={{ marginTop: 24, borderRadius: 'var(--mei-radius-md)' }}
-                />
-
-                <div style={{ marginTop: 32 }}>
-                  <Title level={5} style={{ marginBottom: 16 }}>答题卡</Title>
+                <div style={{ marginTop: 20 }}>
                   <AnswerCard
                     questions={examQuestions}
                     userAnswers={userAnswers}
                     showAnswer={true}
+                    compact
                     onNavigate={(index) => setReviewQuestionIndex(reviewQuestionIndex === index ? null : index)}
                   />
 
