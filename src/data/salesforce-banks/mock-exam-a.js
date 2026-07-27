@@ -574,10 +574,10 @@ const questions = [
         ],
         "userAnswers": [],
         "correctAnswers": [
-            "C"
+            "A"
         ],
         "explanation": {
-            "C": "Scheduled Flow: Ideal for time-based automation where an action (such as sending an email reminder) must occur a set amount of time after a condition is met. Scheduled flows are bulk-safe and can process multiple records efficiently. It can be configured to run 6 hours after the stage_c field is set to \"Waiting on Customer.\""
+            "A": "A record-triggered flow can run when stage_c changes to \"Waiting on Customer\" and use a scheduled path to send the reminder 6 hours later. This declarative automation is bulk-safe."
         },
         "difficulty": "简单",
         "accuracy": 42
