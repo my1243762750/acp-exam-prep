@@ -16,6 +16,10 @@ const StyledCard = styled(Card)`
   border: 1px solid var(--mei-theme-border-default);
   background: var(--mei-theme-bg-page);
   box-shadow: none;
+
+  .ant-card-body {
+    padding: 0;
+  }
 `;
 
 const PreviewLayout = styled.div`
@@ -97,13 +101,11 @@ const Preview: React.FC = () => {
   const handleToggleAll = () => {
     const next = !showAll;
     setShowAll(next);
-    const newMap: { [id: number]: boolean } = {};
-    pageQuestions.forEach(q => { newMap[q.id] = next; });
-    setShowMap(newMap);
+    setShowMap({});
   };
 
   const handleToggleOne = (id: number) => {
-    setShowMap(prev => ({ ...prev, [id]: !prev[id] }));
+    setShowMap(prev => ({ ...prev, [id]: !(prev[id] ?? showAll) }));
   };
 
   const handleSearch = (val: string) => {
@@ -119,8 +121,8 @@ const Preview: React.FC = () => {
   return (
     <div style={{ paddingBottom: 80 }}>
       <StyledCard>
-        <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ padding: '16px 24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <div>
               <span style={{ fontSize: 20, fontWeight: 700, color: 'var(--mei-theme-text-primary)' }}>题库预览</span>
               <Tag color="blue" style={{ marginLeft: 12 }}>共 {total} 题</Tag>
@@ -176,18 +178,18 @@ const Preview: React.FC = () => {
                 <div style={{ position: 'relative' }}>
                   <QuestionCard
                     question={q}
-                    showAnswer={!!showMap[q.id]}
+                    showAnswer={showMap[q.id] ?? showAll}
                     questionNumber={start + idx + 1}
                   />
                   <div style={{ position: 'absolute', top: 24, right: 24, zIndex: 10 }}>
                     <Button
                       size="middle"
-                      type={showMap[q.id] ? 'default' : 'primary'}
-                      icon={showMap[q.id] ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+                      type={(showMap[q.id] ?? showAll) ? 'default' : 'primary'}
+                      icon={(showMap[q.id] ?? showAll) ? <EyeInvisibleOutlined /> : <EyeOutlined />}
                       onClick={() => handleToggleOne(q.id)}
                       style={{ borderRadius: 'var(--mei-radius-md)' }}
                     >
-                      {showMap[q.id] ? '隐藏答案' : '显示答案'}
+                      {(showMap[q.id] ?? showAll) ? '隐藏答案' : '显示答案'}
                     </Button>
                   </div>
                 </div>
