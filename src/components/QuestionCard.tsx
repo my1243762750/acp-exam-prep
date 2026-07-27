@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Radio, Space, Tag, Collapse, Alert } from 'antd';
+import React from 'react';
+import { Card, Checkbox, Radio, Space, Tag, Collapse, Alert } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Question } from '../data/questions';
+import type { SalesforceQuestion } from '../data/salesforce';
+import { isCorrectAnswer } from '../data/salesforce';
 
 const { Panel } = Collapse;
 
@@ -77,14 +78,15 @@ const QuestionMeta = styled.div`
 `;
 
 interface QuestionCardProps {
-  question: Question;
-  onAnswer?: (questionId: number, answer: string) => void;
+  question: SalesforceQuestion;
+  onAnswer?: (questionId: number, answer: string[]) => void;
   showAnswer?: boolean;
-  userAnswer?: string;
+  userAnswer?: string[];
   questionNumber?: number;
 }
 
-const typeLabel = (t: string) => ({ single: '单选题', multiple: '多选题', judge: '判断题' }[t] || t);
+const typeLabel = (type: SalesforceQuestion['type']) =>
+  type === 'multiple_choice' ? '多选题' : '单选题';
 
 const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
@@ -93,25 +95,30 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   userAnswer,
   questionNumber
 }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(userAnswer);
+  const selectedAnswers = userAnswer ?? [];
 
-  const handleOptionSelect = (value: string) => {
-    if (!showAnswer) {
-      setSelectedAnswer(value);
-      onAnswer?.(question.id, value);
-    }
+  const handleOptionSelect = (key: string) => {
+    if (showAnswer) return;
+    const next = question.type === 'multiple_choice'
+      ? selectedAnswers.includes(key)
+        ? selectedAnswers.filter(answer => answer !== key)
+        : [...selectedAnswers, key].sort()
+      : [key];
+    onAnswer?.(question.id, next);
   };
 
-  const isCorrect = userAnswer === question.answer;
-  const hasAnswered = userAnswer !== undefined;
+  const isCorrect = isCorrectAnswer(question, selectedAnswers);
+  const hasAnswered = selectedAnswers.length > 0;
 
   return (
     <StyledCard>
       <QuestionMeta>
         <Space>
           {questionNumber && <Tag color="blue">第{questionNumber}题</Tag>}
-          <Tag color={question.type === 'single' ? 'green' : question.type === 'multiple' ? 'orange' : 'blue'}>{typeLabel(question.type)}</Tag>
-          {question.category && <Tag color="purple">{question.category}</Tag>}
+          <Tag color={question.type === 'multiple_choice' ? 'orange' : 'green'}>{typeLabel(question.type)}</Tag>
+          <Tag color="purple">{question.category}</Tag>
+          <Tag>{question.score} 分</Tag>
+          <Tag color="blue">正确率 {question.accuracy ?? '--'}%</Tag>
         </Space>
         {showAnswer && hasAnswered && (
           <Space>
@@ -127,43 +134,54 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         )}
       </QuestionMeta>
 
-      <QuestionTitle dangerouslySetInnerHTML={{ __html: question.title }} />
+      <QuestionTitle dangerouslySetInnerHTML={{ __html: question.question }} />
 
-      <Radio.Group
-        value={selectedAnswer}
-        onChange={(e) => handleOptionSelect(e.target.value)}
-        disabled={showAnswer}
-        style={{ width: '100%' }}
-      >
-        <Space direction="vertical" style={{ width: '100%' }}>
-          {question.options.map((option, index) => {
-            const optionValue = String.fromCharCode(65 + index); // A, B, C, D
-            const isSelected = selectedAnswer === optionValue;
-            const isCorrectOption = optionValue === question.answer;
-            
-            return (
-              <OptionItem
-                key={index}
-                $isSelected={isSelected}
-                $isCorrect={isCorrectOption}
-                $showAnswer={showAnswer}
-                onClick={() => handleOptionSelect(optionValue)}
-              >
-                <Radio value={optionValue} style={{ marginRight: 8 }}>
-                  <span style={{ color: 'inherit' }} dangerouslySetInnerHTML={{ __html: option }} />
-                </Radio>
-              </OptionItem>
+      <Space direction="vertical" style={{ width: '100%' }}>
+        {question.options.map(option => {
+          const isSelected = selectedAnswers.includes(option.key);
+          const isCorrectOption = question.correctAnswers.includes(option.key);
+          const input = question.type === 'multiple_choice'
+            ? (
+              <Checkbox
+                checked={isSelected}
+                disabled={showAnswer}
+                onClick={event => event.stopPropagation()}
+                onChange={() => handleOptionSelect(option.key)}
+              />
+            )
+            : (
+              <Radio
+                checked={isSelected}
+                disabled={showAnswer}
+                onClick={event => event.stopPropagation()}
+                onChange={() => handleOptionSelect(option.key)}
+              />
             );
-          })}
-        </Space>
-      </Radio.Group>
+
+          return (
+            <OptionItem
+              key={option.key}
+              $isSelected={isSelected}
+              $isCorrect={isCorrectOption}
+              $showAnswer={showAnswer}
+              onClick={() => handleOptionSelect(option.key)}
+            >
+              {input}
+              <span
+                style={{ color: 'inherit', marginLeft: 8 }}
+                dangerouslySetInnerHTML={{ __html: `${option.key}. ${option.text}` }}
+              />
+            </OptionItem>
+          );
+        })}
+      </Space>
 
       {showAnswer && (
         <div style={{ marginTop: 24 }}>
           <Alert
             message={
               <span style={{ fontWeight: 600 }}>
-                正确答案：<span style={{ color: 'var(--mei-color-success-base)', fontSize: 18 }}>{question.answer}</span>
+                正确答案：<span style={{ color: 'var(--mei-color-success-base)', fontSize: 18 }}>{question.correctAnswers.join('、')}</span>
               </span>
             }
             type={hasAnswered ? (isCorrect ? 'success' : 'error') : 'info'}
@@ -172,7 +190,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
           />
           <Collapse ghost expandIconPosition="end">
             <Panel header={<span style={{ fontWeight: 600, color: 'var(--mei-color-primary-600)' }}>查看详细解析</span>} key="1">
-              <div style={{ padding: '8px 0', lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }} dangerouslySetInnerHTML={{ __html: question.explanation }} />
+              <div style={{ padding: '8px 0', lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}>
+                {question.correctAnswers.map(key => (
+                  <div key={key} style={{ marginBottom: 8 }}>
+                    <strong>{key}：</strong>
+                    <span dangerouslySetInnerHTML={{ __html: question.explanation[key] || '暂无解析' }} />
+                  </div>
+                ))}
+              </div>
             </Panel>
           </Collapse>
         </div>
@@ -181,4 +206,4 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   );
 };
 
-export default QuestionCard; 
+export default QuestionCard;

@@ -4,8 +4,9 @@ import { PlayCircleOutlined, ReloadOutlined, EyeOutlined, EyeInvisibleOutlined }
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import type { Question } from '../data/questions';
-import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
+import type { SalesforceQuestion } from '../data/salesforce';
+import { isCorrectAnswer } from '../data/salesforce';
+import { getCurrentPracticeBanks } from '../data/subject';
 import { saveAnswer } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
@@ -19,12 +20,8 @@ const StyledCard = styled(Card)`
   box-shadow: none;
 `;
 
-function getQuestionsByCategory(category: string): Question[] {
-  return getCurrentQuestions().filter(q => q.category === category);
-}
-
-function getRandomQuestions(count: number): Question[] {
-  const all = getCurrentQuestions();
+function getRandomQuestions(questions: SalesforceQuestion[], count: number): SalesforceQuestion[] {
+  const all = questions;
   const shuffled = [...all].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
@@ -60,41 +57,47 @@ const SidebarSection = styled.div`
 
 const Practice: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [practiceQuestions, setPracticeQuestions] = useState<Question[]>([]);
+  const [practiceQuestions, setPracticeQuestions] = useState<SalesforceQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
+  const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
   const [showAnswer, setShowAnswer] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
 
-  const categories = getCurrentCategories();
+  const banks = getCurrentPracticeBanks();
 
   const handleStartPractice = () => {
-    let questionsToPractice: Question[];
+    let questionsToPractice: SalesforceQuestion[];
     if (selectedCategory) {
-      questionsToPractice = getQuestionsByCategory(selectedCategory);
+      questionsToPractice = banks.find(bank => bank.id === selectedCategory)?.questions || [];
     } else {
-      questionsToPractice = getRandomQuestions(10);
+      questionsToPractice = getRandomQuestions(banks.flatMap(bank => bank.questions), 10);
     }
     setPracticeQuestions(questionsToPractice);
     setCurrentQuestionIndex(0);
-    setUserAnswers({});
+    setUserAnswers(Object.fromEntries(
+      questionsToPractice
+        .filter(question => question.userAnswers.length > 0)
+        .map(question => [question.id, question.userAnswers])
+    ));
     setShowAnswer(false);
     setIsStarted(true);
   };
 
-  const handleAnswer = (questionId: number, answer: string) => {
-    setUserAnswers(prev => ({
-      ...prev,
-      [questionId]: answer
-    }));
+  const handleAnswer = (questionId: number, answer: string[]) => {
+    setUserAnswers(prev => {
+      const next = { ...prev };
+      if (answer.length) next[questionId] = answer;
+      else delete next[questionId];
+      return next;
+    });
   };
 
   const handleToggleAnswer = () => {
     if (!showAnswer) {
       const q = practiceQuestions[currentQuestionIndex];
       const userAns = userAnswers[q.id];
-      if (userAns) {
-        saveAnswer(q.id, userAns, userAns === q.answer);
+      if (userAns?.length) {
+        saveAnswer(q.id, userAns, isCorrectAnswer(q, userAns));
       }
     }
     setShowAnswer(prev => !prev);
@@ -124,7 +127,7 @@ const Practice: React.FC = () => {
 
   const currentQuestion = practiceQuestions[currentQuestionIndex];
   const totalQuestions = practiceQuestions.length;
-  const answeredCount = Object.keys(userAnswers).length;
+  const answeredCount = Object.values(userAnswers).filter(answer => answer.length > 0).length;
   const progress = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   return (
@@ -144,8 +147,10 @@ const Practice: React.FC = () => {
                   onChange={setSelectedCategory}
                   size="large"
                 >
-                  {categories.map(category => (
-                    <Option key={category} value={category}>{category}</Option>
+                  {banks.map(bank => (
+                    <Option key={bank.id} value={bank.id}>
+                      {bank.title}（{bank.questions.length}题）
+                    </Option>
                   ))}
                 </Select>
               </div>
@@ -171,7 +176,11 @@ const Practice: React.FC = () => {
                     <div>
                       <Title level={4} style={{ margin: 0 }}>
                         练习进度
-                        {selectedCategory && <Tag color="blue" style={{ marginLeft: 12 }}>{selectedCategory}</Tag>}
+                        {selectedCategory && (
+                          <Tag color="blue" style={{ marginLeft: 12 }}>
+                            {banks.find(bank => bank.id === selectedCategory)?.title}
+                          </Tag>
+                        )}
                       </Title>
                       <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', margin: '4px 0 0 0' }}>
                         第 {currentQuestionIndex + 1} 题 / 共 {totalQuestions} 题

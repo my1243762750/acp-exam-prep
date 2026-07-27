@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Upload, Button, Typography, Alert, Tag, Space, message } from 'antd';
 import { InboxOutlined, DownloadOutlined } from '@ant-design/icons';
-import type { Question } from '../data/questions';
+import type { SalesforceQuestion, SalesforceQuestionInput } from '../data/salesforce';
+import { isSalesforceQuestionInput, normalizeSalesforceQuestions } from '../data/salesforce';
 import { importSubject, setCurrentSubjectId } from '../data/subject';
 
 const { Paragraph, Text } = Typography;
@@ -11,7 +12,7 @@ interface ParsedData {
   name: string;
   shortName: string;
   description: string;
-  questions: Question[];
+  questions: SalesforceQuestion[];
   categories: string[];
   questionCount: number;
 }
@@ -29,52 +30,24 @@ const ImportModal: React.FC<Props> = ({ open, onClose }) => {
     const template = {
       name: '示例题库',
       shortName: '示例',
-      description: '这是一个导入模板，categories 字段可选，系统会自动从题目中提取分类',
+      description: 'Salesforce Platform Developer I 题库导入模板',
       questions: [
         {
-          id: 1,
-          type: 'single',
-          title: '阿里云对象存储OSS的基本数据单元是什么？',
-          options: ['A.Object', 'B.Bucket', 'C.Service', 'D.安全组'],
-          answer: 'A',
-          explanation: 'OSS的基本数据单元是对象（Object）。',
-          category: 'OSS',
-        },
-        {
-          id: 2,
-          type: 'multiple',
-          title: '以下哪些是阿里云的安全服务？（多选）',
-          options: ['A.云盾', 'B.安骑士', 'C.DDoS高防IP', 'D.SLB'],
-          answer: 'ABC',
-          explanation: 'SLB是负载均衡服务，不属于安全服务。',
-          category: '安全',
-        },
-        {
-          id: 3,
-          type: 'judge',
-          title: '阿里云对象存储OSS支持图片处理功能。',
-          options: ['A.对', 'B.错'],
-          answer: 'A',
-          explanation: 'OSS支持图片处理，包括缩放、裁剪、水印等功能。',
-          category: 'OSS',
-        },
-        {
-          id: 4,
-          type: 'single',
-          title: '阿里云CDN加速域名的默认超时时间是多少秒？',
-          options: ['A.120秒', 'B.180秒', 'C.360秒', 'D.600秒'],
-          answer: 'C',
-          explanation: 'CDN默认超时时间为360秒。',
-          category: 'CDN',
-        },
-        {
-          id: 5,
-          type: 'judge',
-          title: '云服务器ECS实例创建后，可以随时更换为不同的操作系统。',
-          options: ['A.对', 'B.错'],
-          answer: 'A',
-          explanation: 'ECS实例可以通过更换系统盘来更换操作系统。',
-          category: 'ECS',
+          type: 'single_choice',
+          question: 'Which keyword enforces record-level sharing rules in an Apex class?',
+          score: 1,
+          chooseCount: 1,
+          options: [
+            { key: 'A', text: 'with sharing' },
+            { key: 'B', text: 'without sharing' },
+            { key: 'C', text: 'global' },
+            { key: 'D', text: 'static' },
+          ],
+          userAnswers: [],
+          correctAnswers: ['A'],
+          explanation: { A: 'The with sharing keyword enforces record-level sharing rules.' },
+          difficulty: '简单',
+          accuracy: 90,
         },
       ],
     };
@@ -96,30 +69,50 @@ const ImportModal: React.FC<Props> = ({ open, onClose }) => {
       try {
         const raw = JSON.parse(e.target?.result as string);
         let data: ParsedData;
+        const rawQuestions = Array.isArray(raw) ? raw : raw?.questions;
+
+        if (
+          Array.isArray(rawQuestions) &&
+          rawQuestions.some(question => !isSalesforceQuestionInput(question))
+        ) {
+          setError('题目字段不完整，请使用下载模板中的 Salesforce 格式。');
+          return;
+        }
+
+        if (
+          !Array.isArray(raw) &&
+          (
+            (raw.name !== undefined && typeof raw.name !== 'string') ||
+            (raw.shortName !== undefined && typeof raw.shortName !== 'string') ||
+            (raw.description !== undefined && typeof raw.description !== 'string')
+          )
+        ) {
+          setError('题库名称、简称和说明必须是文本。');
+          return;
+        }
 
         if (Array.isArray(raw)) {
-          // bare question array
-          const cats = Array.from(new Set(raw.map((q: Question) => q.category).filter(Boolean))) as string[];
+          const name = file.name.replace(/\.json$/i, '') || '导入题库';
           data = {
-            name: '导入题库',
+            name,
             shortName: '导入',
-            description: '用户导入的题库',
-            questions: raw,
-            categories: cats,
+            description: '用户导入的 Salesforce 题库',
+            questions: normalizeSalesforceQuestions(raw as SalesforceQuestionInput[], 'imported', name),
+            categories: [name],
             questionCount: raw.length,
           };
         } else if (raw.questions && Array.isArray(raw.questions)) {
-          const cats = raw.categories || Array.from(new Set(raw.questions.map((q: Question) => q.category).filter(Boolean)));
+          const name = raw.name || '导入题库';
           data = {
-            name: raw.name || '导入题库',
+            name,
             shortName: raw.shortName || '导入',
-            description: raw.description || '用户导入的题库',
-            questions: raw.questions,
-            categories: cats,
+            description: raw.description || '用户导入的 Salesforce 题库',
+            questions: normalizeSalesforceQuestions(raw.questions as SalesforceQuestionInput[], 'imported', name),
+            categories: [name],
             questionCount: raw.questions.length,
           };
         } else {
-          setError('无法识别的格式。请提供题目数组或包含 questions 字段的对象。');
+          setError('无法识别的格式。请提供 Salesforce 题目数组或包含 questions 字段的对象。');
           return;
         }
 
@@ -141,11 +134,16 @@ const ImportModal: React.FC<Props> = ({ open, onClose }) => {
     if (!parsed) return;
 
     const id = `custom_${Date.now()}`;
-    importSubject({
+    const imported = importSubject({
       info: { id, name: parsed.name, shortName: parsed.shortName, description: parsed.description },
       questions: parsed.questions,
       categories: parsed.categories,
     });
+
+    if (!imported) {
+      message.error('题库保存失败，请检查浏览器存储空间后重试');
+      return;
+    }
 
     setCurrentSubjectId(id);
     message.success(`成功导入「${parsed.name}」共 ${parsed.questionCount} 题`);

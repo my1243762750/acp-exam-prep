@@ -115,7 +115,7 @@ const Statistics: React.FC = () => {
               value={hasData ? accuracy : 0}
               suffix="%"
               prefix={<TrophyOutlined style={{ color: 'var(--mei-color-warning-base)' }} />}
-              valueStyle={{ color: hasData && accuracy >= 80 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 800 }}
+              valueStyle={{ color: hasData && accuracy >= 65 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 800 }}
             />
           </StyledCard>
         </Col>
@@ -231,11 +231,11 @@ const Statistics: React.FC = () => {
                         <div style={{ color: 'var(--mei-theme-text-secondary)', fontSize: 13, marginTop: 4 }}>正确: {record.correct}/{record.total}</div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontSize: 22, fontWeight: 800, color: record.score >= 80 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)' }}>
+                        <div style={{ fontSize: 22, fontWeight: 800, color: record.score >= 65 ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)' }}>
                           {record.score}分
                         </div>
-                        <Tag color={record.score >= 80 ? 'green' : 'red'} style={{ borderRadius: 'var(--mei-radius-full)', marginTop: 4 }}>
-                          {record.score >= 80 ? '通过' : '未通过'}
+                        <Tag color={record.score >= 65 ? 'green' : 'red'} style={{ borderRadius: 'var(--mei-radius-full)', marginTop: 4 }}>
+                          {record.score >= 65 ? '通过' : '未通过'}
                         </Tag>
                       </div>
                     </div>

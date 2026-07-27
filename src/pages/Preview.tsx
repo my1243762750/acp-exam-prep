@@ -72,7 +72,10 @@ const Preview: React.FC = () => {
     let list = orderedQuestions;
     if (searchText) {
       const kw = searchText.toLowerCase();
-      list = list.filter(q => q.title.toLowerCase().includes(kw) || (q.explanation && q.explanation.toLowerCase().includes(kw)));
+      list = list.filter(q =>
+        q.question.toLowerCase().includes(kw) ||
+        Object.values(q.explanation).some(text => text.toLowerCase().includes(kw))
+      );
     }
     if (categoryFilter) {
       list = list.filter(q => q.category === categoryFilter);

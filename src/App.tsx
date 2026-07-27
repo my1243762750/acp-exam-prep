@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Practice from './pages/Practice';
 import Exam from './pages/Exam';
 import Review from './pages/Review';
+import EssayPractice from './pages/EssayPractice';
 import Statistics from './pages/Statistics';
 import Preview from './pages/Preview';
 import './tokens.css';
@@ -23,6 +24,7 @@ const App: React.FC = () => {
               <Route path="/practice" element={<Practice />} />
               <Route path="/exam" element={<Exam />} />
               <Route path="/review" element={<Review />} />
+              <Route path="/essay" element={<EssayPractice />} />
               <Route path="/statistics" element={<Statistics />} />
               <Route path="/preview" element={<Preview />} />
             </Routes>

@@ -1,7 +1,7 @@
 import { getCurrentSubjectId, getCurrentTotalQuestions } from '../data/subject';
 
 export interface UserAnswer {
-  answer: string;
+  answer: string[];
   correct: boolean;
   timestamp: number;
 }
@@ -11,7 +11,7 @@ export interface ExamRecord {
   score: number;
   total: number;
   correct: number;
-  answers: Record<number, string>;
+  answers: Record<number, string[]>;
 }
 
 function subjectKey(base: string): string {
@@ -39,13 +39,13 @@ function setItem<T>(key: string, value: T): void {
 // ---- User Answers ----
 
 export function getAnswers(): Record<number, UserAnswer> {
-  return getItem<Record<number, UserAnswer>>(subjectKey('acp_answers'), {});
+  return getItem<Record<number, UserAnswer>>(subjectKey('exam_prep_answers'), {});
 }
 
-export function saveAnswer(questionId: number, answer: string, correct: boolean): void {
+export function saveAnswer(questionId: number, answer: string[], correct: boolean): void {
   const all = getAnswers();
   all[questionId] = { answer, correct, timestamp: Date.now() };
-  setItem(subjectKey('acp_answers'), all);
+  setItem(subjectKey('exam_prep_answers'), all);
 }
 
 // ---- Computed Stats ----
@@ -82,21 +82,21 @@ export function getWrongQuestionIds(): number[] {
 export function removeWrongQuestion(questionId: number): void {
   const all = getAnswers();
   delete all[questionId];
-  setItem(subjectKey('acp_answers'), all);
+  setItem(subjectKey('exam_prep_answers'), all);
 }
 
 export function clearWrongQuestions(): void {
-  setItem(subjectKey('acp_answers'), {});
+  setItem(subjectKey('exam_prep_answers'), {});
 }
 
 // ---- Exam History ----
 
 export function getExamHistory(): ExamRecord[] {
-  return getItem<ExamRecord[]>(subjectKey('acp_exam_history'), []);
+  return getItem<ExamRecord[]>(subjectKey('exam_prep_exam_history'), []);
 }
 
 export function saveExamRecord(record: ExamRecord): void {
   const history = getExamHistory();
   history.unshift(record);
-  setItem(subjectKey('acp_exam_history'), history);
+  setItem(subjectKey('exam_prep_exam_history'), history);
 }

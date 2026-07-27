@@ -6,11 +6,13 @@ import {
   ExclamationCircleOutlined,
   TrophyOutlined,
   ClockCircleOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
+  FormOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getStats } from '../utils/storage';
+import { getCurrentSubjectInfo } from '../data/subject';
 
 const { Title, Paragraph } = Typography;
 
@@ -95,6 +97,7 @@ const IconWrapper = styled.div<{ color: string }>`
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const stats = getStats();
+  const subject = getCurrentSubjectInfo();
 
   const accuracy = stats.answeredQuestions > 0
     ? Math.round((stats.correctAnswers / stats.answeredQuestions) * 100)
@@ -142,9 +145,9 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <Title level={2} style={{ color: 'var(--mei-theme-text-primary)' }}>欢迎使用ACP考试助手</Title>
+      <Title level={2} style={{ color: 'var(--mei-theme-text-primary)' }}>欢迎使用 {subject.shortName} 考试助手</Title>
       <Paragraph style={{ color: 'var(--mei-theme-text-secondary)', marginBottom: 32 }}>
-        阿里云ACP认证考试备考平台，助您高效备考，轻松通过考试
+        {subject.description}，助您高效备考
       </Paragraph>
 
       <Row gutter={[24, 24]} style={{ marginBottom: 32 }}>
@@ -222,6 +225,19 @@ const Home: React.FC = () => {
             </QuickActionCard>
           </Col>
         ))}
+        <Col xs={24} sm={12} md={6}>
+          <QuickActionCard
+            onClick={() => navigate('/essay')}
+            basecolor="var(--mei-color-primary-500)"
+            lightcolor="var(--mei-color-primary-50)"
+          >
+            <IconWrapper className="icon-wrapper" color="var(--mei-color-primary-500)">
+              <FormOutlined />
+            </IconWrapper>
+            <Title level={4} className="quick-title" style={{ color: 'var(--mei-color-primary-500)', marginBottom: 12 }}>问答题</Title>
+            <Paragraph className="quick-desc" style={{ color: 'var(--mei-theme-text-secondary)', margin: 0 }}>看题思考核对答案</Paragraph>
+          </QuickActionCard>
+        </Col>
       </Row>
 
       <Card title={<span style={{ fontWeight: 700 }}>学习建议</span>} style={{ marginTop: 32 }}>

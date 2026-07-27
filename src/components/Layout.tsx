@@ -7,6 +7,7 @@ import {
   BarChartOutlined,
   ExclamationCircleOutlined,
   UnorderedListOutlined,
+  FormOutlined,
   SwapOutlined,
   UploadOutlined,
   GithubOutlined
@@ -23,12 +24,12 @@ const MeiLogo = () => (
   <svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="mei-mark-gradient" x1="104" y1="88" x2="408" y2="424" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#6366F1"/>
-        <stop offset="1" stop-color="#4F46E5"/>
+        <stop offset="0" stopColor="#6366F1"/>
+        <stop offset="1" stopColor="#4F46E5"/>
       </linearGradient>
     </defs>
     <rect x="72" y="72" width="368" height="368" rx="84" fill="url(#mei-mark-gradient)"/>
-    <path d="M144 326C170 266 199 218 230 218C261 218 270 258 282 294C294 258 307 218 342 218C381 218 407 266 410 326" stroke="white" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M144 326C170 266 199 218 230 218C261 218 270 258 282 294C294 258 307 218 342 218C381 218 407 266 410 326" stroke="white" strokeWidth="40" strokeLinecap="round" strokeLinejoin="round"/>
     <circle cx="256" cy="154" r="22" fill="white"/>
     <circle cx="214" cy="174" r="14" fill="white"/>
     <circle cx="298" cy="174" r="14" fill="white"/>
@@ -137,6 +138,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         case 'practice': name = '练习模式'; break;
         case 'exam': name = '模拟考试'; break;
         case 'review': name = '错题复习'; break;
+        case 'essay': name = '问答题'; break;
         case 'statistics': name = '学习统计'; break;
         case 'preview': name = '题库预览'; break;
         default: name = snippet;
@@ -156,6 +158,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     { key: '/practice', icon: <FileTextOutlined />, label: <Link to="/practice">练习模式</Link> },
     { key: '/exam', icon: <TrophyOutlined />, label: <Link to="/exam">模拟考试</Link> },
     { key: '/review', icon: <ExclamationCircleOutlined />, label: <Link to="/review">错题复习</Link> },
+    { key: '/essay', icon: <FormOutlined />, label: <Link to="/essay">问答题</Link> },
     { key: '/statistics', icon: <BarChartOutlined />, label: <Link to="/statistics">学习统计</Link> },
     { key: '/preview', icon: <UnorderedListOutlined />, label: <Link to="/preview">题库预览</Link> },
   ];

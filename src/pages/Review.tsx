@@ -3,9 +3,9 @@ import { Card, Select, Button, Space, Typography, Row, Col, Tag, Empty, List } f
 import { ExclamationCircleOutlined, EyeOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
-import type { Question } from '../data/questions';
+import type { SalesforceQuestion } from '../data/salesforce';
 import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
-import { getWrongQuestionIds, removeWrongQuestion, clearWrongQuestions } from '../utils/storage';
+import { getAnswers, getWrongQuestionIds, removeWrongQuestion, clearWrongQuestions } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -29,13 +29,14 @@ const ReviewHeader = styled.div`
 
 const Review: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<SalesforceQuestion | null>(null);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
+  const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
   const [refreshKey, setRefreshKey] = useState(0);
 
   const categories = getCurrentCategories();
   const allQuestions = getCurrentQuestions();
+  const savedAnswers = getAnswers();
 
   const wrongQuestionIds = useMemo(() => getWrongQuestionIds(), [refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
   const wrongQuestions = useMemo(() => {
@@ -49,7 +50,7 @@ const Review: React.FC = () => {
     return wrongQuestions;
   }, [selectedCategory, wrongQuestions]);
 
-  const handleViewQuestion = (question: Question) => {
+  const handleViewQuestion = (question: SalesforceQuestion) => {
     setCurrentQuestion(question);
     setShowQuestion(true);
   };
@@ -59,7 +60,7 @@ const Review: React.FC = () => {
     setRefreshKey(k => k + 1);
   };
 
-  const handleAnswer = (questionId: number, answer: string) => {
+  const handleAnswer = (questionId: number, answer: string[]) => {
     setUserAnswers(prev => ({
       ...prev,
       [questionId]: answer
@@ -156,7 +157,7 @@ const Review: React.FC = () => {
                         whiteSpace: 'nowrap',
                         color: 'var(--mei-theme-text-secondary)'
                       }}>
-                        {question.title.replace(/<[^>]+>/g, '').slice(0, 80)}...
+                        {question.question.replace(/<[^>]+>/g, '').slice(0, 80)}...
                       </div>
                     }
                   />
@@ -202,7 +203,7 @@ const Review: React.FC = () => {
                 question={currentQuestion}
                 onAnswer={handleAnswer}
                 showAnswer={true}
-                userAnswer={userAnswers[currentQuestion.id]}
+                userAnswer={userAnswers[currentQuestion.id] ?? savedAnswers[currentQuestion.id]?.answer}
               />
             </div>
           </StyledCard>

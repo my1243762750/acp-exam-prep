@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { Question } from '../data/questions';
+import type { SalesforceQuestion } from '../data/salesforce';
+import { isCorrectAnswer } from '../data/salesforce';
 
 const Wrapper = styled.div`
   background: var(--mei-theme-bg-surface);
@@ -147,8 +148,8 @@ const Cell = styled.div<{ $status: 'correct' | 'wrong' | 'answered' | 'unanswere
 `;
 
 interface AnswerCardProps {
-  questions: Question[]
-  userAnswers: Record<number, string>
+  questions: SalesforceQuestion[]
+  userAnswers: Record<number, string[]>
   showAnswer: boolean
   currentIndex?: number
   onNavigate?: (index: number) => void
@@ -156,8 +157,11 @@ interface AnswerCardProps {
 
 const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAnswer, currentIndex, onNavigate }) => {
   const total = questions.length;
-  const answered = Object.keys(userAnswers).length;
-  const correct = Object.values(userAnswers).filter((ans, i) => ans === questions[i]?.answer).length;
+  const answered = Object.values(userAnswers).filter(answer => answer.length > 0).length;
+  const correct = questions.filter(question => {
+    const answer = userAnswers[question.id];
+    return answer && isCorrectAnswer(question, answer);
+  }).length;
 
   return (
     <Wrapper>
@@ -193,9 +197,9 @@ const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAns
           {questions.map((q, index) => {
             const userAns = userAnswers[q.id];
             let status: 'correct' | 'wrong' | 'answered' | 'unanswered' = 'unanswered';
-            if (showAnswer && userAns !== undefined) {
-              status = userAns === q.answer ? 'correct' : 'wrong';
-            } else if (userAns !== undefined) {
+            if (showAnswer && userAns?.length) {
+              status = isCorrectAnswer(q, userAns) ? 'correct' : 'wrong';
+            } else if (userAns?.length) {
               status = 'answered';
             }
             return (

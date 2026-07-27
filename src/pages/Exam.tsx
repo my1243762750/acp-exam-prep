@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, Button, Space, Typography, Row, Col, Progress, Modal, Statistic, Alert } from 'antd';
+import { Card, Button, Space, Typography, Row, Col, Progress, Modal, Statistic, Alert, Select } from 'antd';
 import { 
   PlayCircleOutlined, 
   ClockCircleOutlined, 
@@ -12,8 +12,9 @@ import {
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import type { Question } from '../data/questions';
-import { getCurrentQuestions } from '../data/subject';
+import type { SalesforceQuestion } from '../data/salesforce';
+import { isCorrectAnswer } from '../data/salesforce';
+import { getCurrentExamBanks } from '../data/subject';
 import { saveAnswer, saveExamRecord } from '../utils/storage';
 
 const { Title, Paragraph, Text } = Typography;
@@ -75,14 +76,24 @@ const RuleItem = styled.div`
   }
 `;
 
-function getRandomQuestions(count: number): Question[] {
-  const all = getCurrentQuestions();
-  const shuffled = [...all].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, Math.min(count, all.length));
-}
+const EXAM_DURATION = 105 * 60;
+const PASSING_SCORE = 65;
 
-const EXAM_DURATION = 90 * 60; // 90 minutes
-const EXAM_QUESTION_COUNT = 100;
+function calculateExamResult(
+  questions: SalesforceQuestion[],
+  answers: Record<number, string[]>,
+) {
+  const totalPoints = questions.reduce((sum, question) => sum + question.score, 0);
+  const correctQuestions = questions.filter(question => {
+    const answer = answers[question.id];
+    return answer && isCorrectAnswer(question, answer);
+  });
+  const earnedPoints = correctQuestions.reduce((sum, question) => sum + question.score, 0);
+  return {
+    correctCount: correctQuestions.length,
+    score: totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0,
+  };
+}
 
 const ExamLayout = styled.div`
   display: grid;
@@ -127,9 +138,11 @@ const ExamHUD = styled.div`
 `;
 
 const Exam: React.FC = () => {
-  const [examQuestions, setExamQuestions] = useState<Question[]>([]);
+  const examBanks = getCurrentExamBanks();
+  const [selectedExamId, setSelectedExamId] = useState(examBanks[0]?.id || '');
+  const [examQuestions, setExamQuestions] = useState<SalesforceQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
+  const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
   const [isStarted, setIsStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(EXAM_DURATION);
   const [isFinished, setIsFinished] = useState(false);
@@ -162,20 +175,18 @@ const Exam: React.FC = () => {
       autoSubmitted.current = true;
       if (timerRef.current) clearInterval(timerRef.current);
 
-      const correctCount = Object.values(userAnswers).filter((answer, index) =>
-        answer === examQuestions[index]?.answer
-      ).length;
+      const result = calculateExamResult(examQuestions, userAnswers);
 
       Object.entries(userAnswers).forEach(([qId, answer]) => {
         const q = examQuestions.find(eq => eq.id === Number(qId));
-        if (q) saveAnswer(Number(qId), answer, answer === q.answer);
+        if (q) saveAnswer(Number(qId), answer, isCorrectAnswer(q, answer));
       });
 
       saveExamRecord({
         date: new Date().toISOString().slice(0, 10),
-        score: Math.round((correctCount / examQuestions.length) * 100),
+        score: result.score,
         total: examQuestions.length,
-        correct: correctCount,
+        correct: result.correctCount,
         answers: userAnswers,
       });
 
@@ -186,10 +197,15 @@ const Exam: React.FC = () => {
   }, [timeLeft]);
 
   const handleStartExam = () => {
-    const questions = getRandomQuestions(EXAM_QUESTION_COUNT);
-    setExamQuestions(questions);
+    const selectedBank = examBanks.find(bank => bank.id === selectedExamId) || examBanks[0];
+    const selectedQuestions = selectedBank?.questions || [];
+    setExamQuestions(selectedQuestions);
     setCurrentQuestionIndex(0);
-    setUserAnswers({});
+    setUserAnswers(Object.fromEntries(
+      selectedQuestions
+        .filter(question => question.userAnswers.length > 0)
+        .map(question => [question.id, question.userAnswers])
+    ));
     setIsStarted(true);
     setIsFinished(false);
     setShowResults(false);
@@ -197,11 +213,13 @@ const Exam: React.FC = () => {
     autoSubmitted.current = false;
   };
 
-  const handleAnswer = (questionId: number, answer: string) => {
-    setUserAnswers(prev => ({
-      ...prev,
-      [questionId]: answer
-    }));
+  const handleAnswer = (questionId: number, answer: string[]) => {
+    setUserAnswers(prev => {
+      const next = { ...prev };
+      if (answer.length) next[questionId] = answer;
+      else delete next[questionId];
+      return next;
+    });
   };
 
   const handleNextQuestion = () => {
@@ -224,20 +242,18 @@ const Exam: React.FC = () => {
       timerRef.current = null;
     }
 
-    const correctCount = Object.values(userAnswers).filter((answer, index) =>
-      answer === examQuestions[index]?.answer
-    ).length;
+    const result = calculateExamResult(examQuestions, userAnswers);
 
     Object.entries(userAnswers).forEach(([qId, answer]) => {
       const q = examQuestions.find(eq => eq.id === Number(qId));
-      if (q) saveAnswer(Number(qId), answer, answer === q.answer);
+      if (q) saveAnswer(Number(qId), answer, isCorrectAnswer(q, answer));
     });
 
     saveExamRecord({
       date: new Date().toISOString().slice(0, 10),
-      score: Math.round((correctCount / examQuestions.length) * 100),
+      score: result.score,
       total: examQuestions.length,
-      correct: correctCount,
+      correct: result.correctCount,
       answers: userAnswers,
     });
 
@@ -266,13 +282,12 @@ const Exam: React.FC = () => {
 
   const currentQuestion = examQuestions[currentQuestionIndex];
   const totalQuestions = examQuestions.length;
-  const answeredCount = Object.keys(userAnswers).length;
+  const answeredCount = Object.values(userAnswers).filter(answer => answer.length > 0).length;
   const progress = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
-  const correctAnswers = Object.values(userAnswers).filter((answer, index) =>
-    answer === examQuestions[index]?.answer
-  ).length;
-  const score = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
-  const passed = score >= 80;
+  const examResult = calculateExamResult(examQuestions, userAnswers);
+  const correctAnswers = examResult.correctCount;
+  const score = examResult.score;
+  const passed = score >= PASSING_SCORE;
 
   return (
     <div>
@@ -295,7 +310,7 @@ const Exam: React.FC = () => {
                     <ClockCircleOutlined style={{ color: 'var(--mei-color-primary-500)', fontSize: 18, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--mei-theme-text-primary)' }}>答题时长</div>
-                      <div style={{ fontSize: 13, color: 'var(--mei-theme-text-secondary)', marginTop: 2 }}>全程 90 分钟</div>
+                      <div style={{ fontSize: 13, color: 'var(--mei-theme-text-secondary)', marginTop: 2 }}>全程 105 分钟</div>
                     </div>
                   </RuleItem>
                 </Col>
@@ -304,7 +319,7 @@ const Exam: React.FC = () => {
                     <FileTextOutlined style={{ color: 'var(--mei-color-primary-500)', fontSize: 18, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--mei-theme-text-primary)' }}>题目数量</div>
-                      <div style={{ fontSize: 13, color: 'var(--mei-theme-text-secondary)', marginTop: 2 }}>共 {EXAM_QUESTION_COUNT} 道单选题</div>
+                      <div style={{ fontSize: 13, color: 'var(--mei-theme-text-secondary)', marginTop: 2 }}>每卷 65 道单选/多选题</div>
                     </div>
                   </RuleItem>
                 </Col>
@@ -313,7 +328,7 @@ const Exam: React.FC = () => {
                     <TrophyOutlined style={{ color: 'var(--mei-color-primary-500)', fontSize: 18, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--mei-theme-text-primary)' }}>合格标准</div>
-                      <div style={{ fontSize: 13, color: 'var(--mei-theme-text-secondary)', marginTop: 2 }}>满分 100 分，80 分及格</div>
+                      <div style={{ fontSize: 13, color: 'var(--mei-theme-text-secondary)', marginTop: 2 }}>满分 100 分，65 分及格</div>
                     </div>
                   </RuleItem>
                 </Col>
@@ -348,9 +363,17 @@ const Exam: React.FC = () => {
                 flexWrap: 'wrap',
                 gap: 16
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                   <ExclamationCircleOutlined style={{ color: 'var(--mei-color-primary-600)', fontSize: 20 }} />
-                  <span style={{ color: 'var(--mei-color-primary-700)', fontWeight: 500 }}>准备好了吗？点击下方按钮立即开始模拟考试。</span>
+                  <Select
+                    value={selectedExamId}
+                    onChange={setSelectedExamId}
+                    style={{ width: 220 }}
+                    options={examBanks.map(bank => ({
+                      value: bank.id,
+                      label: `${bank.title}（${bank.questions.length}题）`,
+                    }))}
+                  />
                 </div>
                 <Button
                   type="primary"
@@ -552,24 +575,27 @@ const Exam: React.FC = () => {
                       </div>
                       <div
                         style={{ marginBottom: 16, lineHeight: 1.8, color: 'var(--mei-theme-text-primary)' }}
-                        dangerouslySetInnerHTML={{ __html: examQuestions[reviewQuestionIndex].title }}
+                        dangerouslySetInnerHTML={{ __html: examQuestions[reviewQuestionIndex].question }}
                       />
                       <div style={{ marginBottom: 8 }}>
                         <Text strong>您的答案：</Text>
-                        <Text style={{ color: userAnswers[examQuestions[reviewQuestionIndex].id] === examQuestions[reviewQuestionIndex].answer ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 600 }}>
-                          {userAnswers[examQuestions[reviewQuestionIndex].id] || '未作答'}
+                        <Text style={{ color: isCorrectAnswer(examQuestions[reviewQuestionIndex], userAnswers[examQuestions[reviewQuestionIndex].id] || []) ? 'var(--mei-color-success-base)' : 'var(--mei-color-error-base)', fontWeight: 600 }}>
+                          {userAnswers[examQuestions[reviewQuestionIndex].id]?.join('、') || '未作答'}
                         </Text>
                       </div>
                       <div>
                         <Text strong>正确答案：</Text>
-                        <Text style={{ color: 'var(--mei-color-success-base)', fontWeight: 600 }}>{examQuestions[reviewQuestionIndex].answer}</Text>
+                        <Text style={{ color: 'var(--mei-color-success-base)', fontWeight: 600 }}>{examQuestions[reviewQuestionIndex].correctAnswers.join('、')}</Text>
                       </div>
                       <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--mei-theme-bg-elevated)', borderRadius: 'var(--mei-radius-md)', border: '1px solid var(--mei-theme-border-default)' }}>
                         <Text strong style={{ color: 'var(--mei-color-primary-600)' }}>解析：</Text>
-                        <div
-                          style={{ marginTop: 4, lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}
-                          dangerouslySetInnerHTML={{ __html: examQuestions[reviewQuestionIndex].explanation }}
-                        />
+                        {examQuestions[reviewQuestionIndex].correctAnswers.map(key => (
+                          <div
+                            key={key}
+                            style={{ marginTop: 4, lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}
+                            dangerouslySetInnerHTML={{ __html: examQuestions[reviewQuestionIndex].explanation[key] || '暂无解析' }}
+                          />
+                        ))}
                       </div>
                     </ReviewPanel>
                   )}
