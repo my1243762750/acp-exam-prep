@@ -22,7 +22,7 @@ export interface ImportedSubject {
 const salesforceInfo: SubjectInfo = {
   id: 'salesforce-pd1',
   name: 'Salesforce Platform Developer I',
-  shortName: 'PD1',
+  shortName: 'Platform Developer I',
   description: 'Salesforce Platform Developer I 认证考试备考平台',
 };
 

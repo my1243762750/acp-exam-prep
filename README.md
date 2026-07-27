@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="./public/logo.svg" width="120" height="120" alt="Salesforce PD1 Exam Prep Logo" />
-  <h1>Salesforce PD1 考试助手</h1>
+  <img src="./public/logo.svg" width="120" height="120" alt="Salesforce Platform Developer I Exam Prep Logo" />
+  <h1>Salesforce Platform Developer I 考试助手</h1>
 </div>
 
 Salesforce Platform Developer I 认证刷题工具。项目是一个纯前端 React 应用，内置 6 个考点自测题库和 2 套模拟卷，共 378 题；也支持导入相同格式的 JSON 题库。练习记录、错题和考试历史保存在浏览器 localStorage。
@@ -86,8 +86,8 @@ src/
 
 ```json
 {
-  "name": "Salesforce PD1 示例题库",
-  "shortName": "PD1",
+  "name": "Salesforce Platform Developer I 示例题库",
+  "shortName": "Platform Developer I",
   "description": "Platform Developer I 练习题",
   "questions": [
     {
