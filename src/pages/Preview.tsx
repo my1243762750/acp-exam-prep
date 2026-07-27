@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Card, Button, Row, Col, Space, Pagination, Input, Select, Tooltip, Tag } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined, SearchOutlined, SwapOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
+import { getCurrentPracticeBanks } from '../data/subject';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 
@@ -55,8 +55,15 @@ const Preview: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [shuffled, setShuffled] = useState(false);
 
-  const rawQuestions = getCurrentQuestions();
-  const categories = getCurrentCategories();
+  const practiceBanks = getCurrentPracticeBanks();
+  const rawQuestions = useMemo(
+    () => practiceBanks.flatMap(bank => bank.questions),
+    [practiceBanks]
+  );
+  const categories = useMemo(
+    () => Array.from(new Set(rawQuestions.map(question => question.category))),
+    [rawQuestions]
+  );
 
   const orderedQuestions = useMemo(() => {
     if (!shuffled) return rawQuestions;
