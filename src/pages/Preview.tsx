@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { Card, Button, Row, Col, Space, Pagination, Input, Select, Tooltip, Tag } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined, SearchOutlined, SwapOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
@@ -39,6 +39,7 @@ const PreviewLayout = styled.div`
 
 const QuestionSection = styled.div`
   min-width: 0;
+  scroll-margin-top: 171px;
 `;
 
 const SidebarSection = styled.div`
@@ -61,6 +62,7 @@ const Preview: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [shuffled, setShuffled] = useState(false);
+  const questionSectionRef = useRef<HTMLDivElement>(null);
 
   const practiceBanks = getCurrentPracticeBanks();
   const rawQuestions = useMemo(
@@ -116,9 +118,16 @@ const Preview: React.FC = () => {
     setPage(1);
   };
 
+  const handlePageChange = (nextPage: number) => {
+    setPage(nextPage);
+    requestAnimationFrame(() => {
+      questionSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
   const handleNavigate = (index: number) => {
     const targetPage = Math.floor(index / PAGE_SIZE) + 1;
-    setPage(targetPage);
+    handlePageChange(targetPage);
   };
 
   return (
@@ -174,7 +183,7 @@ const Preview: React.FC = () => {
       </StyledCard>
 
       <PreviewLayout>
-        <QuestionSection>
+        <QuestionSection ref={questionSectionRef}>
           <Row gutter={[0, 24]}>
             {pageQuestions.map((q, idx) => (
               <Col span={24} key={q.id}>
@@ -240,7 +249,7 @@ const Preview: React.FC = () => {
             current={page}
             total={total}
             pageSize={PAGE_SIZE}
-            onChange={setPage}
+            onChange={handlePageChange}
             showSizeChanger={false}
             showTotal={(t) => `共 ${t} 题`}
           />
