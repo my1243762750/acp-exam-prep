@@ -11,6 +11,9 @@ const { Option } = Select;
 const PAGE_SIZE = 10;
 
 const StyledCard = styled(Card)`
+  position: sticky;
+  top: 80px;
+  z-index: 999;
   margin-bottom: var(--mei-spacing-stack-lg);
   border-radius: var(--mei-radius-xl);
   border: 1px solid var(--mei-theme-border-default);
