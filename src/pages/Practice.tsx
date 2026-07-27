@@ -201,6 +201,7 @@ const Practice: React.FC = () => {
                     question={currentQuestion}
                     onAnswer={handleAnswer}
                     showAnswer={showAnswer}
+                    autoExpandExplanation
                     userAnswer={userAnswers[currentQuestion.id]}
                     questionNumber={currentQuestionIndex + 1}
                   />

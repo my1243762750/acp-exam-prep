@@ -81,6 +81,7 @@ interface QuestionCardProps {
   question: SalesforceQuestion;
   onAnswer?: (questionId: number, answer: string[]) => void;
   showAnswer?: boolean;
+  autoExpandExplanation?: boolean;
   userAnswer?: string[];
   questionNumber?: number;
 }
@@ -92,6 +93,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
   onAnswer,
   showAnswer = false,
+  autoExpandExplanation = false,
   userAnswer,
   questionNumber
 }) => {
@@ -188,7 +190,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             showIcon
             style={{ marginBottom: 16, borderRadius: 'var(--mei-radius-md)' }}
           />
-          <Collapse ghost expandIconPosition="end">
+          <Collapse
+            ghost
+            expandIconPosition="end"
+            defaultActiveKey={autoExpandExplanation ? ['1'] : undefined}
+          >
             <Panel header={<span style={{ fontWeight: 600, color: 'var(--mei-color-primary-600)' }}>查看详细解析</span>} key="1">
               <div style={{ padding: '8px 0', lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}>
                 {question.correctAnswers.map(key => (

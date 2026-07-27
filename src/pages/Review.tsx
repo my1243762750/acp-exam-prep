@@ -203,6 +203,7 @@ const Review: React.FC = () => {
                 question={currentQuestion}
                 onAnswer={handleAnswer}
                 showAnswer={true}
+                autoExpandExplanation
                 userAnswer={userAnswers[currentQuestion.id] ?? savedAnswers[currentQuestion.id]?.answer}
               />
             </div>
