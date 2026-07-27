@@ -112,7 +112,7 @@ const Cell = styled.div<{ $status: 'correct' | 'wrong' | 'answered' | 'unanswere
   font-weight: 600;
   cursor: pointer;
   transition: all var(--mei-motion-fast) var(--mei-ease-out);
-  border: 1.5px solid transparent;
+  border: 1px solid transparent;
 
   ${props => props.$status === 'correct' && `
     background: var(--mei-color-success-light);
@@ -143,7 +143,7 @@ const Cell = styled.div<{ $status: 'correct' | 'wrong' | 'answered' | 'unanswere
     border-color: var(--mei-color-primary-500);
     color: var(--mei-color-primary-600);
     background: var(--mei-color-primary-50);
-    border-width: 2px;
+    border-width: 1px;
   `}
 `;
 
