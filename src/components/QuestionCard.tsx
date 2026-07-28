@@ -3,7 +3,7 @@ import { Card, Checkbox, Radio, Space, Tag, Collapse, Alert } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import type { SalesforceQuestion } from '../data/salesforce';
-import { isCorrectAnswer } from '../data/salesforce';
+import { getEffectiveCorrectAnswers, isCorrectAnswer } from '../data/salesforce';
 
 const { Panel } = Collapse;
 
@@ -110,6 +110,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   const isCorrect = isCorrectAnswer(question, selectedAnswers);
+  const effectiveCorrectAnswers = getEffectiveCorrectAnswers(question);
   const hasAnswered = selectedAnswers.length > 0;
 
   return (
@@ -141,7 +142,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       <Space direction="vertical" style={{ width: '100%' }}>
         {question.options.map(option => {
           const isSelected = selectedAnswers.includes(option.key);
-          const isCorrectOption = question.correctAnswers.includes(option.key);
+          const isCorrectOption = effectiveCorrectAnswers.includes(option.key);
           const input = question.type === 'multiple_choice'
             ? (
               <Checkbox
@@ -183,7 +184,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
           <Alert
             message={
               <span style={{ fontWeight: 600 }}>
-                正确答案：<span style={{ color: 'var(--mei-color-success-base)', fontSize: 18 }}>{question.correctAnswers.join('、')}</span>
+                正确答案：<span style={{ color: 'var(--mei-color-success-base)', fontSize: 18 }}>{effectiveCorrectAnswers.join('、')}</span>
               </span>
             }
             type={hasAnswered ? (isCorrect ? 'success' : 'error') : 'info'}
@@ -197,7 +198,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
           >
             <Panel header={<span style={{ fontWeight: 600, color: 'var(--mei-color-primary-600)' }}>查看详细解析</span>} key="1">
               <div style={{ padding: '8px 0', lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}>
-                {question.correctAnswers.map(key => (
+                {effectiveCorrectAnswers.map(key => (
                   <div key={key} style={{ marginBottom: 8 }}>
                     <strong>{key}：</strong>
                     <span dangerouslySetInnerHTML={{ __html: question.explanation[key] || '暂无解析' }} />

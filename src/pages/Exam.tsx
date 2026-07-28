@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 import type { SalesforceQuestion } from '../data/salesforce';
-import { isCorrectAnswer } from '../data/salesforce';
+import { getEffectiveCorrectAnswers, isCorrectAnswer } from '../data/salesforce';
 import { getCurrentExamBanks } from '../data/subject';
 import { saveAnswer, saveExamRecord } from '../utils/storage';
 
@@ -600,11 +600,11 @@ const Exam: React.FC = () => {
                       </div>
                       <div>
                         <Text strong>正确答案：</Text>
-                        <Text style={{ color: 'var(--mei-color-success-base)', fontWeight: 600 }}>{examQuestions[reviewQuestionIndex].correctAnswers.join('、')}</Text>
+                        <Text style={{ color: 'var(--mei-color-success-base)', fontWeight: 600 }}>{getEffectiveCorrectAnswers(examQuestions[reviewQuestionIndex]).join('、')}</Text>
                       </div>
                       <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--mei-theme-bg-elevated)', borderRadius: 'var(--mei-radius-md)', border: '1px solid var(--mei-theme-border-default)' }}>
                         <Text strong style={{ color: 'var(--mei-color-primary-600)' }}>解析：</Text>
-                        {examQuestions[reviewQuestionIndex].correctAnswers.map(key => (
+                        {getEffectiveCorrectAnswers(examQuestions[reviewQuestionIndex]).map(key => (
                           <div
                             key={key}
                             style={{ marginTop: 4, lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}
