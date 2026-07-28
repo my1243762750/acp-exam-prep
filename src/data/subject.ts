@@ -143,6 +143,9 @@ export function getCurrentExamBanks(): QuestionBank[] {
 }
 
 export function getCurrentTotalQuestions(): number {
+  if (getCurrentSubjectId() === salesforceInfo.id) {
+    return practiceBanks.reduce((total, bank) => total + bank.questions.length, 0);
+  }
   return getCurrentQuestions().length;
 }
 
