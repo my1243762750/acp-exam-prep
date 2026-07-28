@@ -4,6 +4,7 @@ import flowAutomationLogicMultiple from './salesforce-banks/flow-automation-logi
 import flowAutomationLogic2 from './salesforce-banks/flow-automation-logic-2';
 import userInterface from './salesforce-banks/user-interface';
 import testingDebuggingDeployment from './salesforce-banks/testing-debugging-deployment';
+import supplementalQuestions from './salesforce-banks/supplemental-questions';
 import mockExamA from './salesforce-banks/mock-exam-a';
 import mockExamB from './salesforce-banks/mock-exam-b';
 import answerReviews from './salesforce-banks/answer-reviews';
@@ -46,6 +47,8 @@ interface BankDefinition {
   id: string;
   title: string;
   kind: 'practice' | 'exam';
+  idBase?: number;
+  updatedAt?: string;
   questions: SalesforceQuestionInput[];
 }
 
@@ -70,8 +73,9 @@ const bankDefinitions: BankDefinition[] = [
   { id: 'flow-automation-logic-2', title: '流程自动化与逻辑2', kind: 'practice', questions: asQuestionInput(flowAutomationLogic2) },
   { id: 'user-interface', title: '用户界面', kind: 'practice', questions: asQuestionInput(userInterface) },
   { id: 'testing-debugging-deployment', title: '测试/调试/部署', kind: 'practice', questions: asQuestionInput(testingDebuggingDeployment) },
-  { id: 'mock-exam-a', title: '模拟卷A', kind: 'exam', questions: asQuestionInput(mockExamA) },
-  { id: 'mock-exam-b', title: '模拟卷B', kind: 'exam', questions: asQuestionInput(mockExamB) },
+  { id: 'supplemental-questions', title: '新增题（2026更新）', kind: 'practice', idBase: 8000, updatedAt: '2026.7.28', questions: asQuestionInput(supplementalQuestions) },
+  { id: 'mock-exam-a', title: '模拟卷A', kind: 'exam', idBase: 6000, questions: asQuestionInput(mockExamA) },
+  { id: 'mock-exam-b', title: '模拟卷B', kind: 'exam', idBase: 7000, questions: asQuestionInput(mockExamB) },
 ];
 
 export function normalizeSalesforceQuestions(
@@ -177,8 +181,8 @@ export const questionBanks: QuestionBank[] = bankDefinitions.map((bank, index) =
   id: bank.id,
   title: bank.title,
   kind: bank.kind,
-  updatedAt: UPDATED_AT,
-  questions: normalizeSalesforceQuestions(bank.questions, bank.id, bank.title, index * 1000),
+  updatedAt: bank.updatedAt ?? UPDATED_AT,
+  questions: normalizeSalesforceQuestions(bank.questions, bank.id, bank.title, bank.idBase ?? index * 1000),
 }));
 
 export const practiceBanks = questionBanks.filter(bank => bank.kind === 'practice');
