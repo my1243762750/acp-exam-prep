@@ -3,7 +3,7 @@
   <h1>Salesforce Platform Developer I 考试助手</h1>
 </div>
 
-Salesforce Platform Developer I 认证刷题工具。项目是一个纯前端 React 应用，内置 6 个考点自测题库和 2 套模拟卷，共 378 题；也支持导入相同格式的 JSON 题库。练习记录、错题和考试历史保存在浏览器 localStorage。
+Salesforce Platform Developer I 认证刷题工具。项目是一个纯前端 React 应用，内置 6 个考点自测题库，共 248 道独立练习题；另有 2 套各 65 题的模拟卷，题目均从练习题中抽取。也支持导入相同格式的 JSON 题库。练习记录、错题和考试历史保存在浏览器 localStorage。
 
 在线体验：[acp-exam-prep.vercel.app](https://acp-exam-prep.vercel.app/)
 
@@ -123,6 +123,7 @@ src/
 - `options`：选项数组，每项包含唯一的 `key` 和选项 `text`。
 - `userAnswers`：已有用户答案，可为空数组。
 - `correctAnswers`：正确答案键数组。
+- `verifiedAnswers`：可选的人工复核答案；存在时优先用于答案显示和判定，否则使用 `correctAnswers`。
 - `explanation`：按答案键保存的解析对象。
 - `difficulty`：题目难度。
 - `accuracy`：题目来源提供的正确率，范围为 0–100。
