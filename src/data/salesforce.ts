@@ -75,11 +75,9 @@ export function normalizeSalesforceQuestions(
   return questions.map((question, index) => {
     const questionNumber = index + 1;
     const review = answerReviewMap.get(`${bankId}:${questionNumber}`);
-    const correctAnswers = [...question.correctAnswers].sort();
-
-    if (review && answerKey(review.correctAnswers) !== answerKey(correctAnswers)) {
-      throw new Error(`${bankId} 第 ${questionNumber} 题的原答案与复核记录不一致`);
-    }
+    const correctAnswers = review
+      ? [...review.correctAnswers].sort()
+      : [...question.correctAnswers].sort();
 
     return {
       ...question,
