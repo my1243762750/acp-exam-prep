@@ -88,6 +88,12 @@ code {
   box-shadow: var(--mei-shadow-md) !important;
 }
 
+.ant-btn-primary:disabled {
+  background: var(--mei-color-neutral-100) !important;
+  color: var(--mei-color-neutral-600) !important;
+  box-shadow: none !important;
+}
+
 .ant-progress-bg {
   background: var(--mei-color-primary-500) !important;
 }
