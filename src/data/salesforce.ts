@@ -6,6 +6,7 @@ import userInterface from './salesforce-banks/user-interface';
 import testingDebuggingDeployment from './salesforce-banks/testing-debugging-deployment';
 import mockExamA from './salesforce-banks/mock-exam-a';
 import mockExamB from './salesforce-banks/mock-exam-b';
+import answerReviews from './salesforce-banks/answer-reviews';
 
 export interface SalesforceOption {
   key: string;
@@ -20,6 +21,7 @@ export interface SalesforceQuestionInput {
   options: SalesforceOption[];
   userAnswers: string[];
   correctAnswers: string[];
+  verifiedAnswers?: string[];
   explanation: Record<string, string>;
   difficulty: string;
   accuracy: number | null;
@@ -49,6 +51,9 @@ interface BankDefinition {
 const UPDATED_AT = '2025.10.9';
 const asQuestionInput = (value: unknown): SalesforceQuestionInput[] =>
   value as SalesforceQuestionInput[];
+const answerReviewMap = new Map(
+  answerReviews.map(review => [`${review.bankId}:${review.questionNumber}`, review]),
+);
 
 const bankDefinitions: BankDefinition[] = [
   { id: 'development-basics', title: '开发基础', kind: 'practice', questions: asQuestionInput(developmentBasics) },
@@ -67,14 +72,25 @@ export function normalizeSalesforceQuestions(
   category: string,
   idBase = 0,
 ): SalesforceQuestion[] {
-  return questions.map((question, index) => ({
-    ...question,
-    id: idBase + index + 1,
-    bankId,
-    category,
-    userAnswers: Array.isArray(question.userAnswers) ? question.userAnswers : [],
-    correctAnswers: [...question.correctAnswers].sort(),
-  }));
+  return questions.map((question, index) => {
+    const questionNumber = index + 1;
+    const review = answerReviewMap.get(`${bankId}:${questionNumber}`);
+    const correctAnswers = [...question.correctAnswers].sort();
+
+    if (review && answerKey(review.correctAnswers) !== answerKey(correctAnswers)) {
+      throw new Error(`${bankId} 第 ${questionNumber} 题的原答案与复核记录不一致`);
+    }
+
+    return {
+      ...question,
+      id: idBase + questionNumber,
+      bankId,
+      category,
+      userAnswers: Array.isArray(question.userAnswers) ? question.userAnswers : [],
+      correctAnswers,
+      verifiedAnswers: review ? [...review.verifiedAnswers].sort() : undefined,
+    };
+  });
 }
 
 export function isSalesforceQuestionInput(value: unknown): value is SalesforceQuestionInput {
@@ -84,6 +100,7 @@ export function isSalesforceQuestionInput(value: unknown): value is SalesforceQu
     ? question.options.map(option => option?.key)
     : [];
   const correctAnswers = Array.isArray(question.correctAnswers) ? question.correctAnswers : [];
+  const verifiedAnswers = question.verifiedAnswers;
   const userAnswers = Array.isArray(question.userAnswers) ? question.userAnswers : [];
   const explanation = question.explanation as Record<string, unknown> | undefined;
   return (
@@ -113,6 +130,15 @@ export function isSalesforceQuestionInput(value: unknown): value is SalesforceQu
     correctAnswers.length === question.chooseCount &&
     correctAnswers.every(answer => typeof answer === 'string' && optionKeys.includes(answer)) &&
     new Set(correctAnswers).size === correctAnswers.length &&
+    (
+      verifiedAnswers === undefined ||
+      (
+        Array.isArray(verifiedAnswers) &&
+        verifiedAnswers.length === question.chooseCount &&
+        verifiedAnswers.every(answer => typeof answer === 'string' && optionKeys.includes(answer)) &&
+        new Set(verifiedAnswers).size === verifiedAnswers.length
+      )
+    ) &&
     !!explanation &&
     Object.values(explanation).every(text => typeof text === 'string') &&
     typeof question.difficulty === 'string' &&
@@ -145,6 +171,12 @@ export function answerKey(answers: string[]): string {
   return [...answers].sort().join('');
 }
 
+export function getEffectiveCorrectAnswers(
+  question: Pick<SalesforceQuestionInput, 'correctAnswers' | 'verifiedAnswers'>,
+): string[] {
+  return question.verifiedAnswers ?? question.correctAnswers;
+}
+
 export function isCorrectAnswer(question: SalesforceQuestion, answers: string[]): boolean {
-  return answerKey(answers) === answerKey(question.correctAnswers);
+  return answerKey(answers) === answerKey(getEffectiveCorrectAnswers(question));
 }
