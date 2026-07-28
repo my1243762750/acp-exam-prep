@@ -125,6 +125,7 @@ src/
 - `correctAnswers`：正确答案键数组。
 - `verifiedAnswers`：可选的人工复核答案；存在时优先用于答案显示和判定，否则使用 `correctAnswers`。
 - `explanation`：按答案键保存的解析对象。
+- `verifiedExplanation`：可选的人工复核解析；存在时优先显示，原解析保留在 `explanation` 中。
 - `difficulty`：题目难度。
 - `accuracy`：题目来源提供的正确率，范围为 0–100。
 

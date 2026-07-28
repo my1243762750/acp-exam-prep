@@ -3,7 +3,11 @@ import { Card, Checkbox, Radio, Space, Tag, Collapse, Alert } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import type { SalesforceQuestion } from '../data/salesforce';
-import { getEffectiveCorrectAnswers, isCorrectAnswer } from '../data/salesforce';
+import {
+  getEffectiveCorrectAnswers,
+  getEffectiveExplanation,
+  isCorrectAnswer,
+} from '../data/salesforce';
 
 const { Panel } = Collapse;
 
@@ -201,7 +205,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                 {effectiveCorrectAnswers.map(key => (
                   <div key={key} style={{ marginBottom: 8 }}>
                     <strong>{key}：</strong>
-                    <span dangerouslySetInnerHTML={{ __html: question.explanation[key] || '暂无解析' }} />
+                    <span dangerouslySetInnerHTML={{ __html: getEffectiveExplanation(question, key) }} />
                   </div>
                 ))}
               </div>

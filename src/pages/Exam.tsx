@@ -13,7 +13,11 @@ import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 import type { SalesforceQuestion } from '../data/salesforce';
-import { getEffectiveCorrectAnswers, isCorrectAnswer } from '../data/salesforce';
+import {
+  getEffectiveCorrectAnswers,
+  getEffectiveExplanation,
+  isCorrectAnswer,
+} from '../data/salesforce';
 import { getCurrentExamBanks } from '../data/subject';
 import { saveAnswer, saveExamRecord } from '../utils/storage';
 
@@ -608,7 +612,9 @@ const Exam: React.FC = () => {
                           <div
                             key={key}
                             style={{ marginTop: 4, lineHeight: 1.8, color: 'var(--mei-theme-text-secondary)' }}
-                            dangerouslySetInnerHTML={{ __html: examQuestions[reviewQuestionIndex].explanation[key] || '暂无解析' }}
+                            dangerouslySetInnerHTML={{
+                              __html: getEffectiveExplanation(examQuestions[reviewQuestionIndex], key),
+                            }}
                           />
                         ))}
                       </div>

@@ -23,6 +23,7 @@ export interface SalesforceQuestionInput {
   correctAnswers: string[];
   verifiedAnswers?: string[];
   explanation: Record<string, string>;
+  verifiedExplanation?: Record<string, string>;
   difficulty: string;
   accuracy: number | null;
 }
@@ -54,6 +55,13 @@ const asQuestionInput = (value: unknown): SalesforceQuestionInput[] =>
 const answerReviewMap = new Map(
   answerReviews.map(review => [`${review.bankId}:${review.questionNumber}`, review]),
 );
+const resolveAnswerReview = (bankId: string, questionNumber: number) => {
+  const review = answerReviewMap.get(`${bankId}:${questionNumber}`);
+  if (!review?.sourceReview) return review;
+  return answerReviewMap.get(
+    `${review.sourceReview.bankId}:${review.sourceReview.questionNumber}`,
+  );
+};
 
 const bankDefinitions: BankDefinition[] = [
   { id: 'development-basics', title: '开发基础', kind: 'practice', questions: asQuestionInput(developmentBasics) },
@@ -75,6 +83,7 @@ export function normalizeSalesforceQuestions(
   return questions.map((question, index) => {
     const questionNumber = index + 1;
     const review = answerReviewMap.get(`${bankId}:${questionNumber}`);
+    const resolvedReview = resolveAnswerReview(bankId, questionNumber);
     const correctAnswers = review
       ? [...review.correctAnswers].sort()
       : [...question.correctAnswers].sort();
@@ -87,6 +96,10 @@ export function normalizeSalesforceQuestions(
       userAnswers: Array.isArray(question.userAnswers) ? question.userAnswers : [],
       correctAnswers,
       verifiedAnswers: review ? [...review.verifiedAnswers].sort() : undefined,
+      explanation: review ? { ...review.originalExplanation } : question.explanation,
+      verifiedExplanation: resolvedReview?.verifiedExplanation
+        ? { ...resolvedReview.verifiedExplanation }
+        : undefined,
     };
   });
 }
@@ -101,6 +114,7 @@ export function isSalesforceQuestionInput(value: unknown): value is SalesforceQu
   const verifiedAnswers = question.verifiedAnswers;
   const userAnswers = Array.isArray(question.userAnswers) ? question.userAnswers : [];
   const explanation = question.explanation as Record<string, unknown> | undefined;
+  const verifiedExplanation = question.verifiedExplanation as Record<string, unknown> | undefined;
   return (
     (question.type === 'single_choice' || question.type === 'multiple_choice') &&
     typeof question.question === 'string' &&
@@ -139,6 +153,13 @@ export function isSalesforceQuestionInput(value: unknown): value is SalesforceQu
     ) &&
     !!explanation &&
     Object.values(explanation).every(text => typeof text === 'string') &&
+    (
+      verifiedExplanation === undefined ||
+      (
+        Object.values(verifiedExplanation).every(text => typeof text === 'string') &&
+        (verifiedAnswers || []).every(answer => typeof verifiedExplanation[answer] === 'string')
+      )
+    ) &&
     typeof question.difficulty === 'string' &&
     (
       question.accuracy === null ||
@@ -173,6 +194,13 @@ export function getEffectiveCorrectAnswers(
   question: Pick<SalesforceQuestionInput, 'correctAnswers' | 'verifiedAnswers'>,
 ): string[] {
   return question.verifiedAnswers ?? question.correctAnswers;
+}
+
+export function getEffectiveExplanation(
+  question: Pick<SalesforceQuestionInput, 'explanation' | 'verifiedExplanation'>,
+  answer: string,
+): string {
+  return question.verifiedExplanation?.[answer] ?? question.explanation[answer] ?? '暂无解析';
 }
 
 export function isCorrectAnswer(question: SalesforceQuestion, answers: string[]): boolean {
