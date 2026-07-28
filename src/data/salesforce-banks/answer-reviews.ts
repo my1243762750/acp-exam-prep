@@ -36,6 +36,42 @@ const answerReviews: AnswerReview[] = [
   },
   {
     "bankId": "development-basics",
+    "questionNumber": 17,
+    "correctAnswers": [
+      "D"
+    ],
+    "verifiedAnswers": [
+      "B"
+    ],
+    "reason": "人工复核",
+    "reviewedAt": "2026-07-28",
+    "originalExplanation": {
+      "D": "Order_Shipment_Group__c object: This custom object is used to track shipment groups for orders, which is crucial for managing split shipments where different items (Order_Line__c records) of the same order are shipped to different locations.\n\nMaster-detail field on Order__c and Order_Line__c:\n\nMaster-detail on Order__c: This establishes a relationship between the Order_Shipment_Group__c and the Order__c objects. It ensures that each shipment group is linked to a specific order.\nMaster-detail on Order_Line__c: This allows each order line (which represents individual products in the order) to be linked to specific shipment groups. This is essential for tracking which parts of the order are being shipped to which locations.\nBy using this structure, you can easily manage multiple shipments per order, and link the relevant shipping details to both the overall order and the individual order lines."
+    },
+    "verifiedExplanation": {
+      "B": "Create Order_Shipment_Group__c and add a master-detail relationship field on Order_Line__c. Each order line can then belong to one shipment group, allowing lines from the same order to be split across different shipping locations."
+    }
+  },
+  {
+    "bankId": "development-basics",
+    "questionNumber": 20,
+    "correctAnswers": [
+      "A"
+    ],
+    "verifiedAnswers": [
+      "B"
+    ],
+    "reason": "人工复核",
+    "reviewedAt": "2026-07-28",
+    "originalExplanation": {
+      "A": ""
+    },
+    "verifiedExplanation": {
+      "B": "Use record-triggered flows to recalculate the value when either the Contact Mailing State or the Job Preferred_Locations__c field changes and update the related Job_Application__c records."
+    }
+  },
+  {
+    "bankId": "development-basics",
     "questionNumber": 44,
     "correctAnswers": [
       "B",
