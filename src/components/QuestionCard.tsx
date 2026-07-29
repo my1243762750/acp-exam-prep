@@ -27,6 +27,25 @@ const StyledCard = styled(Card)`
     padding: var(--mei-spacing-inset-xl);
   }
 
+  [style*='text-wrap-mode: nowrap'],
+  [style*='white-space: nowrap'] {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre [style*='text-wrap-mode: nowrap'],
+  pre [style*='white-space: nowrap'] {
+    white-space: inherit !important;
+    overflow-wrap: normal;
+  }
+
   @media (max-width: 768px) {
     .ant-card-body {
       padding: 16px;
