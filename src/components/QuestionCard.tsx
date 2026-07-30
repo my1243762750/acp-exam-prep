@@ -2,10 +2,12 @@ import React from 'react';
 import { Card, Checkbox, Radio, Space, Tag, Collapse, Alert } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import type { SalesforceQuestion } from '../data/salesforce';
+import type { QuestionLanguage, SalesforceQuestion } from '../data/salesforce';
 import {
   getEffectiveCorrectAnswers,
-  getEffectiveExplanation,
+  getLocalizedExplanation,
+  getLocalizedOptions,
+  getLocalizedQuestion,
   isCorrectAnswer,
 } from '../data/salesforce';
 
@@ -137,6 +139,7 @@ interface QuestionCardProps {
   autoExpandExplanation?: boolean;
   userAnswer?: string[];
   questionNumber?: number;
+  language?: QuestionLanguage;
 }
 
 const typeLabel = (type: SalesforceQuestion['type']) =>
@@ -148,9 +151,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   showAnswer = false,
   autoExpandExplanation = false,
   userAnswer,
-  questionNumber
+  questionNumber,
+  language = 'en',
 }) => {
   const selectedAnswers = userAnswer ?? [];
+  const localizedOptions = getLocalizedOptions(question, language);
 
   const handleOptionSelect = (key: string) => {
     if (showAnswer) return;
@@ -190,10 +195,10 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         )}
       </QuestionMeta>
 
-      <QuestionTitle dangerouslySetInnerHTML={{ __html: question.question }} />
+      <QuestionTitle dangerouslySetInnerHTML={{ __html: getLocalizedQuestion(question, language) }} />
 
       <Space direction="vertical" style={{ width: '100%' }}>
-        {question.options.map(option => {
+        {localizedOptions.map(option => {
           const isSelected = selectedAnswers.includes(option.key);
           const isCorrectOption = effectiveCorrectAnswers.includes(option.key);
           const input = question.type === 'multiple_choice'
@@ -254,7 +259,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                 {effectiveCorrectAnswers.map(key => (
                   <div key={key} style={{ marginBottom: 8 }}>
                     <strong>{key}：</strong>
-                    <span dangerouslySetInnerHTML={{ __html: getEffectiveExplanation(question, key) }} />
+                    <span dangerouslySetInnerHTML={{ __html: getLocalizedExplanation(question, key, language) }} />
                   </div>
                 ))}
               </div>

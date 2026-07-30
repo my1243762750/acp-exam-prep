@@ -4,9 +4,11 @@ import { PlayCircleOutlined, ReloadOutlined, EyeOutlined, EyeInvisibleOutlined }
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import type { SalesforceQuestion } from '../data/salesforce';
+import QuestionLanguageSwitch from '../components/QuestionLanguageSwitch';
+import type { QuestionLanguage, SalesforceQuestion } from '../data/salesforce';
 import { isCorrectAnswer } from '../data/salesforce';
 import { getCurrentPracticeBanks } from '../data/subject';
+import { getStoredQuestionLanguage, saveQuestionLanguage } from '../utils/questionLanguage';
 import { saveAnswer } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
@@ -131,8 +133,14 @@ const Practice: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
   const [showAnswer, setShowAnswer] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
+  const [questionLanguage, setQuestionLanguage] = useState<QuestionLanguage>(
+    getStoredQuestionLanguage,
+  );
 
   const banks = getCurrentPracticeBanks();
+  const hasTranslations = banks.some(bank =>
+    bank.questions.some(question => Boolean(question['question-zh']))
+  );
 
   const handleStartPractice = () => {
     let questionsToPractice: SalesforceQuestion[];
@@ -194,6 +202,11 @@ const Practice: React.FC = () => {
     setShowAnswer(false);
   };
 
+  const handleLanguageChange = (language: QuestionLanguage) => {
+    setQuestionLanguage(language);
+    saveQuestionLanguage(language);
+  };
+
   const currentQuestion = practiceQuestions[currentQuestionIndex];
   const totalQuestions = practiceQuestions.length;
   const answeredCount = Object.values(userAnswers).filter(answer => answer.length > 0).length;
@@ -223,6 +236,15 @@ const Practice: React.FC = () => {
                   ))}
                 </Select>
               </div>
+              {hasTranslations && (
+                <div>
+                  <Paragraph style={{ fontWeight: 500, marginBottom: 8 }}>题目语言：</Paragraph>
+                  <QuestionLanguageSwitch
+                    value={questionLanguage}
+                    onChange={handleLanguageChange}
+                  />
+                </div>
+              )}
               <Button
                 type="primary"
                 size="large"
@@ -255,9 +277,17 @@ const Practice: React.FC = () => {
                         第 {currentQuestionIndex + 1} 题 / 共 {totalQuestions} 题
                       </Paragraph>
                     </div>
-                    <Button icon={<ReloadOutlined />} onClick={handleReset} type="default">
-                      重新开始
-                    </Button>
+                    <Space wrap>
+                      {hasTranslations && (
+                        <QuestionLanguageSwitch
+                          value={questionLanguage}
+                          onChange={handleLanguageChange}
+                        />
+                      )}
+                      <Button icon={<ReloadOutlined />} onClick={handleReset} type="default">
+                        重新开始
+                      </Button>
+                    </Space>
                   </div>
                   <Progress percent={progress} status="active" strokeColor="var(--mei-color-primary-500)" />
                 </div>
@@ -273,6 +303,7 @@ const Practice: React.FC = () => {
                     autoExpandExplanation
                     userAnswer={userAnswers[currentQuestion.id]}
                     questionNumber={currentQuestionIndex + 1}
+                    language={questionLanguage}
                   />
                   <AnswerToggle>
                     <Button

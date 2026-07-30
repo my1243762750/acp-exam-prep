@@ -3,8 +3,11 @@ import { Card, Select, Button, Space, Typography, Row, Col, Tag, Empty, List } f
 import { ExclamationCircleOutlined, EyeOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import QuestionCard from '../components/QuestionCard';
-import type { SalesforceQuestion } from '../data/salesforce';
+import QuestionLanguageSwitch from '../components/QuestionLanguageSwitch';
+import type { QuestionLanguage, SalesforceQuestion } from '../data/salesforce';
+import { getLocalizedQuestion } from '../data/salesforce';
 import { getCurrentQuestions, getCurrentCategories } from '../data/subject';
+import { getStoredQuestionLanguage, saveQuestionLanguage } from '../utils/questionLanguage';
 import { getAnswers, getWrongQuestionIds, removeWrongQuestion, clearWrongQuestions } from '../utils/storage';
 
 const { Title, Paragraph } = Typography;
@@ -48,10 +51,14 @@ const Review: React.FC = () => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
   const [refreshKey, setRefreshKey] = useState(0);
+  const [questionLanguage, setQuestionLanguage] = useState<QuestionLanguage>(
+    getStoredQuestionLanguage,
+  );
 
   const categories = getCurrentCategories();
   const allQuestions = getCurrentQuestions();
   const savedAnswers = getAnswers();
+  const hasTranslations = allQuestions.some(question => Boolean(question['question-zh']));
 
   const wrongQuestionIds = useMemo(() => getWrongQuestionIds(), [refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
   const wrongQuestions = useMemo(() => {
@@ -92,6 +99,11 @@ const Review: React.FC = () => {
     setRefreshKey(k => k + 1);
   };
 
+  const handleLanguageChange = (language: QuestionLanguage) => {
+    setQuestionLanguage(language);
+    saveQuestionLanguage(language);
+  };
+
   return (
     <div>
       <Title level={2} style={{ color: 'var(--mei-theme-text-primary)' }}>错题复习</Title>
@@ -109,6 +121,12 @@ const Review: React.FC = () => {
               </Paragraph>
             </div>
             <Space size="large">
+              {hasTranslations && (
+                <QuestionLanguageSwitch
+                  value={questionLanguage}
+                  onChange={handleLanguageChange}
+                />
+              )}
               <Select
                 style={{ width: 180 }}
                 placeholder="全部分类"
@@ -172,7 +190,7 @@ const Review: React.FC = () => {
                         whiteSpace: 'nowrap',
                         color: 'var(--mei-theme-text-secondary)'
                       }}>
-                        {question.question.replace(/<[^>]+>/g, '').slice(0, 80)}...
+                        {getLocalizedQuestion(question, questionLanguage).replace(/<[^>]+>/g, '').slice(0, 80)}...
                       </div>
                     }
                   />
@@ -220,6 +238,7 @@ const Review: React.FC = () => {
                 showAnswer={true}
                 autoExpandExplanation
                 userAnswer={userAnswers[currentQuestion.id] ?? savedAnswers[currentQuestion.id]?.answer}
+                language={questionLanguage}
               />
             </div>
           </StyledCard>
