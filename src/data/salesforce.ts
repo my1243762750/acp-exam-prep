@@ -14,17 +14,23 @@ export interface SalesforceOption {
   text: string;
 }
 
+export type QuestionLanguage = 'en' | 'zh' | 'both';
+
 export interface SalesforceQuestionInput {
   type: 'single_choice' | 'multiple_choice';
   question: string;
+  'question-zh'?: string;
   score: number;
   chooseCount: number;
   options: SalesforceOption[];
+  'options-zh'?: SalesforceOption[];
   userAnswers: string[];
   correctAnswers: string[];
   verifiedAnswers?: string[];
   explanation: Record<string, string>;
+  'explanation-zh'?: Record<string, string>;
   verifiedExplanation?: Record<string, string>;
+  verifiedExplanationZh?: Record<string, string>;
   difficulty: string;
   accuracy: number | null;
 }
@@ -103,6 +109,9 @@ export function normalizeSalesforceQuestions(
       explanation: review ? { ...review.originalExplanation } : question.explanation,
       verifiedExplanation: resolvedReview?.verifiedExplanation
         ? { ...resolvedReview.verifiedExplanation }
+        : undefined,
+      verifiedExplanationZh: resolvedReview?.verifiedExplanationZh
+        ? { ...resolvedReview.verifiedExplanationZh }
         : undefined,
     };
   });
@@ -205,6 +214,50 @@ export function getEffectiveExplanation(
   answer: string,
 ): string {
   return question.verifiedExplanation?.[answer] ?? question.explanation[answer] ?? '暂无解析';
+}
+
+const combineLocalizedText = (
+  english: string,
+  chinese: string | undefined,
+  language: QuestionLanguage,
+): string => {
+  if (language === 'en' || !chinese) return english;
+  if (language === 'zh') return chinese;
+  return `${english}<div style="margin-top: 12px;">${chinese}</div>`;
+};
+
+export function getLocalizedQuestion(
+  question: Pick<SalesforceQuestionInput, 'question' | 'question-zh'>,
+  language: QuestionLanguage,
+): string {
+  return combineLocalizedText(question.question, question['question-zh'], language);
+}
+
+export function getLocalizedOptions(
+  question: Pick<SalesforceQuestionInput, 'options' | 'options-zh'>,
+  language: QuestionLanguage,
+): SalesforceOption[] {
+  const chineseOptions = new Map(
+    (question['options-zh'] || []).map(option => [option.key, option.text]),
+  );
+  return question.options.map(option => ({
+    ...option,
+    text: combineLocalizedText(option.text, chineseOptions.get(option.key), language),
+  }));
+}
+
+export function getLocalizedExplanation(
+  question: Pick<
+    SalesforceQuestionInput,
+    'explanation' | 'explanation-zh' | 'verifiedExplanation' | 'verifiedExplanationZh'
+  >,
+  answer: string,
+  language: QuestionLanguage,
+): string {
+  const english = getEffectiveExplanation(question, answer);
+  const chinese = question.verifiedExplanationZh?.[answer]
+    ?? question['explanation-zh']?.[answer];
+  return combineLocalizedText(english, chinese, language);
 }
 
 export function isCorrectAnswer(question: SalesforceQuestion, answers: string[]): boolean {

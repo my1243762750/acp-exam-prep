@@ -5,6 +5,14 @@ import styled from 'styled-components';
 import { getCurrentPracticeBanks } from '../data/subject';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
+import QuestionLanguageSwitch from '../components/QuestionLanguageSwitch';
+import type { QuestionLanguage } from '../data/salesforce';
+import {
+  getEffectiveCorrectAnswers,
+  getLocalizedExplanation,
+  getLocalizedQuestion,
+} from '../data/salesforce';
+import { getStoredQuestionLanguage, saveQuestionLanguage } from '../utils/questionLanguage';
 
 const { Option } = Select;
 
@@ -115,6 +123,9 @@ const Preview: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [shuffled, setShuffled] = useState(false);
+  const [questionLanguage, setQuestionLanguage] = useState<QuestionLanguage>(
+    getStoredQuestionLanguage,
+  );
   const questionSectionRef = useRef<HTMLDivElement>(null);
 
   const practiceBanks = getCurrentPracticeBanks();
@@ -126,6 +137,7 @@ const Preview: React.FC = () => {
     () => Array.from(new Set(rawQuestions.map(question => question.category))),
     [rawQuestions]
   );
+  const hasTranslations = rawQuestions.some(question => Boolean(question['question-zh']));
 
   const orderedQuestions = useMemo(() => {
     if (!shuffled) return rawQuestions;
@@ -142,15 +154,17 @@ const Preview: React.FC = () => {
     if (searchText) {
       const kw = searchText.toLowerCase();
       list = list.filter(q =>
-        q.question.toLowerCase().includes(kw) ||
-        Object.values(q.explanation).some(text => text.toLowerCase().includes(kw))
+        getLocalizedQuestion(q, questionLanguage).toLowerCase().includes(kw) ||
+        getEffectiveCorrectAnswers(q).some(answer =>
+          getLocalizedExplanation(q, answer, questionLanguage).toLowerCase().includes(kw)
+        )
       );
     }
     if (categoryFilter) {
       list = list.filter(q => q.category === categoryFilter);
     }
     return list;
-  }, [orderedQuestions, searchText, categoryFilter]);
+  }, [orderedQuestions, searchText, categoryFilter, questionLanguage]);
 
   const total = filtered.length;
   const start = (page - 1) * PAGE_SIZE;
@@ -183,6 +197,12 @@ const Preview: React.FC = () => {
     handlePageChange(targetPage);
   };
 
+  const handleLanguageChange = (language: QuestionLanguage) => {
+    setQuestionLanguage(language);
+    saveQuestionLanguage(language);
+    setPage(1);
+  };
+
   return (
     <div style={{ paddingBottom: 80 }}>
       <StyledCard>
@@ -193,6 +213,12 @@ const Preview: React.FC = () => {
               <Tag color="blue" style={{ marginLeft: 12 }}>共 {total} 题</Tag>
             </div>
             <Space wrap>
+              {hasTranslations && (
+                <QuestionLanguageSwitch
+                  value={questionLanguage}
+                  onChange={handleLanguageChange}
+                />
+              )}
               <Input
                 placeholder="搜索题目..."
                 prefix={<SearchOutlined style={{ color: 'var(--mei-theme-text-tertiary)' }} />}
@@ -245,6 +271,7 @@ const Preview: React.FC = () => {
                     question={q}
                     showAnswer={showMap[q.id] ?? showAll}
                     questionNumber={start + idx + 1}
+                    language={questionLanguage}
                   />
                   <AnswerToggle>
                     <Button

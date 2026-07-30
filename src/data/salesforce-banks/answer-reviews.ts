@@ -10,6 +10,7 @@ export interface AnswerReview {
   originalExplanation: Record<string, string>;
   verifiedAnswers: string[];
   verifiedExplanation?: Record<string, string>;
+  verifiedExplanationZh?: Record<string, string>;
   sourceReview?: ReviewReference;
   reason: string;
   reviewedAt: string;
@@ -32,6 +33,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "D": "JavaScript validation runs in the browser before the request reaches Salesforce. Server-side order of execution, including loading the original record and system validation, begins only after the request is submitted."
+    },
+    "verifiedExplanationZh": {
+      "D": "JavaScript 验证在浏览器中执行，发生在请求到达 Salesforce 之前。只有提交请求后，服务器端执行顺序才会开始，包括加载原始记录和执行系统验证。"
     }
   },
   {
@@ -50,6 +54,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "B": "Create Order_Shipment_Group__c and add a master-detail relationship field on Order_Line__c. Each order line can then belong to one shipment group, allowing lines from the same order to be split across different shipping locations."
+    },
+    "verifiedExplanationZh": {
+      "B": "创建 Order_Shipment_Group__c，并在 Order_Line__c 上添加主从关系字段。这样每个订单行都可归属于一个发货组，同一订单的不同订单行便可发往不同地点。"
     }
   },
   {
@@ -68,6 +75,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "B": "Use record-triggered flows to recalculate the value when either the Contact Mailing State or the Job Preferred_Locations__c field changes and update the related Job_Application__c records."
+    },
+    "verifiedExplanationZh": {
+      "B": "使用记录触发流，在 Contact 的 Mailing State 或 Job 的 Preferred_Locations__c 发生变化时重新计算，并更新相关的 Job_Application__c 记录。"
     }
   },
   {
@@ -90,6 +100,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "B": "Declarative customization is configured through the Salesforce Setup UI with point-and-click tools.",
       "D": "Declarative automation does not contain Apex code, so it does not require Apex test classes or Apex code-coverage deployment requirements."
+    },
+    "verifiedExplanationZh": {
+      "B": "声明式自定义通过 Salesforce 设置界面中的点击式工具完成配置。",
+      "D": "声明式自动化不包含 Apex 代码，因此不需要 Apex 测试类，也不受 Apex 代码覆盖率部署要求限制。"
     }
   },
   {
@@ -108,6 +122,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "D": "A trigger can enqueue one Queueable job when an order first becomes Placed. Queueable Apex supports asynchronous REST callouts and can process or chain orders one at a time without waiting for a scheduled batch."
+    },
+    "verifiedExplanationZh": {
+      "D": "订单首次变为 Placed 状态时，触发器可将一个 Queueable 作业加入队列。Queueable Apex 支持异步 REST 调用，并可逐个处理或链式处理订单，无需等待计划批处理。"
     }
   },
   {
@@ -126,6 +143,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "C": "A private static variable on a helper class retains its value for the current Apex transaction and is shared across trigger executions in that transaction. It remains mutable, unlike a static final constant."
+    },
+    "verifiedExplanationZh": {
+      "C": "辅助类中的 private static 变量会在当前 Apex 事务期间保留其值，并在该事务的多次触发器执行之间共享。与 static final 常量不同，它仍可被修改。"
     }
   },
   {
@@ -148,6 +168,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "A": "A record-triggered flow can detect the Status__c change declaratively, which reduces custom-code maintenance.",
       "D": "Publishing a platform event decouples Salesforce from multiple external subscribers, so each external system can receive the notification independently."
+    },
+    "verifiedExplanationZh": {
+      "A": "记录触发流可通过声明式方式检测 Status__c 的变化，从而减少自定义代码的维护工作。",
+      "D": "发布平台事件可将 Salesforce 与多个外部订阅者解耦，使每个外部系统都能独立接收通知。"
     }
   },
   {
@@ -170,6 +194,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "A": "Each Batch Apex execute() invocation runs as a separate transaction, so governor limits reset for every batch chunk.",
       "C": "Batch Apex runs asynchronously, and some asynchronous Apex limits are higher than synchronous limits. The limits still apply and can still be exceeded."
+    },
+    "verifiedExplanationZh": {
+      "A": "Batch Apex 每次调用 execute() 都作为独立事务运行，因此每个批次分块都会重置治理限制。",
+      "C": "Batch Apex 以异步方式运行，部分异步 Apex 限制高于同步限制；但这些限制仍然存在，也仍有可能被超过。"
     }
   },
   {
@@ -192,6 +220,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "B": "A Visualforce quick action places an explicit user-initiated action on the Opportunity record page and can invoke controller callout logic.",
       "C": "A Lightning component exposed as a Lightning action provides a user-initiated action on the Opportunity page and can invoke the REST callout logic."
+    },
+    "verifiedExplanationZh": {
+      "B": "Visualforce 快速操作可在 Opportunity 记录页面提供明确的用户触发操作，并调用控制器中的外部调用逻辑。",
+      "C": "公开为 Lightning 操作的 Lightning 组件可在 Opportunity 页面提供用户触发操作，并调用 REST 外部调用逻辑。"
     }
   },
   {
@@ -210,6 +242,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "C": "A LIMIT clause places a hard upper bound on the number of queried Account records. A WHERE clause can reduce rows but does not guarantee that the query will stay below a governor limit."
+    },
+    "verifiedExplanationZh": {
+      "C": "LIMIT 子句可为查询到的 Account 记录数设置明确上限。WHERE 子句只能减少记录数，不能保证查询结果一定低于治理限制。"
     }
   },
   {
@@ -232,6 +267,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "A": "The update statement is inside the loop, producing one DML statement per Account. In a synchronous transaction this reaches the 150-DML limit and can fail when any additional DML is performed.",
       "C": "Asynchronous Apex is also limited to 150 DML statements per transaction, so moving this pattern to an asynchronous context does not remove the DML-limit risk."
+    },
+    "verifiedExplanationZh": {
+      "A": "update 语句位于循环内部，每个 Account 都会产生一次 DML。同步事务最多允许 150 条 DML 语句，因此再执行任何额外 DML 都可能导致事务失败。",
+      "C": "异步 Apex 每个事务同样最多执行 150 条 DML 语句，因此将这种写法移到异步上下文并不能消除超过 DML 限制的风险。"
     }
   },
   {
@@ -254,6 +293,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "A": "Validating or allow-listing the lastName parameter with a regular expression can remove characters that could alter the SOQL structure.",
       "C": "Static SOQL with a bind variable keeps the user value separate from the query structure and is the preferred protection against SOQL injection."
+    },
+    "verifiedExplanationZh": {
+      "A": "使用正则表达式验证 lastName 参数或实施允许列表，可移除可能改变 SOQL 结构的字符。",
+      "C": "使用带绑定变量的静态 SOQL，可将用户输入值与查询结构分离，是防止 SOQL 注入的首选方式。"
     }
   },
   {
@@ -272,6 +315,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "B": "A Standard list controller, used with recordSetVar, works with a collection of records and avoids writing a custom controller just to list the current user’s Contacts."
+    },
+    "verifiedExplanationZh": {
+      "B": "标准列表控制器与 recordSetVar 配合使用，可处理记录集合，无需仅为列出当前用户的 Contact 而编写自定义控制器。"
     }
   },
   {
@@ -294,6 +340,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "B": "A getter returns a controller value to the Visualforce page.",
       "D": "Visualforce property access follows the getVariable and setVariable naming convention for getter and setter methods."
+    },
+    "verifiedExplanationZh": {
+      "B": "getter 方法将控制器中的值返回给 Visualforce 页面。",
+      "D": "Visualforce 属性访问遵循 getter 和 setter 方法的 getVariable 与 setVariable 命名约定。"
     }
   },
   {
@@ -316,6 +366,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "B": "The parent can call a child method that is exposed publicly with @api and pass the string as a method argument.",
       "C": "The parent can assign the string to a child property exposed with @api."
+    },
+    "verifiedExplanationZh": {
+      "B": "父组件可调用使用 @api 公开的子组件方法，并将字符串作为方法参数传入。",
+      "C": "父组件可将字符串赋值给使用 @api 公开的子组件属性。"
     }
   },
   {
@@ -342,6 +396,11 @@ const answerReviews: AnswerReview[] = [
       "A": "After JavaScript exposes the static-resource URL through a getter, the HTML template references that getter to render the SVG.",
       "B": "The SVG must first be uploaded to Salesforce as a static resource.",
       "D": "The component JavaScript imports the static resource with @salesforce/resourceUrl and exposes its URL through a getter."
+    },
+    "verifiedExplanationZh": {
+      "A": "JavaScript 通过 getter 暴露静态资源 URL 后，HTML 模板引用该 getter 来渲染 SVG。",
+      "B": "必须先将 SVG 作为静态资源上传到 Salesforce。",
+      "D": "组件 JavaScript 使用 @salesforce/resourceUrl 导入静态资源，并通过 getter 暴露其 URL。"
     }
   },
   {
@@ -364,6 +423,10 @@ const answerReviews: AnswerReview[] = [
     "verifiedExplanation": {
       "A": "A test data factory can create the required Pricing_Structure__c records during test setup, keeping the test isolated and repeatable.",
       "B": "@IsTest(SeeAllData=true) allows the test to access the existing Pricing_Structure__c records in the org, although isolated test data is generally preferred."
+    },
+    "verifiedExplanationZh": {
+      "A": "测试数据工厂可在测试设置期间创建所需的 Pricing_Structure__c 记录，使测试保持隔离且可重复执行。",
+      "B": "@IsTest(SeeAllData=true) 允许测试访问组织中现有的 Pricing_Structure__c 记录，但通常更推荐使用隔离的测试数据。"
     }
   },
   {
@@ -382,6 +445,9 @@ const answerReviews: AnswerReview[] = [
     },
     "verifiedExplanation": {
       "C": "A change set is the standard declarative deployment mechanism for moving Apex, Lightning components, and related metadata from a connected sandbox to production."
+    },
+    "verifiedExplanationZh": {
+      "C": "变更集是标准的声明式部署机制，可将 Apex、Lightning 组件及相关元数据从已连接的沙盒迁移到生产环境。"
     }
   },
   {
