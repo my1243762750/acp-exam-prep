@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Card, Button, Row, Col, Space, Pagination, Input, Select, Tooltip, Tag } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined, SearchOutlined, SwapOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
@@ -127,6 +127,8 @@ const Preview: React.FC = () => {
     getStoredQuestionLanguage,
   );
   const questionSectionRef = useRef<HTMLDivElement>(null);
+  const questionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const pendingQuestionIdRef = useRef<number | null>(null);
 
   const practiceBanks = getCurrentPracticeBanks();
   const rawQuestions = useMemo(
@@ -170,6 +172,17 @@ const Preview: React.FC = () => {
   const start = (page - 1) * PAGE_SIZE;
   const pageQuestions = filtered.slice(start, start + PAGE_SIZE);
 
+  useEffect(() => {
+    const questionId = pendingQuestionIdRef.current;
+    if (questionId === null) return;
+
+    const frame = requestAnimationFrame(() => {
+      questionRefs.current[questionId]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      pendingQuestionIdRef.current = null;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [page]);
+
   const handleToggleAll = () => {
     const next = !showAll;
     setShowAll(next);
@@ -193,8 +206,17 @@ const Preview: React.FC = () => {
   };
 
   const handleNavigate = (index: number) => {
+    const targetQuestion = filtered[index];
+    if (!targetQuestion) return;
+
     const targetPage = Math.floor(index / PAGE_SIZE) + 1;
-    handlePageChange(targetPage);
+    if (targetPage === page) {
+      questionRefs.current[targetQuestion.id]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    pendingQuestionIdRef.current = targetQuestion.id;
+    setPage(targetPage);
   };
 
   const handleLanguageChange = (language: QuestionLanguage) => {
@@ -266,7 +288,10 @@ const Preview: React.FC = () => {
           <Row gutter={[0, 24]}>
             {pageQuestions.map((q, idx) => (
               <Col span={24} key={q.id}>
-                <div style={{ position: 'relative' }}>
+                <div
+                  ref={element => { questionRefs.current[q.id] = element; }}
+                  style={{ position: 'relative', scrollMarginTop: 171 }}
+                >
                   <QuestionCard
                     question={q}
                     showAnswer={showMap[q.id] ?? showAll}
