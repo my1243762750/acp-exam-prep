@@ -2081,7 +2081,7 @@ const questions = [
             },
             {
                 "key": "D",
-                "text": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_annotation_InvocableMethod.htm</p>"
+                "text": "<p>Use the String.escapeSingleQuotes method to sanitize the parameter before its use.</p>"
             }
         ],
         "userAnswers": [],
@@ -2090,8 +2090,8 @@ const questions = [
             "D"
         ],
         "explanation": {
-            "C": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>",
-            "D": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>"
+            "C": "<p>Static SOQL with a bind variable keeps user input separate from the query structure and is the preferred protection against SOQL injection.</p>",
+            "D": "<p>String.escapeSingleQuotes escapes quotation marks in the string parameter so the value cannot change the structure of the dynamic SOQL query.</p>"
         },
         "difficulty": "简单",
         "accuracy": 87

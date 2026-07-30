@@ -1241,7 +1241,7 @@ const questions = [
             },
             {
                 "key": "D",
-                "text": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_annotation_InvocableMethod.htm</p>"
+                "text": "<p>Use the String.escapeSingleQuotes method to sanitize the parameter before its use.</p>"
             }
         ],
         "userAnswers": [],
@@ -1250,8 +1250,8 @@ const questions = [
             "D"
         ],
         "explanation": {
-            "C": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>",
-            "D": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>"
+            "C": "<p>Static SOQL with a bind variable keeps user input separate from the query structure and is the preferred protection against SOQL injection.</p>",
+            "D": "<p>String.escapeSingleQuotes escapes quotation marks in the string parameter so the value cannot change the structure of the dynamic SOQL query.</p>"
         },
         "difficulty": "简单",
         "accuracy": 57,
@@ -1271,12 +1271,12 @@ const questions = [
             },
             {
                 "key": "D",
-                "text": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_annotation_InvocableMethod.htm</p>"
+                "text": "<p>在使用参数前，通过 String.escapeSingleQuotes 方法对其进行转义处理。</p>"
             }
         ],
         "explanation-zh": {
-            "C": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>",
-            "D": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>"
+            "C": "<p>使用带绑定变量的静态 SOQL，可将用户输入与查询结构分离，是防止 SOQL 注入的首选方式。</p>",
+            "D": "<p>String.escapeSingleQuotes 会转义字符串参数中的引号，防止该值改变动态 SOQL 查询的结构。</p>"
         }
     },
     {

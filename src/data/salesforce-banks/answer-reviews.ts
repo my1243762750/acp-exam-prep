@@ -274,32 +274,6 @@ const answerReviews: AnswerReview[] = [
     }
   },
   {
-    "bankId": "flow-automation-logic-2",
-    "questionNumber": 23,
-    "correctAnswers": [
-      "C",
-      "D"
-    ],
-    "verifiedAnswers": [
-      "A",
-      "C"
-    ],
-    "reason": "人工复核",
-    "reviewedAt": "2026-07-28",
-    "originalExplanation": {
-      "C": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>",
-      "D": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>"
-    },
-    "verifiedExplanation": {
-      "A": "Validating or allow-listing the lastName parameter with a regular expression can remove characters that could alter the SOQL structure.",
-      "C": "Static SOQL with a bind variable keeps the user value separate from the query structure and is the preferred protection against SOQL injection."
-    },
-    "verifiedExplanationZh": {
-      "A": "使用正则表达式验证 lastName 参数或实施允许列表，可移除可能改变 SOQL 结构的字符。",
-      "C": "使用带绑定变量的静态 SOQL，可将用户输入值与查询结构分离，是防止 SOQL 注入的首选方式。"
-    }
-  },
-  {
     "bankId": "user-interface",
     "questionNumber": 13,
     "correctAnswers": [
@@ -639,28 +613,6 @@ const answerReviews: AnswerReview[] = [
       "questionNumber": 8
     }
   },
-  {
-    "bankId": "mock-exam-b",
-    "questionNumber": 61,
-    "correctAnswers": [
-      "C",
-      "D"
-    ],
-    "verifiedAnswers": [
-      "A",
-      "C"
-    ],
-    "reason": "与已复核练习题同步",
-    "reviewedAt": "2026-07-28",
-    "originalExplanation": {
-      "C": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>",
-      "D": "<p>https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/pages_security_tips_soql_injection.htm</p>"
-    },
-    "sourceReview": {
-      "bankId": "flow-automation-logic-2",
-      "questionNumber": 23
-    }
-  }
 ];
 
 export default answerReviews;

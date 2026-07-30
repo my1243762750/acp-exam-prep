@@ -1644,7 +1644,7 @@
       },
       {
         "key": "B",
-        "text": "Use the sacapeSingleQuotes method to sanitize the parameter before its use."
+        "text": "Use the String.escapeSingleQuotes method to sanitize the parameter before its use."
       },
       {
         "key": "C",

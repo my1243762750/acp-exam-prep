@@ -7335,7 +7335,7 @@ Choose the correct answer
 
  A Use variable binding and replace the dynamic query with a static SOQL.
 
- B Use the sacapeSingleQuotes method to sanitize the parameter before its use.
+ B Use the String.escapeSingleQuotes method to sanitize the parameter before its use.
 
  C Use the Readonly annotation and the with sharing keyword on the class.
 
