@@ -131,6 +131,7 @@ const Practice: React.FC = () => {
   const [practiceQuestions, setPracticeQuestions] = useState<SalesforceQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
+  const [revealedQuestionIds, setRevealedQuestionIds] = useState<Set<number>>(new Set());
   const [showAnswer, setShowAnswer] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
   const [questionLanguage, setQuestionLanguage] = useState<QuestionLanguage>(
@@ -156,6 +157,7 @@ const Practice: React.FC = () => {
         .filter(question => question.userAnswers.length > 0)
         .map(question => [question.id, question.userAnswers])
     ));
+    setRevealedQuestionIds(new Set());
     setShowAnswer(false);
     setIsStarted(true);
   };
@@ -173,6 +175,7 @@ const Practice: React.FC = () => {
     if (!showAnswer) {
       const q = practiceQuestions[currentQuestionIndex];
       const userAns = userAnswers[q.id];
+      setRevealedQuestionIds(prev => new Set(prev).add(q.id));
       if (userAns?.length) {
         saveAnswer(q.id, userAns, isCorrectAnswer(q, userAns));
       }
@@ -199,6 +202,7 @@ const Practice: React.FC = () => {
     setPracticeQuestions([]);
     setCurrentQuestionIndex(0);
     setUserAnswers({});
+    setRevealedQuestionIds(new Set());
     setShowAnswer(false);
   };
 
@@ -325,6 +329,7 @@ const Practice: React.FC = () => {
                 questions={practiceQuestions}
                 userAnswers={userAnswers}
                 showAnswer={showAnswer}
+                revealedQuestionIds={revealedQuestionIds}
                 currentIndex={currentQuestionIndex}
                 onNavigate={(index) => { setCurrentQuestionIndex(index); setShowAnswer(false); }}
               />

@@ -155,17 +155,25 @@ interface AnswerCardProps {
   questions: SalesforceQuestion[]
   userAnswers: Record<number, string[]>
   showAnswer: boolean
+  revealedQuestionIds?: ReadonlySet<number>
   compact?: boolean
   currentIndex?: number
   onNavigate?: (index: number) => void
 }
 
-const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAnswer, compact = false, currentIndex, onNavigate }) => {
+const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAnswer, revealedQuestionIds, compact = false, currentIndex, onNavigate }) => {
   const total = questions.length;
   const answered = Object.values(userAnswers).filter(answer => answer.length > 0).length;
+  const hasVisibleResults = showAnswer || Boolean(revealedQuestionIds?.size);
+  const resultIsVisible = (questionId: number) => revealedQuestionIds
+    ? revealedQuestionIds.has(questionId)
+    : showAnswer;
+  const judged = questions.filter(question =>
+    resultIsVisible(question.id) && userAnswers[question.id]?.length
+  ).length;
   const correct = questions.filter(question => {
     const answer = userAnswers[question.id];
-    return answer && isCorrectAnswer(question, answer);
+    return resultIsVisible(question.id) && answer && isCorrectAnswer(question, answer);
   }).length;
 
   return (
@@ -183,7 +191,7 @@ const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAns
           <Swatch $status="unanswered" />
           <span>未答 {total - answered}</span>
         </LegendItem>
-        {showAnswer && (
+        {hasVisibleResults && (
           <>
             <LegendItem>
               <Swatch $status="correct" />
@@ -191,7 +199,7 @@ const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAns
             </LegendItem>
             <LegendItem>
               <Swatch $status="wrong" />
-              <span>错误 {answered - correct}</span>
+              <span>错误 {judged - correct}</span>
             </LegendItem>
           </>
         )}
@@ -202,7 +210,7 @@ const AnswerCard: React.FC<AnswerCardProps> = ({ questions, userAnswers, showAns
           {questions.map((q, index) => {
             const userAns = userAnswers[q.id];
             let status: 'correct' | 'wrong' | 'answered' | 'unanswered' = 'unanswered';
-            if (showAnswer && userAns?.length) {
+            if (resultIsVisible(q.id) && userAns?.length) {
               status = isCorrectAnswer(q, userAns) ? 'correct' : 'wrong';
             } else if (userAns?.length) {
               status = 'answered';
