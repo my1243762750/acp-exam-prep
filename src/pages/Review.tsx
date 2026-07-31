@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Card, Select, Button, Space, Typography, Row, Col, Tag, Empty, List } from 'antd';
 import { ExclamationCircleOutlined, EyeOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
@@ -12,6 +12,7 @@ import { getAnswers, getWrongQuestionIds, removeWrongQuestion, clearWrongQuestio
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
+const WRONG_PAGE_SIZE = 10;
 
 const StyledCard = styled(Card)`
   margin-bottom: var(--mei-spacing-stack-lg);
@@ -51,9 +52,11 @@ const Review: React.FC = () => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [userAnswers, setUserAnswers] = useState<Record<number, string[]>>({});
   const [refreshKey, setRefreshKey] = useState(0);
+  const [wrongPage, setWrongPage] = useState(1);
   const [questionLanguage, setQuestionLanguage] = useState<QuestionLanguage>(
     getStoredQuestionLanguage,
   );
+  const detailRef = useRef<HTMLDivElement>(null);
 
   const categories = getCurrentCategories();
   const allQuestions = getCurrentQuestions();
@@ -71,6 +74,19 @@ const Review: React.FC = () => {
     }
     return wrongQuestions;
   }, [selectedCategory, wrongQuestions]);
+
+  useEffect(() => {
+    const lastPage = Math.max(1, Math.ceil(filteredQuestions.length / WRONG_PAGE_SIZE));
+    if (wrongPage > lastPage) setWrongPage(lastPage);
+  }, [filteredQuestions.length, wrongPage]);
+
+  useEffect(() => {
+    if (!showQuestion) return;
+    const frame = requestAnimationFrame(() => {
+      detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [showQuestion, currentQuestion]);
 
   const handleViewQuestion = (question: SalesforceQuestion) => {
     setCurrentQuestion(question);
@@ -132,7 +148,10 @@ const Review: React.FC = () => {
                 placeholder="全部分类"
                 allowClear
                 value={selectedCategory}
-                onChange={setSelectedCategory}
+                onChange={value => {
+                  setSelectedCategory(value);
+                  setWrongPage(1);
+                }}
                 size="large"
               >
                 {categories.map(category => (
@@ -152,6 +171,14 @@ const Review: React.FC = () => {
           <div style={{ padding: 'var(--mei-spacing-inset-lg)' }}>
             <List
               dataSource={filteredQuestions}
+              pagination={{
+                current: wrongPage,
+                pageSize: WRONG_PAGE_SIZE,
+                showSizeChanger: false,
+                hideOnSinglePage: true,
+                showTotal: total => `共 ${total} 道错题`,
+                onChange: setWrongPage,
+              }}
               renderItem={(question, index) => (
                 <List.Item
                   style={{ padding: '16px 0', borderBottom: '1px solid var(--mei-theme-border-default)' }}
@@ -177,7 +204,9 @@ const Review: React.FC = () => {
                   <List.Item.Meta
                     title={
                       <Space>
-                        <span style={{ fontWeight: 600 }}>第{index + 1}题</span>
+                        <span style={{ fontWeight: 600 }}>
+                          第{(wrongPage - 1) * WRONG_PAGE_SIZE + index + 1}题
+                        </span>
                         <Tag color="red">错题</Tag>
                         {question.category && <Tag color="purple">{question.category}</Tag>}
                       </Space>
@@ -217,7 +246,7 @@ const Review: React.FC = () => {
       )}
 
       {showQuestion && currentQuestion && (
-        <div className="fade-in">
+        <div ref={detailRef} className="fade-in" style={{ scrollMarginTop: 80 }}>
           <StyledCard
             title={
               <Space>
